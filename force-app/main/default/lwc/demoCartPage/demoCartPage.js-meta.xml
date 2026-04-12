@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Demo Cart Page</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="title"
+                type="String"
+                label="Title"
+                default="你的購物車"
+            />
+            <property
+                name="requestPageUrl"
+                type="String"
+                label="Request Page URL"
+                description="Relative or absolute URL for the demo request page."
+            />
+            <property
+                name="emptyCartMessage"
+                type="String"
+                label="Empty Cart Message"
+                default="購物車目前還是空的。"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

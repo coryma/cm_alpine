@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <content>Alpine_Product_Admin_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Product2</pageOrSobjectType>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <description>Console app for Alpine storefront configuration and real-time quiz monitoring.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Alpine Storefront Console</label>
+    <navType>Console</navType>
+    <tabs>Alpine_Storefront_Admin</tabs>
+    <tabs>Alpine_Storefront_Quiz_Monitor</tabs>
+    <tabs>Alpine_Storefront_Config__c</tabs>
+    <tabs>standard-Product2</tabs>
+    <uiType>Lightning</uiType>
+    <workspaceConfig>
+        <mappings>
+            <tab>Alpine_Storefront_Admin</tab>
+        </mappings>
+        <mappings>
+            <tab>Alpine_Storefront_Quiz_Monitor</tab>
+        </mappings>
+        <mappings>
+            <tab>Alpine_Storefront_Config__c</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-Product2</tab>
+        </mappings>
+    </workspaceConfig>
+</CustomApplication>

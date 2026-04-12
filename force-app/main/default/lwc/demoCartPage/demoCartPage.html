@@ -1,0 +1,97 @@
+<template>
+    <section class="cart-page">
+        <header class="page-header">
+            <p class="page-header__eyebrow">購物流程</p>
+            <h1>{title}</h1>
+            <p>目前購物車內容暫存在本機瀏覽器，用來展示前台選品到詢問單的完整流程。</p>
+        </header>
+
+        <template if:true={errorMessage}>
+            <div class="state-panel state-panel_error">{errorMessage}</div>
+        </template>
+
+        <template if:true={hasItems}>
+            <div class="cart-layout">
+                <div class="cart-surface">
+                    <template for:each={cartItems} for:item="item">
+                        <article key={item.id} class="cart-item">
+                            <div class="cart-item__main">
+                                <template if:true={item.imageUrl}>
+                                    <img class="cart-image" src={item.imageUrl} alt={item.name} />
+                                </template>
+
+                                <div class="cart-copy">
+                                    <p class="cart-copy__eyebrow">已選商品</p>
+                                    <h2>{item.name}</h2>
+
+                                    <template if:true={item.subtitle}>
+                                        <p class="cart-copy__meta">{item.subtitle}</p>
+                                    </template>
+
+                                    <template if:true={item.attributeText}>
+                                        <p class="cart-copy__meta">{item.attributeText}</p>
+                                    </template>
+
+                                    <p class="cart-copy__price">
+                                        單價
+                                        <strong>{item.unitPriceDisplay}</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <label class="quantity-field">
+                                <span>數量</span>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    step="1"
+                                    value={item.quantity}
+                                    data-id={item.id}
+                                    onchange={handleQuantityChange}
+                                />
+                            </label>
+
+                            <div class="line-total">
+                                <p>小計</p>
+                                <strong>{item.lineTotalDisplay}</strong>
+
+                                <button class="remove-button" type="button" data-id={item.id} onclick={handleRemove}>
+                                    移除
+                                </button>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+
+                <aside class="summary-card">
+                    <p class="summary-card__eyebrow">訂單摘要</p>
+
+                    <div class="summary-row">
+                        <span>商品件數</span>
+                        <span>{cart.itemCount}</span>
+                    </div>
+
+                    <div class="summary-row summary-row_total">
+                        <span>總計</span>
+                        <strong>{totalAmountDisplay}</strong>
+                    </div>
+
+                    <button
+                        class="summary-button"
+                        type="button"
+                        onclick={handleRequest}
+                        disabled={isRequestDisabled}
+                    >
+                        前往詢問
+                    </button>
+                </aside>
+            </div>
+        </template>
+
+        <template if:false={hasItems}>
+            <div class="state-panel">
+                <p>{emptyCartMessage}</p>
+            </div>
+        </template>
+    </section>
+</template>

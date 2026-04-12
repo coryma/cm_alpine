@@ -1,0 +1,10 @@
+{
+  "activeViewId" : "45b14d75-7e06-444f-b033-67aad944328b",
+  "appPageId" : "83a4a4a7-1b26-4c09-b6d8-44dc9e5a26d8",
+  "configurationTags" : [ ],
+  "devName" : "Quiz__c",
+  "label" : "Quiz",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-quiz",
+  "urlPrefix" : "quiz"
+}

@@ -1,0 +1,9 @@
+{
+  "activeViewId" : "cec87deb-5363-4b9f-9301-d1a859dbf280",
+  "appPageId" : "83a4a4a7-1b26-4c09-b6d8-44dc9e5a26d8",
+  "configurationTags" : [ ],
+  "devName" : "Quote_Summary",
+  "label" : "Quote Summary Details",
+  "routeType" : "quote-summary",
+  "urlPrefix" : "quote-summary-detail"
+}

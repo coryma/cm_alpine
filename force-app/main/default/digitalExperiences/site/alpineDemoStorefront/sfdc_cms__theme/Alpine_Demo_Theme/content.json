@@ -1,0 +1,13 @@
+{
+  "type" : "sfdc_cms__theme",
+  "title" : "Alpine Demo Theme",
+  "contentBody" : {
+    "activeBrandingSetId" : "Alpine_Demo_Branding",
+    "definitionName" : "byo",
+    "layouts" : [ {
+      "layoutId" : "innerLayout",
+      "layoutType" : "Inner"
+    } ]
+  },
+  "urlName" : "alpine-demo-theme"
+}

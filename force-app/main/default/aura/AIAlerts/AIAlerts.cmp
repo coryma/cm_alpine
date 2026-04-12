@@ -1,0 +1,136 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+<aura:attribute name="productRecordId" type="String" default="01tKh000005aaMjIAI"/>
+<lightning:navigation aura:id="navService"/>
+<lightning:quickActionAPI aura:id="quickActionAPI"/>    
+    <div role="dialog" tabindex="-1" aria-labelledby="header43" aura:id="Modalbox" class="slds-modal">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <button class="slds-button slds-modal__close " title="Close" onclick="{!c.closeModal}">
+                    <lightning:icon class="close-icon" iconName="utility:close" size="x-small"/>
+                </button>
+                <h2 id="header43" class="slds-text-heading--medium">Create Promotion</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium slds-is-relative">
+                <div>
+                    {!v.body}
+                    <!--<c:ABINBAAction/>-->
+                </div>
+            </div>
+     
+        </div>
+    </div>
+    <div class="slds-backdrop " aura:id="Modalbackdrop"></div>
+   
+<lightning:card title="Market Insights" variant="base">
+   
+    <aura:set attribute="footer">
+        <div style="font-size: 0.9125rem;">Learn More</div>
+    </aura:set>
+    <div class="slds-card__body_inner">
+        <lightning:layout class="slds-p-bottom_x-small slds-border_bottom" horizontalAlign="spread" verticalAlign="center">
+            <lightning:layoutItem>
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem size="2"><img class="slds-p-around_x-small" src="https://rcg-ido.s3.us-east-2.amazonaws.com/nto-secondary-logo-05.png"></img>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:tile label="Key Account Check-In️">
+                            <aura:set attribute="media"></aura:set>
+                            <div style="font-size: 1.0rem;"><b>Review Recent Store Performance for Northern Trail Outfitters.</b></div>
+                            <div style="font-size: 1.0rem;">Click below to view NTO Store 201</div>
+                        </lightning:tile>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout class="slds-wrap" multipleRows="true">
+                    <lightning:layoutItem size="2"></lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:layout verticalAlign="center">
+                            <lightning:layoutItem>
+                                <lightning:buttonStateful variant="neutral" labelWhenHover="Unsave" labelWhenOff="View Account" labelWhenOn="Saved" iconNameWhenHover="action:remove" iconNameWhenOn="utility:check" iconNameWhenOff="utility:add" onclick="{!c.openmodal}"></lightning:buttonStateful>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem><a href="javascript:void(0);" class="slds-m-left_small slds-text-link">Dismiss</a></lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout class="slds-p-top_x-small slds-p-bottom_x-small slds-border_bottom" horizontalAlign="spread" verticalAlign="center">
+            <lightning:layoutItem>
+                <lightning:layout class="slds-wrap" multipleRows="true">
+                    <lightning:layoutItem size="2"><img class="slds-p-around_xx-small" src="https://rcg-ido.s3.us-east-2.amazonaws.com/cgoffline/alpine-group-secondary-logo-icon.png"></img>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:tile label="Company Announcement">
+                            <aura:set attribute="media"></aura:set>
+                            <div style="font-size: 1.0rem;"><b>Sales Kick-Off is happening the week of September 16th</b></div>
+                            <div style="font-size: 1.0rem;">Click below to add it to your calendar</div>
+                        </lightning:tile>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout class="slds-wrap" multipleRows="true">
+                    <lightning:layoutItem size="2"></lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:layout verticalAlign="center">
+                            <lightning:layoutItem>
+                                <lightning:buttonStateful variant="neutral" labelWhenHover="Unsave" labelWhenOff="Add to Calendar" labelWhenOn="Saved" iconNameWhenHover="action:remove" iconNameWhenOn="utility:check" iconNameWhenOff="utility:add" onclick="{!c.openDistributionReporting}"></lightning:buttonStateful>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem><a href="javascript:void(0);" class="slds-m-left_small slds-text-link">Dismiss</a></lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout class="slds-p-top_x-small slds-p-bottom_x-small slds-border_bottom" horizontalAlign="spread" verticalAlign="center">
+            <lightning:layoutItem>
+                <lightning:layout class="slds-wrap" multipleRows="true">
+                    <lightning:layoutItem size="2"><img class="slds-p-around_x-small" src="https://rcg-ido.s3.us-east-2.amazonaws.com/cgoffline/sell_sheets_1_800x.jpg"></img>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:tile label="New Assets Alert">
+                            <aura:set attribute="media"></aura:set>
+                            <div style="font-size: 1.0rem;"><b>New Assets Available for Alpine Energy Drinks</b>.</div>
+                            <div style="font-size: 1.0rem;">Click to view the new seasonal sell sheets</div>
+                        </lightning:tile>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout class="slds-wrap" multipleRows="true">
+                    <lightning:layoutItem size="2"></lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:layout verticalAlign="center">
+                            <lightning:layoutItem>
+                                <lightning:buttonStateful variant="neutral" labelWhenHover="Unsave" labelWhenOff="View Assets" labelWhenOn="Saved" iconNameWhenHover="action:remove" iconNameWhenOn="utility:check" iconNameWhenOff="utility:add"></lightning:buttonStateful>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem><a href="javascript:void(0);" class="slds-m-left_small slds-text-link">Dismiss</a></lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout class="slds-p-top_x-small slds-p-bottom_x-small" horizontalAlign="spread" verticalAlign="center">
+            <lightning:layoutItem>
+                <lightning:layout class="slds-wrap" multipleRows="true">
+                    <lightning:layoutItem size="2"><img class="slds-p-around_x-small" src="https://rcg-ido.s3.us-east-2.amazonaws.com/cgoffline/alpine-energy-during-greentea.png"></img>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:tile label="Inventory Update">
+                            <aura:set attribute="media"></aura:set>
+                            <div style="font-size: 1.0rem;"><b>Out of Stock of Alpine Energy Drink - Green Tea</b>.</div>
+                            <div style="font-size: 1.0rem;">Recommend Alpine Energy Drink - Tart Cherry</div>
+                        </lightning:tile>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout class="slds-wrap" multipleRows="true">
+                    <lightning:layoutItem size="2"></lightning:layoutItem>
+                    <lightning:layoutItem size="10">
+                        <lightning:layout verticalAlign="center">
+                            <lightning:layoutItem>
+                                <lightning:buttonStateful variant="neutral" labelWhenHover="Unsave" labelWhenOff="View Product" labelWhenOn="Saved" iconNameWhenHover="action:remove" iconNameWhenOn="utility:check" iconNameWhenOff="utility:add" onclick="{!c.openProduct}"></lightning:buttonStateful>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem><a href="javascript:void(0);" class="slds-m-left_small slds-text-link">Dismiss</a></lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</lightning:card>
+</aura:component>

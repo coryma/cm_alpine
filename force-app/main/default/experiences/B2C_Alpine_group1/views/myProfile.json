@@ -1,0 +1,287 @@
+{
+  "appPageId" : "83a4a4a7-1b26-4c09-b6d8-44dc9e5a26d8",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "dataProviders" : [ {
+    "componentName" : "commerce_data_provider:myProfileDataProvider",
+    "componentAttributes" : {
+      "sfdcExpressionKey" : "MyProfile"
+    }
+  } ],
+  "label" : "My Profile",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "componentSpacerSize" : "",
+        "dxpStyle" : { },
+        "layoutDirectionDesktop" : "row",
+        "layoutDirectionMobile" : "column",
+        "layoutDirectionTablet" : "column",
+        "maxContentWidth" : "",
+        "sectionColumnGutterWidth" : "",
+        "sectionConfig" : "{\"UUID\":\"a0ec4375-e4b2-4f30-8743-070920a7b533\",\"columns\":[{\"UUID\":\"62dd3b1b-971b-4b5a-b1d2-9a10f07289db\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+        "sectionMinHeight" : "",
+        "sectionVerticalAlign" : "flex-start"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "a0ec4375-e4b2-4f30-8743-070920a7b533",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "clientState" : "{!MyProfile.ClientState}",
+            "dxpStyle" : { },
+            "emailLabel" : "Email Address",
+            "firstNameLabel" : "First Name",
+            "lastNameLabel" : "Last Name",
+            "phoneLabel" : "Phone Number",
+            "profile" : "{!MyProfile.Details}",
+            "profileCardBorderColor" : "#D9DFE7",
+            "profileCardBorderRadius" : 4,
+            "showPhoneDetails" : true
+          },
+          "componentName" : "commerce_builder:myAccountProfileContainer",
+          "id" : "b61129cb-61bc-4bdf-9e45-fce0d16a6c03",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : {
+                "backgroundColor" : "",
+                "dxpStyle" : { },
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "xx-small",
+                "text" : "My Profile",
+                "textAlign" : "left",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\": \"heading-large\", \"headingTag\": \"h2\"}"
+              },
+              "componentName" : "dxp_base:textBlock",
+              "id" : "ae063343-f825-406c-965e-5307db96cb99",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "2c2a7956-bead-43f4-a43a-19fee45a5a67",
+            "regionName" : "header",
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "backgroundColor" : "",
+                "dxpStyle" : { },
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Name",
+                "textAlign" : "left",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\"}"
+              },
+              "componentName" : "dxp_base:textBlock",
+              "id" : "3920c934-1d01-4f5e-905c-6b2d4c75d4d4",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "d5200775-1534-45d7-b191-96b79169db33",
+            "regionName" : "personalDetailsHeaderLabel",
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "dxpStyle" : { },
+                "size" : "standard",
+                "text" : "Change Password",
+                "variant" : "secondary",
+                "width" : "standard"
+              },
+              "componentName" : "commerce_builder:actionButton",
+              "id" : "73e28f4e-560c-42dc-b8bb-854ad7cce8c2",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "27c27c08-c92e-41fc-9dc5-9efd88bcf433",
+            "regionName" : "changePasswordButton",
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "backgroundColor" : "",
+                "dxpStyle" : { },
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Email Address",
+                "textAlign" : "left",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\"}"
+              },
+              "componentName" : "dxp_base:textBlock",
+              "id" : "73066df9-1f87-4956-8cff-5ad0944413a2",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "82f1574f-f47b-421b-b45b-cadb020aacb2",
+            "regionName" : "emailHeaderLabel",
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "backgroundColor" : "",
+                "dxpStyle" : { },
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Phone Number",
+                "textAlign" : "left",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\"}"
+              },
+              "componentName" : "dxp_base:textBlock",
+              "id" : "2490de43-05ae-4f94-80ba-d4032eb5dac5",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "78d7726c-4abc-48d6-980b-8785796c18a4",
+            "regionName" : "phoneHeaderLabel",
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "62dd3b1b-971b-4b5a-b1d2-9a10f07289db",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "componentSpacerSize" : "",
+        "dxpStyle" : {
+          "padding" : {
+            "bottom" : "1rem",
+            "left" : "1rem",
+            "right" : "1rem",
+            "top" : "1rem"
+          }
+        },
+        "layoutDirectionDesktop" : "row",
+        "layoutDirectionMobile" : "column",
+        "layoutDirectionTablet" : "column",
+        "maxContentWidth" : "",
+        "sectionColumnGutterWidth" : "",
+        "sectionConfig" : "{\"UUID\":\"38ffe4f4-a622-45a2-b4e6-0068a3899a24\",\"columns\":[{\"UUID\":\"414a6f4b-65b8-4e95-9248-7b4586c2cb89\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+        "sectionMinHeight" : "",
+        "sectionVerticalAlign" : "flex-start"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "38ffe4f4-a622-45a2-b4e6-0068a3899a24",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "consentData" : "{!Marketing.Subscriptions}",
+            "dxp:dataProviders" : [ {
+              "componentAttributes" : {
+                "consentExperience" : "ProfileAndRegistration",
+                "contactFromUserContext" : true,
+                "sfdcExpressionKey" : "Marketing"
+              },
+              "componentName" : "commerce_data_provider:marketingConsentDataProvider",
+              "expressionKey" : "Marketing"
+            } ],
+            "dxpStyle" : { }
+          },
+          "componentName" : "commerce_builder:myAccountMarketingConsentSettings",
+          "id" : "695f7ecc-f174-40a6-b8de-25db55e0ec0a",
+          "regions" : [ {
+            "components" : [ {
+              "componentAttributes" : {
+                "backgroundColor" : "",
+                "dxpStyle" : { },
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "xx-small",
+                "text" : "Marketing Communication Preferences",
+                "textAlign" : "left",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\": \"heading-large\", \"headingTag\": \"h2\"}"
+              },
+              "componentName" : "dxp_base:textBlock",
+              "id" : "a1d9350a-28c3-4b61-9099-628a18c96cdb",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "d9acb08b-b356-48d8-a894-95db4c949501",
+            "regionName" : "consentOptionsHeaderText",
+            "type" : "region"
+          }, {
+            "components" : [ {
+              "componentAttributes" : {
+                "dxpStyle" : { },
+                "imageInfos" : "",
+                "richTextValue" : "<p>Read the <a href=\"{!Site.basePath}/privacy-policy\" rel=\"noopener noreferrer\" target=\"_blank\"><u>Privacy Policy</u></a> to learn how we handle your data.</p>"
+              },
+              "componentName" : "community_builder:richTextEditor",
+              "id" : "5ce95457-8d13-4a98-93d0-64893a3e433e",
+              "renderPriority" : "NEUTRAL",
+              "renditionMap" : { },
+              "type" : "component"
+            } ],
+            "id" : "65ae426c-0671-444e-8867-f9c27ddda931",
+            "regionName" : "consentOptionsFooterText",
+            "type" : "region"
+          } ],
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "414a6f4b-65b8-4e95-9248-7b4586c2cb89",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "0703cc21-6036-405d-973a-a4c0b58c6dcf",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "dxpStyle" : { },
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "d266e088-1f56-4c4c-86f3-9dccd6dea865",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "94eff490-f1e2-4f81-a817-402b94baecc6",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "MyAccount",
+  "viewType" : "my-profile"
+}

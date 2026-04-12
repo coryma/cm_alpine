@@ -1,0 +1,21 @@
+<template>
+    <article class="page">
+        <template lwc:if={hasHeader}>
+            <header class="page__header">
+                <template lwc:if={eyebrow}>
+                    <p class="page__eyebrow">{eyebrow}</p>
+                </template>
+                <template lwc:if={title}>
+                    <h1 class="page__title">{title}</h1>
+                </template>
+                <template lwc:if={intro}>
+                    <p class="page__intro">{intro}</p>
+                </template>
+            </header>
+        </template>
+
+        <div class="page__body">
+            <slot></slot>
+        </div>
+    </article>
+</template>

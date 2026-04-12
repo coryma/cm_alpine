@@ -1,0 +1,200 @@
+<template>
+    <c-alpine-demo-page-container>
+        <template lwc:if={errorMessage}>
+            <div class="state-panel state-panel_error">{errorMessage}</div>
+        </template>
+
+        <template lwc:if={isLoading}>
+            <div class="state-panel">正在重建首頁選品版位...</div>
+        </template>
+
+        <template lwc:if={pageContent}>
+            <div class="home">
+                <section class="hero-grid">
+                    <article class="hero-panel">
+                        <div class="hero-panel__copy">
+                            <p class="eyebrow">{hero.eyebrow}</p>
+                            <h1>{hero.title}</h1>
+                            <p class="body-copy">{hero.body}</p>
+
+                            <div class="hero-actions">
+                                <a class="button button_primary" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</a>
+                                <a class="button button_secondary" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
+                            </div>
+
+                            <template if:true={heroFeaturedProduct}>
+                                <a class="hero-product" href={heroFeaturedProduct.href}>
+                                    <div>
+                                        <p class="hero-product__eyebrow">{heroFeaturedProduct.ribbon}</p>
+                                        <strong>{heroFeaturedProduct.name}</strong>
+                                    </div>
+                                    <span>{heroFeaturedProduct.formattedPrice}</span>
+                                </a>
+                            </template>
+                        </div>
+
+                        <template if:true={heroFeaturedProduct}>
+                            <a class="hero-panel__media" href={heroFeaturedProduct.href}>
+                                <img
+                                    src={heroFeaturedProduct.imageUrl}
+                                    alt={heroFeaturedProduct.imageAlt}
+                                    loading="eager"
+                                />
+                                <div class="hero-panel__overlay">
+                                    <p>{heroFeaturedProduct.eyebrow}</p>
+                                    <strong>{heroFeaturedProduct.priceNote}</strong>
+                                </div>
+                            </a>
+                        </template>
+                    </article>
+
+                    <div class="hero-stack">
+                        <template for:each={heroSecondaryPanels} for:item="panel">
+                            <a key={panel.key} class={panel.className} href={panel.href}>
+                                <template if:true={panel.imageUrl}>
+                                    <div class="hero-tile__media">
+                                        <img src={panel.imageUrl} alt={panel.imageAlt} loading="lazy" />
+                                    </div>
+                                </template>
+                                <div class="hero-tile__copy">
+                                    <p class="hero-tile__eyebrow">{panel.eyebrow}</p>
+                                    <h2>{panel.title}</h2>
+                                    <p>{panel.body}</p>
+                                </div>
+                            </a>
+                        </template>
+                    </div>
+                </section>
+
+                <section class="quick-links" aria-label="快速入口">
+                    <template for:each={quickLinks} for:item="item">
+                        <a key={item.key} class="quick-link" href={item.href}>
+                            <span class={item.badgeClass}>{item.glyph}</span>
+                            <strong>{item.label}</strong>
+                            <p>{item.caption}</p>
+                        </a>
+                    </template>
+                </section>
+
+                <section class="flash-sale section-surface">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">{flashSale.eyebrow}</p>
+                            <h2>{flashSale.title}</h2>
+                            <p class="body-copy">{flashSale.intro}</p>
+                        </div>
+
+                        <div class="flash-sale__meta">
+                            <div class="countdown-card">
+                                <span>今日倒數</span>
+                                <strong>{countdownLabel}</strong>
+                            </div>
+                            <a class="text-link" href={flashSale.ctaHref}>{flashSale.ctaLabel}</a>
+                        </div>
+                    </div>
+
+                    <div class="slot-row" aria-label="快閃時段">
+                        <template for:each={flashSaleSlots} for:item="slot">
+                            <button
+                                key={slot.key}
+                                class={slot.className}
+                                data-key={slot.key}
+                                type="button"
+                                onclick={handleSlotClick}
+                            >
+                                <strong>{slot.label}</strong>
+                                <span>{slot.note}</span>
+                            </button>
+                        </template>
+                    </div>
+
+                    <div class="flash-grid">
+                        <template for:each={displayedFlashSaleItems} for:item="item">
+                            <a key={item.key} class="sale-card" href={item.href}>
+                                <div class="sale-card__media">
+                                    <img src={item.imageUrl} alt={item.imageAlt} loading="lazy" />
+                                    <span class="sale-card__badge">{item.discountLabel}</span>
+                                </div>
+
+                                <div class="sale-card__body">
+                                    <p class="sale-card__category">{item.categoryLabel}</p>
+                                    <h3>{item.name}</h3>
+                                    <p class="sale-card__summary">{item.shortDescription}</p>
+
+                                    <div class="sale-card__price">
+                                        <strong>{item.formattedPrice}</strong>
+                                        <span>{item.priceNote}</span>
+                                    </div>
+
+                                    <div class="sale-card__progress" aria-hidden="true">
+                                        <span style={item.progressStyle}></span>
+                                    </div>
+                                    <p class="sale-card__claim">{item.claimLabel}</p>
+                                </div>
+                            </a>
+                        </template>
+                    </div>
+                </section>
+
+                <a class="collection-banner" href={collectionBanner.href}>
+                    <img src={collectionBanner.imageUrl} alt={collectionBanner.imageAlt} loading="lazy" />
+                    <div class="collection-banner__overlay">
+                        <p class="eyebrow">{collectionBanner.eyebrow}</p>
+                        <h2>{collectionBanner.title}</h2>
+                        <p>{collectionBanner.body}</p>
+                    </div>
+                </a>
+
+                <section class="technology section-surface">
+                    <div class="section-header">
+                        <div>
+                            <p class="eyebrow">{technologyShowcase.eyebrow}</p>
+                            <h2>{technologyShowcase.title}</h2>
+                            <p class="body-copy">{technologyShowcase.intro}</p>
+                        </div>
+                    </div>
+
+                    <div class="technology__scroller">
+                        <template for:each={technologyItems} for:item="item">
+                            <a key={item.key} class="technology-card" href={item.href}>
+                                <img src={item.imageUrl} alt={item.imageAlt} loading="lazy" />
+                                <p>{item.categoryLabel}</p>
+                                <h3>{item.name}</h3>
+                                <strong>{item.formattedPrice}</strong>
+                            </a>
+                        </template>
+                    </div>
+                </section>
+
+                <section class="recommendations section-surface">
+                    <div class="section-header section-header_border">
+                        <div>
+                            <p class="eyebrow">{recommendations.eyebrow}</p>
+                            <h2>{recommendations.title}</h2>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-grid">
+                        <template for:each={recommendationItems} for:item="item">
+                            <a key={item.key} class="recommendation-card" href={item.href}>
+                                <div class="recommendation-card__media">
+                                    <img src={item.imageUrl} alt={item.imageAlt} loading="lazy" />
+                                </div>
+                                <p>{item.eyebrow}</p>
+                                <h3>{item.name}</h3>
+                                <span>{item.formattedPrice}</span>
+                            </a>
+                        </template>
+
+                        <a class="recommendation-promo" href={recommendationPromoCard.href}>
+                            <p class="eyebrow">{recommendationPromoCard.eyebrow}</p>
+                            <h3>{recommendationPromoCard.title}</h3>
+                            <p>{recommendationPromoCard.body}</p>
+                            <span>{recommendationPromoCard.ctaLabel}</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </template>
+    </c-alpine-demo-page-container>
+</template>

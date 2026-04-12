@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Quiz",
+  "contentBody" : {
+    "activeViewId" : "quiz",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-quiz",
+    "urlPrefix" : "quiz"
+  },
+  "urlName" : "quiz"
+}

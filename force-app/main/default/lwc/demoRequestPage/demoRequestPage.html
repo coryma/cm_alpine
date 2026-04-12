@@ -1,0 +1,140 @@
+<template>
+    <section class="request-page">
+        <header class="page-header">
+            <p class="page-header__eyebrow">專人服務</p>
+            <h1>{title}</h1>
+            <p>目前先用詢問單承接客服、訂單需求與批量採購，正式結帳流程後續再接。</p>
+        </header>
+
+        <template if:true={errorMessage}>
+            <div class="state-panel state-panel_error">{errorMessage}</div>
+        </template>
+
+        <template if:true={showSuccess}>
+            <div class="success-card">
+                <p class="page-header__eyebrow">已送出</p>
+                <h2>詢問已收到</h2>
+                <p>{successMessage}</p>
+                <p class="success-card__total">
+                    總計
+                    <strong>{totalAmountDisplay}</strong>
+                </p>
+
+                <template if:true={cartPageUrl}>
+                    <button class="ghost-button" type="button" onclick={handleBackToCart}>返回購物車</button>
+                </template>
+            </div>
+
+            <div class="summary-card">
+                <p class="summary-card__eyebrow">送出內容</p>
+
+                <template for:each={cartItems} for:item="item">
+                    <div key={item.id} class="summary-item">
+                        <div>
+                            <p class="summary-item__name">{item.name}</p>
+
+                            <template if:true={item.attributeText}>
+                                <p class="summary-item__meta">{item.attributeText}</p>
+                            </template>
+                        </div>
+
+                        <div class="summary-values">
+                            <span>數量 {item.quantity}</span>
+                            <strong>{item.lineTotalDisplay}</strong>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:false={showSuccess}>
+            <div class="request-layout">
+                <div class="form-card">
+                    <label class="field">
+                        <span>姓名</span>
+                        <input
+                            name="fullName"
+                            type="text"
+                            value={fullName}
+                            required
+                            onchange={handleInputChange}
+                        />
+                    </label>
+
+                    <label class="field">
+                        <span>電子郵件</span>
+                        <input
+                            name="email"
+                            type="email"
+                            value={email}
+                            required
+                            onchange={handleInputChange}
+                        />
+                    </label>
+
+                    <label class="field">
+                        <span>電話</span>
+                        <input
+                            name="phone"
+                            type="tel"
+                            value={phone}
+                            required
+                            onchange={handleInputChange}
+                        />
+                    </label>
+
+                    <label class="field">
+                        <span>備註</span>
+                        <textarea name="note" value={note} onchange={handleInputChange}></textarea>
+                    </label>
+
+                    <div class="form-actions">
+                        <button class="primary-button" type="button" onclick={handleSubmit} disabled={disableSubmit}>
+                            送出詢問
+                        </button>
+
+                        <template if:true={isSubmitting}>
+                            <span class="submit-note">送出中...</span>
+                        </template>
+                    </div>
+                </div>
+
+                <aside class="summary-card summary-card_sticky">
+                    <p class="summary-card__eyebrow">購物車摘要</p>
+
+                    <template if:true={hasItems}>
+                        <template for:each={cartItems} for:item="item">
+                            <div key={item.id} class="summary-item">
+                                <div>
+                                    <p class="summary-item__name">{item.name}</p>
+
+                                    <template if:true={item.attributeText}>
+                                        <p class="summary-item__meta">{item.attributeText}</p>
+                                    </template>
+                                </div>
+
+                                <div class="summary-values">
+                                    <span>數量 {item.quantity}</span>
+                                    <strong>{item.lineTotalDisplay}</strong>
+                                </div>
+                            </div>
+                        </template>
+
+                        <div class="summary-total">
+                            <span>總計</span>
+                            <strong>{totalAmountDisplay}</strong>
+                        </div>
+                    </template>
+
+                    <template if:false={hasItems}>
+                        <p class="empty-message">購物車目前沒有商品。</p>
+
+                        <template if:true={cartPageUrl}>
+                            <button class="ghost-button" type="button" onclick={handleBackToCart}>返回購物車</button>
+                        </template>
+                    </template>
+                </aside>
+            </div>
+        </template>
+    </section>
+</template>

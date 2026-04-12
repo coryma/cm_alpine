@@ -1,0 +1,49 @@
+:host {
+    display: block;
+}
+
+.page {
+    display: grid;
+    gap: var(--alpine-demo-space-5);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.page__header {
+    display: grid;
+    gap: var(--alpine-demo-space-3);
+    max-width: 48rem;
+}
+
+.page__eyebrow {
+    margin: 0;
+    color: var(--alpine-demo-color-highlight);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.page__title {
+    margin: 0;
+    color: var(--alpine-demo-color-ink);
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    font-family: "Avenir Next", "SF Pro Display", "PingFang TC", "Noto Sans TC", sans-serif;
+    letter-spacing: -0.04em;
+}
+
+.page__intro {
+    margin: 0;
+    color: var(--alpine-demo-color-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.page__body {
+    display: grid;
+    gap: var(--alpine-demo-space-5);
+}

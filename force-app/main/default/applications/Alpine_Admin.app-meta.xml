@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <content>Alpine_Product_Admin_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Product2</pageOrSobjectType>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <description>Internal admin app for controlling Alpine storefront products.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Alpine Storefront Admin Console</label>
+    <navType>Standard</navType>
+    <tabs>Alpine_Storefront_Admin</tabs>
+    <tabs>Alpine_Storefront_Config__c</tabs>
+    <tabs>standard-Product2</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

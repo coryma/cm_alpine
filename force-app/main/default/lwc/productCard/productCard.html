@@ -1,0 +1,45 @@
+<template>
+    <article class="card">
+        <a class="media" href={detailUrl} onclick={handleOpen}>
+            <img src={imageUrl} alt={imageAlt} loading="lazy" />
+            <template if:true={primaryBadge}>
+                <span class="media-badge">{primaryBadge}</span>
+            </template>
+            <span class="media-action">查看</span>
+        </a>
+
+        <div class="body">
+            <p class="category">{categoryLabel}</p>
+
+            <a class="title-link" href={detailUrl} onclick={handleOpen}>
+                <h3>{product.name}</h3>
+            </a>
+
+            <p class="summary">{product.shortDescription}</p>
+
+            <template if:true={hasFeatureHighlights}>
+                <div class="highlight-row">
+                    <template for:each={featureHighlights} for:item="highlight">
+                        <span key={highlight} class="highlight">{highlight}</span>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={hasSecondaryBadges}>
+                <div class="badge-row">
+                    <template for:each={secondaryBadges} for:item="badge">
+                        <span key={badge} class="badge">{badge}</span>
+                    </template>
+                </div>
+            </template>
+
+            <div class="footer">
+                <div class="price-block">
+                    <strong>{formattedPrice}</strong>
+                    <span>{product.sku}</span>
+                </div>
+                <a class="detail-link" href={detailUrl} onclick={handleOpen}>{detailLabel}</a>
+            </div>
+        </div>
+    </article>
+</template>

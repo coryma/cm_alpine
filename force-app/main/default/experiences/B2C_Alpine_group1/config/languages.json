@@ -1,0 +1,11 @@
+{
+  "defaultCode" : "zh_TW",
+  "defaultLabel" : "Chinese (Traditional) (TW)",
+  "languages" : [ {
+    "countryCode" : "US",
+    "fallbackLanguageId" : null,
+    "isActive" : true,
+    "label" : "English (US)",
+    "languageCode" : "en"
+  } ]
+}

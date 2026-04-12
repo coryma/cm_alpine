@@ -1,0 +1,129 @@
+.filters {
+    display: grid;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: 1.4rem;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 20px 42px rgba(15, 23, 42, 0.08);
+}
+
+.toolbar {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: minmax(12rem, 0.9fr) minmax(0, 1.7fr) minmax(12rem, 0.7fr) auto;
+    align-items: end;
+}
+
+.toolbar__copy {
+    display: grid;
+    gap: 0.28rem;
+}
+
+.toolbar__eyebrow,
+.select-label {
+    margin: 0;
+    color: #607084;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.toolbar__copy h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    font-family: "Avenir Next", "SF Pro Display", "PingFang TC", "Noto Sans TC", sans-serif;
+}
+
+.search-field,
+.select-field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.search-field input,
+.select-field select {
+    min-height: 3rem;
+    width: 100%;
+    padding: 0 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.38);
+    border-radius: 1rem;
+    background: #f8fafc;
+    color: #111827;
+    font: inherit;
+}
+
+.search-field input:focus,
+.select-field select:focus {
+    outline: 0;
+    border-color: #20324d;
+    box-shadow: 0 0 0 3px rgba(32, 50, 77, 0.12);
+}
+
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.68rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    background: #eef2f7;
+    color: #334155;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.chip-active {
+    background: #20324d;
+    color: #f8fafc;
+    border-color: #20324d;
+}
+
+.count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 0.2rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    font-size: 0.74rem;
+}
+
+.reset-button {
+    min-height: 3rem;
+    padding: 0 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    border-radius: 999px;
+    background: transparent;
+    color: #20324d;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+@media (max-width: 860px) {
+    .toolbar {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Commerce products list page with adapter-backed search, category filters, and sorting.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Products Page</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property default="商品分類" label="Eyebrow" name="heroEyebrow" type="String"/>
+            <property default="把熱銷品、分類與搜尋都放進同一個瀏覽頁" label="Title" name="title" type="String"/>
+            <property
+                default="從首頁進來後可以直接延續搜尋與分類決策，不需要重新適應另一套介面。"
+                label="Subtitle"
+                name="subtitle"
+                type="String"
+            />
+            <property default="/product" label="Detail Page Path" name="detailPagePath" type="String"/>
+            <property default="mock" label="Adapter Source" name="adapterSource" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

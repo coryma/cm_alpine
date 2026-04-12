@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Product detail page for Experience Cloud with adapter-backed image, pricing, FAQ, and add-to-cart CTA.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Product Detail Page</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Product Id" name="productId" type="String"/>
+            <property label="Product Slug" name="productSlug" type="String"/>
+            <property label="Product SKU" name="productSku" type="String"/>
+            <property default="mock" label="Adapter Source" name="adapterSource" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

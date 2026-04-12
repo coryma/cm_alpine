@@ -1,0 +1,108 @@
+{
+  "appPageId" : "83a4a4a7-1b26-4c09-b6d8-44dc9e5a26d8",
+  "componentName" : "community_layout:sldsFlexibleLayout",
+  "dataProviders" : [ ],
+  "label" : "Privacy Policy",
+  "regions" : [ {
+    "components" : [ {
+      "componentAttributes" : {
+        "backgroundImageConfig" : "",
+        "backgroundImageOverlay" : "rgba(0,0,0,0)",
+        "componentSpacerSize" : "",
+        "dxpStyle" : { },
+        "layoutDirectionDesktop" : "row",
+        "layoutDirectionMobile" : "column",
+        "layoutDirectionTablet" : "column",
+        "maxContentWidth" : "",
+        "sectionColumnGutterWidth" : "",
+        "sectionConfig" : "{\"UUID\":\"414f1381-fc6c-4e64-a0bd-f93f46b7cd9b\",\"columns\":[{\"UUID\":\"ff4883ee-5ab9-45cd-925c-158ffda13c8d\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+        "sectionMinHeight" : "",
+        "sectionVerticalAlign" : "flex-start"
+      },
+      "componentName" : "community_layout:section",
+      "id" : "414f1381-fc6c-4e64-a0bd-f93f46b7cd9b",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "backgroundColor" : "",
+            "dxpStyle" : { },
+            "isLinkable" : false,
+            "linkAssistiveText" : "",
+            "paddingHorizontal" : "none",
+            "paddingVertical" : "large",
+            "text" : "Privacy Policy",
+            "textAlign" : "left",
+            "textDecoration" : "{}",
+            "textDisplayInfo" : "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+          },
+          "componentName" : "dxp_base:textBlock",
+          "id" : "da7dedcf-5117-48e6-b0bc-2add9435294b",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "dxpStyle" : {
+              "padding" : {
+                "bottom" : "2rem",
+                "left" : "0rem",
+                "right" : "0rem",
+                "top" : "1rem"
+              }
+            },
+            "imageInfos" : "",
+            "richTextValue" : "<p>Effective Date: [Policy Effective Date]</p>"
+          },
+          "componentName" : "community_builder:richTextEditor",
+          "id" : "16df141b-0b13-42a0-aff4-b45979c37f67",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "dxpStyle" : { },
+            "imageInfos" : "",
+            "richTextValue" : "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">[Your Company Name] (\"we\", \"our\", or \"us\") is committed to protecting and respecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [Your Website URL] (\"Site\"), make purchases, or engage with our services.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">By using our Site, you agree to the collection and use of information in accordance with this policy.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">1. Information We Collect</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">We may collect the following types of information:</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">Personal Information: When you use our services, we may collect personal details such as your name, email address, billing and shipping addresses, phone number, and payment information.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">Usage Data: We may collect non-identifiable information related to your use of the Site, such as IP address, browser type, pages visited, and time spent on the Site.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">Cookies and Tracking Technologies: We use cookies and similar technologies to enhance your browsing experience, personalize content, and analyze site traffic. You can manage your cookie preferences in your browser settings.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">2. How We Use Your Information</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">We use the information we collect for various purposes, including:</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">To process your orders and provide the requested products or services.</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">To communicate with you regarding your account, orders, and other inquiries.</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">To improve our Site, services, and customer experience.</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">To send promotional emails or marketing communications (with your consent).</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">To comply with legal obligations.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">3. Data Sharing and Disclosure</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">We do not sell, trade, or rent your personal information to third parties. However, we may share your data with trusted third-party service providers who assist us in operating our Site and fulfilling orders, such as payment processors, shipping carriers, and email service providers. These third parties are obligated to protect your data and use it only for the purposes for which it was provided.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">We may also disclose your personal information if required by law or to protect our legal rights.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">4. Data Security</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">We use industry-standard security measures to protect your personal information, including encryption and secure servers. However, no method of transmission over the internet is 100% secure, and we cannot guarantee the absolute security of your data.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">5. Your Rights and Choices</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">You have the right to:</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">Access and update your personal information.</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">Request the deletion of your personal data (subject to certain exceptions).</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">Opt-out of marketing communications at any time.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">To exercise these rights, please contact us at [Your Contact Email].</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">6. Third-Party Links</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">Our Site may contain links to other websites that are not operated by us. We are not responsible for the privacy practices of third-party sites. We encourage you to review the privacy policies of any third-party websites you visit.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">7. Changes to This Privacy Policy</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated \"Effective Date.\" We encourage you to review this Privacy Policy periodically.</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">8. Contact Us</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">If you have any questions about this Privacy Policy or how we handle your personal information, please contact us at:</span></p><p><br></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">[Your Company Name]</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">[Your Company Address]</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">[Your Email Address]</span></p><p><span style=\"background-color: transparent; color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 11pt;\">[Your Phone Number]</span></p>"
+          },
+          "componentName" : "community_builder:richTextEditor",
+          "id" : "7fde646f-c221-44dc-9162-32fb06f41b60",
+          "renderPriority" : "NEUTRAL",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "ff4883ee-5ab9-45cd-925c-158ffda13c8d",
+        "regionLabel" : "Column 1",
+        "regionName" : "col1",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "scopedBrandingSetId" : null,
+      "type" : "component"
+    } ],
+    "id" : "3c370ffd-cbb4-436b-a5f4-8f9960d20899",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "dxpStyle" : { },
+        "pageTitle" : "Privacy Policy",
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "community_builder:seoAssistant",
+      "id" : "47ea5cbb-44f8-4adf-804e-a5284c8d5f3a",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "76c546b8-c283-4cea-b02b-f813b6d0d4d7",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "viewType" : "privacy-policy"
+}

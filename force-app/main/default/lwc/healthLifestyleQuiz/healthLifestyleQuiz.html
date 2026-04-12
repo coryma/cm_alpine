@@ -1,0 +1,220 @@
+<template>
+    <section class="quiz-shell">
+        <div class="quiz-glow quiz-glow_one"></div>
+        <div class="quiz-glow quiz-glow_two"></div>
+
+        <div class="quiz-panel">
+            <header class="quiz-header">
+                <div class="quiz-header__copy">
+                    <p class="quiz-header__brand">健康好物推薦</p>
+
+                    <template if:true={isQuestionStep}>
+                        <p class="quiz-header__meta">第 {currentQuestion.index} / {quizStepCount} 題</p>
+                    </template>
+
+                    <template if:true={isResult}>
+                        <p class="quiz-header__meta">推薦完成</p>
+                    </template>
+                </div>
+
+                <template if:true={showProgress}>
+                    <div class="quiz-progress" aria-hidden="true">
+                        <span class="quiz-progress__value" style={progressStyle}></span>
+                    </div>
+                </template>
+            </header>
+
+            <div class="quiz-body">
+                <template if:true={isIntro}>
+                    <section class="hero-screen">
+                        <div class="hero-card">
+                            <img class="hero-card__image" src={introArtwork} alt="健康好物推薦主視覺" />
+                        </div>
+
+                        <div class="hero-copy">
+                            <p class="hero-copy__eyebrow">個人化健康推薦</p>
+                            <h1>找到最適合你現在的健康好物組合</h1>
+                            <p>
+                                五個問題，從你的目標、日常習慣和偏好方式，幫你找出一套真的用得上的健康好物。
+                            </p>
+                        </div>
+
+                        <div class="hero-points">
+                            <article class="hero-point">
+                                <strong>5 題快速完成</strong>
+                                <span>簡單俐落，不需要長篇填答。</span>
+                            </article>
+                            <article class="hero-point">
+                                <strong>每題都有圖示</strong>
+                                <span>用情境來選，不是冷冰冰的表單。</span>
+                            </article>
+                            <article class="hero-point">
+                                <strong>直接查看推薦商品</strong>
+                                <span>完成後可一次加入推薦好物。</span>
+                            </article>
+                        </div>
+                    </section>
+                </template>
+
+                <template if:true={isQuestionStep}>
+                    <section class="question-screen">
+                        <div class="question-copy">
+                            <p class="question-copy__eyebrow">{currentQuestion.eyebrow}</p>
+                            <h2>{currentQuestion.title}</h2>
+                            <p>{currentQuestion.subtitle}</p>
+                        </div>
+
+                        <div class="choice-grid">
+                            <template for:each={optionCards} for:item="option">
+                                <button
+                                    key={option.value}
+                                    class={option.className}
+                                    type="button"
+                                    data-question={currentQuestion.key}
+                                    data-value={option.value}
+                                    onclick={handleOptionSelect}
+                                >
+                                    <span class="choice-card__media">
+                                        <img src={option.artwork} alt={option.title} />
+                                    </span>
+
+                                    <span class="choice-card__body">
+                                        <strong>{option.title}</strong>
+                                        <span>{option.note}</span>
+                                    </span>
+                                </button>
+                            </template>
+                        </div>
+
+                        <template if:true={validationMessage}>
+                            <p class="validation-message">{validationMessage}</p>
+                        </template>
+                    </section>
+                </template>
+
+                <template if:true={isResult}>
+                    <section class="result-screen">
+                        <article class="result-hero">
+                            <div class="result-hero__media">
+                                <img src={resultArtwork} alt={bundleName} />
+                            </div>
+
+                            <div class="result-hero__copy">
+                                <p class="result-hero__eyebrow">你的專屬推薦結果</p>
+                                <h2>{bundleName}</h2>
+                                <p>{bundleSummary}</p>
+
+                                <div class="result-tags">
+                                    <template for:each={resultTags} for:item="tag">
+                                        <span key={tag} class="result-tag">{tag}</span>
+                                    </template>
+                                </div>
+                            </div>
+                        </article>
+
+                        <section class="insight-grid" aria-label="你的選擇摘要">
+                            <template for:each={answerHighlights} for:item="answer">
+                                <article key={answer.stepKey} class="insight-card">
+                                    <p class="insight-card__label">{answer.eyebrow}</p>
+                                    <strong>{answer.title}</strong>
+                                    <span>{answer.note}</span>
+                                </article>
+                            </template>
+                        </section>
+
+                        <section class="results-list">
+                            <div class="section-heading">
+                                <div>
+                                    <p class="section-heading__eyebrow">推薦商品</p>
+                                    <h3>為你挑選的好物</h3>
+                                </div>
+                                <a class="section-heading__link" href={productsPageUrl}>查看全部商品</a>
+                            </div>
+
+                            <template if:true={hasRecommendedProducts}>
+                                <div class="product-grid">
+                                    <template for:each={recommendedProducts} for:item="product">
+                                        <article key={product.id} class="product-card">
+                                            <a class="product-card__media" href={product.detailUrl}>
+                                                <img src={product.imageUrl} alt={product.imageAlt} loading="lazy" />
+                                            </a>
+
+                                            <div class="product-card__body">
+                                                <p class="product-card__role">{product.roleLabel}</p>
+                                                <h4>{product.name}</h4>
+                                                <p>{product.reason}</p>
+
+                                                <div class="product-card__footer">
+                                                    <strong>{product.priceLabel}</strong>
+                                                    <a href={product.detailUrl}>查看商品</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </template>
+                                </div>
+                            </template>
+
+                            <template if:false={hasRecommendedProducts}>
+                                <div class="empty-state">
+                                    <p>目前沒有找到符合的商品。</p>
+                                    <p>你可以瀏覽全部商品，或稍後再測一次。</p>
+                                </div>
+                            </template>
+                        </section>
+                    </section>
+                </template>
+            </div>
+
+            <footer class="quiz-footer">
+                <template if:true={isIntro}>
+                    <div class="quiz-footer__stack">
+                        <button class="button button_primary" type="button" onclick={handleStart}>
+                            開始測驗
+                        </button>
+                        <p class="quiz-footer__hint">約 1 分鐘完成，完成後直接查看推薦商品。</p>
+                    </div>
+                </template>
+
+                <template if:true={isQuestionStep}>
+                    <div class="quiz-footer__row">
+                        <button class="button button_secondary" type="button" onclick={handleBack}>
+                            上一題
+                        </button>
+                        <button class="button button_primary" type="button" onclick={handleNext}>
+                            {nextButtonLabel}
+                        </button>
+                    </div>
+                </template>
+
+                <template if:true={isResult}>
+                    <div class="quiz-footer__stack">
+                        <button class="button button_primary" type="button" onclick={handleAddBundle} disabled={disableAddBundle}>
+                            {addBundleLabel}
+                        </button>
+
+                        <div class="quiz-footer__links">
+                            <a href={cartPageUrl}>前往購物車</a>
+                            <a href={productsPageUrl}>瀏覽全部商品</a>
+                            <button class="button-link" type="button" onclick={handleRestart}>重新測驗</button>
+                        </div>
+
+                        <template if:true={cartNotice}>
+                            <p class="quiz-footer__hint">{cartNotice}</p>
+                        </template>
+                    </div>
+                </template>
+            </footer>
+
+            <template if:true={isGenerating}>
+                <div class="analysis-overlay" role="status" aria-live="polite">
+                    <div class="analysis-card">
+                        <span class="analysis-card__pulse"></span>
+                        <p class="analysis-card__eyebrow">分析中</p>
+                        <h3>正在找出最適合你的商品組合</h3>
+                        <p>根據你的選擇幫你配對，馬上好。</p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </section>
+</template>

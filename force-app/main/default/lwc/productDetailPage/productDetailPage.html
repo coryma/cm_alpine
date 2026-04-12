@@ -1,0 +1,140 @@
+<template>
+    <section class="detail-shell">
+        <template if:true={errorMessage}>
+            <div class="state-panel state-error">{errorMessage}</div>
+        </template>
+
+        <template if:true={isLoading}>
+            <div class="state-panel">正在載入商品詳情...</div>
+        </template>
+
+        <template if:true={hasProduct}>
+            <div class="hero">
+                <div class="media-panel">
+                    <template if:true={currentImage}>
+                        <div class="main-image">
+                            <img src={currentImage.url} alt={currentImage.alt} />
+                        </div>
+                    </template>
+
+                    <template if:true={hasImageGallery}>
+                        <div class="thumbnail-row">
+                            <template for:each={thumbnailItems} for:item="image">
+                                <button
+                                    key={image.url}
+                                    class={image.className}
+                                    data-index={image.index}
+                                    type="button"
+                                    onclick={handleThumbnailClick}
+                                >
+                                    <img src={image.url} alt={image.alt} />
+                                </button>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="content-panel">
+                    <p class="category">{product.categoryLabel}</p>
+                    <h1>{product.name}</h1>
+                    <p class="short-description">{product.shortDescription}</p>
+
+                    <div class="price-row">
+                        <strong>{product.formattedPrice}</strong>
+                        <span>{product.availability}</span>
+                    </div>
+
+                    <template if:true={hasBadges}>
+                        <div class="badge-row">
+                            <template for:each={badgeList} for:item="badge">
+                                <span key={badge} class="badge">{badge}</span>
+                            </template>
+                        </div>
+                    </template>
+
+                    <template if:true={hasFeatureHighlights}>
+                        <ul class="highlight-list">
+                            <template for:each={featureHighlights} for:item="highlight">
+                                <li key={highlight}>{highlight}</li>
+                            </template>
+                        </ul>
+                    </template>
+
+                    <template if:true={hasQuickSpecs}>
+                        <div class="quick-spec-grid">
+                            <template for:each={quickSpecList} for:item="spec">
+                                <div key={spec.label} class="quick-spec">
+                                    <span>{spec.label}</span>
+                                    <strong>{spec.value}</strong>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+
+                    <div class="cta-row">
+                        <button class="add-to-cart" type="button" onclick={handleAddToCart}>{addToCartLabel}</button>
+                        <span class="sku">{product.sku}</span>
+                    </div>
+
+                    <template if:true={addToCartMessage}>
+                        <div class="inline-message">{addToCartMessage}</div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="detail-grid">
+                <div class="section-card prose-card">
+                    <h2>商品介紹</h2>
+                    <template if:true={hasLongDescription}>
+                        <lightning-formatted-rich-text value={product.longDescription}></lightning-formatted-rich-text>
+                    </template>
+                </div>
+
+                <template if:true={hasSpecs}>
+                    <div class="section-card">
+                        <h2>規格資訊</h2>
+                        <div class="spec-grid">
+                            <template for:each={specList} for:item="spec">
+                                <div key={spec.label} class="spec-tile">
+                                    <span>{spec.label}</span>
+                                    <strong>{spec.value}</strong>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <template if:true={hasFeatures}>
+                    <div class="section-card">
+                        <h2>亮點特色</h2>
+                        <div class="feature-grid">
+                            <template for:each={featureList} for:item="feature">
+                                <article key={feature.title} class="feature-card">
+                                    <h3>{feature.title}</h3>
+                                    <p>{feature.description}</p>
+                                </article>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <template if:true={hasFaqs}>
+                    <div class="section-card">
+                        <h2>常見問題</h2>
+                        <lightning-accordion allow-multiple-sections-open>
+                            <template for:each={faqList} for:item="faq">
+                                <lightning-accordion-section
+                                    key={faq.question}
+                                    label={faq.question}
+                                    name={faq.question}
+                                >
+                                    <p class="faq-answer">{faq.answer}</p>
+                                </lightning-accordion-section>
+                            </template>
+                        </lightning-accordion>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </section>
+</template>

@@ -1,0 +1,48 @@
+<template>
+    <section class="filters">
+        <div class="toolbar">
+            <div class="toolbar__copy">
+                <p class="toolbar__eyebrow">目錄工具</p>
+                <h2>搜尋、排序、篩選</h2>
+            </div>
+
+            <label class="search-field">
+                <span class="search-label">搜尋商品</span>
+                <input
+                    type="search"
+                    value={searchValue}
+                    placeholder={searchPlaceholder}
+                    oninput={handleSearchInput}
+                />
+            </label>
+
+            <label class="select-field">
+                <span class="select-label">排序方式</span>
+                <select value={sortValue} onchange={handleSortChange}>
+                    <template for:each={normalizedSortOptions} for:item="option">
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                    </template>
+                </select>
+            </label>
+
+            <template if:true={hasActiveFilters}>
+                <button class="reset-button" type="button" onclick={handleReset}>清除</button>
+            </template>
+        </div>
+
+        <div class="chip-row" role="list" aria-label="商品分類篩選">
+            <template for:each={normalizedCategories} for:item="category">
+                <button
+                    key={category.value}
+                    class={category.buttonClass}
+                    data-value={category.value}
+                    type="button"
+                    onclick={handleCategoryClick}
+                >
+                    <span>{category.label}</span>
+                    <span class="count">{category.count}</span>
+                </button>
+            </template>
+        </div>
+    </section>
+</template>

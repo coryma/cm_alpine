@@ -1,0 +1,11 @@
+{
+  "type" : "appPage",
+  "cmsSettings" : { },
+  "currentThemeId" : "6f77698e-6d1b-4e75-ae53-fc885fdb283c",
+  "favIconAssetRef" : null,
+  "headMarkup" : "<!-- branding stylesheets -->\n\r\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/salesforce-lightning-design-system.min.css?{ versionKey }\"/>\r\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-site-spacing-styling-hooks.min.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-styling-hooks.min.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-slds-extensions.min.css?{ versionKey }\" />\n\n\n\n<!-- branding stylesheets -->\n\n<!-- General -->\n<link rel=\"shortcut icon\" href=\"{basePath}/assets/favicon.ico?{versionKey}\">\n<link rel=\"stylesheet\" href=\"{basePath}/assets/css/theme2.css?{versionKey}\">\n<link rel=\"stylesheet\" href=\"{ styles/styles.css }\" />",
+  "isLockerServiceEnabled" : true,
+  "isRelaxedCSPLevel" : true,
+  "label" : "main",
+  "templateName" : "b2b-storefront"
+}

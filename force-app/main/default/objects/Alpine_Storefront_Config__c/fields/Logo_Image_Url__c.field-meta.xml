@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Logo_Image_Url__c</fullName>
+    <description>Public image URL used for the storefront logo mark in the site header.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>請填入可公開存取的 logo 圖片 URL。</inlineHelpText>
+    <label>Logo Image URL</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>

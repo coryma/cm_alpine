@@ -1,0 +1,15 @@
+.DS_Store
+*.log
+
+.sf/
+.sfdx/
+.cursor/
+.codex_tmp/
+.tmp_profile/
+.tmp_ps/
+.vscode/
+
+test-results/
+node_modules/
+coverage/
+.localdevserver/

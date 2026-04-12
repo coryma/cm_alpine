@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Request",
+  "contentBody" : {
+    "activeViewId" : "request",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-request",
+    "urlPrefix" : "request"
+  },
+  "urlName" : "request"
+}

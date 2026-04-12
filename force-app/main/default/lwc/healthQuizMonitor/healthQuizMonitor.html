@@ -1,0 +1,77 @@
+<template>
+    <section class="monitor-shell">
+        <header class="monitor-header">
+            <div>
+                <p class="monitor-header__eyebrow">Real-Time Quiz Monitor</p>
+                <h2>即時問卷進度</h2>
+                <p>每完成一頁就立即顯示對應 icon，完成 5 步後即可看到完整軌跡。</p>
+            </div>
+
+            <button class="refresh-button" type="button" onclick={handleRefresh} disabled={isLoading}>
+                重新整理
+            </button>
+        </header>
+
+        <div class="monitor-summary">
+            <div class="summary-pill">
+                <strong>{totalEventCount}</strong>
+                <span>已累積 icon</span>
+            </div>
+            <div class="summary-pill">
+                <strong>{activeSessionCount}</strong>
+                <span>目前 session</span>
+            </div>
+            <div class="summary-pill">
+                <strong>{subscriptionState}</strong>
+                <span>事件通道</span>
+            </div>
+        </div>
+
+        <template if:true={errorMessage}>
+            <div class="monitor-state monitor-state_error">{errorMessage}</div>
+        </template>
+
+        <template if:true={isLoading}>
+            <div class="monitor-state">正在載入問卷 monitor...</div>
+        </template>
+
+        <template if:false={isLoading}>
+            <template if:true={hasSessions}>
+                <div class="session-list">
+                    <template for:each={sessionRows} for:item="session">
+                        <article key={session.sessionKey} class="session-row">
+                            <div class="session-row__identity">
+                                <span class="session-avatar" style={session.avatarStyle}>{session.avatarText}</span>
+                                <div class="session-row__copy">
+                                    <strong>{session.displayLabel}</strong>
+                                    <p>{session.statusText}</p>
+                                </div>
+                            </div>
+
+                            <div class="session-row__icons" aria-label="問卷已完成步驟">
+                                <template for:each={session.icons} for:item="icon">
+                                    <span key={icon.stepNumber} class="session-icon" title={icon.title}>
+                                        <img src={icon.url} alt={icon.alt} loading="lazy" />
+                                    </span>
+                                </template>
+                            </div>
+
+                            <div class="session-row__meta">
+                                <span class="progress-pill">{session.progressLabel}</span>
+                                <template if:true={session.bundleName}>
+                                    <p>{session.bundleName}</p>
+                                </template>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </template>
+
+            <template if:false={hasSessions}>
+                <div class="monitor-state">
+                    目前還沒有收到問卷進度事件。等前台使用者完成第一個步驟後，這裡就會出現對應 icon。
+                </div>
+            </template>
+        </template>
+    </section>
+</template>

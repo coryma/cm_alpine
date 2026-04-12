@@ -1,0 +1,336 @@
+.shell {
+    display: grid;
+    gap: 1rem;
+    padding: 0.75rem 0 2rem;
+    color: #153126;
+}
+
+.hero-card,
+.status-strip,
+.chip-panel,
+.catalog-panel,
+.promo-panel,
+.diagnostic-card,
+.footer-card,
+.state-panel {
+    border: 1px solid rgba(22, 54, 40, 0.08);
+    border-radius: 1.35rem;
+    background: #ffffff;
+    box-shadow: 0 18px 45px rgba(22, 54, 40, 0.08);
+}
+
+.hero-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.15rem;
+    background:
+        radial-gradient(circle at top right, rgba(255, 231, 184, 0.72), transparent 34%),
+        radial-gradient(circle at top left, rgba(194, 255, 228, 0.72), transparent 28%),
+        linear-gradient(180deg, #f7fff9 0%, #ffffff 48%, #f6fbf9 100%);
+}
+
+.hero-topbar,
+.status-strip,
+.product-header,
+.diagnostic-head,
+.cta-row {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.eyebrow,
+.hero-kicker,
+.section-label {
+    margin: 0 0 0.35rem;
+    color: #5d756a;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.hero-topbar strong,
+.status-strip strong,
+.product-header strong,
+.record-item strong {
+    color: #153126;
+}
+
+.inline-link,
+.secondary-link,
+.product-link,
+.primary-link {
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.inline-link,
+.secondary-link,
+.product-link {
+    color: #20513d;
+}
+
+.hero-copy h1,
+.section-head h2,
+.product-body h3,
+.diagnostic-head h3 {
+    margin: 0;
+    color: #173528;
+    letter-spacing: -0.03em;
+    font-family: "Avenir Next", "Poppins", "PingFang TC", "Noto Sans TC", sans-serif;
+}
+
+.hero-copy h1 {
+    font-size: clamp(2rem, 7.5vw, 2.9rem);
+    line-height: 0.98;
+}
+
+.hero-body,
+.section-head p,
+.catalog-note,
+.product-description,
+.diagnostic-note,
+.record-item span,
+.footer-card p,
+.state-panel {
+    margin: 0;
+    color: #587165;
+    line-height: 1.65;
+}
+
+.search-pill {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(22, 54, 40, 0.08);
+    color: #587165;
+}
+
+.search-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 999px;
+    background: #edf7f1;
+    color: #20513d;
+    font-size: 0.95rem;
+}
+
+.primary-button,
+.ghost-button,
+.primary-link {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.82rem 1.05rem;
+    font-weight: 800;
+}
+
+.primary-button,
+.primary-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #20513d 0%, #2f7d5b 100%);
+    color: #ffffff;
+    box-shadow: 0 16px 30px rgba(32, 81, 61, 0.24);
+}
+
+.ghost-button {
+    background: #f4f9f6;
+    color: #20513d;
+    border: 1px solid rgba(32, 81, 61, 0.12);
+}
+
+.status-strip,
+.chip-panel,
+.catalog-panel,
+.promo-panel,
+.footer-card,
+.state-panel {
+    padding: 1rem 1.05rem;
+}
+
+.status-strip {
+    display: grid;
+}
+
+.chip-row {
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+}
+
+.chip,
+.badge,
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.chip {
+    padding: 0.55rem 0.8rem;
+    background: #eff8f2;
+    color: #20513d;
+}
+
+.catalog-panel,
+.promo-panel,
+.diagnostics-panel {
+    display: grid;
+    gap: 1rem;
+}
+
+.section-head {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.catalog-note {
+    padding: 0.9rem 1rem;
+    border-radius: 1rem;
+    background: #f6fbf8;
+    border: 1px solid rgba(22, 54, 40, 0.06);
+}
+
+.product-grid,
+.diagnostic-grid,
+.record-list {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.product-card {
+    display: grid;
+    gap: 0;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    border: 1px solid rgba(22, 54, 40, 0.08);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfefc 100%);
+}
+
+.product-image,
+.product-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 11;
+}
+
+.product-image {
+    object-fit: cover;
+    background: #eef6f1;
+}
+
+.product-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at top right, rgba(255, 224, 163, 0.9), transparent 30%),
+        linear-gradient(135deg, #e4f8ea 0%, #f7fff9 100%);
+    color: #2f7d5b;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.product-body {
+    display: grid;
+    gap: 0.65rem;
+    padding: 1rem;
+}
+
+.badge {
+    padding: 0.38rem 0.72rem;
+    background: #eff8f2;
+    color: #20513d;
+}
+
+.product-category {
+    margin: 0;
+    color: #749184;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.product-link {
+    margin-top: 0.2rem;
+}
+
+.diagnostics-panel {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.diagnostic-card {
+    display: grid;
+    gap: 0.8rem;
+    padding: 1rem;
+}
+
+.diagnostic-card_success {
+    background: linear-gradient(180deg, #ffffff, #f6fff9);
+}
+
+.diagnostic-card_warning {
+    background: linear-gradient(180deg, #ffffff, #fffaf2);
+}
+
+.status-pill {
+    flex-shrink: 0;
+    padding: 0.38rem 0.72rem;
+    background: #ebf3ee;
+    color: #20513d;
+}
+
+.record-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.record-item {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 0.95rem;
+    background: rgba(244, 249, 246, 0.96);
+    border: 1px solid rgba(22, 54, 40, 0.06);
+}
+
+.state-panel {
+    padding: 1rem 1.05rem;
+}
+
+.state-error {
+    border-color: rgba(185, 28, 28, 0.18);
+    background: #fff5f5;
+    color: #991b1b;
+}
+
+.state-info {
+    border-color: rgba(25, 103, 210, 0.14);
+    background: #f3f8ff;
+    color: #1f4e8c;
+}
+
+@media (min-width: 48rem) {
+    .status-strip {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: end;
+    }
+
+    .product-grid,
+    .diagnostic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

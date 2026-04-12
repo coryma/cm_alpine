@@ -1,0 +1,73 @@
+<template>
+    <div class="shell">
+        <div class="shell__frame">
+            <aside class="sidebar">
+                <div class="sidebar__intro">
+                    <p class="sidebar__eyebrow">分類導覽</p>
+                    <h2>依情境瀏覽</h2>
+                </div>
+
+                <nav class="sidebar__nav" aria-label="商品分類">
+                    <template for:each={sideNavItems} for:item="item">
+                        <a key={item.key} class="sidebar__link" href={item.href}>
+                            <strong>{item.label}</strong>
+                            <span>{item.note}</span>
+                        </a>
+                    </template>
+                </nav>
+
+                <a class="sidebar__cta" href={requestHref}>開始 AI 配方測驗</a>
+            </aside>
+
+            <div class="shell__content">
+                <template if:false={isHome}>
+                    <section class="context-card" aria-label="頁面說明">
+                        <p class="context-card__eyebrow">{currentPage.eyebrow}</p>
+                        <p class="context-card__helper">{currentPage.helper}</p>
+                    </section>
+                </template>
+
+                <main class="shell__main">
+                    <template lwc:if={isHome}>
+                        <c-alpine-demo-home-mount></c-alpine-demo-home-mount>
+                    </template>
+                    <template lwc:elseif={isProducts}>
+                        <c-alpine-demo-products-mount></c-alpine-demo-products-mount>
+                    </template>
+                    <template lwc:elseif={isProductDetail}>
+                        <c-alpine-demo-product-detail-mount></c-alpine-demo-product-detail-mount>
+                    </template>
+                    <template lwc:elseif={isCart}>
+                        <c-alpine-demo-cart-mount></c-alpine-demo-cart-mount>
+                    </template>
+                    <template lwc:else>
+                        <c-alpine-demo-request-mount></c-alpine-demo-request-mount>
+                    </template>
+                </main>
+
+                <footer class="footer">
+                    <div>
+                        <p class="footer__eyebrow">{storeName}</p>
+                        <p class="footer__copy">{footerCopy}</p>
+                    </div>
+
+                    <div class="footer__links">
+                        <a href={homeHref}>首頁</a>
+                        <a href={productsHref}>目錄</a>
+                        <a href={cartHref}>購物車</a>
+                        <a href={requestHref}>AI 配方</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <nav class="bottom-nav" aria-label="底部導覽">
+            <template for:each={mobileNavItems} for:item="item">
+                <a key={item.key} class={item.className} href={item.href}>
+                    <span class="bottom-nav__badge">{item.shortLabel}</span>
+                    <span>{item.label}</span>
+                </a>
+            </template>
+        </nav>
+    </div>
+</template>

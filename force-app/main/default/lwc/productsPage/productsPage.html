@@ -1,0 +1,61 @@
+<template>
+    <section class="page-shell">
+        <div class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">{heroEyebrow}</p>
+                <h1>{title}</h1>
+                <p class="subtitle">{subtitle}</p>
+            </div>
+            <div class="hero-card">
+                <span class="hero-card-label">即時商品資料</span>
+                <strong>{resultCountLabel}</strong>
+                <p>首頁入口、列表與詳情共用同一套 adapter，搜尋與導流不會在中途斷掉。</p>
+            </div>
+        </div>
+
+        <c-product-filters
+            categories={categories}
+            sort-options={sortOptions}
+            search-value={searchTerm}
+            active-category={activeCategory}
+            sort-value={sortBy}
+            search-placeholder="搜尋商品、品類或關鍵字"
+            onfilterchange={handleFilterChange}
+        ></c-product-filters>
+
+        <template if:true={errorMessage}>
+            <div class="state-panel state-error">{errorMessage}</div>
+        </template>
+
+        <template if:true={isLoading}>
+            <div class="state-panel">正在載入商品列表...</div>
+        </template>
+
+        <template if:false={isLoading}>
+            <template if:true={hasProducts}>
+                <div class="result-meta">
+                    <p>{resultCountLabel}</p>
+                    <span>中文目錄瀏覽</span>
+                </div>
+
+                <div class="grid">
+                    <template for:each={products} for:item="product">
+                        <c-product-card
+                            key={product.id}
+                            product={product}
+                            onopen={handleCardOpen}
+                        ></c-product-card>
+                    </template>
+                </div>
+            </template>
+
+            <template if:false={hasProducts}>
+                <div class="state-panel state-empty">
+                    <h2>沒有符合條件的商品</h2>
+                    <p>{emptyStateMessage}</p>
+                    <button class="ghost-button" type="button" onclick={handleResetFilters}>清除篩選</button>
+                </div>
+            </template>
+        </template>
+    </section>
+</template>

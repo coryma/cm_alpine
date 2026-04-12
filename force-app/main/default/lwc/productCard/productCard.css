@@ -1,0 +1,139 @@
+.card {
+    display: grid;
+    min-height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 1.4rem;
+    overflow: hidden;
+    box-shadow: 0 22px 44px rgba(15, 23, 42, 0.08);
+}
+
+.media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    background: #eef2f7;
+}
+
+.media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.media-badge,
+.media-action,
+.highlight,
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.media-badge {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    padding: 0.4rem 0.7rem;
+    background: rgba(17, 24, 39, 0.86);
+    color: #f8fafc;
+    font-size: 0.72rem;
+}
+
+.media-action {
+    position: absolute;
+    right: 0.9rem;
+    bottom: 0.9rem;
+    justify-content: center;
+    min-height: 2.35rem;
+    padding: 0 0.8rem;
+    background: rgba(248, 250, 252, 0.9);
+    color: #111827;
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.body {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.15rem;
+}
+
+.category {
+    margin: 0;
+    color: #627086;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.title-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.title-link h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    color: #111827;
+    font-family: "Avenir Next", "SF Pro Display", "PingFang TC", "Noto Sans TC", sans-serif;
+}
+
+.summary {
+    margin: 0;
+    color: #5f6b7c;
+    line-height: 1.65;
+}
+
+.highlight-row,
+.badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.highlight,
+.badge {
+    padding: 0.32rem 0.65rem;
+    font-size: 0.74rem;
+}
+
+.highlight {
+    background: #e8eef6;
+    color: #20324d;
+}
+
+.badge {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.footer,
+.price-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.price-block strong {
+    font-size: 1.05rem;
+    color: #111827;
+}
+
+.price-block span {
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+.detail-link {
+    color: #20324d;
+    font-weight: 800;
+    text-decoration: none;
+}

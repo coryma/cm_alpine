@@ -1,0 +1,238 @@
+.detail-shell {
+    display: grid;
+    gap: 1.4rem;
+    padding: 0.25rem 0 2rem;
+}
+
+.hero {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+    padding: 1.35rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 1.6rem;
+    background:
+        radial-gradient(circle at top left, rgba(223, 230, 238, 0.72), transparent 34%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(239, 243, 248, 0.84));
+    box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
+}
+
+.media-panel,
+.content-panel,
+.section-card {
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 1.3rem;
+}
+
+.media-panel {
+    padding: 1rem;
+}
+
+.main-image {
+    aspect-ratio: 5 / 4;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #eef2f7;
+}
+
+.main-image img,
+.thumbnail-button img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-row {
+    display: grid;
+    gap: 0.7rem;
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+    margin-top: 0.9rem;
+}
+
+.thumbnail-button {
+    border: 1px solid rgba(148, 163, 184, 0.26);
+    border-radius: 0.9rem;
+    padding: 0;
+    overflow: hidden;
+    background: #f8fafc;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.thumbnail-button_active {
+    border-color: #20324d;
+    box-shadow: 0 0 0 3px rgba(32, 50, 77, 0.12);
+}
+
+.content-panel {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.35rem;
+}
+
+.category,
+.spec-tile span {
+    margin: 0;
+    color: #607084;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+    font-weight: 800;
+}
+
+.content-panel h1,
+.section-card h2,
+.feature-card h3 {
+    margin: 0;
+    letter-spacing: -0.04em;
+    color: #111827;
+    font-family: "Avenir Next", "SF Pro Display", "PingFang TC", "Noto Sans TC", sans-serif;
+}
+
+.content-panel h1 {
+    font-size: clamp(2.4rem, 3vw, 3.6rem);
+    line-height: 0.96;
+}
+
+.section-card h2 {
+    margin-bottom: 0.9rem;
+    font-size: 1.5rem;
+}
+
+.short-description,
+.faq-answer,
+.feature-card p,
+.inline-message,
+.state-panel {
+    margin: 0;
+    color: #5f6b7c;
+    line-height: 1.7;
+}
+
+.price-row,
+.cta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.9rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.price-row strong {
+    font-size: 1.95rem;
+    color: #111827;
+}
+
+.price-row span,
+.sku {
+    color: #617084;
+}
+
+.badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge,
+.quick-spec,
+.spec-tile,
+.feature-card {
+    border-radius: 1rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.72rem;
+    background: #eef2f7;
+    color: #20324d;
+    font-weight: 700;
+    font-size: 0.78rem;
+}
+
+.highlight-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+    color: #334155;
+}
+
+.quick-spec-grid,
+.spec-grid,
+.feature-grid {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.quick-spec,
+.spec-tile,
+.feature-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.9rem 1rem;
+    background: #f8fafc;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.quick-spec span {
+    color: #607084;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.quick-spec strong,
+.spec-tile strong {
+    color: #111827;
+}
+
+.add-to-cart {
+    min-height: 3rem;
+    padding: 0 1.2rem;
+    border: 0;
+    border-radius: 999px;
+    background: #111827;
+    color: #f8fafc;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.inline-message,
+.state-panel {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #f8fafc;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.state-error {
+    background: #fff1f2;
+    color: #8c2f2f;
+}
+
+.detail-grid {
+    display: grid;
+    gap: 1.1rem;
+}
+
+.section-card {
+    padding: 1.3rem;
+}
+
+.feature-card h3 {
+    font-size: 1.15rem;
+    line-height: 1.12;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+}

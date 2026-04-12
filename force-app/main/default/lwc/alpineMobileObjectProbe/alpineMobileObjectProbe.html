@@ -1,0 +1,153 @@
+<template>
+    <section class="shell">
+        <header class="hero-card">
+            <div class="hero-topbar">
+                <div>
+                    <p class="eyebrow">Public Mobile Storefront</p>
+                    <strong>{storefront.storeName}</strong>
+                </div>
+                <a class="inline-link" href={requestPath}>{topLinkLabel}</a>
+            </div>
+
+            <div class="hero-copy">
+                <p class="hero-kicker">{storefront.heroEyebrow}</p>
+                <h1>{storefront.heroTitle}</h1>
+                <p class="hero-body">{storefront.heroBody}</p>
+            </div>
+
+            <div class="search-pill">
+                <span class="search-icon">⌕</span>
+                <span>{storefront.searchPlaceholder}</span>
+            </div>
+
+            <div class="cta-row">
+                <button class="primary-button" type="button" onclick={handleJumpToCatalog}>
+                    {storefront.heroPrimaryCtaLabel}
+                </button>
+                <a class="secondary-link" href={requestPath}>{storefront.heroSecondaryCtaLabel}</a>
+            </div>
+        </header>
+
+        <section class="status-strip">
+            <div>
+                <p class="section-label">Storefront</p>
+                <strong>{storefront.storeTagline}</strong>
+            </div>
+            <div>
+                <p class="section-label">Guest Health</p>
+                <strong>{probeSummary}</strong>
+            </div>
+            <button class="ghost-button" type="button" onclick={handleReload}>Reload</button>
+        </section>
+
+        <template if:true={isStaticMode}>
+            <div class="state-panel state-info">{modeMessage}</div>
+        </template>
+
+        <template if:true={hasQuickLinks}>
+            <section class="chip-panel">
+                <p class="section-label">Category Snapshot</p>
+                <div class="chip-row">
+                    <template for:each={quickLinks} for:item="item">
+                        <span key={item.value} class="chip">{item.label} · {item.count}</span>
+                    </template>
+                </div>
+            </section>
+        </template>
+
+        <template if:true={errorMessage}>
+            <div class="state-panel state-error">{errorMessage}</div>
+        </template>
+
+        <template if:true={isLoading}>
+            <div class="state-panel">Loading the public mobile storefront shell...</div>
+        </template>
+
+        <template if:false={isLoading}>
+            <section class="catalog-panel" data-catalog>
+                <div class="section-head">
+                    <p class="section-label">Catalog</p>
+                    <h2>{storefront.sectionTitle}</h2>
+                    <p>{storefront.sectionIntro}</p>
+                </div>
+
+                <div class="catalog-note">{catalogNote}</div>
+
+                <template if:true={hasProducts}>
+                    <div class="product-grid">
+                        <template for:each={featuredProducts} for:item="item">
+                            <article key={item.id} class="product-card">
+                                <template if:true={item.hasImage}>
+                                    <img class="product-image" src={item.imageUrl} alt={item.imageAlt} />
+                                </template>
+                                <template if:false={item.hasImage}>
+                                    <div class="product-placeholder">{item.placeholderLabel}</div>
+                                </template>
+
+                                <div class="product-body">
+                                    <div class="product-header">
+                                        <span class="badge">{item.badgeText}</span>
+                                        <strong>{item.priceText}</strong>
+                                    </div>
+                                    <h3>{item.name}</h3>
+                                    <p class="product-category">{item.category}</p>
+                                    <p class="product-description">{item.description}</p>
+                                    <a class="product-link" href={item.detailPath}>View Product</a>
+                                </div>
+                            </article>
+                        </template>
+                    </div>
+                </template>
+            </section>
+
+            <section class="promo-panel">
+                <div class="section-head">
+                    <p class="section-label">Request Flow</p>
+                    <h2>{storefront.promoTitle}</h2>
+                    <p>{storefront.promoBody}</p>
+                </div>
+                <a class="primary-link" href={requestPath}>{storefront.promoCtaLabel}</a>
+            </section>
+
+            <template if:true={hasDiagnostics}>
+                <section class="diagnostics-panel">
+                    <div class="section-head">
+                        <p class="section-label">Diagnostics</p>
+                        <h2>Guest access smoke test</h2>
+                        <p>Keep these checks visible while we migrate the old storefront piece by piece.</p>
+                    </div>
+
+                    <div class="diagnostic-grid">
+                        <template for:each={diagnosticCards} for:item="item">
+                            <article key={item.apiName} class={item.cardClass}>
+                                <div class="diagnostic-head">
+                                    <div>
+                                        <p class="section-label">{item.apiName}</p>
+                                        <h3>{item.label}</h3>
+                                    </div>
+                                    <span class="status-pill">{item.statusLabel}</span>
+                                </div>
+                                <p class="diagnostic-note">{item.note}</p>
+
+                                <template if:true={item.sampleCount}>
+                                    <ul class="record-list">
+                                        <template for:each={item.records} for:item="record">
+                                            <li key={record.id} class="record-item">
+                                                <strong>{record.title}</strong>
+                                                <span>{record.subtitle}</span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                            </article>
+                        </template>
+                    </div>
+                </section>
+            </template>
+
+            <footer class="footer-card">
+                <p>{storefront.footerCopy}</p>
+            </footer>
+        </template>
+    </section>
+</template>

@@ -1,0 +1,69 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Mobile Probe",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "dxpStyle" : { },
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"8e0671bb-4cf6-4b33-ab77-9e89f2e42aa1\",\"columns\":[{\"UUID\":\"3b36f183-7f6f-4e14-a56b-68cb9639ff49\",\"columnName\":\"Content\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:alpineMobileObjectProbe",
+              "id" : "1e2dc7f5-3f79-4a40-97ab-2bb8313ff1a2",
+              "type" : "component"
+            } ],
+            "id" : "3b36f183-7f6f-4e14-a56b-68cb9639ff49",
+            "name" : "col1",
+            "title" : "Content",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "8e0671bb-4cf6-4b33-ab77-9e89f2e42aa1",
+          "type" : "component"
+        } ],
+        "id" : "de3b6b2d-bdb6-4819-bd7e-6cd77d3e4704",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "Conservative public mobile probe for validating anonymous storefront access.",
+            "dxpStyle" : { },
+            "pageTitle" : "Mobile Probe",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "ee46cfb8-cb47-45f5-8a29-bf854372f860",
+          "type" : "component"
+        } ],
+        "id" : "222fc3de-66dd-4216-b560-b0a5b42bd0d6",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "b1d38c40-f2a1-44e0-b194-df9fc8f5c52b",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-quiz"
+  },
+  "urlName" : "quiz"
+}

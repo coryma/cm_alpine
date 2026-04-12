@@ -1,0 +1,9 @@
+{
+  "activeViewId" : "bcabe536-44d4-4335-a5ed-e9330e924551",
+  "appPageId" : "83a4a4a7-1b26-4c09-b6d8-44dc9e5a26d8",
+  "configurationTags" : [ ],
+  "devName" : "Payment_Processing",
+  "label" : "Payment Processing",
+  "routeType" : "payment-processing",
+  "urlPrefix" : "payment-processing"
+}

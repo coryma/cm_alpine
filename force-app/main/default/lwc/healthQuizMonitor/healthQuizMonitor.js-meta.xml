@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Real-time monitor for guest quiz progress and icon selections.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Health Quiz Monitor</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+    </targets>
+</LightningComponentBundle>

@@ -1,0 +1,161 @@
+.admin-shell {
+    background: #f4f6f9;
+    min-height: 100%;
+    padding: 1.5rem;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.admin-header__eyebrow {
+    color: #5c6980;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.25rem;
+    text-transform: uppercase;
+}
+
+.admin-header h1 {
+    color: #122033;
+    font-size: 2rem;
+    margin: 0 0 0.5rem;
+}
+
+.admin-header p {
+    color: #4f5d75;
+    margin: 0;
+    max-width: 48rem;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.admin-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-card {
+    background: #ffffff;
+    border: 1px solid #d9dfe8;
+    border-radius: 1rem;
+    padding: 1.25rem;
+}
+
+.admin-card h2 {
+    color: #122033;
+    font-size: 1.125rem;
+    margin: 0 0 1rem;
+}
+
+.admin-card_span {
+    grid-column: 1 / -1;
+}
+
+.field-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-card lightning-input,
+.admin-card lightning-textarea {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.admin-note {
+    color: #4f5d75;
+    margin: 0 0 1rem;
+}
+
+.logo-preview {
+    display: grid;
+    gap: 0.6rem;
+    width: fit-content;
+    margin: 0 0 1rem;
+}
+
+.logo-preview__label {
+    color: #5c6980;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.logo-preview__image {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1rem;
+    border: 1px solid #d9dfe8;
+    object-fit: cover;
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgba(18, 32, 51, 0.08);
+}
+
+.product-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.guide-card {
+    background: #f7f9fc;
+    border: 1px solid #e1e6ef;
+    border-radius: 0.875rem;
+    padding: 1rem;
+}
+
+.guide-card__api {
+    color: #19335b;
+    font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 0.75rem;
+    margin: 0 0 0.5rem;
+}
+
+.guide-card h3 {
+    color: #122033;
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+}
+
+.guide-card p {
+    color: #4f5d75;
+    margin: 0;
+}
+
+.state-panel {
+    background: #ffffff;
+    border: 1px solid #d9dfe8;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem 1.25rem;
+}
+
+.state-panel_error {
+    border-color: #d52b1e;
+    color: #8f2018;
+}
+
+@media (max-width: 960px) {
+    .admin-header,
+    .field-grid,
+    .admin-grid {
+        grid-template-columns: 1fr;
+        display: grid;
+    }
+
+    .admin-actions {
+        flex-wrap: wrap;
+    }
+}

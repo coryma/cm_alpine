@@ -1,0 +1,245 @@
+<template>
+    <section class="admin-shell">
+        <header class="admin-header">
+            <div>
+                <p class="admin-header__eyebrow">Storefront Admin</p>
+                <h1>ALPINE 健康生活商城設定</h1>
+                <p>集中管理品牌文案、首頁版位與商品資料來源，商品級上架則沿用 Product2 欄位。</p>
+            </div>
+
+            <div class="admin-actions">
+                <lightning-button label="重新整理" onclick={handleReload} disabled={disableActions}></lightning-button>
+                <lightning-button label="回復表單" onclick={handleReset} disabled={disableActions}></lightning-button>
+                <lightning-button
+                    variant="brand"
+                    label="儲存設定"
+                    onclick={handleSave}
+                    disabled={disableActions}
+                ></lightning-button>
+            </div>
+        </header>
+
+        <template if:true={errorMessage}>
+            <div class="state-panel state-panel_error">{errorMessage}</div>
+        </template>
+
+        <template if:true={isLoading}>
+            <div class="state-panel">正在載入商城設定...</div>
+        </template>
+
+        <template if:false={isLoading}>
+            <div class="admin-grid">
+                <section class="admin-card">
+                    <h2>品牌與搜尋</h2>
+
+                    <div class="field-grid">
+                        <lightning-input
+                            label="商城名稱"
+                            name="storeName"
+                            value={config.storeName}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                        <lightning-input
+                            label="副標語"
+                            name="storeTagline"
+                            value={config.storeTagline}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                    </div>
+
+                    <lightning-input
+                        label="Logo 圖片 URL"
+                        name="logoImageUrl"
+                        type="url"
+                        value={config.logoImageUrl}
+                        onchange={handleFieldChange}
+                    ></lightning-input>
+
+                    <template if:true={hasLogoImageUrl}>
+                        <div class="logo-preview">
+                            <span class="logo-preview__label">Logo 預覽</span>
+                            <img class="logo-preview__image" src={config.logoImageUrl} alt="Store logo preview" />
+                        </div>
+                    </template>
+
+                    <lightning-input
+                        label="搜尋欄 Placeholder"
+                        name="searchPlaceholder"
+                        value={config.searchPlaceholder}
+                        onchange={handleFieldChange}
+                    ></lightning-input>
+                </section>
+
+                <section class="admin-card">
+                    <h2>首頁主視覺</h2>
+
+                    <div class="field-grid">
+                        <lightning-input
+                            label="Hero 上方小標"
+                            name="heroEyebrow"
+                            value={config.heroEyebrow}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                        <lightning-input
+                            label="Hero 主標題"
+                            name="heroTitle"
+                            value={config.heroTitle}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                    </div>
+
+                    <lightning-textarea
+                        label="Hero 內文"
+                        name="heroBody"
+                        value={config.heroBody}
+                        onchange={handleFieldChange}
+                    ></lightning-textarea>
+
+                    <div class="field-grid">
+                        <lightning-input
+                            label="主按鈕文案"
+                            name="heroPrimaryCtaLabel"
+                            value={config.heroPrimaryCtaLabel}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                        <lightning-input
+                            label="次按鈕文案"
+                            name="heroSecondaryCtaLabel"
+                            value={config.heroSecondaryCtaLabel}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                    </div>
+                </section>
+
+                <section class="admin-card">
+                    <h2>首頁區塊文案</h2>
+
+                    <div class="field-grid">
+                        <lightning-input
+                            label="限時快閃標題"
+                            name="flashSaleTitle"
+                            value={config.flashSaleTitle}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                        <lightning-input
+                            label="人氣補給標題"
+                            name="technologyTitle"
+                            value={config.technologyTitle}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                    </div>
+
+                    <lightning-textarea
+                        label="限時快閃說明"
+                        name="flashSaleIntro"
+                        value={config.flashSaleIntro}
+                        onchange={handleFieldChange}
+                    ></lightning-textarea>
+
+                    <lightning-textarea
+                        label="人氣補給說明"
+                        name="technologyIntro"
+                        value={config.technologyIntro}
+                        onchange={handleFieldChange}
+                    ></lightning-textarea>
+
+                    <div class="field-grid">
+                        <lightning-input
+                            label="推薦區標題"
+                            name="recommendationsTitle"
+                            value={config.recommendationsTitle}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                        <lightning-input
+                            label="推薦 Promo 標題"
+                            name="recommendationsPromoTitle"
+                            value={config.recommendationsPromoTitle}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                    </div>
+
+                    <lightning-textarea
+                        label="推薦 Promo 內文"
+                        name="recommendationsPromoBody"
+                        value={config.recommendationsPromoBody}
+                        onchange={handleFieldChange}
+                    ></lightning-textarea>
+
+                    <div class="field-grid">
+                        <lightning-input
+                            label="推薦 Promo 按鈕文案"
+                            name="recommendationsPromoCtaLabel"
+                            value={config.recommendationsPromoCtaLabel}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                    </div>
+
+                    <lightning-textarea
+                        label="Footer 文案"
+                        name="footerCopy"
+                        value={config.footerCopy}
+                        onchange={handleFieldChange}
+                    ></lightning-textarea>
+                </section>
+
+                <section class="admin-card">
+                    <h2>資料來源與媒體</h2>
+
+                    <div class="field-grid">
+                        <lightning-input
+                            label="Pricebook2 Id"
+                            name="demoPricebookId"
+                            value={config.demoPricebookId}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                        <lightning-input
+                            label="CMS 語系代碼"
+                            name="cmsLanguage"
+                            value={config.cmsLanguage}
+                            onchange={handleFieldChange}
+                        ></lightning-input>
+                    </div>
+
+                    <lightning-input
+                        label="Experience Site Network Name"
+                        name="siteNetworkName"
+                        value={config.siteNetworkName}
+                        onchange={handleFieldChange}
+                    ></lightning-input>
+
+                    <lightning-input
+                        label="Public Content Channel Name"
+                        name="publicContentChannelName"
+                        value={config.publicContentChannelName}
+                        onchange={handleFieldChange}
+                    ></lightning-input>
+
+                    <lightning-input
+                        type="checkbox"
+                        label="啟用 ProductMedia / CMS 圖片解析"
+                        name="enableCmsMedia"
+                        checked={config.enableCmsMedia}
+                        onchange={handleFieldChange}
+                    ></lightning-input>
+                </section>
+
+                <section class="admin-card admin-card_span">
+                    <h2>商品級後台欄位</h2>
+                    <p class="admin-note">
+                        商品是否上架、排序、分類與卡片短文案，不在這裡逐筆維護，而是直接由 Product2 record 控制。
+                    </p>
+
+                    <div class="product-grid">
+                        <template for:each={productFieldGuides} for:item="item">
+                            <article key={item.apiName} class="guide-card">
+                                <p class="guide-card__api">{item.apiName}</p>
+                                <h3>{item.label}</h3>
+                                <p>{item.description}</p>
+                            </article>
+                        </template>
+                    </div>
+                </section>
+            </div>
+        </template>
+    </section>
+</template>
