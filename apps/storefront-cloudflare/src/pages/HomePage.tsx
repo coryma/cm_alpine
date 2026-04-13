@@ -1,16 +1,25 @@
 import type { HomePageContent, HomeResponse } from "../../shared/contracts";
+import type { HomeHeroPersonalization } from "../lib/homePersonalization";
 import { StorefrontImage } from "../components/StorefrontImage";
 
 interface HomePageProps {
   home: HomeResponse;
   onNavigate: (href: string) => void;
   page: HomePageContent;
+  personalization: HomeHeroPersonalization | null;
 }
 
-export function HomePage({ home, onNavigate, page }: HomePageProps) {
+export function HomePage({ home, onNavigate, page, personalization }: HomePageProps) {
   const heroTitleClassName = containsHanCharacters(home.heroFeature.title)
     ? "heroFeature__title heroFeature__title_cjk"
     : "heroFeature__title";
+  const personalizedProducts = personalization?.products || [];
+  const personalizedTitle = applyTemplate(page.personalizedTitleTemplate, {
+    bundleName: personalization?.bundleName || ""
+  });
+  const personalizedBody = applyTemplate(page.personalizedBodyTemplate, {
+    bundleName: personalization?.bundleName || ""
+  });
 
   return (
     <>
@@ -25,16 +34,28 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
             <span className="heroFeature__eyebrow">{home.heroFeature.label}</span>
             <h2 className={heroTitleClassName}>{home.heroFeature.title}</h2>
             <p>{home.heroFeature.body}</p>
-            <a
-              className="heroButton"
-              href="/products"
-              onClick={(event) => {
-                event.preventDefault();
-                onNavigate("/products");
-              }}
-            >
-              {page.heroCtaLabel}
-            </a>
+            <div className="heroActionRow">
+              <a
+                className="heroButton"
+                href="/products"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate("/products");
+                }}
+              >
+                {page.heroCtaLabel}
+              </a>
+              <a
+                className="heroButton heroButton_secondary"
+                href="/quiz"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate("/quiz");
+                }}
+              >
+                {page.heroQuizCtaLabel}
+              </a>
+            </div>
           </div>
         </article>
 
@@ -60,6 +81,46 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
           </article>
         </div>
       </section>
+
+      {personalizedProducts.length ? (
+        <section className="personalizedSpotlight" id="personalized-spotlight">
+          <div className="personalizedSpotlight__header">
+            <div>
+              <p className="microLabel">{page.personalizedEyebrow}</p>
+              <h2>{personalizedTitle}</h2>
+              <p className="personalizedSpotlight__intro">{personalizedBody}</p>
+            </div>
+            <a
+              className="discoverButton personalizedSpotlight__cta"
+              href="/quiz"
+              onClick={(event) => {
+                event.preventDefault();
+                onNavigate("/quiz");
+              }}
+            >
+              {page.heroQuizCtaLabel}
+            </a>
+          </div>
+
+          <div className="personalizedSpotlight__grid">
+            {personalizedProducts.map((product) => (
+              <article
+                className="recommendCard personalizedSpotlight__card"
+                key={product.id}
+                onClick={() => onNavigate(`/products/${product.slug}`)}
+              >
+                <div className="recommendCard__imageWrap">
+                  <StorefrontImage alt={product.imageAlt} src={product.imageUrl} />
+                </div>
+                <p>{product.roleLabel}</p>
+                <h3>{product.name}</h3>
+                <span className="personalizedSpotlight__reason">{product.reason}</span>
+                <strong>{product.priceLabel}</strong>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="shortcutGrid">
         {home.quickLinks.map((item) => (

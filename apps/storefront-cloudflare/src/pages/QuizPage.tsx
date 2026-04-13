@@ -23,11 +23,17 @@ import {
   resetQuizSessionIdentity,
   type QuizSessionIdentity
 } from "../lib/quizSession";
+import {
+  writeHomeHeroPersonalization,
+  type HomeHeroPersonalization,
+  type HomePersonalizedProduct
+} from "../lib/homePersonalization";
 import "./QuizPage.css";
 import { StorefrontImage } from "../components/StorefrontImage";
 
 interface QuizPageProps {
   onNavigate: (href: string) => void;
+  onHeroPersonalizationChange?: (payload: HomeHeroPersonalization) => void;
   page: QuizPageContent;
 }
 
@@ -35,7 +41,7 @@ const CATALOG_LIMIT = 120;
 const STEP_KEYS = ["intro", ...QUIZ_STEP_ORDER, "result"] as const;
 const LAST_QUESTION_KEY = QUIZ_STEP_ORDER[QUIZ_STEP_ORDER.length - 1];
 
-export function QuizPage({ onNavigate, page }: QuizPageProps) {
+export function QuizPage({ onNavigate, onHeroPersonalizationChange, page }: QuizPageProps) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>(() => buildEmptyQuizAnswers());
   const [validationMessage, setValidationMessage] = useState("");
@@ -150,6 +156,24 @@ export function QuizPage({ onNavigate, page }: QuizPageProps) {
         const availableProducts = await resolveCatalogProducts();
         await wait(520);
         const nextRecommendation = buildHealthQuizRecommendation(answers, availableProducts);
+        const personalizedProducts: HomePersonalizedProduct[] = nextRecommendation.products.map(
+          (product) => ({
+            id: product.id,
+            slug: product.slug,
+            name: product.name,
+            priceLabel: product.priceLabel,
+            imageUrl: product.imageUrl,
+            imageAlt: product.imageAlt,
+            label: product.label,
+            reason: product.reason,
+            roleLabel: product.roleLabel
+          })
+        );
+        const nextHeroPersonalization = writeHomeHeroPersonalization({
+          heroVariantKey: nextRecommendation.heroVariantKey,
+          bundleName: nextRecommendation.bundleName,
+          products: personalizedProducts
+        });
         syncProgressPayload(
           buildProgressPayload(sessionIdentity, currentQuestion.key, currentQuestion.index, selectedOption, {
             bundleName: nextRecommendation.bundleName,
@@ -159,6 +183,7 @@ export function QuizPage({ onNavigate, page }: QuizPageProps) {
         );
 
         startTransition(() => {
+          onHeroPersonalizationChange?.(nextHeroPersonalization);
           setRecommendation(nextRecommendation);
           setCurrentStepIndex(STEP_KEYS.indexOf("result"));
         });

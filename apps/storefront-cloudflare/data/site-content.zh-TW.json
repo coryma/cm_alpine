@@ -43,6 +43,10 @@
     },
     "home": {
       "heroCtaLabel": "開始選購",
+      "heroQuizCtaLabel": "您的健康顧問",
+      "personalizedEyebrow": "依你的健康顧問結果",
+      "personalizedTitleTemplate": "先看這組「{bundleName}」",
+      "personalizedBodyTemplate": "這些商品會優先貼近你剛完成的問卷結果，先從最相關的幾項開始看。",
       "flashSaleTitle": "限時精選",
       "flashSaleMetaLabel": "本週重點",
       "flashSaleLinkLabel": "查看全部",
@@ -308,6 +312,50 @@
       "body": "從早餐穀物、機能飲到恢復保養，把每天會回購的品項整理在同一個清楚好逛的選品頁裡。",
       "imageUrl": "/images/home-hero-wellness.svg",
       "alt": "以穀物、柑橘與機能飲為主題的健康生活主視覺"
+    },
+    "quizHeroVariants": {
+      "energy": {
+        "label": "您的健康顧問推薦結果",
+        "title": "讓您白天精神補滿",
+        "body": "你剛完成的問卷比較偏向白天提振與清爽補給，首頁先替你聚焦「{bundleName}」。",
+        "imageUrl": "/images/home-hero-energy.svg",
+        "alt": "以日常提振與清爽補給為主題的個人化首頁主視覺"
+      },
+      "balance": {
+        "label": "您的健康顧問推薦結果",
+        "title": "生活規律養成規律好習慣",
+        "body": "你目前更適合從均衡、規律、好持續的選擇開始，首頁先替你聚焦「{bundleName}」。",
+        "imageUrl": "/images/home-hero-balance.svg",
+        "alt": "以均衡日常與穩定節奏為主題的個人化首頁主視覺"
+      },
+      "recovery": {
+        "label": "您的健康顧問推薦結果",
+        "title": "從勞累中恢復元氣",
+        "body": "你剛完成的問卷明顯偏向恢復與身體整理，首頁先替你聚焦「{bundleName}」。",
+        "imageUrl": "/images/home-hero-recovery.svg",
+        "alt": "以恢復節奏與放鬆補給為主題的個人化首頁主視覺"
+      },
+      "sleep": {
+        "label": "您的健康顧問推薦結果",
+        "title": "夜晚一夜好眠",
+        "body": "你現在更需要把夜晚節奏慢下來，首頁先替你聚焦「{bundleName}」。",
+        "imageUrl": "/images/home-hero-sleep.svg",
+        "alt": "以夜晚放鬆與舒緩節奏為主題的個人化首頁主視覺"
+      },
+      "light": {
+        "label": "您的健康顧問推薦結果",
+        "title": "簡單生活輕鬆開始",
+        "body": "你比較適合先從低負擔、容易開始的方式切入，首頁先替你聚焦「{bundleName}」。",
+        "imageUrl": "/images/home-hero-light.svg",
+        "alt": "以輕鬆好執行的健康節奏為主題的個人化首頁主視覺"
+      },
+      "care": {
+        "label": "您的健康顧問推薦結果",
+        "title": "把自己照顧好很重要",
+        "body": "你這次的選擇更偏向溫和照顧與日常陪伴，首頁先替你聚焦「{bundleName}」。",
+        "imageUrl": "/images/home-hero-care.svg",
+        "alt": "以日常照顧與溫和陪伴為主題的個人化首頁主視覺"
+      }
     },
     "heroSecondary": {
       "title": "晨光補給",

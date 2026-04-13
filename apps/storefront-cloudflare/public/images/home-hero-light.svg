@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Light routine hero background">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="55%" stop-color="#7dd3c7"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1320" cy="164" r="176" fill="#fef9c3" opacity="0.4"/>
+  <circle cx="214" cy="710" r="210" fill="#d1fae5" opacity="0.18"/>
+  <path d="M0 706C170 638 298 632 430 652C574 674 660 732 824 732C978 732 1132 660 1282 632C1402 610 1500 620 1600 668V900H0Z" fill="#ffffff" opacity="0.18"/>
+  <path d="M288 614C394 480 536 426 704 434C846 440 982 514 1088 628" fill="none" stroke="#ffffff" stroke-width="24" stroke-linecap="round" opacity="0.88"/>
+  <path d="M450 678C528 572 632 530 756 540C860 550 950 602 1024 688" fill="none" stroke="#fde68a" stroke-width="18" stroke-linecap="round" opacity="0.82"/>
+  <text x="210" y="214" fill="#11413a" font-size="52" font-family="Manrope, sans-serif" letter-spacing="10">LIGHT</text>
+</svg>

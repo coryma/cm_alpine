@@ -104,6 +104,8 @@ export interface HeroFeature {
   alt: string;
 }
 
+export type QuizHeroVariantMap = Record<string, HeroFeature>;
+
 export interface HeroSecondary {
   title: string;
   caption: string;
@@ -131,6 +133,10 @@ export interface PromoCardContent {
 
 export interface HomePageContent {
   heroCtaLabel: string;
+  heroQuizCtaLabel: string;
+  personalizedEyebrow: string;
+  personalizedTitleTemplate: string;
+  personalizedBodyTemplate: string;
   flashSaleTitle: string;
   flashSaleMetaLabel: string;
   flashSaleLinkLabel: string;
@@ -412,6 +418,7 @@ export interface StorefrontContentDocument {
   homeSections: {
     quickLinks: QuickLink[];
     heroFeature: HeroFeature;
+    quizHeroVariants?: QuizHeroVariantMap;
     heroSecondary: HeroSecondary;
     heroMembership: HeroMembership;
     editorialBanner: EditorialBanner;

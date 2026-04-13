@@ -52,6 +52,7 @@ export interface QuizRecommendedProduct extends StorefrontProduct {
 }
 
 export interface QuizRecommendation {
+  heroVariantKey: string;
   bundleName: string;
   summary: string;
   artwork: string;
@@ -254,6 +255,7 @@ export function buildHealthQuizRecommendation(
     .slice(0, 4);
 
   return {
+    heroVariantKey: goal.value,
     bundleName: applyTemplate(QUIZ_CONTENT.bundleNameTemplate, {
       goal: goal.bundleWord,
       support: support.bundleWord

@@ -227,6 +227,11 @@ export default {
       }
     }
 
+    if (isSpaRouteRequest(request, url)) {
+      const indexUrl = new URL("/index.html", url);
+      return env.ASSETS.fetch(new Request(indexUrl.toString(), request));
+    }
+
     return env.ASSETS.fetch(request);
   }
 };
@@ -264,6 +269,18 @@ function readSortBy(value: string | null): ProductSortBy | undefined {
     default:
       return undefined;
   }
+}
+
+function isSpaRouteRequest(request: Request, url: URL): boolean {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return false;
+  }
+
+  if (url.pathname.startsWith("/api/")) {
+    return false;
+  }
+
+  return !url.pathname.includes(".");
 }
 
 function handleProviderError(error: unknown): Response {

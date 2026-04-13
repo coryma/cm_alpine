@@ -11,6 +11,12 @@ import {
   fetchProductDetail,
   fetchProducts
 } from "./lib/api";
+import { syncAnonymousProfile } from "./lib/salesforceDataCloud";
+import {
+  applyHomeHeroPersonalization,
+  readHomeHeroPersonalization,
+  type HomeHeroPersonalization
+} from "./lib/homePersonalization";
 import { getStorefrontConfig } from "../shared/storefront";
 import { StorefrontShell } from "./components/StorefrontShell";
 import { HomePage } from "./pages/HomePage";
@@ -75,6 +81,9 @@ function App() {
   );
   const [config, setConfig] = useState<StorefrontConfigResponse | null>(null);
   const [home, setHome] = useState<HomeResponse | null>(null);
+  const [heroPersonalization, setHeroPersonalization] = useState<HomeHeroPersonalization | null>(
+    () => readHomeHeroPersonalization()
+  );
   const [productsResponse, setProductsResponse] = useState<ProductsResponse | null>(null);
   const [productDetail, setProductDetail] = useState<StorefrontProduct | null>(null);
   const [isBootstrapping, setIsBootstrapping] = useState(true);
@@ -137,6 +146,38 @@ function App() {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []);
+
+  useEffect(() => {
+    const handleStorage = () => {
+      setHeroPersonalization(readHomeHeroPersonalization());
+    };
+
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
+
+  useEffect(() => {
+    const preferredCategory =
+      route.kind === "products"
+        ? route.category
+        : route.kind === "product"
+          ? productDetail?.categoryId || ""
+          : "";
+
+    void syncAnonymousProfile({
+      preferredCategory: preferredCategory === "all" ? "" : preferredCategory,
+      quizBundle: heroPersonalization?.bundleName || "",
+      personaHint: heroPersonalization?.heroVariantKey || ""
+    });
+  }, [
+    heroPersonalization?.bundleName,
+    heroPersonalization?.heroVariantKey,
+    productDetail?.categoryId,
+    route
+  ]);
 
   useEffect(() => {
     let active = true;
@@ -290,6 +331,10 @@ function App() {
   });
 
   const storefrontConfig = config || DEFAULT_CONFIG;
+  const resolvedHome = useMemo(
+    () => (home ? applyHomeHeroPersonalization(home, heroPersonalization) : null),
+    [heroPersonalization, home]
+  );
 
   return (
     <StorefrontShell
@@ -307,11 +352,12 @@ function App() {
         <div className="loadingPanel">{storefrontConfig.pages.common.loadingLabel}</div>
       ) : null}
 
-      {!isBootstrapping && !isLoading && route.kind === "home" && home ? (
+      {!isBootstrapping && !isLoading && route.kind === "home" && resolvedHome ? (
         <HomePage
-          home={home}
+          home={resolvedHome}
           onNavigate={navigate}
           page={storefrontConfig.pages.home}
+          personalization={heroPersonalization}
         />
       ) : null}
 
@@ -341,7 +387,11 @@ function App() {
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "quiz" ? (
-        <QuizPage onNavigate={navigate} page={storefrontConfig.pages.quiz} />
+        <QuizPage
+          onHeroPersonalizationChange={setHeroPersonalization}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.quiz}
+        />
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "quiz-monitor" ? (

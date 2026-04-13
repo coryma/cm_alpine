@@ -560,7 +560,7 @@ img {
   max-width: 12ch;
   margin: 1rem 0;
   font-family: "Manrope", sans-serif;
-  font-size: clamp(2.7rem, 4.2vw, 4.4rem);
+  font-size: clamp(2rem, 4.2vw, 4.4rem);
   line-height: 1;
   letter-spacing: -0.07em;
   text-wrap: balance;
@@ -568,8 +568,8 @@ img {
 
 .heroFeature__title_cjk {
   max-width: none;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
@@ -577,6 +577,13 @@ img {
   max-width: 48ch;
   margin: 0 0 1.5rem;
   color: rgba(255, 255, 255, 0.84);
+}
+
+.heroActionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
 }
 
 .heroButton,
@@ -598,6 +605,13 @@ img {
 
 .heroButton {
   width: fit-content;
+}
+
+.heroButton_secondary {
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
 }
 
 .heroButton:hover,
@@ -1026,6 +1040,62 @@ img {
 .recommendedSection {
   display: grid;
   gap: 1.5rem;
+}
+
+.personalizedSpotlight {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at top right, rgba(250, 204, 21, 0.16), transparent 28%),
+    linear-gradient(135deg, rgba(216, 227, 250, 0.82), rgba(255, 255, 255, 0.96));
+  box-shadow: 0 20px 48px rgba(3, 22, 53, 0.08);
+}
+
+.personalizedSpotlight__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.personalizedSpotlight__header h2 {
+  margin: 0.35rem 0 0.65rem;
+  max-width: none;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1.02;
+  white-space: nowrap;
+}
+
+.personalizedSpotlight__intro {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.personalizedSpotlight__cta {
+  flex-shrink: 0;
+}
+
+.personalizedSpotlight__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.personalizedSpotlight__card {
+  min-height: 100%;
+}
+
+.personalizedSpotlight__reason {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--text-soft);
+  font-size: 0.94rem;
+  line-height: 1.55;
 }
 
 .recommendedHeader {
@@ -1562,6 +1632,7 @@ img {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
+  .personalizedSpotlight__grid,
   .saleGrid,
   .recommendedGrid,
   .catalogListingGrid {
@@ -1606,6 +1677,7 @@ img {
   .sectionBar,
   .sectionBar__headline,
   .sectionBar__meta,
+  .personalizedSpotlight__header,
   .recommendedHeader,
   .pageIntro,
   .listingCard__footer {
@@ -1680,6 +1752,7 @@ img {
 
   .heroFeature__overlay,
   .heroSecondaryCard__copy,
+  .personalizedSpotlight,
   .flashSaleSection,
   .technologyCard,
   .recommendCard,
@@ -1689,9 +1762,11 @@ img {
 
   .heroFeature__title,
   .sectionBar__headline h2,
-  .recommendedHeader h2 {
+  .recommendedHeader h2,
+  .personalizedSpotlight__header h2 {
     max-width: none;
     font-size: clamp(2rem, 10vw, 3rem);
+    white-space: normal;
   }
 
   .heroFeature__title_cjk {
@@ -1700,7 +1775,12 @@ img {
     white-space: normal;
   }
 
+  .heroActionRow {
+    width: 100%;
+  }
+
   .shortcutGrid,
+  .personalizedSpotlight__grid,
   .saleGrid,
   .recommendedGrid,
   .catalogListingGrid,

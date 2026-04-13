@@ -1,0 +1,194 @@
+{
+  "records": [
+    {
+      "developerName": "alpineStorefrontAction",
+      "masterLabel": "Alpine Storefront Action",
+      "category": "Engagement",
+      "externalDataTranFields": [
+        {
+          "masterLabel": "actionName",
+          "developerName": "actionName",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "routeKind",
+          "developerName": "routeKind",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "pagePath",
+          "developerName": "pagePath",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "productSlug",
+          "developerName": "productSlug",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "categoryId",
+          "developerName": "categoryId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "eventId",
+          "developerName": "eventId",
+          "dataType": "Text",
+          "isDataRequired": true,
+          "primaryIndexOrder": 1
+        },
+        {
+          "masterLabel": "category",
+          "developerName": "category",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "dateTime",
+          "developerName": "dateTime",
+          "dataType": "DateTime",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "deviceId",
+          "developerName": "deviceId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "eventType",
+          "developerName": "eventType",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "sessionId",
+          "developerName": "sessionId",
+          "dataType": "Text",
+          "isDataRequired": true
+        }
+      ]
+    },
+    {
+      "developerName": "identity",
+      "masterLabel": "Identity",
+      "category": "Profile",
+      "externalDataTranFields": [
+        {
+          "masterLabel": "category",
+          "developerName": "category",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "dateTime",
+          "developerName": "dateTime",
+          "dataType": "DateTime",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "deviceId",
+          "developerName": "deviceId",
+          "dataType": "Text",
+          "isDataRequired": true,
+          "primaryIndexOrder": 1
+        },
+        {
+          "masterLabel": "eventId",
+          "developerName": "eventId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "eventType",
+          "developerName": "eventType",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "firstName",
+          "developerName": "firstName",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "isAnonymous",
+          "developerName": "isAnonymous",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "lastName",
+          "developerName": "lastName",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "sessionId",
+          "developerName": "sessionId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "sourceChannel",
+          "developerName": "sourceChannel",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "sourceLocale",
+          "developerName": "sourceLocale",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "sourcePageType",
+          "developerName": "sourcePageType",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "sourceUrl",
+          "developerName": "sourceUrl",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "sourceUrlReferrer",
+          "developerName": "sourceUrlReferrer",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "preferredCategory",
+          "developerName": "customField0",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "quizBundle",
+          "developerName": "customField1",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "acquisitionSource",
+          "developerName": "customField2",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "personaHint",
+          "developerName": "customField3",
+          "dataType": "Text",
+          "isDataRequired": false
+        }
+      ]
+    }
+  ]
+}
