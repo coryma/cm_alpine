@@ -105,22 +105,22 @@
     },
     "quiz": {
       "brand": "健康好物測驗",
-      "title": "找到更適合你現在節奏的健康選品",
-      "introStatusLabel": "5 題快速完成，直接產出推薦商品",
+      "title": "幫你找出適合你生活節奏的健康選品組合",
+      "introStatusLabel": "5 題快速完成，直接為您量身打造",
       "questionProgressTemplate": "第 {current} / {total} 題",
       "completedLabel": "推薦完成",
       "introImageAlt": "健康好物推薦主視覺",
       "introEyebrow": "個人化健康推薦",
-      "introTitle": "五個問題，幫你快速整理現在更適合的選項",
-      "introBody": "從生活節奏、使用習慣到想要的感受，幫你整理出更貼近現在需求的健康好物與日常補給。",
+      "introTitle": "只需簡單的五個問題",
+      "introBody": "告訴我們你的健康目標、生活型態和偏好形式，我們從商品清單裡幫你篩出最相關的選項。",
       "introPoints": [
         {
           "title": "5 題快速完成",
           "body": "不用長時間填答，幾個步驟就能得到結果。"
         },
         {
-          "title": "依偏好整理推薦",
-          "body": "從目標、生活型態到形式偏好，組出更貼近你的選項。"
+          "title": "依你的習慣篩選",
+          "body": "根據健康目標、作息型態和使用形式，從商品清單裡找出最相關的。"
         },
         {
           "title": "直接查看商品與需求表單",
