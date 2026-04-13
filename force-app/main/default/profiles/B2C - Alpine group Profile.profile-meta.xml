@@ -4,6 +4,10 @@
         <apexClass>AlpineStorefrontProbeController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>HealthQuizProgressController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <custom>true</custom>
     <loginIpRanges>
         <description>ALL</description>

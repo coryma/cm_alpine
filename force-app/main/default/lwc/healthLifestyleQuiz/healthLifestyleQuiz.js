@@ -23,6 +23,8 @@ import {
 const SESSION_STORAGE_KEY = 'health-lifestyle-quiz-session';
 const STEP_KEYS = Object.freeze(['intro', ...QUIZ_STEP_ORDER, 'result']);
 const LAST_QUESTION_KEY = QUIZ_STEP_ORDER[QUIZ_STEP_ORDER.length - 1];
+const PROGRESS_SYNC_MAX_ATTEMPTS = 3;
+const PROGRESS_SYNC_RETRY_DELAY_MS = 900;
 
 export default class HealthLifestyleQuiz extends LightningElement {
     currentStepIndex = 0;
@@ -316,10 +318,21 @@ export default class HealthLifestyleQuiz extends LightningElement {
             bundleName: bundleName || ''
         };
 
+        this.syncProgressPayload(payload, 1);
+    }
+
+    syncProgressPayload(payload, attemptNumber) {
         recordQuizProgressJson({
             payloadJson: JSON.stringify(payload)
-        }).catch(() => {
-            // The quiz should continue even if monitor sync fails.
+        }).catch((error) => {
+            if (attemptNumber < PROGRESS_SYNC_MAX_ATTEMPTS) {
+                wait(PROGRESS_SYNC_RETRY_DELAY_MS * attemptNumber).then(() => {
+                    this.syncProgressPayload(payload, attemptNumber + 1);
+                });
+                return;
+            }
+
+            logProgressSyncFailure(error, payload, attemptNumber);
         });
     }
 
@@ -417,5 +430,19 @@ function normalizeString(value) {
 function wait(duration) {
     return new Promise((resolve) => {
         setTimeout(resolve, duration);
+    });
+}
+
+function logProgressSyncFailure(error, payload, attemptNumber) {
+    if (typeof console === 'undefined' || typeof console.warn !== 'function') {
+        return;
+    }
+
+    console.warn('healthLifestyleQuiz progress sync failed', {
+        attemptNumber,
+        sessionKey: payload?.sessionKey,
+        stepNumber: payload?.stepNumber,
+        stepKey: payload?.stepKey,
+        error
     });
 }
