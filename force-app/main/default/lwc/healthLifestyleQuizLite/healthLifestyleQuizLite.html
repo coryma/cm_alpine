@@ -1,0 +1,214 @@
+<template>
+    <section class="lite-shell">
+        <div class="lite-glow lite-glow_one"></div>
+        <div class="lite-glow lite-glow_two"></div>
+
+        <div class="lite-panel">
+            <header class="lite-header">
+                <div class="lite-header__copy">
+                    <p class="lite-header__brand">健康好物推薦 Lite</p>
+
+                    <template if:true={isQuestionStep}>
+                        <p class="lite-header__meta">第 {currentQuestion.index} / {quizStepCount} 題</p>
+                    </template>
+
+                    <template if:true={isResult}>
+                        <p class="lite-header__meta">Lite 推薦完成</p>
+                    </template>
+                </div>
+
+                <template if:true={showProgress}>
+                    <div class="lite-progress" aria-hidden="true">
+                        <span class="lite-progress__value" style={progressStyle}></span>
+                    </div>
+                </template>
+            </header>
+
+            <div class="lite-body">
+                <template if:true={isIntro}>
+                    <section class="hero-screen">
+                        <div class="hero-card">
+                            <img class="hero-card__image" src={introArtwork} alt="健康好物推薦 Lite 主視覺" />
+                        </div>
+
+                        <div class="hero-copy">
+                            <p class="eyebrow">Lite Isolation Mode</p>
+                            <h1>先驗證純前端問答頁能不能長時間穩定存活</h1>
+                            <p>
+                                這一版只保留題目、選項和結果畫面，不載入商品、不讀 CMS、不寫購物車，也不呼叫任何 Apex。
+                            </p>
+                        </div>
+
+                        <div class="hero-points">
+                            <article class="info-card">
+                                <strong>純前端</strong>
+                                <span>不依賴 catalog、CMS media 或 guest event sync。</span>
+                            </article>
+                            <article class="info-card">
+                                <strong>保留原本問答</strong>
+                                <span>題目邏輯還在，方便直接拿來做行為對照。</span>
+                            </article>
+                            <article class="info-card">
+                                <strong>目標是隔離問題</strong>
+                                <span>如果這版也壞，問題就更偏向 site/runtime 層。</span>
+                            </article>
+                        </div>
+                    </section>
+                </template>
+
+                <template if:true={isQuestionStep}>
+                    <section class="question-screen">
+                        <div class="question-copy">
+                            <p class="eyebrow">{currentQuestion.eyebrow}</p>
+                            <h2>{currentQuestion.title}</h2>
+                            <p>{currentQuestion.subtitle}</p>
+                        </div>
+
+                        <div class="choice-grid">
+                            <template for:each={optionCards} for:item="option">
+                                <button
+                                    key={option.value}
+                                    class={option.className}
+                                    type="button"
+                                    data-question={currentQuestion.key}
+                                    data-value={option.value}
+                                    onclick={handleOptionSelect}
+                                >
+                                    <span class="choice-card__media">
+                                        <img src={option.artwork} alt={option.title} />
+                                    </span>
+
+                                    <span class="choice-card__body">
+                                        <strong>{option.title}</strong>
+                                        <span>{option.note}</span>
+                                    </span>
+                                </button>
+                            </template>
+                        </div>
+
+                        <template if:true={validationMessage}>
+                            <p class="validation-message">{validationMessage}</p>
+                        </template>
+                    </section>
+                </template>
+
+                <template if:true={isResult}>
+                    <section class="result-screen">
+                        <article class="result-hero">
+                            <div class="result-hero__media">
+                                <img src={resultArtwork} alt={bundleName} />
+                            </div>
+
+                            <div class="result-hero__copy">
+                                <p class="eyebrow">Lite 推薦結果</p>
+                                <h2>{bundleName}</h2>
+                                <p>{bundleSummary}</p>
+
+                                <div class="result-tags">
+                                    <template for:each={resultTags} for:item="tag">
+                                        <span key={tag} class="result-tag">{tag}</span>
+                                    </template>
+                                </div>
+                            </div>
+                        </article>
+
+                        <section class="section-block">
+                            <div class="section-heading">
+                                <div>
+                                    <p class="eyebrow">你的選擇摘要</p>
+                                    <h3>問答仍然照常運作</h3>
+                                </div>
+                            </div>
+
+                            <div class="card-grid">
+                                <template for:each={answerHighlights} for:item="answer">
+                                    <article key={answer.stepKey} class="info-card">
+                                        <p class="card-label">{answer.eyebrow}</p>
+                                        <strong>{answer.title}</strong>
+                                        <span>{answer.note}</span>
+                                    </article>
+                                </template>
+                            </div>
+                        </section>
+
+                        <section class="section-block">
+                            <div class="section-heading">
+                                <div>
+                                    <p class="eyebrow">Lite 建議</p>
+                                    <h3>只保留結果推理，不載入任何站外資料</h3>
+                                </div>
+                            </div>
+
+                            <div class="card-grid">
+                                <template for:each={directionCards} for:item="card">
+                                    <article key={card.key} class="info-card">
+                                        <p class="card-label">{card.label}</p>
+                                        <strong>{card.title}</strong>
+                                        <span>{card.note}</span>
+                                    </article>
+                                </template>
+                            </div>
+                        </section>
+
+                        <section class="section-block">
+                            <div class="section-heading">
+                                <div>
+                                    <p class="eyebrow">Isolation Scope</p>
+                                    <h3>這版明確排除的 shared source</h3>
+                                </div>
+                            </div>
+
+                            <div class="note-list">
+                                <template for:each={isolationNotes} for:item="note">
+                                    <div key={note} class="note-pill">{note}</div>
+                                </template>
+                            </div>
+                        </section>
+                    </section>
+                </template>
+            </div>
+
+            <footer class="lite-footer">
+                <template if:true={isIntro}>
+                    <div class="footer-stack">
+                        <button class="button button_primary" type="button" onclick={handleStart}>
+                            開始 Lite 測試
+                        </button>
+                        <p class="footer-hint">如果這版放著幾分鐘後也變成 login，問題就不在 quiz 的 shared data flow。</p>
+                    </div>
+                </template>
+
+                <template if:true={isQuestionStep}>
+                    <div class="footer-row">
+                        <button class="button button_secondary" type="button" onclick={handleBack}>
+                            上一題
+                        </button>
+                        <button class="button button_primary" type="button" onclick={handleNext}>
+                            {nextButtonLabel}
+                        </button>
+                    </div>
+                </template>
+
+                <template if:true={isResult}>
+                    <div class="footer-stack">
+                        <button class="button button_primary" type="button" onclick={handleRestart}>
+                            重新測驗
+                        </button>
+                        <p class="footer-hint">Lite mode finished without calling catalog, CMS media, cart, session identity, or quiz progress Apex.</p>
+                    </div>
+                </template>
+            </footer>
+
+            <template if:true={isGenerating}>
+                <div class="analysis-overlay" role="status" aria-live="polite">
+                    <div class="analysis-card">
+                        <span class="analysis-card__pulse"></span>
+                        <p class="eyebrow">分析中</p>
+                        <h3>正在整理 Lite 建議</h3>
+                        <p>這一步只做前端推理，不會打任何外部資料。</p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </section>
+</template>

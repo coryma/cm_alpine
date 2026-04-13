@@ -1,0 +1,427 @@
+{
+  "shell": {
+    "brandEyebrow": "健康補給與日常選品",
+    "brandName": "ALPINE 健康生活館",
+    "searchPlaceholder": "搜尋早餐穀物、機能飲與健康好物",
+    "categoryEyebrow": "選品分類",
+    "categoryTitle": "依生活情境瀏覽",
+    "categoryCtaLabel": "留下需求",
+    "footerBrand": "ALPINE 健康生活館",
+    "footerLegal": "© 2026 Alpine 健康生活館。保留所有權利。",
+    "navLinks": [
+      { "label": "首頁", "href": "/" },
+      { "label": "全部商品", "href": "/products" },
+      { "label": "新品推薦", "href": "/products?category=workspace" },
+      { "label": "精選組合", "href": "/products?category=style" },
+      { "label": "風格測驗", "href": "/quiz" },
+      { "label": "進度看板", "href": "/quiz-monitor" },
+      { "label": "需求表單", "href": "/request" }
+    ],
+    "sideCategories": [
+      { "id": "all", "label": "全部分類", "caption": "所有選品", "icon": "home" },
+      { "id": "workspace", "label": "工作與桌面", "caption": "裝置與日常工具", "icon": "devices" },
+      { "id": "wellness", "label": "健康補給", "caption": "恢復與日常保養", "icon": "self_care" },
+      { "id": "style", "label": "風格配件", "caption": "造型與生活物件", "icon": "diamond" },
+      { "id": "travel", "label": "外出隨行", "caption": "輕便好攜帶", "icon": "flight_takeoff" },
+      { "id": "gourmet", "label": "風味食飲", "caption": "早餐與餐桌靈感", "icon": "restaurant" }
+    ],
+    "footerLinks": [
+      { "label": "隱私政策", "href": "#" },
+      { "label": "服務條款", "href": "#" },
+      { "label": "配送資訊", "href": "#" },
+      { "label": "退換說明", "href": "#" }
+    ]
+  },
+  "pages": {
+    "home": {
+      "heroCtaLabel": "開始選購",
+      "flashSaleTitle": "限時精選",
+      "flashSaleMetaLabel": "本週重點",
+      "flashSaleLinkLabel": "查看全部",
+      "premiumTechnologyTitle": "人氣選品",
+      "recommendedEyebrow": "為你推薦",
+      "recommendedTitle": "猜你會喜歡",
+      "browseCatalogLabel": "瀏覽全部商品",
+      "promoCard": {
+        "title": "需要專人協助挑選？",
+        "body": "如果你想大量採購、送禮搭配，或替辦公室補貨，可以先留下需求，我們會協助整理適合的組合。",
+        "ctaLabel": "前往需求表單"
+      }
+    },
+    "products": {
+      "eyebrow": "商品總覽",
+      "title": "全部商品",
+      "description": "依類別與關鍵字快速找到適合你的健康補給與生活好物。",
+      "matchingLabel": "項商品",
+      "emptyEyebrow": "查無結果",
+      "emptyTitle": "目前沒有符合條件的商品。",
+      "emptyBody": "可以換個關鍵字，或先回到全部商品繼續瀏覽。",
+      "viewProductLabel": "查看商品"
+    },
+    "productDetail": {
+      "catalogLabel": "全部商品",
+      "requestButtonLabel": "留下需求",
+      "backButtonLabel": "返回商品列表",
+      "notesTitle": "商品資訊",
+      "notFoundEyebrow": "找不到商品",
+      "notFoundTitle": "找不到這個商品。"
+    },
+    "request": {
+      "eyebrow": "需求表單",
+      "title": "告訴我們你想找的商品",
+      "description": "不論是自用補貨、企業採購或送禮需求，都可以先留下資料，我們會盡快與你聯繫。",
+      "panelEyebrow": "服務說明",
+      "panelTitle": "留下需求，我們協助你整理合適選項。",
+      "panelBody": "如果你正在找特定品項、想做團購補貨，或需要更完整的商品建議，都可以透過這裡告訴我們。",
+      "checklist": [
+        "可說明用途與偏好",
+        "可留下公司或團購需求",
+        "送出後會提供案件編號"
+      ],
+      "validationMessage": "請先填寫姓名與電子郵件。",
+      "submitIdleLabel": "送出需求",
+      "submitBusyLabel": "送出中...",
+      "browseProductsLabel": "瀏覽商品",
+      "fieldLabels": {
+        "fullName": "姓名",
+        "email": "電子郵件",
+        "company": "公司名稱",
+        "interest": "想找的商品",
+        "message": "補充說明"
+      }
+    }
+  },
+  "homeSections": {
+    "quickLinks": [
+      { "label": "今日優惠", "icon": "local_fire_department" },
+      { "label": "優惠券", "icon": "confirmation_number" },
+      { "label": "會員禮遇", "icon": "loyalty" },
+      { "label": "人氣品牌", "icon": "electric_bolt" },
+      { "label": "最新上架", "icon": "package_2" },
+      { "label": "風格實驗室", "icon": "diamond" },
+      { "label": "永續選物", "icon": "eco" },
+      { "label": "海外配送", "icon": "flight_takeoff" },
+      { "label": "智慧推薦", "icon": "auto_awesome" },
+      { "label": "更多分類", "icon": "more_horiz" }
+    ],
+    "heroFeature": {
+      "label": "本週主題",
+      "title": "把健康補給與日常選品整理得更清楚",
+      "body": "從早餐穀物、機能飲到恢復保養，把每天會回購的品項整理在同一個清楚好逛的選品頁裡。",
+      "imageUrl": "/images/home-hero-wellness.svg",
+      "alt": "以穀物、柑橘與機能飲為主題的健康生活主視覺"
+    },
+    "heroSecondary": {
+      "title": "晨光補給",
+      "caption": "清爽、明亮、適合健康生活的日常角落",
+      "imageUrl": "/images/home-secondary-pantry.svg",
+      "alt": "帶有陽光、穀物罐與柑橘的明亮健康角落"
+    },
+    "heroMembership": {
+      "title": "會員精選",
+      "caption": "搶先看本月推薦"
+    },
+    "editorialBanner": {
+      "title": "夏日生活補給清單",
+      "caption": "從早餐、補水到恢復保養，一次整理",
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBip8lAe0FhLZmukcW5Nc_hMwK4rmETKhAZhrtWVfQF9UhOmZKFKfkyAFxFHwmBOMn5yR1sZaVa8jTmKH8Jj8iLcE60VNz38IMOOUNjHikeQTb2PluyI-uxWAnWi-SbNviYs4l8tTPPib-ooWoColuwlvUxW9McebLCWq5WIsVEfMMTJ9NHJSs3Q6ifTePN_x8r7Mmoz4OfcQMreN7g19NGyquh0cQHGgcQwQK3VmMcFfuYzO4zg5kLhdTgddBUzHu9pVtng-ulzAc",
+      "alt": "夏日生活補給橫幅"
+    },
+    "flashSaleIds": [
+      "sneaker-kinetic",
+      "watch-minimal",
+      "audio-anc",
+      "camera-retro"
+    ],
+    "premiumTechnologyIds": [
+      "tablet-slate",
+      "phone-nebula",
+      "ultrabook-zenith",
+      "lamp-lume",
+      "audio-anc"
+    ],
+    "recommendedIds": [
+      "loafers-oxford",
+      "hifi-monitors",
+      "aviators-navigator",
+      "pendant-ethereal",
+      "phone-nebula",
+      "workstation-flux",
+      "sneaker-kinetic"
+    ]
+  },
+  "products": [
+    {
+      "id": "audio-anc",
+      "slug": "studio-anc-wireless-audio",
+      "categoryId": "workspace",
+      "categoryLabel": "Workspace",
+      "label": "Audio Visual",
+      "name": "Studio ANC Wireless Audio",
+      "kicker": "Desk-side silence",
+      "priceLabel": "NT$6,580",
+      "originalPriceLabel": "NT$8,900",
+      "saleBadge": "30% OFF",
+      "claimedPercent": 89,
+      "description": "主打沉浸式工作桌面與低噪環境的頭戴式耳機。",
+      "longDescription": "這款商品代表新的 storefront 語氣。不是只賣規格，而是把使用情境、桌面氛圍與安靜工作狀態一起包進銷售敘事裡。",
+      "highlights": ["Hybrid ANC", "Workspace hero item", "High-margin editorial pick"],
+      "specs": [
+        { "label": "Battery", "value": "36 hours" },
+        { "label": "Profile", "value": "Desk / flight / focus" },
+        { "label": "Finish", "value": "Matte graphite" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBYZPqEdn0Vzl-_BdmQ9Q7ojDYwHOn_aLgIQgRbX1xX24wLGBRcb6BCwtS_NBi8PiG8iWlYrXjffYqMQww1XnrN_NoPfZFwihHJe09CxDGqaxH4WU7DYBLu1hlgK7Zb7SBh5QQvAnnW1lknK2Yw_Za2r5W8MA4hDMunYR_3XKOep4uoIgZhkdCSa7DsbHWr8SUOn4phrTn6RQwjS5yQFI4-61RdrT-bt5Aq4fVlA-coZixwHfSF_OTN6psbSV6MxwNYRaA6PeG-hAc",
+      "imageAlt": "black over ear headphones"
+    },
+    {
+      "id": "watch-minimal",
+      "slug": "horizon-minimalist-timepiece",
+      "categoryId": "style",
+      "categoryLabel": "Style",
+      "label": "Accessories",
+      "name": "Horizon Minimalist Timepiece",
+      "kicker": "Quiet precision",
+      "priceLabel": "NT$2,980",
+      "originalPriceLabel": "NT$3,450",
+      "saleBadge": "15% OFF",
+      "claimedPercent": 22,
+      "description": "淡木色錶面與建築感排版，適合做 style hero 的細節卡。",
+      "longDescription": "在這個市場頁中，它不是單純的手錶，而是讓整體內容看起來更完整的 style anchor。高辨識度但不張揚，很適合你現在選的 UI 語境。",
+      "highlights": ["Quiet luxury accessory", "Minimal dial", "Giftable price tier"],
+      "specs": [
+        { "label": "Dial", "value": "Pale wood texture" },
+        { "label": "Strap", "value": "Italian calfskin" },
+        { "label": "Water", "value": "5 ATM" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuByG7RcDUTqePcA3YcbKLrwHaFkEaeOLF0Q9Q386Rx13ze1ls6zN3kLU0JwhsQPNQrmvnzsfT1XTw3RJxuOXyDX0EG_HaycHlSKjSJJB6-ZOeGH7W3Wdb3zpaLQxzZtNt3zV3DPZx3e-HNIJ-0GBKXJSJN2kd8Y7PxZPJG8LM0g5zQ2URJLoZs8kCFKgqOydtrV11R1dGnhasy4_AC1j00sYm4FPpsWqDlKJVHBONG5EZYkYxj3DebT2bJanainzJhBDkOyVxy8-w0",
+      "imageAlt": "white minimalist wristwatch"
+    },
+    {
+      "id": "camera-retro",
+      "slug": "retro-frame-35mm-digital",
+      "categoryId": "travel",
+      "categoryLabel": "Travel",
+      "label": "Field Notes",
+      "name": "Retro Frame 35mm Digital",
+      "kicker": "Portable storytelling",
+      "priceLabel": "NT$16,800",
+      "originalPriceLabel": "NT$18,600",
+      "saleBadge": "10% OFF",
+      "claimedPercent": 45,
+      "description": "一台適合被放進 campaign story 的旅行相機。",
+      "longDescription": "復古外型與輕便機身適合旅行記錄與日常隨拍，無論是城市散步還是週末出遊，都能留下有溫度的畫面。",
+      "highlights": ["Travel editorial anchor", "Strong hero image", "High average order value"],
+      "specs": [
+        { "label": "Sensor", "value": "35mm-inspired digital frame" },
+        { "label": "Body", "value": "Graphite alloy" },
+        { "label": "Carry", "value": "Field strap included" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDIGPxswSQDggsvlqotHz4Y4ZgifILyFsSGHKoKMUbpcmZG6PoU-6qPDJ9g5BwC6V-Owcn5t5ZK3YB7N1tSopxRkl-Hunm3-dcZxy3zWn3vxjQQzj1kCEUq7GpbM63S3UzPduF53wjUDymzkHaUxSPK8cBH7j4Njj68RXwX1OQd6FREEPjmCXz0l6ALEmdFJ3Hqi0C2WzdXnnEKbw87NcRO-Jc6X2C7HT3e_Nj8sfxqEM7lROBENqGNhMsraIO-_JWgT96sSxuPe50",
+      "imageAlt": "retro digital camera"
+    },
+    {
+      "id": "tablet-slate",
+      "slug": "slate-pro-tablet-x",
+      "categoryId": "workspace",
+      "categoryLabel": "Computers",
+      "label": "Computers",
+      "name": "Slate Pro Tablet X",
+      "kicker": "Editorial tablet",
+      "priceLabel": "NT$28,900",
+      "description": "適合 premium technology 橫向 rail 的平板選品。",
+      "longDescription": "Tablet 類產品在這套設計裡會偏向 layout 平衡器，用來讓 technology rail 看起來像一個完整的 curated department，而不是只有配件和小物。",
+      "highlights": ["Pen-ready device", "Technology rail core", "Clean silhouette"],
+      "specs": [
+        { "label": "Display", "value": "11-inch matte panel" },
+        { "label": "Chip", "value": "Editorial compute tier" },
+        { "label": "Use", "value": "Notes / media / mobile desk" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSZtMyN6M2Gr_Ub81oWubS5DRxrToVlKTvsI_CVH-YiRDvMQtwRTQhghLZDoqqxjip569u63b3EQVJjRqY_3VZ6wdtQASVTHNmSH06WCLU4e3KMepfaj1wCktDJKcvxRmaR1FdhHc71Kktr75v3Hnej1wid2iTJmFda5f8WDHA7pnX73o1SkljhbPLojPUhZzJpEATO-2QaloPUQGTTlQiLJa8xz3rtvrV4EUGE2EzyaUAZeGU9ZZMdaXNJggKPksds4hsfNrTcNw",
+      "imageAlt": "tablet with stylus"
+    },
+    {
+      "id": "phone-nebula",
+      "slug": "nebula-ultra-phone",
+      "categoryId": "workspace",
+      "categoryLabel": "Mobile",
+      "label": "Mobile",
+      "name": "Nebula Ultra Phone",
+      "kicker": "Flagship form",
+      "priceLabel": "NT$36,900",
+      "description": "以俐落外型與高階手感為重點的旗艦手機。",
+      "longDescription": "珍珠金屬機身搭配高亮螢幕，適合重視手感、影像與日常效率的人使用，從工作到外出都能維持穩定表現。",
+      "highlights": ["Flagship mobile", "Premium visual", "Hero-friendly PDP"],
+      "specs": [
+        { "label": "Body", "value": "Pearlescent alloy" },
+        { "label": "Screen", "value": "Edge-lit OLED" },
+        { "label": "Position", "value": "Top-tier mobile curation" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuC0kZf-tcag5s5pUlMdNygUWfedW5K6m8q__wAsd5D-6tQ03R50G1SouvJTse8k6T4fN1SEnOBsBYEObrHnLWhIT7Igo-cOGRFHaBvqm8ASBUgUAsmaKkg8QXErfiVqr0-v_9eRFWS5x5heHe7lOIVWdDPFTX74vktz1ZNKWhV81Kiyby-7uRYgCL8PMv0Q_FjHc2M5C1ac_kvb_8Gk-SN6ua87_vIbj0V84lQOxN6WRpy_-3sxd1S5SFTXNbvg-so6K4FJqsLysmA",
+      "imageAlt": "premium smartphone on pedestal"
+    },
+    {
+      "id": "ultrabook-zenith",
+      "slug": "zenith-14-ultrabook",
+      "categoryId": "workspace",
+      "categoryLabel": "Laptops",
+      "label": "Workplace",
+      "name": "Zenith 14\" Ultrabook",
+      "kicker": "Portable discipline",
+      "priceLabel": "NT$46,500",
+      "description": "高效工作線的代表商品，用來支撐右滑科技區很合適。",
+      "longDescription": "輕薄機身搭配霧面螢幕，適合長時間工作、移動辦公與內容整理，兼顧攜帶性與穩定效能。",
+      "highlights": ["Portable workstation", "Long-form PDP candidate", "High-value ticket"],
+      "specs": [
+        { "label": "Screen", "value": "14-inch anti-glare" },
+        { "label": "Weight", "value": "1.18 kg" },
+        { "label": "Persona", "value": "Creative desk nomad" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAiJz6ijXqNTKDo1hjk2LoKKF4pv0oTJmlJbfvsHsC223HF60ZQ45zw9pb8FWrfbQI2PYDhH0F_4H89zwvTfStdCeXaBrmI8qh2whlFa0uEGSCWRljK9FmRtGpIU8sTVJmmQGVBt0EfLSxh_62pclYBQg6TMJPN4gZaCOSe38L7Ymck-bYPkhyvQn2_9KT9fxHPMZgWZLggIkNf_GMnbCtwM0aS2Kb5klDRbb9n52EXjBxC0k3Y8QKAztMdsyErD82XhjkyuKJcajM",
+      "imageAlt": "silver ultrabook laptop"
+    },
+    {
+      "id": "lamp-lume",
+      "slug": "lume-intelligent-desk-lamp",
+      "categoryId": "workspace",
+      "categoryLabel": "Accessories",
+      "label": "Accessories",
+      "name": "Lume Intelligent Desk Lamp",
+      "kicker": "Warm focus",
+      "priceLabel": "NT$2,480",
+      "description": "桌面氛圍物件，適合把整站語氣往 editorial 設計帶。",
+      "longDescription": "這種較低價但高美感的物件很適合做成 related products 或 recommendations 的補位，讓產品列表的節奏不會全被大件商品吃掉。",
+      "highlights": ["Desk atmosphere", "Cross-sell accessory", "Visual softener"],
+      "specs": [
+        { "label": "Light", "value": "Warm / focus / ambient" },
+        { "label": "Base", "value": "Powder-coated steel" },
+        { "label": "Placement", "value": "Desk / bedside / studio" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBYdLnne67C5-Rq2m0w8QfNEvrGLw5cOknH3rhRmk23FBJN5o34lbbKidpRgMttAF0hnuaH3YuGnz9pcbj5kAFAOCrMfGtS1iLw2nvN4HQIrzmmaF5wW4krqJtQxxO2-WurqzdmfmhN-8KdOIi-kbUUzuTqq-OQQ-RUiB5ltAFtFOnv59PKsVIkpZewFszHTk6JfXi0s8rT0dSN6Z7twBGZp02mdChx8EO82DAyNNLxbjqQv8HF5jdiMFSdXUDZTbJOOt0LGLAqqIw",
+      "imageAlt": "minimalist white desk lamp"
+    },
+    {
+      "id": "loafers-oxford",
+      "slug": "oxford-heritage-loafers",
+      "categoryId": "style",
+      "categoryLabel": "Fashion & Leather",
+      "label": "Fashion & Leather",
+      "name": "Oxford Heritage Loafers",
+      "kicker": "Editorial leather",
+      "priceLabel": "NT$9,400",
+      "description": "推薦網格裡需要一兩張比較像 fashion spread 的圖。",
+      "longDescription": "這類 style card 不是主營收入口，但可以把整個 storefront 從科技商城拉回 editorial market。對品牌感非常重要。",
+      "highlights": ["Fashion spread energy", "Premium leather", "Cross-category tension"],
+      "specs": [
+        { "label": "Material", "value": "Cognac leather" },
+        { "label": "Last", "value": "European slim form" },
+        { "label": "Mood", "value": "Quiet luxury" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBhufS_48nNpSbIjQVzoZjG-B1UDWY2cZCuUjdG3vZQH11mHsVq538r6v9eTqTI9sYjg54T86jbto9qflEzeleAgVvsW-syzFynINPXwUiOgvOQahj70A-rxYr-yQMh7skpiFR-KCIs7F50ppewFiIeEQxVl5ET6cdRKYHOOc8tMGJMsj0ff1s1Shgu27u9qub8oPwy-ya6WXSVxSiZLII5MT8M66M10FfTjH0OgpD3mItKeiS3BToNFQ_cgEs5T52DHRe2bXZH4jY",
+      "imageAlt": "premium leather loafers"
+    },
+    {
+      "id": "hifi-monitors",
+      "slug": "gold-plated-hifi-monitors",
+      "categoryId": "workspace",
+      "categoryLabel": "Audio Visual",
+      "label": "Audio Visual",
+      "name": "Gold-Plated HIFI Monitors",
+      "kicker": "Collector audio",
+      "priceLabel": "NT$13,800",
+      "description": "用來平衡 tech 區與推薦網格的重點音訊產品。",
+      "longDescription": "這種產品在新 storefront 裡需要呈現得像一件可收藏的 object，而不只是 3C 商品。detail page 的語氣會決定整站檔次。",
+      "highlights": ["Collector-grade tone", "Audio flagship", "Object-driven merchandising"],
+      "specs": [
+        { "label": "Tuning", "value": "Warm studio profile" },
+        { "label": "Cable", "value": "Braided premium line" },
+        { "label": "Use", "value": "Desk listening / travel kit" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDDpRf7soXzRM-LUNoDorLr92q-1hJQ6ApXcDnu_ARL-7TmCfaT1M6UVAIx-84noXBiAr1EipOsvv_zcZEkUPwtRm9GUWGpaOJNAXJLXNCjSYXaNoY0JpJ1EY1WVMY986iaok-DyntTvLKaviYdwh7e22h3HeQRak7x0DKdAgxzolWS7Qqt33U0r18cJsbjj_JIc6BPo2IibevhTyAja65pByAYESyYzhcFFq8rSCNaLehHKEKvIKiTGMv3I8zqzM_kyPL35jV63p0",
+      "imageAlt": "premium wired earphones"
+    },
+    {
+      "id": "aviators-navigator",
+      "slug": "navigator-series-aviators",
+      "categoryId": "style",
+      "categoryLabel": "Accessories",
+      "label": "Accessories",
+      "name": "Navigator Series Aviators",
+      "kicker": "Summer frame",
+      "priceLabel": "NT$5,600",
+      "description": "推薦網格裡作為夏季風格點綴的經典眼鏡。",
+      "longDescription": "當推薦區能自然混入這種風格物件時，首頁和 products page 才會真的像 curated market，而不是單一品類的 catalog。",
+      "highlights": ["Seasonal style note", "Strong accessory image", "Merchandising contrast"],
+      "specs": [
+        { "label": "Frame", "value": "Gold aviator" },
+        { "label": "Lens", "value": "Smoke gradient" },
+        { "label": "Role", "value": "Editorial accent" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBZ9-XxcXtBJIqQw6gjjLWtUZNjtmwK_GO6AM-v8NiOg1eO2ojVpaR0IXjjAjS_48eapV5O46nt2ceSbyBda6FlajDWFizz-ZuaK2iCUC8G14W1cl4W09JhYYGA_RMYflRVh8_Vu5kX6ozKqc7clDPrEgL_7LDeOjyTPc5cqOjW57-GYahGkDXxvCHjY5aRbrkp0rbbk3zpi9R1M1V7QvPKE2R60is-u38duEUTMpNyn9KSmhBImiKxMC5rYJl_zG5dGdHaGDsnLgw",
+      "imageAlt": "aviator sunglasses"
+    },
+    {
+      "id": "pendant-ethereal",
+      "slug": "ethereal-gold-pendant",
+      "categoryId": "style",
+      "categoryLabel": "Jewelry",
+      "label": "Jewelry",
+      "name": "Ethereal Gold Pendant",
+      "kicker": "Statement object",
+      "priceLabel": "NT$39,800",
+      "description": "高單價珠寶可讓推薦區看起來更像 curated market。",
+      "longDescription": "細緻的金屬光澤與俐落輪廓，適合在正式場合或日常穿搭中作為醒目重點，呈現穩定又有份量的風格。",
+      "highlights": ["High AOV item", "Luxury depth", "Visual authority"],
+      "specs": [
+        { "label": "Metal", "value": "18K gold" },
+        { "label": "Chain", "value": "Fine-link profile" },
+        { "label": "Placement", "value": "Signature look" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDImGUmRA9bJO4Vb5A8iKXd-eDaqAo-68KXmdyZevnOJAjwXTKBBAi11deSx3U2Rjpr8FAQHez_YfDryHLmKVcNH7bDr5W4xwAP8-NGv-jM83OhDeYP1ylKcrr0qrG-dx5DGUqZ1UcokeITm4g-uI7FajG9rvZQn7Njk1m24KZMrxl26xWm7CUv8IYTnM4G2O33dLncDm0CaBGJTe--WlTxs56jkqX0YUN5Tn2XyczWEDIMWRW9ikMqdT3mD3WFKEMW5PQbMHWfMo8",
+      "imageAlt": "gold pendant jewelry"
+    },
+    {
+      "id": "workstation-flux",
+      "slug": "flux-workstation-pro",
+      "categoryId": "workspace",
+      "categoryLabel": "Workplace",
+      "label": "Workplace",
+      "name": "Flux Workstation Pro",
+      "kicker": "Calm productivity",
+      "priceLabel": "NT$66,900",
+      "description": "做為推薦區和 hero 語境之間的銜接，保留工作美學。",
+      "longDescription": "從日常辦公到長時間專注工作，都能提供穩定舒適的使用體驗，適合需要兼顧效率與桌面美感的人。",
+      "highlights": ["High-value workstation", "Productivity flagship", "Detail-page stress test"],
+      "specs": [
+        { "label": "Role", "value": "Main desk anchor" },
+        { "label": "Profile", "value": "Quiet productivity" },
+        { "label": "Tier", "value": "Premium workstation" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCp-NT4zbGpER1kVtzpy_KF3ei40qIyXf-mZ07HRT3Kp29DOik5fmiTqodbczXodYmo35POHyACi1Pb0alA8-Vegf5C7UUpRxPBeyh0yy8IP7GZ3TJ8hrNZNxQbzyc3y20qvraQ9IWAaXHWRS5_vbKlWi5ZKVWW2bhUZL1ALs9XmcUd6rUn88oH4EUFQSjU6Agm6tryOnrOEGRvl34Jlm5auNy6EfDfT69zxTuUCcCyjrhrXm3AnIJxCwo-VFsEYWByyU6x5Al32Dw",
+      "imageAlt": "modern laptop on clean desk"
+    },
+    {
+      "id": "sneaker-kinetic",
+      "slug": "kinetic-performance-runners",
+      "categoryId": "wellness",
+      "categoryLabel": "Movement",
+      "label": "Movement",
+      "name": "Kinetic Performance Runners",
+      "kicker": "Performance form",
+      "priceLabel": "NT$3,880",
+      "originalPriceLabel": "NT$4,850",
+      "saleBadge": "20% OFF",
+      "claimedPercent": 67,
+      "description": "把 wellness 這條線用運動鞋與 performance 語境帶進來。",
+      "longDescription": "這款商品幫你把健康生活和 curated market 接起來。它不只是鞋，而是把整個 storefront 的 wellness 節奏拉出來的重要類別入口。",
+      "highlights": ["Wellness category anchor", "Performance visual", "Flash sale friendly"],
+      "specs": [
+        { "label": "Upper", "value": "Vent mesh knit" },
+        { "label": "Use", "value": "Daily city movement" },
+        { "label": "Energy", "value": "Light rebound sole" }
+      ],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuClcPrR_lz-7qZv8SmXDunUbc30ahi3331jjmrsa9ZRPb16_jgggvgLCP-yrvWvpbjqHkVOiTEMgXF67WRS5W3MVM_I794xNgBQQ1pJxt2uj8aE_YDcIcu9_WiUzGngMuQHYHH9SaR2Wq4WqOaQyHA2ZB5ETPvzWJ0EmtO0hFe45SIEXLGK8VdOUt9JVJkPJTc35NX5W7bYC2sR4WmC1zillLCb4dt35Zbi0AHTiLh3NXpL1OmHQb-EGW4jJfukmBPEFsLTeWZrC8w",
+      "imageAlt": "red performance sneaker"
+    }
+  ]
+}

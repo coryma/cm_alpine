@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">健康商品預設圖</title>
+  <desc id="desc">以穀物罐、葉片與柔和底色構成的健康商品預設插圖。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8f3e9"/>
+      <stop offset="100%" stop-color="#e4f1df"/>
+    </linearGradient>
+    <linearGradient id="jar" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0e4d2"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#8ccd8a"/>
+      <stop offset="100%" stop-color="#4d9468"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="800" rx="48" fill="url(#bg)"/>
+  <circle cx="612" cy="168" r="112" fill="#fff5c5" opacity="0.85"/>
+  <circle cx="660" cy="618" r="144" fill="#d7ebcb" opacity="0.7"/>
+
+  <rect x="224" y="212" width="208" height="286" rx="42" fill="url(#jar)"/>
+  <rect x="256" y="170" width="144" height="58" rx="20" fill="#7b9868"/>
+  <rect x="254" y="316" width="148" height="118" rx="20" fill="#ecd49d"/>
+  <circle cx="294" cy="350" r="15" fill="#d5924e"/>
+  <circle cx="338" cy="374" r="13" fill="#db9d57"/>
+  <circle cx="320" cy="410" r="14" fill="#b07b42"/>
+
+  <circle cx="564" cy="382" r="94" fill="#fff6e3"/>
+  <circle cx="564" cy="382" r="60" fill="#ffd76e"/>
+  <circle cx="564" cy="382" r="48" fill="#fff5d3"/>
+  <path d="M564 322a60 60 0 0 1 51 30l-51 30z" fill="#f39d49"/>
+  <path d="M624 382a60 60 0 0 1-30 51l-30-51z" fill="#efa24d"/>
+  <path d="M564 442a60 60 0 0 1-51-30l51-30z" fill="#f2b05e"/>
+  <path d="M504 382a60 60 0 0 1 30-51l30 51z" fill="#eb9140"/>
+
+  <g fill="url(#leaf)">
+    <path d="M178 570c-49 11-88 43-114 96 53 5 99-16 132-61 7-9 2-20-18-35z"/>
+    <path d="M586 558c-58 8-103 42-137 102 66 8 122-17 160-72 7-11 2-20-23-30z"/>
+    <path d="M466 170c-44-14-86-6-131 27 44 24 91 25 134 5 9-4 9-14-3-32z"/>
+  </g>
+
+  <text x="400" y="638" fill="#35503e" font-family="Manrope, Arial, sans-serif" font-size="38" font-weight="800" text-anchor="middle">健康補給選品</text>
+  <text x="400" y="680" fill="#6a7a67" font-family="Inter, Arial, sans-serif" font-size="20" text-anchor="middle">圖片載入中或來源暫時不可用</text>
+</svg>

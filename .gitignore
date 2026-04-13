@@ -13,3 +13,6 @@ test-results/
 node_modules/
 coverage/
 .localdevserver/
+apps/storefront-cloudflare/.wrangler/
+apps/storefront-cloudflare/dist/
+apps/storefront-cloudflare/.dev.vars

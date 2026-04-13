@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "alpine-storefront-cloudflare",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-04-13",
+  "assets": {
+    "directory": "./dist/client",
+    "not_found_handling": "single-page-application",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "STOREFRONT_PROVIDER": "salesforce",
+    "EDGE_CACHE_TTL_SECONDS": "300",
+    "SALESFORCE_API_VERSION": "v66.0",
+    "SALESFORCE_API_BASE_URL": "https://storm-a0d796bbc84797.my.salesforce.com"
+  }
+}
