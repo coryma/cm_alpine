@@ -5,6 +5,7 @@ import { QUIZ_STEP_COUNT, getQuizIconUrl } from 'c/healthLifestyleQuizCatalog';
 
 const CHANNEL_NAME = '/event/Health_Quiz_Progress__e';
 const HASH_COLORS = ['#2563eb', '#0f766e', '#9333ea', '#ea580c', '#db2777', '#0f172a', '#14b8a6'];
+const FALLBACK_POLL_INTERVAL_MS = 4000;
 
 export default class HealthQuizMonitor extends LightningElement {
     isLoading = true;
@@ -12,10 +13,12 @@ export default class HealthQuizMonitor extends LightningElement {
     sessionRows = [];
     subscription;
     errorListenerRegistered = false;
+    pollTimer;
 
     connectedCallback() {
         this.initialize();
         this.registerErrorListener();
+        this.startPolling();
     }
 
     disconnectedCallback() {
@@ -23,6 +26,8 @@ export default class HealthQuizMonitor extends LightningElement {
             unsubscribe(this.subscription, () => {});
             this.subscription = null;
         }
+
+        this.stopPolling();
     }
 
     get hasSessions() {
@@ -91,6 +96,34 @@ export default class HealthQuizMonitor extends LightningElement {
             this.errorMessage = reduceError(error);
         } finally {
             this.isLoading = false;
+        }
+    }
+
+    startPolling() {
+        if (this.pollTimer || typeof window === 'undefined') {
+            return;
+        }
+
+        this.pollTimer = window.setInterval(() => {
+            this.refreshSessionsSilently();
+        }, FALLBACK_POLL_INTERVAL_MS);
+    }
+
+    stopPolling() {
+        if (!this.pollTimer || typeof window === 'undefined') {
+            return;
+        }
+
+        window.clearInterval(this.pollTimer);
+        this.pollTimer = null;
+    }
+
+    async refreshSessionsSilently() {
+        try {
+            await this.loadSessions();
+            this.errorMessage = '';
+        } catch (error) {
+            this.errorMessage = reduceError(error);
         }
     }
 

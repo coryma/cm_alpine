@@ -21,7 +21,7 @@ public without sharing class HealthQuizProgressController {
         return HealthQuizProgressService.recordProgress(payload);
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<HealthQuizProgressService.SessionView> getRecentSessions(Integer limitSize) {
         return HealthQuizProgressService.getRecentSessions(limitSize);
     }
