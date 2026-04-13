@@ -1,4 +1,5 @@
-import type { StorefrontProduct } from "../../shared/contracts";
+import type { QuizQuestionContent, StorefrontProduct } from "../../shared/contracts";
+import { getStorefrontContentDocument } from "../../shared/storefront";
 
 export const QUIZ_STEP_ORDER = [
   "goal",
@@ -77,353 +78,60 @@ interface IllustrationInput {
   label?: string;
 }
 
-const QUESTIONS: Record<QuizQuestionKey, QuizQuestion> = Object.freeze({
+interface OptionMetaInput {
+  tags: string[];
+  iconKey: string;
+  artwork: IllustrationInput;
+}
+
+const QUIZ_CONTENT = getStorefrontContentDocument().pages.quiz;
+
+const QUESTION_META: Record<QuizQuestionKey, Record<string, OptionMetaInput>> = Object.freeze({
   goal: {
-    key: "goal",
-    index: 1,
-    eyebrow: "健康目標",
-    title: "你現在最想先改善哪個部分？",
-    subtitle: "選你現在最有感的需求，推薦會更準確。",
-    options: [
-      createOption({
-        value: "energy",
-        title: "白天更有精神",
-        note: "想讓白天更有精神和體力",
-        tags: ["energy", "focus", "daily", "portable"],
-        bundleWord: "活力",
-        summaryLead: "先把白天的精神和體力補回來",
-        iconKey: "goal-energy",
-        artwork: { motif: "sunrise", primary: "#0f766e", secondary: "#99f6e4", accent: "#f97316" }
-      }),
-      createOption({
-        value: "balance",
-        title: "作息更規律",
-        note: "想讓飲食和日常習慣更規律",
-        tags: ["balance", "nutrition", "ritual", "daily"],
-        bundleWord: "均衡",
-        summaryLead: "先把日常飲食和習慣規律起來",
-        iconKey: "goal-balance",
-        artwork: { motif: "leaf", primary: "#14532d", secondary: "#86efac", accent: "#facc15" }
-      }),
-      createOption({
-        value: "recovery",
-        title: "運動後恢復",
-        note: "運動後或久坐後想好好放鬆一下",
-        tags: ["recovery", "performance", "fitness"],
-        bundleWord: "恢復",
-        summaryLead: "以身體放鬆和循環恢復為主",
-        iconKey: "goal-recovery",
-        artwork: { motif: "pulse", primary: "#7c3aed", secondary: "#c4b5fd", accent: "#fb7185" }
-      }),
-      createOption({
-        value: "sleep",
-        title: "晚上好入睡",
-        note: "想讓夜晚更放鬆、更好入睡",
-        tags: ["calm", "rest", "home"],
-        bundleWord: "放鬆",
-        summaryLead: "先讓夜晚的放鬆習慣建立起來",
-        iconKey: "goal-sleep",
-        artwork: { motif: "moon", primary: "#1e293b", secondary: "#93c5fd", accent: "#f8fafc" }
-      }),
-      createOption({
-        value: "light",
-        title: "輕鬆不費力",
-        note: "不想太複雜，容易持續最重要",
-        tags: ["light", "balance", "portable"],
-        bundleWord: "輕鬆",
-        summaryLead: "用低負擔的方式，一步一步建立習慣",
-        iconKey: "goal-light",
-        artwork: { motif: "arc", primary: "#0f766e", secondary: "#a7f3d0", accent: "#fde68a" }
-      }),
-      createOption({
-        value: "care",
-        title: "養成照顧自己的習慣",
-        note: "想固定花一點時間好好關心自己",
-        tags: ["daily", "ritual", "calm"],
-        bundleWord: "保養",
-        summaryLead: "讓照顧自己成為每天固定的一件事",
-        iconKey: "goal-care",
-        artwork: { motif: "glow", primary: "#9d174d", secondary: "#fbcfe8", accent: "#f59e0b" }
-      })
-    ]
+    energy: { tags: ["energy", "focus", "daily", "portable"], iconKey: "goal-energy", artwork: { motif: "sunrise", primary: "#0f766e", secondary: "#99f6e4", accent: "#f97316" } },
+    balance: { tags: ["balance", "nutrition", "ritual", "daily"], iconKey: "goal-balance", artwork: { motif: "leaf", primary: "#14532d", secondary: "#86efac", accent: "#facc15" } },
+    recovery: { tags: ["recovery", "performance", "fitness"], iconKey: "goal-recovery", artwork: { motif: "pulse", primary: "#7c3aed", secondary: "#c4b5fd", accent: "#fb7185" } },
+    sleep: { tags: ["calm", "rest", "home"], iconKey: "goal-sleep", artwork: { motif: "moon", primary: "#1e293b", secondary: "#93c5fd", accent: "#f8fafc" } },
+    light: { tags: ["light", "balance", "portable"], iconKey: "goal-light", artwork: { motif: "arc", primary: "#0f766e", secondary: "#a7f3d0", accent: "#fde68a" } },
+    care: { tags: ["daily", "ritual", "calm"], iconKey: "goal-care", artwork: { motif: "glow", primary: "#9d174d", secondary: "#fbcfe8", accent: "#f59e0b" } }
   },
   rhythm: {
-    key: "rhythm",
-    index: 2,
-    eyebrow: "生活型態",
-    title: "你的日常比較像哪一種狀態？",
-    subtitle: "同樣想顧健康，生活型態不同，適合的方式也完全不一樣。",
-    options: [
-      createOption({
-        value: "office",
-        title: "久坐工作族",
-        note: "長時間盯螢幕、步調緊、容易忘記照顧自己",
-        tags: ["focus", "daily", "ritual"],
-        bundleWord: "上班族",
-        summaryLead: "要能自然融入長時間的工作行程",
-        iconKey: "rhythm-office",
-        artwork: { motif: "grid", primary: "#1d4ed8", secondary: "#bfdbfe", accent: "#f97316" }
-      }),
-      createOption({
-        value: "commute",
-        title: "通勤移動族",
-        note: "時間很零碎，外出時也要能繼續",
-        tags: ["portable", "energy", "hydration"],
-        bundleWord: "通勤族",
-        summaryLead: "要夠俐落，外出也不容易中斷",
-        iconKey: "rhythm-commute",
-        artwork: { motif: "stride", primary: "#0f766e", secondary: "#67e8f9", accent: "#facc15" }
-      }),
-      createOption({
-        value: "training",
-        title: "規律運動族",
-        note: "想讓訓練、休息和補充更完整",
-        tags: ["fitness", "performance", "recovery"],
-        bundleWord: "運動族",
-        summaryLead: "要能支撐訓練前後和恢復狀態",
-        iconKey: "rhythm-training",
-        artwork: { motif: "pulse", primary: "#dc2626", secondary: "#fecaca", accent: "#fb7185" }
-      }),
-      createOption({
-        value: "lateNight",
-        title: "晚睡趕工型",
-        note: "白天忙、晚上還在趕，一直覺得很累",
-        tags: ["rest", "calm", "recovery"],
-        bundleWord: "夜貓族",
-        summaryLead: "先從晚間狀態和睡前習慣下手",
-        iconKey: "rhythm-lateNight",
-        artwork: { motif: "moon", primary: "#312e81", secondary: "#c4b5fd", accent: "#f9fafb" }
-      }),
-      createOption({
-        value: "home",
-        title: "居家生活型",
-        note: "喜歡在家裡慢慢建立自己的習慣",
-        tags: ["home", "calm", "nutrition"],
-        bundleWord: "居家族",
-        summaryLead: "適合從居家空間和固定習慣下手",
-        iconKey: "rhythm-home",
-        artwork: { motif: "home", primary: "#854d0e", secondary: "#fde68a", accent: "#fb7185" }
-      }),
-      createOption({
-        value: "family",
-        title: "家庭照顧型",
-        note: "不只照顧自己，也要兼顧家人的生活",
-        tags: ["nutrition", "daily", "home"],
-        bundleWord: "家庭",
-        summaryLead: "要兼顧效率、實用和容易堅持",
-        iconKey: "rhythm-family",
-        artwork: { motif: "droplet", primary: "#0f766e", secondary: "#ccfbf1", accent: "#fb7185" }
-      })
-    ]
+    office: { tags: ["focus", "daily", "ritual"], iconKey: "rhythm-office", artwork: { motif: "grid", primary: "#1d4ed8", secondary: "#bfdbfe", accent: "#f97316" } },
+    commute: { tags: ["portable", "energy", "hydration"], iconKey: "rhythm-commute", artwork: { motif: "stride", primary: "#0f766e", secondary: "#67e8f9", accent: "#facc15" } },
+    training: { tags: ["fitness", "performance", "recovery"], iconKey: "rhythm-training", artwork: { motif: "pulse", primary: "#dc2626", secondary: "#fecaca", accent: "#fb7185" } },
+    lateNight: { tags: ["rest", "calm", "recovery"], iconKey: "rhythm-lateNight", artwork: { motif: "moon", primary: "#312e81", secondary: "#c4b5fd", accent: "#f9fafb" } },
+    home: { tags: ["home", "calm", "nutrition"], iconKey: "rhythm-home", artwork: { motif: "home", primary: "#854d0e", secondary: "#fde68a", accent: "#fb7185" } },
+    family: { tags: ["nutrition", "daily", "home"], iconKey: "rhythm-family", artwork: { motif: "droplet", primary: "#0f766e", secondary: "#ccfbf1", accent: "#fb7185" } }
   },
   preference: {
-    key: "preference",
-    index: 3,
-    eyebrow: "使用偏好",
-    title: "你習慣用哪種方式開始？",
-    subtitle: "讓推薦更符合你的習慣，而不只是理想化的建議。",
-    options: [
-      createOption({
-        value: "grabAndGo",
-        title: "越快開始越好",
-        note: "拿了就能用，不需要特別準備",
-        tags: ["portable", "daily", "light"],
-        bundleWord: "即開即用",
-        summaryLead: "先從最容易上手的選項開始",
-        iconKey: "preference-grabAndGo",
-        artwork: { motif: "stride", primary: "#0f766e", secondary: "#99f6e4", accent: "#f97316" }
-      }),
-      createOption({
-        value: "visibleResults",
-        title: "想要感受明顯一點",
-        note: "效果要夠明顯，才會想一直用",
-        tags: ["performance", "energy", "recovery"],
-        bundleWord: "有感",
-        summaryLead: "選感受明顯的，更容易維持動力",
-        iconKey: "preference-visibleResults",
-        artwork: { motif: "glow", primary: "#be123c", secondary: "#fecdd3", accent: "#facc15" }
-      }),
-      createOption({
-        value: "homeComfort",
-        title: "想讓家更舒適",
-        note: "想從家裡的環境和氛圍開始改變",
-        tags: ["home", "calm", "rest"],
-        bundleWord: "居家舒適",
-        summaryLead: "先讓居家空間的氛圍變成你的助力",
-        iconKey: "preference-homeComfort",
-        artwork: { motif: "home", primary: "#7c2d12", secondary: "#fed7aa", accent: "#f472b6" }
-      }),
-      createOption({
-        value: "steadyRitual",
-        title: "養成固定習慣",
-        note: "想要每天都能自然重複的安排",
-        tags: ["ritual", "nutrition", "daily"],
-        bundleWord: "固定習慣",
-        summaryLead: "讓照顧自己變成每天的固定節奏",
-        iconKey: "preference-steadyRitual",
-        artwork: { motif: "leaf", primary: "#166534", secondary: "#bbf7d0", accent: "#f59e0b" }
-      }),
-      createOption({
-        value: "lightRoutine",
-        title: "輕鬆不勉強",
-        note: "不想太複雜，能融入生活就好",
-        tags: ["light", "balance", "portable"],
-        bundleWord: "輕鬆入手",
-        summaryLead: "保留彈性，先求做得到",
-        iconKey: "preference-lightRoutine",
-        artwork: { motif: "arc", primary: "#0f766e", secondary: "#bfdbfe", accent: "#fde68a" }
-      }),
-      createOption({
-        value: "outdoorMove",
-        title: "出門也要繼續",
-        note: "外出、運動或通勤時都要方便使用",
-        tags: ["portable", "hydration", "fitness"],
-        bundleWord: "外出攜帶",
-        summaryLead: "以方便攜帶、不中斷為第一優先",
-        iconKey: "preference-outdoorMove",
-        artwork: { motif: "droplet", primary: "#0f766e", secondary: "#67e8f9", accent: "#f97316" }
-      })
-    ]
+    grabAndGo: { tags: ["portable", "daily", "light"], iconKey: "preference-grabAndGo", artwork: { motif: "stride", primary: "#0f766e", secondary: "#99f6e4", accent: "#f97316" } },
+    visibleResults: { tags: ["performance", "energy", "recovery"], iconKey: "preference-visibleResults", artwork: { motif: "glow", primary: "#be123c", secondary: "#fecdd3", accent: "#facc15" } },
+    homeComfort: { tags: ["home", "calm", "rest"], iconKey: "preference-homeComfort", artwork: { motif: "home", primary: "#7c2d12", secondary: "#fed7aa", accent: "#f472b6" } },
+    steadyRitual: { tags: ["ritual", "nutrition", "daily"], iconKey: "preference-steadyRitual", artwork: { motif: "leaf", primary: "#166534", secondary: "#bbf7d0", accent: "#f59e0b" } },
+    lightRoutine: { tags: ["light", "balance", "portable"], iconKey: "preference-lightRoutine", artwork: { motif: "arc", primary: "#0f766e", secondary: "#bfdbfe", accent: "#fde68a" } },
+    outdoorMove: { tags: ["portable", "hydration", "fitness"], iconKey: "preference-outdoorMove", artwork: { motif: "droplet", primary: "#0f766e", secondary: "#67e8f9", accent: "#f97316" } }
   },
   format: {
-    key: "format",
-    index: 4,
-    eyebrow: "偏好形式",
-    title: "你比較願意從哪種形式開始？",
-    subtitle: "先從最容易上手的開始，比一次想得太完整更有用。",
-    options: [
-      createOption({
-        value: "drink",
-        title: "飲品 / 隨手喝水",
-        note: "外出或工作時都能直接使用",
-        tags: ["hydration", "portable", "energy"],
-        bundleWord: "飲品",
-        summaryLead: "先從最容易入口的日常補水開始",
-        iconKey: "format-drink",
-        artwork: { motif: "droplet", primary: "#0f766e", secondary: "#99f6e4", accent: "#f8fafc" }
-      }),
-      createOption({
-        value: "snack",
-        title: "即食 / 隨手補充",
-        note: "拿了就吃，不需要特別備料",
-        tags: ["portable", "light", "energy"],
-        bundleWord: "即食",
-        summaryLead: "讓補充更俐落，不容易忘記",
-        iconKey: "format-snack",
-        artwork: { motif: "sunrise", primary: "#f97316", secondary: "#fde68a", accent: "#ffffff" }
-      }),
-      createOption({
-        value: "kitchen",
-        title: "搭配日常餐食",
-        note: "自然融入早餐或家裡的飲食習慣",
-        tags: ["nutrition", "home", "ritual"],
-        bundleWord: "餐食",
-        summaryLead: "從每天都會發生的飲食習慣切入",
-        iconKey: "format-kitchen",
-        artwork: { motif: "leaf", primary: "#166534", secondary: "#dcfce7", accent: "#f59e0b" }
-      }),
-      createOption({
-        value: "device",
-        title: "居家舒緩小物",
-        note: "從環境和身體感受開始調整",
-        tags: ["home", "calm", "recovery"],
-        bundleWord: "舒緩",
-        summaryLead: "先從身體舒適度和居家空間下手",
-        iconKey: "format-device",
-        artwork: { motif: "home", primary: "#7c3aed", secondary: "#ddd6fe", accent: "#fb7185" }
-      }),
-      createOption({
-        value: "tool",
-        title: "隨時看得到的小工具",
-        note: "放桌上或包包裡，自然形成提醒",
-        tags: ["daily", "ritual", "hydration"],
-        bundleWord: "小工具",
-        summaryLead: "讓提醒自然出現在你眼前",
-        iconKey: "format-tool",
-        artwork: { motif: "grid", primary: "#1d4ed8", secondary: "#dbeafe", accent: "#facc15" }
-      }),
-      createOption({
-        value: "gear",
-        title: "運動 / 恢復裝備",
-        note: "讓運動前後的狀態都能照顧到",
-        tags: ["fitness", "recovery", "performance"],
-        bundleWord: "裝備",
-        summaryLead: "用工具讓訓練和恢復更完整",
-        iconKey: "format-gear",
-        artwork: { motif: "pulse", primary: "#b91c1c", secondary: "#fecaca", accent: "#ffffff" }
-      })
-    ]
+    drink: { tags: ["hydration", "portable", "energy"], iconKey: "format-drink", artwork: { motif: "droplet", primary: "#0f766e", secondary: "#99f6e4", accent: "#f8fafc" } },
+    snack: { tags: ["portable", "light", "energy"], iconKey: "format-snack", artwork: { motif: "sunrise", primary: "#f97316", secondary: "#fde68a", accent: "#ffffff" } },
+    kitchen: { tags: ["nutrition", "home", "ritual"], iconKey: "format-kitchen", artwork: { motif: "leaf", primary: "#166534", secondary: "#dcfce7", accent: "#f59e0b" } },
+    device: { tags: ["home", "calm", "recovery"], iconKey: "format-device", artwork: { motif: "home", primary: "#7c3aed", secondary: "#ddd6fe", accent: "#fb7185" } },
+    tool: { tags: ["daily", "ritual", "hydration"], iconKey: "format-tool", artwork: { motif: "grid", primary: "#1d4ed8", secondary: "#dbeafe", accent: "#facc15" } },
+    gear: { tags: ["fitness", "recovery", "performance"], iconKey: "format-gear", artwork: { motif: "pulse", primary: "#b91c1c", secondary: "#fecaca", accent: "#ffffff" } }
   },
   support: {
-    key: "support",
-    index: 5,
-    eyebrow: "期待感受",
-    title: "你最希望它帶來什麼感受？",
-    subtitle: "最後一題，決定這套推薦偏向提振、穩定還是放鬆。",
-    options: [
-      createOption({
-        value: "clear",
-        title: "清爽一點",
-        note: "希望整體感覺更清新、不那麼沉重",
-        tags: ["light", "hydration", "focus"],
-        bundleWord: "清爽",
-        summaryLead: "偏向輕盈清爽的日常感",
-        iconKey: "support-clear",
-        artwork: { motif: "arc", primary: "#0ea5e9", secondary: "#dbeafe", accent: "#ffffff" }
-      }),
-      createOption({
-        value: "steady",
-        title: "穩定一點",
-        note: "重點是規律、能長期堅持",
-        tags: ["balance", "daily", "ritual"],
-        bundleWord: "穩定",
-        summaryLead: "先把節奏穩下來，再慢慢進步",
-        iconKey: "support-steady",
-        artwork: { motif: "grid", primary: "#334155", secondary: "#cbd5e1", accent: "#f8fafc" }
-      }),
-      createOption({
-        value: "comfort",
-        title: "舒服一點",
-        note: "想讓身體和生活空間都更舒適",
-        tags: ["home", "calm", "rest"],
-        bundleWord: "舒適",
-        summaryLead: "先把壓力降下來，整體更舒服",
-        iconKey: "support-comfort",
-        artwork: { motif: "home", primary: "#854d0e", secondary: "#fde68a", accent: "#ffffff" }
-      }),
-      createOption({
-        value: "motivate",
-        title: "有動力一點",
-        note: "想要感受夠明顯，更能激勵自己繼續",
-        tags: ["performance", "energy", "fitness"],
-        bundleWord: "有活力",
-        summaryLead: "用感受明顯的方式把動力帶起來",
-        iconKey: "support-motivate",
-        artwork: { motif: "glow", primary: "#be123c", secondary: "#fecdd3", accent: "#facc15" }
-      }),
-      createOption({
-        value: "simple",
-        title: "簡單一點",
-        note: "步驟越少越好，做得到最重要",
-        tags: ["light", "portable", "daily"],
-        bundleWord: "簡單",
-        summaryLead: "幾乎不增加額外的負擔",
-        iconKey: "support-simple",
-        artwork: { motif: "stride", primary: "#0f766e", secondary: "#ccfbf1", accent: "#ffffff" }
-      }),
-      createOption({
-        value: "restore",
-        title: "修復一點",
-        note: "比較需要放鬆、恢復和重新調整",
-        tags: ["recovery", "rest", "calm"],
-        bundleWord: "修復",
-        summaryLead: "先把身體和狀態好好修整回來",
-        iconKey: "support-restore",
-        artwork: { motif: "moon", primary: "#312e81", secondary: "#ddd6fe", accent: "#ffffff" }
-      })
-    ]
+    clear: { tags: ["light", "hydration", "focus"], iconKey: "support-clear", artwork: { motif: "arc", primary: "#0ea5e9", secondary: "#dbeafe", accent: "#ffffff" } },
+    steady: { tags: ["balance", "daily", "ritual"], iconKey: "support-steady", artwork: { motif: "grid", primary: "#334155", secondary: "#cbd5e1", accent: "#f8fafc" } },
+    comfort: { tags: ["home", "calm", "rest"], iconKey: "support-comfort", artwork: { motif: "home", primary: "#854d0e", secondary: "#fde68a", accent: "#ffffff" } },
+    motivate: { tags: ["performance", "energy", "fitness"], iconKey: "support-motivate", artwork: { motif: "glow", primary: "#be123c", secondary: "#fecdd3", accent: "#facc15" } },
+    simple: { tags: ["light", "portable", "daily"], iconKey: "support-simple", artwork: { motif: "stride", primary: "#0f766e", secondary: "#ccfbf1", accent: "#ffffff" } },
+    restore: { tags: ["recovery", "rest", "calm"], iconKey: "support-restore", artwork: { motif: "moon", primary: "#312e81", secondary: "#ddd6fe", accent: "#ffffff" } }
   }
 });
+
+const QUESTIONS: Record<QuizQuestionKey, QuizQuestion> = Object.freeze(
+  buildQuestions(QUIZ_CONTENT.questions)
+);
 
 const PRODUCT_TAG_RULES = Object.freeze([
   { keywords: ["按摩", "恢復", "熱敷", "放鬆", "massage", "recovery"], tags: ["recovery", "performance", "fitness", "calm"] },
@@ -444,41 +152,9 @@ const CATEGORY_TAG_RULES = Object.freeze([
   { keywords: ["運動戶外"], tags: ["portable", "hydration", "fitness"] }
 ]);
 
-const ROLE_LABELS: Record<string, string> = Object.freeze({
-  recovery: "放鬆恢復",
-  performance: "提振狀態",
-  hydration: "隨時補水",
-  portable: "外出必備",
-  nutrition: "日常飲食",
-  ritual: "養成習慣",
-  calm: "夜晚放鬆",
-  rest: "舒緩身體",
-  home: "居家首選",
-  balance: "均衡調整",
-  focus: "專注清晰",
-  light: "輕鬆入門",
-  energy: "補充活力",
-  fitness: "運動輔助",
-  daily: "每天使用"
-});
+const ROLE_LABELS: Record<string, string> = Object.freeze(QUIZ_CONTENT.roleLabels);
 
-const TAG_REASON_COPY: Record<string, string> = Object.freeze({
-  recovery: "很適合你現在需要的身體放鬆和恢復。",
-  performance: "符合你想要感受明顯、維持好狀態的需求。",
-  hydration: "讓補水這件事更容易每天做到。",
-  portable: "外出、通勤或移動時都不容易中斷。",
-  nutrition: "先把日常飲食和健康基礎補起來。",
-  ritual: "很適合放進每天固定的早晚習慣裡。",
-  calm: "幫助放慢夜晚節奏，讓身體更容易放鬆。",
-  rest: "對高度消耗或疲勞之後的恢復很有幫助。",
-  home: "可以自然融入你的居家日常，不需要特別費心。",
-  balance: "走穩定調整的路線，比較容易長期堅持。",
-  focus: "有助於維持白天的專注力和清晰感。",
-  light: "負擔低、容易上手，不容易半途而廢。",
-  energy: "比較能對應你現在需要的精力和體力。",
-  fitness: "讓運動前後的狀態都能照顧到。",
-  daily: "不是偶爾用，而是真的能融入每一天。"
-});
+const TAG_REASON_COPY: Record<string, string> = Object.freeze(QUIZ_CONTENT.reasonCopy);
 
 export const INTRO_ARTWORK = createIllustration({
   motif: "hero",
@@ -514,14 +190,17 @@ export function getOption(
   return OPTION_LOOKUP[`${safeQuestionKey}:${safeOptionValue}`] || null;
 }
 
-export function getQuizIconUrl(iconKey: string | undefined, fallbackLabel = "健康") {
+export function getQuizIconUrl(
+  iconKey: string | undefined,
+  fallbackLabel = QUIZ_CONTENT.fallbackIconLabel
+) {
   const safeIconKey = normalizeString(iconKey);
   return ICON_URLS[safeIconKey] || createIllustration({
     motif: "hero",
     primary: "#0f766e",
     secondary: "#ccfbf1",
     accent: "#f97316",
-    label: fallbackLabel
+    label: normalizeString(fallbackLabel) || QUIZ_CONTENT.fallbackIconLabel
   });
 }
 
@@ -575,8 +254,17 @@ export function buildHealthQuizRecommendation(
     .slice(0, 4);
 
   return {
-    bundleName: `${goal.bundleWord} × ${support.bundleWord} 推薦組合`,
-    summary: `${goal.summaryLead}，搭配你選擇的「${preference.title}」方式和「${format.title}」形式，整體更適合 ${rhythm.title} 的生活，朝著「${support.title}」的方向前進。`,
+    bundleName: applyTemplate(QUIZ_CONTENT.bundleNameTemplate, {
+      goal: goal.bundleWord,
+      support: support.bundleWord
+    }),
+    summary: applyTemplate(QUIZ_CONTENT.summaryTemplate, {
+      goalSummaryLead: goal.summaryLead,
+      preferenceTitle: preference.title,
+      formatTitle: format.title,
+      rhythmTitle: rhythm.title,
+      supportTitle: support.title
+    }),
     artwork: support.artwork || preference.artwork || goal.artwork,
     tags: uniqueValues([goal.title, rhythm.title, preference.title, format.title, support.title]),
     products: rankedProducts
@@ -665,7 +353,7 @@ function resolveRoleLabel(inferredTags: string[], tagWeights: Record<string, num
     }))
     .sort((left, right) => right.score - left.score)[0]?.tag;
 
-  return ROLE_LABELS[strongestTag] || "為你推薦";
+  return ROLE_LABELS[strongestTag] || QUIZ_CONTENT.defaultRoleLabel;
 }
 
 function buildProductReason(inferredTags: string[], tagWeights: Record<string, number>) {
@@ -676,7 +364,7 @@ function buildProductReason(inferredTags: string[], tagWeights: Record<string, n
     }))
     .sort((left, right) => right.score - left.score)[0]?.tag;
 
-  return TAG_REASON_COPY[strongestTag] || "這個商品和你的需求比較接近。";
+  return TAG_REASON_COPY[strongestTag] || QUIZ_CONTENT.defaultReason;
 }
 
 function addWeightedTags(target: Record<string, number>, tags: string[], weight: number) {
@@ -694,6 +382,35 @@ function createOption({ artwork, iconKey, ...rest }: OptionInput): QuizOption {
       label: rest.title
     })
   };
+}
+
+function buildQuestions(questionContent: QuizQuestionContent[]) {
+  const questions = {} as Record<QuizQuestionKey, QuizQuestion>;
+
+  questionContent.forEach((question) => {
+    const questionKey = question.key as QuizQuestionKey;
+    const optionMeta = QUESTION_META[questionKey];
+
+    questions[questionKey] = {
+      key: questionKey,
+      index: question.index,
+      eyebrow: question.eyebrow,
+      title: question.title,
+      subtitle: question.subtitle,
+      options: question.options.map((option) => {
+        const meta = optionMeta[option.value];
+
+        return createOption({
+          ...option,
+          tags: meta.tags,
+          iconKey: meta.iconKey,
+          artwork: meta.artwork
+        });
+      })
+    };
+  });
+
+  return questions;
 }
 
 function buildOptionLookup() {
@@ -728,7 +445,17 @@ function normalizeString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
-function createIllustration({ motif, primary, secondary, accent, label = "健康" }: IllustrationInput) {
+function applyTemplate(template: string, values: Record<string, string | number>) {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
+}
+
+function createIllustration({
+  motif,
+  primary,
+  secondary,
+  accent,
+  label = QUIZ_CONTENT.fallbackIconLabel
+}: IllustrationInput) {
   const safePrimary = primary || "#0f766e";
   const safeSecondary = secondary || "#ccfbf1";
   const safeAccent = accent || "#f97316";

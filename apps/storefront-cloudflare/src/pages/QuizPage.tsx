@@ -1,6 +1,7 @@
 import { startTransition, useEffect, useState } from "react";
 import type {
   QuizProgressPayload,
+  QuizPageContent,
   StorefrontProduct
 } from "../../shared/contracts";
 import { fetchProducts, submitQuizProgress } from "../lib/api";
@@ -27,13 +28,14 @@ import { StorefrontImage } from "../components/StorefrontImage";
 
 interface QuizPageProps {
   onNavigate: (href: string) => void;
+  page: QuizPageContent;
 }
 
 const CATALOG_LIMIT = 120;
 const STEP_KEYS = ["intro", ...QUIZ_STEP_ORDER, "result"] as const;
 const LAST_QUESTION_KEY = QUIZ_STEP_ORDER[QUIZ_STEP_ORDER.length - 1];
 
-export function QuizPage({ onNavigate }: QuizPageProps) {
+export function QuizPage({ onNavigate, page }: QuizPageProps) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>(() => buildEmptyQuizAnswers());
   const [validationMessage, setValidationMessage] = useState("");
@@ -61,7 +63,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
           setCatalogNotice(
             payload.items.length
               ? ""
-              : "目前尚未讀到可推薦商品，仍可先完成問答。"
+              : page.catalogEmptyMessage
           );
         });
       })
@@ -72,7 +74,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
 
         startTransition(() => {
           setCatalogLoaded(true);
-          setCatalogNotice("商品資料暫時無法載入，請稍後再試。");
+          setCatalogNotice(page.catalogErrorMessage);
         });
       });
 
@@ -107,7 +109,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
         setCatalogNotice(
           payload.items.length
             ? ""
-            : "目前尚未讀到可推薦商品，仍可先完成問答。"
+            : page.catalogEmptyMessage
         );
       });
 
@@ -115,7 +117,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
     } catch {
       startTransition(() => {
         setCatalogLoaded(true);
-        setCatalogNotice("商品資料暫時無法載入，請稍後再試。");
+        setCatalogNotice(page.catalogErrorMessage);
       });
 
       return [];
@@ -130,13 +132,13 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
     setValidationMessage("");
 
     if (!answers[currentQuestion.key]) {
-      setValidationMessage("請先選一個選項再繼續。");
+      setValidationMessage(page.validationSelectMessage);
       return;
     }
 
     const selectedOption = getOption(currentQuestion.key, answers[currentQuestion.key]);
     if (!selectedOption) {
-      setValidationMessage("請重新選一次。");
+      setValidationMessage(page.validationRetryMessage);
       return;
     }
 
@@ -188,14 +190,17 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
       <div className="quizPage__panel">
         <header className="quizPage__header">
           <div>
-            <p className="quizPage__brand">健康好物測驗</p>
-            <h2>找到更適合你現在節奏的健康選品</h2>
+            <p className="quizPage__brand">{page.brand}</p>
+            <h2>{page.title}</h2>
             <p className="quizPage__meta">
               {currentQuestion
-                ? `第 ${currentQuestion.index} / ${QUIZ_STEP_COUNT} 題`
+                ? applyTemplate(page.questionProgressTemplate, {
+                    current: currentQuestion.index,
+                    total: QUIZ_STEP_COUNT
+                  })
                 : currentStep === "result"
-                  ? "推薦完成"
-                  : "5 題快速完成，直接產出推薦商品"}
+                  ? page.completedLabel
+                  : page.introStatusLabel}
             </p>
           </div>
 
@@ -213,29 +218,21 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
           {currentStep === "intro" ? (
             <section className="quizIntro">
               <div className="quizIntro__art">
-                <img alt="健康好物推薦主視覺" src={INTRO_ARTWORK} />
+                <img alt={page.introImageAlt} src={INTRO_ARTWORK} />
               </div>
 
               <div className="quizIntro__copy">
-                <p className="quizIntro__eyebrow">個人化健康推薦</p>
-                <h1>五個問題，幫你快速整理現在更適合的選項</h1>
-                <p>
-                  從生活節奏、使用習慣到想要的感受，幫你整理出更貼近現在需求的健康好物與日常補給。
-                </p>
+                <p className="quizIntro__eyebrow">{page.introEyebrow}</p>
+                <h1>{page.introTitle}</h1>
+                <p>{page.introBody}</p>
 
                 <div className="quizIntro__points">
-                  <article className="quizIntro__point">
-                    <strong>5 題快速完成</strong>
-                    <span>不用長時間填答，幾個步驟就能得到結果。</span>
-                  </article>
-                  <article className="quizIntro__point">
-                    <strong>依偏好整理推薦</strong>
-                    <span>從目標、生活型態到形式偏好，組出更貼近你的選項。</span>
-                  </article>
-                  <article className="quizIntro__point">
-                    <strong>直接查看商品與需求表單</strong>
-                    <span>看完推薦後可進一步瀏覽商品，或直接留下需求。</span>
-                  </article>
+                  {page.introPoints.map((point) => (
+                    <article className="quizIntro__point" key={point.title}>
+                      <strong>{point.title}</strong>
+                      <span>{point.body}</span>
+                    </article>
+                  ))}
                 </div>
               </div>
             </section>
@@ -286,7 +283,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                 </div>
 
                 <div className="quizResult__copy">
-                  <p className="quizResult__eyebrow">你的專屬推薦結果</p>
+                  <p className="quizResult__eyebrow">{page.resultEyebrow}</p>
                   <h2>{recommendation.bundleName}</h2>
                   <p>{recommendation.summary}</p>
 
@@ -300,7 +297,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                 </div>
               </article>
 
-              <section className="quizInsights" aria-label="你的選擇摘要">
+              <section className="quizInsights" aria-label={page.insightsAriaLabel}>
                 {getAnswerHighlights(answers).map((answer) => (
                   <article className="quizInsightCard" key={answer.stepKey}>
                     <p className="quizInsightCard__eyebrow">{answer.eyebrow}</p>
@@ -313,15 +310,15 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
               <section>
                 <div className="quizSectionHeading">
                   <div>
-                    <p className="quizSectionHeading__eyebrow">推薦商品</p>
-                    <h3>為你挑選的好物</h3>
+                    <p className="quizSectionHeading__eyebrow">{page.recommendationSectionEyebrow}</p>
+                    <h3>{page.recommendationSectionTitle}</h3>
                   </div>
                   <button
                     className="quizTextButton"
                     onClick={() => onNavigate("/products")}
                     type="button"
                   >
-                    查看全部商品
+                    {page.viewAllProductsLabel}
                   </button>
                 </div>
 
@@ -344,7 +341,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                               onClick={() => onNavigate(`/products/${product.slug}`)}
                               type="button"
                             >
-                              查看商品
+                              {page.viewProductLabel}
                             </button>
                           </div>
                         </div>
@@ -353,8 +350,8 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                   </div>
                 ) : (
                   <div className="quizEmptyState">
-                    <p>目前還沒有可直接配對的商品。</p>
-                    <p>你可以先瀏覽全部商品，或直接把需求送到詢價表單。</p>
+                    <p>{page.emptyTitle}</p>
+                    <p>{page.emptyBody}</p>
                   </div>
                 )}
               </section>
@@ -367,7 +364,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
         <footer className="quizPage__footer">
           {currentStep === "intro" ? (
             <>
-              <p className="quizPage__footerHint">約 1 分鐘完成，完成後直接查看推薦商品。</p>
+              <p className="quizPage__footerHint">{page.introFooterHint}</p>
               <div className="quizPage__footerActions">
                 <button
                   className="quizButton quizButton_primary"
@@ -377,7 +374,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                   }}
                   type="button"
                 >
-                  開始測驗
+                  {page.startQuizLabel}
                 </button>
               </div>
             </>
@@ -385,7 +382,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
 
           {currentQuestion ? (
             <>
-              <p className="quizPage__footerHint">依照你的選擇逐步整理更適合的推薦組合。</p>
+              <p className="quizPage__footerHint">{page.questionFooterHint}</p>
               <div className="quizPage__footerActions">
                 <button
                   className="quizButton quizButton_secondary"
@@ -395,7 +392,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                   }}
                   type="button"
                 >
-                  上一題
+                  {page.previousQuestionLabel}
                 </button>
                 <button
                   className="quizButton quizButton_primary"
@@ -404,7 +401,9 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                   }}
                   type="button"
                 >
-                  {currentQuestion.key === LAST_QUESTION_KEY ? "查看我的推薦" : "下一題"}
+                  {currentQuestion.key === LAST_QUESTION_KEY
+                    ? page.viewRecommendationLabel
+                    : page.nextQuestionLabel}
                 </button>
               </div>
             </>
@@ -412,7 +411,7 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
 
           {currentStep === "result" && recommendation ? (
             <>
-              <p className="quizPage__footerHint">可繼續查看商品，或直接送出需求。</p>
+              <p className="quizPage__footerHint">{page.resultFooterHint}</p>
               <div className="quizPage__footerActions">
                 <button
                   className="quizButton quizButton_primary"
@@ -423,28 +422,28 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
                   }
                   type="button"
                 >
-                  送出這組需求
+                  {page.submitRequestLabel}
                 </button>
                 <button
                   className="quizButton quizButton_secondary"
                   onClick={() => onNavigate("/products")}
                   type="button"
                 >
-                  瀏覽全部商品
+                  {page.browseProductsLabel}
                 </button>
                 <button
                   className="quizButton quizButton_secondary"
                   onClick={() => onNavigate("/quiz-monitor")}
                   type="button"
                 >
-                  查看進度看板
+                  {page.viewMonitorLabel}
                 </button>
                 <button
                   className="quizButton quizButton_secondary"
                   onClick={handleRestart}
                   type="button"
                 >
-                  重新測驗
+                  {page.restartLabel}
                 </button>
               </div>
             </>
@@ -455,9 +454,9 @@ export function QuizPage({ onNavigate }: QuizPageProps) {
           <div className="quizOverlay" role="status" aria-live="polite">
             <div className="quizOverlay__card">
               <span className="quizOverlay__pulse"></span>
-              <p className="quizIntro__eyebrow">分析中</p>
-              <h3>正在找出最適合你的商品組合</h3>
-              <p>根據你的選擇幫你配對，馬上好。</p>
+              <p className="quizIntro__eyebrow">{page.loadingEyebrow}</p>
+              <h3>{page.loadingTitle}</h3>
+              <p>{page.loadingBody}</p>
             </div>
           </div>
         ) : null}
@@ -513,4 +512,8 @@ function syncProgressPayload(payload: QuizProgressPayload, attemptNumber: number
       syncProgressPayload(payload, attemptNumber + 1);
     }, 700 * attemptNumber);
   });
+}
+
+function applyTemplate(template: string, values: Record<string, string | number>) {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
 }

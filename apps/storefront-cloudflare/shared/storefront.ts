@@ -117,13 +117,21 @@ export function createMockRequestResponse(payload: RequestPayload): RequestRespo
     .toString()
     .padStart(6, "0")
     .slice(0, 6);
+  const requestPage = content.pages.request;
+  const contactName = payload.fullName?.trim() || requestPage.mockAnonymousName;
 
   return {
     ok: true,
-    message: `已收到 ${payload.fullName || "你的"} 的詢價需求，後續會由專人聯繫。`,
+    message: applyTemplate(requestPage.mockSuccessMessageTemplate, {
+      name: contactName
+    }),
     reference: `ALPINE-MOCK-${hash}`,
     mockMode: true
   };
+}
+
+function applyTemplate(template: string, values: Record<string, string | number>) {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
 }
 
 function normalizeSort(value?: ProductSortBy): ProductSortBy {

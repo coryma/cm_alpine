@@ -7,16 +7,8 @@ interface RequestPageProps {
   page: RequestPageContent;
 }
 
-const INITIAL_FORM: RequestPayload = {
-  fullName: "",
-  email: "",
-  company: "",
-  interest: "商品需求",
-  message: ""
-};
-
 export function RequestPage({ onNavigate, page }: RequestPageProps) {
-  const [form, setForm] = useState<RequestPayload>(() => buildInitialForm());
+  const [form, setForm] = useState<RequestPayload>(() => buildInitialForm(page.defaultInterest));
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [reference, setReference] = useState("");
@@ -40,12 +32,12 @@ export function RequestPage({ onNavigate, page }: RequestPageProps) {
       startTransition(() => {
         setSuccessMessage(result.message);
         setReference(result.reference);
-        setForm(INITIAL_FORM);
+        setForm(buildInitialForm(page.defaultInterest));
       });
     } catch (error) {
       startTransition(() => {
         setErrorMessage(
-          error instanceof Error ? error.message : "目前無法送出詢價。"
+          error instanceof Error ? error.message : page.submitErrorMessage
         );
       });
     } finally {
@@ -153,9 +145,17 @@ export function RequestPage({ onNavigate, page }: RequestPageProps) {
   );
 }
 
-function buildInitialForm(): RequestPayload {
+function buildInitialForm(defaultInterest: string): RequestPayload {
+  const initialForm: RequestPayload = {
+    fullName: "",
+    email: "",
+    company: "",
+    interest: defaultInterest,
+    message: ""
+  };
+
   if (typeof window === "undefined") {
-    return { ...INITIAL_FORM };
+    return initialForm;
   }
 
   const searchParams = new URLSearchParams(window.location.search);
@@ -163,8 +163,8 @@ function buildInitialForm(): RequestPayload {
   const message = searchParams.get("message")?.trim();
 
   return {
-    ...INITIAL_FORM,
-    interest: interest || INITIAL_FORM.interest,
-    message: message || INITIAL_FORM.message
+    ...initialForm,
+    interest: interest || initialForm.interest,
+    message: message || initialForm.message
   };
 }

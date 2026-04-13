@@ -134,6 +134,7 @@ export interface HomePageContent {
   flashSaleTitle: string;
   flashSaleMetaLabel: string;
   flashSaleLinkLabel: string;
+  flashSaleClaimTextTemplate: string;
   premiumTechnologyTitle: string;
   recommendedEyebrow: string;
   recommendedTitle: string;
@@ -178,17 +179,125 @@ export interface RequestPageContent {
   panelBody: string;
   checklist: string[];
   validationMessage: string;
+  submitErrorMessage: string;
   submitIdleLabel: string;
   submitBusyLabel: string;
   browseProductsLabel: string;
+  defaultInterest: string;
+  mockAnonymousName: string;
+  mockSuccessMessageTemplate: string;
   fieldLabels: RequestPageFieldLabels;
 }
 
+export interface CommonPageContent {
+  loadingLabel: string;
+  bootstrapErrorMessage: string;
+  routeErrorMessage: string;
+  salesforceRequestSuccessMessage: string;
+  productDescriptionFallback: string;
+  productLongDescriptionFallback: string;
+}
+
+export interface QuizIntroPointContent {
+  title: string;
+  body: string;
+}
+
+export interface QuizQuestionOptionContent {
+  value: string;
+  title: string;
+  note: string;
+  bundleWord: string;
+  summaryLead: string;
+}
+
+export interface QuizQuestionContent {
+  key: string;
+  index: number;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  options: QuizQuestionOptionContent[];
+}
+
+export interface QuizPageContent {
+  brand: string;
+  title: string;
+  introStatusLabel: string;
+  questionProgressTemplate: string;
+  completedLabel: string;
+  introImageAlt: string;
+  introEyebrow: string;
+  introTitle: string;
+  introBody: string;
+  introPoints: QuizIntroPointContent[];
+  resultEyebrow: string;
+  insightsAriaLabel: string;
+  recommendationSectionEyebrow: string;
+  recommendationSectionTitle: string;
+  viewAllProductsLabel: string;
+  viewProductLabel: string;
+  emptyTitle: string;
+  emptyBody: string;
+  introFooterHint: string;
+  questionFooterHint: string;
+  resultFooterHint: string;
+  startQuizLabel: string;
+  previousQuestionLabel: string;
+  nextQuestionLabel: string;
+  viewRecommendationLabel: string;
+  submitRequestLabel: string;
+  browseProductsLabel: string;
+  viewMonitorLabel: string;
+  restartLabel: string;
+  loadingEyebrow: string;
+  loadingTitle: string;
+  loadingBody: string;
+  catalogEmptyMessage: string;
+  catalogErrorMessage: string;
+  validationSelectMessage: string;
+  validationRetryMessage: string;
+  bundleNameTemplate: string;
+  summaryTemplate: string;
+  defaultRoleLabel: string;
+  defaultReason: string;
+  fallbackIconLabel: string;
+  roleLabels: Record<string, string>;
+  reasonCopy: Record<string, string>;
+  questions: QuizQuestionContent[];
+}
+
+export interface QuizMonitorPageContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  refreshIdleLabel: string;
+  refreshBusyLabel: string;
+  totalIconsLabel: string;
+  totalSessionsLabel: string;
+  autoRefreshValue: string;
+  autoRefreshLabel: string;
+  loadingLabel: string;
+  emptyLabel: string;
+  incompleteResultLabel: string;
+  backToQuizLabel: string;
+  anonymousLabel: string;
+  completedStepFallbackLabel: string;
+  optionAltFallback: string;
+  completedSessionLabel: string;
+  sessionProgressTemplate: string;
+  stepTitleTemplate: string;
+  loadErrorMessage: string;
+}
+
 export interface StorefrontPageCopy {
+  common: CommonPageContent;
   home: HomePageContent;
   products: ProductsPageContent;
   productDetail: ProductDetailPageContent;
   request: RequestPageContent;
+  quiz: QuizPageContent;
+  quizMonitor: QuizMonitorPageContent;
 }
 
 export interface StorefrontConfigResponse {

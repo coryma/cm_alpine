@@ -257,10 +257,11 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     }
 
     const result = (await response.json()) as SalesforceRequestResponse;
+    const commonPage = getStorefrontContentDocument().pages.common;
 
     return {
       ok: true,
-      message: result.message || "詢問已成功送出。",
+      message: result.message || commonPage.salesforceRequestSuccessMessage,
       reference: result.reference || result.leadId || "SALESFORCE-UNKNOWN",
       mockMode: false
     };
@@ -409,6 +410,7 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
 
   private mapProduct(record: SalesforceProductRecord): StorefrontProduct {
     const baseDocument = getStorefrontContentDocument();
+    const commonPage = baseDocument.pages.common;
     const matchedBaseProduct = baseDocument.products.find(
       (product) =>
         product.slug === record.slug ||
@@ -456,12 +458,12 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
       description:
         readText(
           record.shortDescription,
-          matchedBaseProduct?.description || "商品短描述尚未提供。"
+          matchedBaseProduct?.description || commonPage.productDescriptionFallback
         ),
       longDescription:
         readText(
           stripHtml(record.longDescription),
-          matchedBaseProduct?.longDescription || "商品詳細介紹尚未提供。"
+          matchedBaseProduct?.longDescription || commonPage.productLongDescriptionFallback
         ),
       highlights: highlights.length
         ? highlights

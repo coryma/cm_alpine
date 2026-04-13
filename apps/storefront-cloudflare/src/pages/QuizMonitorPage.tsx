@@ -1,17 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
-import type { QuizSession } from "../../shared/contracts";
+import type { QuizMonitorPageContent, QuizSession } from "../../shared/contracts";
 import { fetchQuizSessions } from "../lib/api";
 import { getQuizIconUrl, QUIZ_STEP_COUNT } from "../lib/healthQuiz";
 import "./QuizMonitorPage.css";
 
 interface QuizMonitorPageProps {
   onNavigate: (href: string) => void;
+  page: QuizMonitorPageContent;
 }
 
 const HASH_COLORS = ["#2563eb", "#0f766e", "#9333ea", "#ea580c", "#db2777", "#0f172a", "#14b8a6"];
 const POLL_INTERVAL_MS = 4000;
 
-export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
+export function QuizMonitorPage({ onNavigate, page }: QuizMonitorPageProps) {
   const [sessions, setSessions] = useState<QuizSession[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -42,7 +43,7 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
         }
 
         setErrorMessage(
-          error instanceof Error ? error.message : "問卷進度暫時無法載入。"
+          error instanceof Error ? error.message : page.loadErrorMessage
         );
       } finally {
         if (!active) {
@@ -68,11 +69,11 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
     };
   }, []);
 
-  const rows = useMemo(() => {
+    const rows = useMemo(() => {
     return [...sessions]
-      .map((session) => normalizeSession(session))
+      .map((session) => normalizeSession(session, page))
       .sort((left, right) => right.sortTimestamp - left.sortTimestamp);
-  }, [sessions]);
+  }, [page, sessions]);
 
   const totalEventCount = rows.reduce((sum, session) => sum + session.icons.length, 0);
 
@@ -80,9 +81,9 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
     <section className="quizMonitorPage">
       <header className="quizMonitorHeader">
         <div>
-          <p className="quizMonitorHeader__eyebrow">進度看板</p>
-          <h2>即時問卷進度</h2>
-          <p>這裡會持續整理最近的作答 session 與已完成步驟，方便查看目前的填答狀況。</p>
+          <p className="quizMonitorHeader__eyebrow">{page.eyebrow}</p>
+          <h2>{page.title}</h2>
+          <p>{page.description}</p>
         </div>
 
         <div>
@@ -98,7 +99,7 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
                 })
                 .catch((error) => {
                   setErrorMessage(
-                    error instanceof Error ? error.message : "問卷進度暫時無法載入。"
+                    error instanceof Error ? error.message : page.loadErrorMessage
                   );
                 })
                 .finally(() => {
@@ -107,7 +108,7 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
             }}
             type="button"
           >
-            {isRefreshing ? "同步中..." : "重新整理"}
+            {isRefreshing ? page.refreshBusyLabel : page.refreshIdleLabel}
           </button>
         </div>
       </header>
@@ -115,21 +116,21 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
       <div className="quizMonitorSummary">
         <div className="quizMonitorSummaryCard">
           <strong>{totalEventCount}</strong>
-          <span>已累積 icon</span>
+          <span>{page.totalIconsLabel}</span>
         </div>
         <div className="quizMonitorSummaryCard">
           <strong>{rows.length}</strong>
-          <span>目前 session</span>
+          <span>{page.totalSessionsLabel}</span>
         </div>
         <div className="quizMonitorSummaryCard">
-          <strong>每 4 秒</strong>
-          <span>自動更新</span>
+          <strong>{page.autoRefreshValue}</strong>
+          <span>{page.autoRefreshLabel}</span>
         </div>
       </div>
 
       {errorMessage ? <div className="quizMonitorState quizMonitorState_error">{errorMessage}</div> : null}
 
-      {isLoading ? <div className="quizMonitorState">正在載入問卷進度...</div> : null}
+      {isLoading ? <div className="quizMonitorState">{page.loadingLabel}</div> : null}
 
       {!isLoading && rows.length ? (
         <div className="quizMonitorList">
@@ -158,13 +159,13 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
 
               <div className="quizMonitorSession__meta">
                 <span className="quizMonitorProgress">{session.progressLabel}</span>
-                {session.bundleName ? <p>{session.bundleName}</p> : <p>尚未完成推薦結果</p>}
+                {session.bundleName ? <p>{session.bundleName}</p> : <p>{page.incompleteResultLabel}</p>}
                 <button
                   className="quizTextButton"
                   onClick={() => onNavigate("/quiz")}
                   type="button"
                 >
-                  回到測驗頁
+                  {page.backToQuizLabel}
                 </button>
               </div>
             </article>
@@ -173,22 +174,28 @@ export function QuizMonitorPage({ onNavigate }: QuizMonitorPageProps) {
       ) : null}
 
       {!isLoading && !rows.length ? (
-        <div className="quizMonitorState">
-          目前還沒有收到問卷進度事件。等前台使用者完成第一個步驟後，這裡就會出現對應 icon。
-        </div>
+        <div className="quizMonitorState">{page.emptyLabel}</div>
       ) : null}
     </section>
   );
 }
 
-function normalizeSession(session: QuizSession) {
-  const displayLabel = normalizeString(session.displayLabel) || "匿名";
+function normalizeSession(session: QuizSession, page: QuizMonitorPageContent) {
+  const displayLabel = normalizeString(session.displayLabel) || page.anonymousLabel;
+  const completedStepLabel = page.completedStepFallbackLabel;
+  const optionAltFallback = page.optionAltFallback;
   const icons = [...(session.steps || [])]
     .sort((left, right) => left.stepNumber - right.stepNumber)
     .map((step) => ({
       stepNumber: step.stepNumber,
-      title: `第 ${step.stepNumber} 步 · ${normalizeString(step.optionLabel) || normalizeString(step.stepKey) || "已完成"}`,
-      alt: normalizeString(step.optionLabel) || normalizeString(step.stepKey) || "問卷選擇",
+      title: applyTemplate(page.stepTitleTemplate, {
+        stepNumber: step.stepNumber,
+        label:
+          normalizeString(step.optionLabel) ||
+          normalizeString(step.stepKey) ||
+          completedStepLabel
+      }),
+      alt: normalizeString(step.optionLabel) || normalizeString(step.stepKey) || optionAltFallback,
       url: getQuizIconUrl(step.iconKey, step.optionLabel || displayLabel)
     }));
 
@@ -197,7 +204,9 @@ function normalizeSession(session: QuizSession) {
     displayLabel,
     avatarText: displayLabel.slice(0, 1).toUpperCase(),
     avatarColor: colorForText(displayLabel),
-    statusText: session.isComplete ? "已完成完整問卷" : `目前完成 ${icons.length} 個步驟`,
+    statusText: session.isComplete
+      ? page.completedSessionLabel
+      : applyTemplate(page.sessionProgressTemplate, { count: icons.length }),
     progressLabel: `${icons.length} / ${QUIZ_STEP_COUNT}`,
     bundleName: normalizeString(session.bundleName),
     icons,
@@ -215,4 +224,8 @@ function colorForText(value: string) {
 
 function normalizeString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function applyTemplate(template: string, values: Record<string, string | number>) {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
 }

@@ -36,7 +36,10 @@
     "common": {
       "loadingLabel": "載入頁面中...",
       "bootstrapErrorMessage": "站點內容暫時無法載入。",
-      "routeErrorMessage": "頁面資料暫時無法載入。"
+      "routeErrorMessage": "頁面資料暫時無法載入。",
+      "salesforceRequestSuccessMessage": "詢問已成功送出。",
+      "productDescriptionFallback": "商品短描述尚未提供。",
+      "productLongDescriptionFallback": "商品詳細介紹尚未提供。"
     },
     "home": {
       "heroCtaLabel": "開始選購",

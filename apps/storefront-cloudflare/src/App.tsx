@@ -11,6 +11,7 @@ import {
   fetchProductDetail,
   fetchProducts
 } from "./lib/api";
+import { getStorefrontConfig } from "../shared/storefront";
 import { StorefrontShell } from "./components/StorefrontShell";
 import { HomePage } from "./pages/HomePage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
@@ -27,76 +28,7 @@ type Route =
   | { kind: "quiz-monitor" }
   | { kind: "request" };
 
-const EMPTY_CONFIG: StorefrontConfigResponse = {
-  shell: {
-    brandEyebrow: "",
-    brandName: "",
-    searchPlaceholder: "",
-    categoryEyebrow: "",
-    categoryTitle: "",
-    categoryCtaLabel: "",
-    footerBrand: "",
-    footerLegal: "",
-    navLinks: [],
-    sideCategories: [],
-    footerLinks: []
-  },
-  pages: {
-    home: {
-      heroCtaLabel: "",
-      flashSaleTitle: "",
-      flashSaleMetaLabel: "",
-      flashSaleLinkLabel: "",
-      premiumTechnologyTitle: "",
-      recommendedEyebrow: "",
-      recommendedTitle: "",
-      browseCatalogLabel: "",
-      promoCard: {
-        title: "",
-        body: "",
-        ctaLabel: ""
-      }
-    },
-    products: {
-      eyebrow: "",
-      title: "",
-      description: "",
-      matchingLabel: "",
-      emptyEyebrow: "",
-      emptyTitle: "",
-      emptyBody: "",
-      viewProductLabel: ""
-    },
-    productDetail: {
-      catalogLabel: "",
-      requestButtonLabel: "",
-      backButtonLabel: "",
-      notesTitle: "",
-      notFoundEyebrow: "",
-      notFoundTitle: ""
-    },
-    request: {
-      eyebrow: "",
-      title: "",
-      description: "",
-      panelEyebrow: "",
-      panelTitle: "",
-      panelBody: "",
-      checklist: [],
-      validationMessage: "",
-      submitIdleLabel: "",
-      submitBusyLabel: "",
-      browseProductsLabel: "",
-      fieldLabels: {
-        fullName: "",
-        email: "",
-        company: "",
-        interest: "",
-        message: ""
-      }
-    }
-  }
-};
+const DEFAULT_CONFIG: StorefrontConfigResponse = getStorefrontConfig();
 
 function readRoute(): Route {
   if (typeof window === "undefined") {
@@ -233,7 +165,9 @@ function App() {
 
       startTransition(() => {
         setErrorMessage(
-          error instanceof Error ? error.message : "站點內容暫時無法載入。"
+          error instanceof Error
+            ? error.message
+            : DEFAULT_CONFIG.pages.common.bootstrapErrorMessage
         );
         setIsBootstrapping(false);
       });
@@ -280,7 +214,9 @@ function App() {
           startTransition(() => {
             setProductDetail(payload);
             setProductsResponse(null);
-            setErrorMessage(payload ? "" : "找不到這個商品。");
+            setErrorMessage(
+              payload ? "" : (config || DEFAULT_CONFIG).pages.productDetail.notFoundTitle
+            );
             setIsLoading(false);
           });
           return;
@@ -299,7 +235,9 @@ function App() {
 
         startTransition(() => {
           setErrorMessage(
-            error instanceof Error ? error.message : "頁面資料暫時無法載入。"
+            error instanceof Error
+              ? error.message
+              : (config || DEFAULT_CONFIG).pages.common.routeErrorMessage
           );
           setIsLoading(false);
         });
@@ -311,7 +249,7 @@ function App() {
     return () => {
       active = false;
     };
-  }, [route]);
+  }, [config, route]);
 
   const handleSearchSubmit = useEffectEvent(() => {
     const searchParams = new URLSearchParams();
@@ -351,7 +289,7 @@ function App() {
     navigate(pathname);
   });
 
-  const storefrontConfig = config || EMPTY_CONFIG;
+  const storefrontConfig = config || DEFAULT_CONFIG;
 
   return (
     <StorefrontShell
@@ -366,7 +304,7 @@ function App() {
       {errorMessage ? <div className="errorBanner">{errorMessage}</div> : null}
 
       {isBootstrapping || isLoading ? (
-        <div className="loadingPanel">載入頁面中...</div>
+        <div className="loadingPanel">{storefrontConfig.pages.common.loadingLabel}</div>
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "home" && home ? (
@@ -403,11 +341,11 @@ function App() {
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "quiz" ? (
-        <QuizPage onNavigate={navigate} />
+        <QuizPage onNavigate={navigate} page={storefrontConfig.pages.quiz} />
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "quiz-monitor" ? (
-        <QuizMonitorPage onNavigate={navigate} />
+        <QuizMonitorPage onNavigate={navigate} page={storefrontConfig.pages.quizMonitor} />
       ) : null}
     </StorefrontShell>
   );

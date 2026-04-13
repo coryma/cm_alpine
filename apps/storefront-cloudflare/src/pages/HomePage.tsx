@@ -123,7 +123,9 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
                 />
               </div>
               <p className="saleCard__claimText">
-                {(product.claimedPercent || 40).toString()}% 已搶購
+                {applyTemplate(page.flashSaleClaimTextTemplate, {
+                  percent: (product.claimedPercent || 40).toString()
+                })}
               </p>
             </article>
           ))}
@@ -225,4 +227,8 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
       </section>
     </>
   );
+}
+
+function applyTemplate(template: string, values: Record<string, string | number>) {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
 }
