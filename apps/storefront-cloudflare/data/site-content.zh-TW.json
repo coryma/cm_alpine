@@ -11,9 +11,9 @@
     "navLinks": [
       { "label": "首頁", "href": "/" },
       { "label": "全部商品", "href": "/products" },
-      { "label": "新品推薦", "href": "/products?category=workspace" },
-      { "label": "精選組合", "href": "/products?category=style" },
-      { "label": "風格測驗", "href": "/quiz" },
+      { "label": "新品推薦", "href": "/products?category=wellness" },
+      { "label": "風格配件", "href": "/products?category=style" },
+      { "label": "健康測驗", "href": "/quiz" },
       { "label": "進度看板", "href": "/quiz-monitor" },
       { "label": "需求表單", "href": "/request" }
     ],
@@ -33,11 +33,17 @@
     ]
   },
   "pages": {
+    "common": {
+      "loadingLabel": "載入頁面中...",
+      "bootstrapErrorMessage": "站點內容暫時無法載入。",
+      "routeErrorMessage": "頁面資料暫時無法載入。"
+    },
     "home": {
       "heroCtaLabel": "開始選購",
       "flashSaleTitle": "限時精選",
       "flashSaleMetaLabel": "本週重點",
       "flashSaleLinkLabel": "查看全部",
+      "flashSaleClaimTextTemplate": "{percent}% 已搶購",
       "premiumTechnologyTitle": "人氣選品",
       "recommendedEyebrow": "為你推薦",
       "recommendedTitle": "猜你會喜歡",
@@ -79,9 +85,13 @@
         "送出後會提供案件編號"
       ],
       "validationMessage": "請先填寫姓名與電子郵件。",
+      "submitErrorMessage": "目前無法送出詢價。",
       "submitIdleLabel": "送出需求",
       "submitBusyLabel": "送出中...",
       "browseProductsLabel": "瀏覽商品",
+      "defaultInterest": "商品需求",
+      "mockAnonymousName": "你的",
+      "mockSuccessMessageTemplate": "已收到 {name} 的詢價需求，後續會由專人聯繫。",
       "fieldLabels": {
         "fullName": "姓名",
         "email": "電子郵件",
@@ -89,6 +99,195 @@
         "interest": "想找的商品",
         "message": "補充說明"
       }
+    },
+    "quiz": {
+      "brand": "健康好物測驗",
+      "title": "找到更適合你現在節奏的健康選品",
+      "introStatusLabel": "5 題快速完成，直接產出推薦商品",
+      "questionProgressTemplate": "第 {current} / {total} 題",
+      "completedLabel": "推薦完成",
+      "introImageAlt": "健康好物推薦主視覺",
+      "introEyebrow": "個人化健康推薦",
+      "introTitle": "五個問題，幫你快速整理現在更適合的選項",
+      "introBody": "從生活節奏、使用習慣到想要的感受，幫你整理出更貼近現在需求的健康好物與日常補給。",
+      "introPoints": [
+        {
+          "title": "5 題快速完成",
+          "body": "不用長時間填答，幾個步驟就能得到結果。"
+        },
+        {
+          "title": "依偏好整理推薦",
+          "body": "從目標、生活型態到形式偏好，組出更貼近你的選項。"
+        },
+        {
+          "title": "直接查看商品與需求表單",
+          "body": "看完推薦後可進一步瀏覽商品，或直接留下需求。"
+        }
+      ],
+      "resultEyebrow": "你的專屬推薦結果",
+      "insightsAriaLabel": "你的選擇摘要",
+      "recommendationSectionEyebrow": "推薦商品",
+      "recommendationSectionTitle": "為你挑選的好物",
+      "viewAllProductsLabel": "查看全部商品",
+      "viewProductLabel": "查看商品",
+      "emptyTitle": "目前還沒有可直接配對的商品。",
+      "emptyBody": "你可以先瀏覽全部商品，或直接把需求送到詢價表單。",
+      "introFooterHint": "約 1 分鐘完成，完成後直接查看推薦商品。",
+      "questionFooterHint": "依照你的選擇逐步整理更適合的推薦組合。",
+      "resultFooterHint": "可繼續查看商品，或直接送出需求。",
+      "startQuizLabel": "開始測驗",
+      "previousQuestionLabel": "上一題",
+      "nextQuestionLabel": "下一題",
+      "viewRecommendationLabel": "查看我的推薦",
+      "submitRequestLabel": "送出這組需求",
+      "browseProductsLabel": "瀏覽全部商品",
+      "viewMonitorLabel": "查看進度看板",
+      "restartLabel": "重新測驗",
+      "loadingEyebrow": "分析中",
+      "loadingTitle": "正在找出最適合你的商品組合",
+      "loadingBody": "根據你的選擇幫你配對，馬上好。",
+      "catalogEmptyMessage": "目前尚未讀到可推薦商品，仍可先完成問答。",
+      "catalogErrorMessage": "商品資料暫時無法載入，請稍後再試。",
+      "validationSelectMessage": "請先選一個選項再繼續。",
+      "validationRetryMessage": "請重新選一次。",
+      "bundleNameTemplate": "{goal} × {support} 推薦組合",
+      "summaryTemplate": "{goalSummaryLead}，搭配你選擇的「{preferenceTitle}」方式和「{formatTitle}」形式，整體更適合 {rhythmTitle} 的生活，朝著「{supportTitle}」的方向前進。",
+      "defaultRoleLabel": "為你推薦",
+      "defaultReason": "這個商品和你的需求比較接近。",
+      "fallbackIconLabel": "健康",
+      "roleLabels": {
+        "recovery": "放鬆恢復",
+        "performance": "提振狀態",
+        "hydration": "隨時補水",
+        "portable": "外出必備",
+        "nutrition": "日常飲食",
+        "ritual": "養成習慣",
+        "calm": "夜晚放鬆",
+        "rest": "舒緩身體",
+        "home": "居家首選",
+        "balance": "均衡調整",
+        "focus": "專注清晰",
+        "light": "輕鬆入門",
+        "energy": "補充活力",
+        "fitness": "運動輔助",
+        "daily": "每天使用"
+      },
+      "reasonCopy": {
+        "recovery": "很適合你現在需要的身體放鬆和恢復。",
+        "performance": "符合你想要感受明顯、維持好狀態的需求。",
+        "hydration": "讓補水這件事更容易每天做到。",
+        "portable": "外出、通勤或移動時都不容易中斷。",
+        "nutrition": "先把日常飲食和健康基礎補起來。",
+        "ritual": "很適合放進每天固定的早晚習慣裡。",
+        "calm": "幫助放慢夜晚節奏，讓身體更容易放鬆。",
+        "rest": "對高度消耗或疲勞之後的恢復很有幫助。",
+        "home": "可以自然融入你的居家日常，不需要特別費心。",
+        "balance": "走穩定調整的路線，比較容易長期堅持。",
+        "focus": "有助於維持白天的專注力和清晰感。",
+        "light": "負擔低、容易上手，不容易半途而廢。",
+        "energy": "比較能對應你現在需要的精力和體力。",
+        "fitness": "讓運動前後的狀態都能照顧到。",
+        "daily": "不是偶爾用，而是真的能融入每一天。"
+      },
+      "questions": [
+        {
+          "key": "goal",
+          "index": 1,
+          "eyebrow": "健康目標",
+          "title": "你現在最想先改善哪個部分？",
+          "subtitle": "選你現在最有感的需求，推薦會更準確。",
+          "options": [
+            { "value": "energy", "title": "白天更有精神", "note": "想讓白天更有精神和體力", "bundleWord": "活力", "summaryLead": "先把白天的精神和體力補回來" },
+            { "value": "balance", "title": "作息更規律", "note": "想讓飲食和日常習慣更規律", "bundleWord": "均衡", "summaryLead": "先把日常飲食和習慣規律起來" },
+            { "value": "recovery", "title": "運動後恢復", "note": "運動後或久坐後想好好放鬆一下", "bundleWord": "恢復", "summaryLead": "以身體放鬆和循環恢復為主" },
+            { "value": "sleep", "title": "晚上好入睡", "note": "想讓夜晚更放鬆、更好入睡", "bundleWord": "放鬆", "summaryLead": "先讓夜晚的放鬆習慣建立起來" },
+            { "value": "light", "title": "輕鬆不費力", "note": "不想太複雜，容易持續最重要", "bundleWord": "輕鬆", "summaryLead": "用低負擔的方式，一步一步建立習慣" },
+            { "value": "care", "title": "養成照顧自己的習慣", "note": "想固定花一點時間好好關心自己", "bundleWord": "保養", "summaryLead": "讓照顧自己成為每天固定的一件事" }
+          ]
+        },
+        {
+          "key": "rhythm",
+          "index": 2,
+          "eyebrow": "生活型態",
+          "title": "你的日常比較像哪一種狀態？",
+          "subtitle": "同樣想顧健康，生活型態不同，適合的方式也完全不一樣。",
+          "options": [
+            { "value": "office", "title": "久坐工作族", "note": "長時間盯螢幕、步調緊、容易忘記照顧自己", "bundleWord": "上班族", "summaryLead": "要能自然融入長時間的工作行程" },
+            { "value": "commute", "title": "通勤移動族", "note": "時間很零碎，外出時也要能繼續", "bundleWord": "通勤族", "summaryLead": "要夠俐落，外出也不容易中斷" },
+            { "value": "training", "title": "規律運動族", "note": "想讓訓練、休息和補充更完整", "bundleWord": "運動族", "summaryLead": "要能支撐訓練前後和恢復狀態" },
+            { "value": "lateNight", "title": "晚睡趕工型", "note": "白天忙、晚上還在趕，一直覺得很累", "bundleWord": "夜貓族", "summaryLead": "先從晚間狀態和睡前習慣下手" },
+            { "value": "home", "title": "居家生活型", "note": "喜歡在家裡慢慢建立自己的習慣", "bundleWord": "居家族", "summaryLead": "適合從居家空間和固定習慣下手" },
+            { "value": "family", "title": "家庭照顧型", "note": "不只照顧自己，也要兼顧家人的生活", "bundleWord": "家庭", "summaryLead": "要兼顧效率、實用和容易堅持" }
+          ]
+        },
+        {
+          "key": "preference",
+          "index": 3,
+          "eyebrow": "使用偏好",
+          "title": "你習慣用哪種方式開始？",
+          "subtitle": "讓推薦更符合你的習慣，而不只是理想化的建議。",
+          "options": [
+            { "value": "grabAndGo", "title": "越快開始越好", "note": "拿了就能用，不需要特別準備", "bundleWord": "即開即用", "summaryLead": "先從最容易上手的選項開始" },
+            { "value": "visibleResults", "title": "想要感受明顯一點", "note": "效果要夠明顯，才會想一直用", "bundleWord": "有感", "summaryLead": "選感受明顯的，更容易維持動力" },
+            { "value": "homeComfort", "title": "想讓家更舒適", "note": "想從家裡的環境和氛圍開始改變", "bundleWord": "居家舒適", "summaryLead": "先讓居家空間的氛圍變成你的助力" },
+            { "value": "steadyRitual", "title": "養成固定習慣", "note": "想要每天都能自然重複的安排", "bundleWord": "固定習慣", "summaryLead": "讓照顧自己變成每天的固定節奏" },
+            { "value": "lightRoutine", "title": "輕鬆不勉強", "note": "不想太複雜，能融入生活就好", "bundleWord": "輕鬆入手", "summaryLead": "保留彈性，先求做得到" },
+            { "value": "outdoorMove", "title": "出門也要繼續", "note": "外出、運動或通勤時都要方便使用", "bundleWord": "外出攜帶", "summaryLead": "以方便攜帶、不中斷為第一優先" }
+          ]
+        },
+        {
+          "key": "format",
+          "index": 4,
+          "eyebrow": "偏好形式",
+          "title": "你比較願意從哪種形式開始？",
+          "subtitle": "先從最容易上手的開始，比一次想得太完整更有用。",
+          "options": [
+            { "value": "drink", "title": "飲品 / 隨手喝水", "note": "外出或工作時都能直接使用", "bundleWord": "飲品", "summaryLead": "先從最容易入口的日常補水開始" },
+            { "value": "snack", "title": "即食 / 隨手補充", "note": "拿了就吃，不需要特別備料", "bundleWord": "即食", "summaryLead": "讓補充更俐落，不容易忘記" },
+            { "value": "kitchen", "title": "搭配日常餐食", "note": "自然融入早餐或家裡的飲食習慣", "bundleWord": "餐食", "summaryLead": "從每天都會發生的飲食習慣切入" },
+            { "value": "device", "title": "居家舒緩小物", "note": "從環境和身體感受開始調整", "bundleWord": "舒緩", "summaryLead": "先從身體舒適度和居家空間下手" },
+            { "value": "tool", "title": "隨時看得到的小工具", "note": "放桌上或包包裡，自然形成提醒", "bundleWord": "小工具", "summaryLead": "讓提醒自然出現在你眼前" },
+            { "value": "gear", "title": "運動 / 恢復裝備", "note": "讓運動前後的狀態都能照顧到", "bundleWord": "裝備", "summaryLead": "用工具讓訓練和恢復更完整" }
+          ]
+        },
+        {
+          "key": "support",
+          "index": 5,
+          "eyebrow": "期待感受",
+          "title": "你最希望它帶來什麼感受？",
+          "subtitle": "最後一題，決定這套推薦偏向提振、穩定還是放鬆。",
+          "options": [
+            { "value": "clear", "title": "清爽一點", "note": "希望整體感覺更清新、不那麼沉重", "bundleWord": "清爽", "summaryLead": "偏向輕盈清爽的日常感" },
+            { "value": "steady", "title": "穩定一點", "note": "重點是規律、能長期堅持", "bundleWord": "穩定", "summaryLead": "先把節奏穩下來，再慢慢進步" },
+            { "value": "comfort", "title": "舒服一點", "note": "想讓身體和生活空間都更舒適", "bundleWord": "舒適", "summaryLead": "先把壓力降下來，整體更舒服" },
+            { "value": "motivate", "title": "有動力一點", "note": "想要感受夠明顯，更能激勵自己繼續", "bundleWord": "有活力", "summaryLead": "用感受明顯的方式把動力帶起來" },
+            { "value": "simple", "title": "簡單一點", "note": "步驟越少越好，做得到最重要", "bundleWord": "簡單", "summaryLead": "幾乎不增加額外的負擔" },
+            { "value": "restore", "title": "修復一點", "note": "比較需要放鬆、恢復和重新調整", "bundleWord": "修復", "summaryLead": "先把身體和狀態好好修整回來" }
+          ]
+        }
+      ]
+    },
+    "quizMonitor": {
+      "eyebrow": "進度看板",
+      "title": "即時問卷進度",
+      "description": "這裡會持續整理最近的作答 session 與已完成步驟，方便查看目前的填答狀況。",
+      "refreshIdleLabel": "重新整理",
+      "refreshBusyLabel": "同步中...",
+      "totalIconsLabel": "已累積 icon",
+      "totalSessionsLabel": "目前 session",
+      "autoRefreshValue": "每 4 秒",
+      "autoRefreshLabel": "自動更新",
+      "loadingLabel": "正在載入問卷進度...",
+      "emptyLabel": "目前還沒有收到問卷進度事件。等前台使用者完成第一個步驟後，這裡就會出現對應 icon。",
+      "incompleteResultLabel": "尚未完成推薦結果",
+      "backToQuizLabel": "回到測驗頁",
+      "anonymousLabel": "匿名",
+      "completedStepFallbackLabel": "已完成",
+      "optionAltFallback": "問卷選擇",
+      "completedSessionLabel": "已完成完整問卷",
+      "sessionProgressTemplate": "目前完成 {count} 個步驟",
+      "stepTitleTemplate": "第 {stepNumber} 步 · {label}",
+      "loadErrorMessage": "問卷進度暫時無法載入。"
     }
   },
   "homeSections": {
@@ -257,9 +456,9 @@
       "longDescription": "採用混合式 ANC 技術，有效隔絕辦公室雜音與環境聲，讓你在任何場合都能保持專注。霧黑啞光機身輕盈耐用，折疊設計方便攜帶，從桌面到通勤都是理想選擇。",
       "highlights": ["混合式主動降噪", "36 小時電池續航", "可折疊攜帶設計"],
       "specs": [
-        { "label": "電池", "value": "36 hours" },
-        { "label": "使用情境", "value": "Desk / flight / focus" },
-        { "label": "材質", "value": "Matte graphite" }
+        { "label": "電池", "value": "36 小時" },
+        { "label": "使用情境", "value": "桌面 / 通勤 / 專注" },
+        { "label": "材質", "value": "霧黑石墨" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBYZPqEdn0Vzl-_BdmQ9Q7ojDYwHOn_aLgIQgRbX1xX24wLGBRcb6BCwtS_NBi8PiG8iWlYrXjffYqMQww1XnrN_NoPfZFwihHJe09CxDGqaxH4WU7DYBLu1hlgK7Zb7SBh5QQvAnnW1lknK2Yw_Za2r5W8MA4hDMunYR_3XKOep4uoIgZhkdCSa7DsbHWr8SUOn4phrTn6RQwjS5yQFI4-61RdrT-bt5Aq4fVlA-coZixwHfSF_OTN6psbSV6MxwNYRaA6PeG-hAc",
       "imageAlt": "black over ear headphones"
@@ -280,8 +479,8 @@
       "longDescription": "以簡潔建築感排版為設計核心，淡木色紋理錶面搭配細緻義大利小牛皮錶帶，適合日常穿搭與正式場合。防水 5 ATM，是送禮或自用都合適的精選配件。",
       "highlights": ["淡木色紋理錶面", "義大利小牛皮錶帶", "防水 5 ATM"],
       "specs": [
-        { "label": "錶面", "value": "Pale wood texture" },
-        { "label": "錶帶", "value": "Italian calfskin" },
+        { "label": "錶面", "value": "淡木色紋理" },
+        { "label": "錶帶", "value": "義大利小牛皮" },
         { "label": "防水", "value": "5 ATM" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuByG7RcDUTqePcA3YcbKLrwHaFkEaeOLF0Q9Q386Rx13ze1ls6zN3kLU0JwhsQPNQrmvnzsfT1XTw3RJxuOXyDX0EG_HaycHlSKjSJJB6-ZOeGH7W3Wdb3zpaLQxzZtNt3zV3DPZx3e-HNIJ-0GBKXJSJN2kd8Y7PxZPJG8LM0g5zQ2URJLoZs8kCFKgqOydtrV11R1dGnhasy4_AC1j00sYm4FPpsWqDlKJVHBONG5EZYkYxj3DebT2bJanainzJhBDkOyVxy8-w0",
@@ -303,9 +502,9 @@
       "longDescription": "石墨合金機身輕巧好握，35mm 膠捲感畫面風格讓每張照片都帶有溫度。隨附背帶方便隨身攜帶，無論城市散步或週末旅行都能輕鬆上手。",
       "highlights": ["復古 35mm 數位畫風", "石墨合金輕量機身", "隨附隨行背帶"],
       "specs": [
-        { "label": "感光元件", "value": "35mm-inspired digital frame" },
-        { "label": "機身", "value": "Graphite alloy" },
-        { "label": "隨附配件", "value": "Field strap included" }
+        { "label": "感光元件", "value": "35mm 數位感光" },
+        { "label": "機身", "value": "石墨合金" },
+        { "label": "隨附配件", "value": "隨行背帶" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDIGPxswSQDggsvlqotHz4Y4ZgifILyFsSGHKoKMUbpcmZG6PoU-6qPDJ9g5BwC6V-Owcn5t5ZK3YB7N1tSopxRkl-Hunm3-dcZxy3zWn3vxjQQzj1kCEUq7GpbM63S3UzPduF53wjUDymzkHaUxSPK8cBH7j4Njj68RXwX1OQd6FREEPjmCXz0l6ALEmdFJ3Hqi0C2WzdXnnEKbw87NcRO-Jc6X2C7HT3e_Nj8sfxqEM7lROBENqGNhMsraIO-_JWgT96sSxuPe50",
       "imageAlt": "retro digital camera"
@@ -383,9 +582,9 @@
       "longDescription": "暖光、專注光與環境光三種模式切換，配合不同時段與工作狀態使用。烤漆鋼材底座穩固耐用，俐落造型適合桌面、床頭或工作室角落，是提升空間質感的實用配件。",
       "highlights": ["三段燈光模式可調", "烤漆鋼材底座", "適合桌面 / 床頭 / 工作室"],
       "specs": [
-        { "label": "燈光模式", "value": "Warm / focus / ambient" },
-        { "label": "底座", "value": "Powder-coated steel" },
-        { "label": "適用位置", "value": "Desk / bedside / studio" }
+        { "label": "燈光模式", "value": "暖光 / 專注光 / 環境光" },
+        { "label": "底座", "value": "烤漆鋼材" },
+        { "label": "適用位置", "value": "桌面 / 床頭 / 工作室" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBYdLnne67C5-Rq2m0w8QfNEvrGLw5cOknH3rhRmk23FBJN5o34lbbKidpRgMttAF0hnuaH3YuGnz9pcbj5kAFAOCrMfGtS1iLw2nvN4HQIrzmmaF5wW4krqJtQxxO2-WurqzdmfmhN-8KdOIi-kbUUzuTqq-OQQ-RUiB5ltAFtFOnv59PKsVIkpZewFszHTk6JfXi0s8rT0dSN6Z7twBGZp02mdChx8EO82DAyNNLxbjqQv8HF5jdiMFSdXUDZTbJOOt0LGLAqqIw",
       "imageAlt": "minimalist white desk lamp"
@@ -403,9 +602,9 @@
       "longDescription": "選用科涅克棕小牛皮，手工縫製細節與歐式窄楦設計帶來優雅貼腳的穿著體驗。無論商務場合或日常穿搭，都能呈現低調而有質感的風格，也是送禮的精選選項。",
       "highlights": ["科涅克棕真皮材質", "歐式窄楦設計", "商務與日常皆適用"],
       "specs": [
-        { "label": "材質", "value": "Cognac leather" },
-        { "label": "鞋楦", "value": "European slim form" },
-        { "label": "風格", "value": "Quiet luxury" }
+        { "label": "材質", "value": "科涅克棕小牛皮" },
+        { "label": "鞋楦", "value": "歐式窄楦" },
+        { "label": "風格", "value": "低調奢華" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBhufS_48nNpSbIjQVzoZjG-B1UDWY2cZCuUjdG3vZQH11mHsVq538r6v9eTqTI9sYjg54T86jbto9qflEzeleAgVvsW-syzFynINPXwUiOgvOQahj70A-rxYr-yQMh7skpiFR-KCIs7F50ppewFiIeEQxVl5ET6cdRKYHOOc8tMGJMsj0ff1s1Shgu27u9qub8oPwy-ya6WXSVxSiZLII5MT8M66M10FfTjH0OgpD3mItKeiS3BToNFQ_cgEs5T52DHRe2bXZH4jY",
       "imageAlt": "premium leather loafers"
@@ -423,9 +622,9 @@
       "longDescription": "以暖色工作室調音曲線調校，中頻飽滿、細節豐富，適合長時間桌面聆聽與旅行隨身攜帶。編織線材耐用抗纏繞，鍍金插頭確保穩定訊號傳輸，是音樂愛好者的精選配件。",
       "highlights": ["暖色工作室調音", "鍍金插頭穩定傳輸", "編織線材耐用設計"],
       "specs": [
-        { "label": "調音特性", "value": "Warm studio profile" },
-        { "label": "線材", "value": "Braided premium line" },
-        { "label": "適用場景", "value": "Desk listening / travel kit" }
+        { "label": "調音特性", "value": "暖色工作室調音" },
+        { "label": "線材", "value": "編織高級線材" },
+        { "label": "適用場景", "value": "桌面聆聽 / 旅行隨身" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDDpRf7soXzRM-LUNoDorLr92q-1hJQ6ApXcDnu_ARL-7TmCfaT1M6UVAIx-84noXBiAr1EipOsvv_zcZEkUPwtRm9GUGpaOJNAXJLXNCjSYXaNoY0JpJ1EY1WVMY986iaok-DyntTvLKaviYdwh7e22h3HeQRak7x0DKdAgxzolWS7Qqt33U0r18cJsbjj_JIc6BPo2IibevhTyAja65pByAYESyYzhcFFq8rSCNaLehHKEKvIKiTGMv3I8zqzM_kyPL35jV63p0",
       "imageAlt": "premium wired earphones"
@@ -443,9 +642,9 @@
       "longDescription": "以經典飛行員輪廓為基礎，金色細邊鏡框搭配漸層煙灰鏡片，提供遮光保護的同時維持清晰視野。輕量鏡架佩戴舒適，適合戶外活動、旅行或日常外出。",
       "highlights": ["金色飛行員鏡框", "漸層煙灰抗 UV 鏡片", "輕量舒適鏡架"],
       "specs": [
-        { "label": "鏡框", "value": "Gold aviator" },
-        { "label": "鏡片", "value": "Smoke gradient" },
-        { "label": "風格定位", "value": "Editorial accent" }
+        { "label": "鏡框", "value": "金色飛行員款" },
+        { "label": "鏡片", "value": "漸層煙灰" },
+        { "label": "適合場合", "value": "戶外 / 旅行 / 日常外出" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBZ9-XxcXtBJIqQw6gjjLWtUZNjtmwK_GO6AM-v8NiOe2ojVpaR0IXjjAjS_48eapV5O46nt2ceSbyBda6FlajDWFizz-ZuaK2iCUC8G14W1cl4W09JhYYGA_RMYflRVh8_Vu5kX6ozKqc7clDPrEgL_7LDeOjyTPc5cqOjW57-GYahGkDXxvCHjY5aRbrkp0rbbk3zpi9R1M1V7QvPKE2R60is-u38duEUTMpNyn9KSmhBImiKxMC5rYJl_zG5dGdHaGDsnLgw",
       "imageAlt": "aviator sunglasses"
@@ -463,9 +662,9 @@
       "longDescription": "以 18K 黃金打造，俐落的幾何輪廓讓項鍊成為穿搭的視覺焦點。細鍊設計貼近頸部線條，不論單獨佩戴或疊戴都自然協調，是具有長期保值性的精緻飾品。",
       "highlights": ["18K 黃金材質", "俐落幾何輪廓", "單戴或疊戴皆宜"],
       "specs": [
-        { "label": "金屬成色", "value": "18K gold" },
-        { "label": "鍊條", "value": "Fine-link profile" },
-        { "label": "佩戴場合", "value": "Signature look" }
+        { "label": "金屬成色", "value": "18K 黃金" },
+        { "label": "鍊條", "value": "細鍊設計" },
+        { "label": "佩戴場合", "value": "正式 / 日常皆宜" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDImGUmRA9bJO4Vb5A8iKXd-eDaqAo-68KXmdyZevnOJAjwXTKBBAi11deSx3U2Rjpr8FAQHez_YfDryHLmKVcNH7bDr5W4xwAP8-NGv-jM83OhDeYP1ylKcrr0qrG-dx5DGUqZ1UcokeITm4g-uI7FajG9rvZQn7Njk1m24KZMrxl26xWm7CUv8IYTnM4G2O33dLncDm0CaBGJTe--WlTxs56jkqX0YUN5Tn2XyczWEDIMWRW9ikMqdT3mD3WFKEMW5PQbMHWfMo8",
       "imageAlt": "gold pendant jewelry"
@@ -506,9 +705,9 @@
       "longDescription": "採用透氣網布鞋面，有效散熱降低長時間穿著的悶熱感。輕量回彈中底在每一步提供自然推進感，適合晨跑、通勤步行與健身房訓練，是日常運動的可靠夥伴。",
       "highlights": ["透氣網面鞋身設計", "輕量回彈中底", "適合晨跑與城市通勤"],
       "specs": [
-        { "label": "鞋面", "value": "Vent mesh knit" },
-        { "label": "適用場景", "value": "Daily city movement" },
-        { "label": "中底", "value": "Light rebound sole" }
+        { "label": "鞋面", "value": "透氣網布編織" },
+        { "label": "適用場景", "value": "日常城市移動" },
+        { "label": "中底", "value": "輕量回彈" }
       ],
       "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuClcPrR_lz-7qZv8SmXDunUbc30ahi3331jjmrsa9ZRPb16_jgggvgLCP-yrvWvpbjqHkVOiTECu9_WiUzGngMuQHYHH9SaR2Wq4WqOaQyHA2ZB5ETPvzWJ0EmtO0hFe45SIEXLGK8VdOUt9JVJkPJTc35NX5W7bYC2sR4WmC1zillLCb4dt35Zbi0AHTiLh3NXpL1OmHQb-EGW4jJfukmBPEFsLTeWZrC8w",
       "imageAlt": "red performance sneaker"
