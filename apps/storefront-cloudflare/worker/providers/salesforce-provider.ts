@@ -50,6 +50,8 @@ interface SalesforceCategoryOption {
 interface SalesforceImageRecord {
   url?: string;
   alt?: string;
+  cmsContentId?: string;
+  cmsDeliveryPath?: string;
 }
 
 interface SalesforceSpecRecord {
@@ -473,7 +475,7 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
             value: spec.value || "-"
           }))
           .filter((spec) => spec.label && spec.value) || matchedBaseProduct?.specs || [],
-      imageUrl: toMediaUrl(image?.url || matchedBaseProduct?.imageUrl || ""),
+      imageUrl: resolveSalesforceImageUrl(image, matchedBaseProduct?.imageUrl, this.env),
       imageAlt:
         image?.alt || matchedBaseProduct?.imageAlt || record.name || "storefront product image"
     };
@@ -560,6 +562,24 @@ function hasCurrencyMarker(value: string): boolean {
   return /(?:NT\$|[$¥€£]|USD|TWD|JPY|CNY|RMB|EUR|GBP)/i.test(value);
 }
 
+function resolveSalesforceImageUrl(
+  image: SalesforceImageRecord | undefined,
+  fallbackUrl: string | undefined,
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string {
+  const directUrl = image?.url?.trim();
+  if (directUrl) {
+    return toSalesforceMediaUrl(directUrl, env);
+  }
+
+  const cmsDeliveryPath = image?.cmsDeliveryPath?.trim();
+  if (cmsDeliveryPath) {
+    return toSalesforceMediaUrl(cmsDeliveryPath, env);
+  }
+
+  return fallbackUrl || "";
+}
+
 function toMediaUrl(imageUrl: string): string {
   const normalized = imageUrl.trim();
 
@@ -572,6 +592,71 @@ function toMediaUrl(imageUrl: string): string {
   }
 
   return `/api/media?src=${encodeURIComponent(normalized)}`;
+}
+
+function toSalesforceMediaUrl(
+  imageUrl: string,
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string {
+  const normalized = imageUrl.trim();
+
+  if (!normalized) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(normalized)) {
+    return buildMediaProxyUrl(normalized);
+  }
+
+  if (!normalized.startsWith("/")) {
+    return normalized;
+  }
+
+  const absoluteUrl = toAbsoluteSalesforceUrl(normalized, env);
+  return absoluteUrl ? buildMediaProxyUrl(absoluteUrl) : normalized;
+}
+
+function toAbsoluteSalesforceUrl(
+  path: string,
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string | null {
+  const origin = readSalesforceMediaOrigin(env);
+
+  if (!origin) {
+    return null;
+  }
+
+  try {
+    return new URL(path, origin).toString();
+  } catch {
+    return null;
+  }
+}
+
+function readSalesforceMediaOrigin(
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string | null {
+  const candidates = [env.SALESFORCE_MEDIA_BASE_URL, env.SALESFORCE_API_BASE_URL];
+
+  for (const candidate of candidates) {
+    const normalized = candidate?.trim();
+
+    if (!normalized) {
+      continue;
+    }
+
+    try {
+      return new URL(normalized).origin;
+    } catch {
+      continue;
+    }
+  }
+
+  return null;
+}
+
+function buildMediaProxyUrl(imageUrl: string): string {
+  return `/api/media?src=${encodeURIComponent(imageUrl)}`;
 }
 
 function inferCategoryIcon(label: string): string {

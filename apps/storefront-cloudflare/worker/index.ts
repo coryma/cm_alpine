@@ -339,10 +339,17 @@ async function proxyRemoteImage(url: URL, env: Env): Promise<Response> {
     );
   }
 
+  const headers = new Headers({
+    Accept: "image/*"
+  });
+  const salesforceToken = readSalesforceMediaToken(remoteUrl, env);
+
+  if (salesforceToken) {
+    headers.set("Authorization", `Bearer ${salesforceToken}`);
+  }
+
   const upstream = await fetch(remoteUrl.toString(), {
-    headers: {
-      Accept: "image/*"
-    }
+    headers
   });
 
   if (!upstream.ok) {
@@ -365,18 +372,18 @@ async function proxyRemoteImage(url: URL, env: Env): Promise<Response> {
     });
   }
 
-  const headers = new Headers();
-  headers.set("Content-Type", contentType);
-  headers.set("Cache-Control", `public, max-age=${readTtl(env.EDGE_CACHE_TTL_SECONDS)}`);
+  const responseHeaders = new Headers();
+  responseHeaders.set("Content-Type", contentType);
+  responseHeaders.set("Cache-Control", `public, max-age=${readTtl(env.EDGE_CACHE_TTL_SECONDS)}`);
 
   const etag = upstream.headers.get("ETag");
   if (etag) {
-    headers.set("ETag", etag);
+    responseHeaders.set("ETag", etag);
   }
 
   return new Response(upstream.body, {
     status: 200,
-    headers
+    headers: responseHeaders
   });
 }
 
@@ -392,10 +399,27 @@ function isAllowedRemoteImageUrl(url: URL): boolean {
     return true;
   }
 
+  return hostname.endsWith(".amazonaws.com") || isSalesforceHostname(hostname);
+}
+
+function readSalesforceMediaToken(url: URL, env: Env): string | null {
+  const token = env.SALESFORCE_API_TOKEN?.trim();
+
+  if (!token || !isSalesforceHostname(url.hostname)) {
+    return null;
+  }
+
+  return token;
+}
+
+function isSalesforceHostname(hostname: string): boolean {
+  const normalized = hostname.toLowerCase();
+
   return [
-    ".amazonaws.com",
     ".salesforce.com",
     ".force.com",
-    ".site.com"
-  ].some((suffix) => hostname.endsWith(suffix));
+    ".site.com",
+    ".documentforce.com",
+    ".salesforce-sites.com"
+  ].some((suffix) => normalized.endsWith(suffix));
 }

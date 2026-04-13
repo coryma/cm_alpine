@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { ReactNode } from "react";
 import type { StorefrontShellContent } from "../../shared/contracts";
 
@@ -22,29 +23,56 @@ export function StorefrontShell({
   searchTerm,
   shell
 }: StorefrontShellProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleNavigate = (href: string) => {
+    setIsMobileMenuOpen(false);
+    onNavigate(href);
+  };
+
+  const handleCategorySelect = (categoryId: string) => {
+    setIsMobileMenuOpen(false);
+    onCategorySelect(categoryId);
+  };
+
   return (
     <div className="pageShell">
-      <header className="topBar">
+      <header className={isMobileMenuOpen ? "topBar topBar_menuOpen" : "topBar"}>
         <div className="topBar__inner">
-          <div className="topBar__brand">
-            <div>
-              <p className="microLabel">{shell.brandEyebrow}</p>
-              <h1>{shell.brandName}</h1>
+          <div className="topBar__primary">
+            <button
+              aria-expanded={isMobileMenuOpen}
+              aria-label={isMobileMenuOpen ? "close navigation menu" : "open navigation menu"}
+              className="topBar__menuToggle"
+              onClick={() => setIsMobileMenuOpen((current) => !current)}
+              type="button"
+            >
+              <span className="material-symbols-outlined">
+                {isMobileMenuOpen ? "close" : "menu"}
+              </span>
+            </button>
+
+            <div className="topBar__brand">
+              <div className="topBar__brandCopy">
+                <p className="microLabel">{shell.brandEyebrow}</p>
+                <h1>{shell.brandName}</h1>
+              </div>
+
+              <nav className="topBar__nav">
+                {shell.navLinks.map((link) => (
+                  <a
+                    href={link.href}
+                    key={link.label}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handleNavigate(link.href);
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
             </div>
-            <nav className="topBar__nav">
-              {shell.navLinks.map((link) => (
-                <a
-                  href={link.href}
-                  key={link.label}
-                  onClick={(event) => {
-                    event.preventDefault();
-                    onNavigate(link.href);
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
           </div>
 
           <div className="topBar__actions">
@@ -67,11 +95,62 @@ export function StorefrontShell({
               </button>
             </form>
 
-            <button aria-label="cart" className="iconButton" type="button">
-              <span className="material-symbols-outlined">shopping_cart</span>
-            </button>
-            <button aria-label="profile" className="iconButton" type="button">
-              <span className="material-symbols-outlined">person</span>
+            <div className="topBar__iconRow">
+              <button aria-label="cart" className="iconButton" type="button">
+                <span className="material-symbols-outlined">shopping_cart</span>
+              </button>
+              <button aria-label="profile" className="iconButton" type="button">
+                <span className="material-symbols-outlined">person</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className={isMobileMenuOpen ? "mobileMenu mobileMenu_open" : "mobileMenu"}>
+          <div className="mobileMenu__panel">
+            <nav className="mobileMenu__links">
+              {shell.navLinks.map((link) => (
+                <button
+                  className="mobileMenu__link"
+                  key={link.label}
+                  onClick={() => handleNavigate(link.href)}
+                  type="button"
+                >
+                  {link.label}
+                </button>
+              ))}
+            </nav>
+
+            <div className="mobileMenu__section">
+              <p className="microLabel">{shell.categoryEyebrow}</p>
+              <div className="mobileMenu__categories">
+                {shell.sideCategories.map((category) => (
+                  <button
+                    className={
+                      category.id === activeCategoryId
+                        ? "mobileMenu__category mobileMenu__category_active"
+                        : "mobileMenu__category"
+                    }
+                    key={category.id}
+                    onClick={() => handleCategorySelect(category.id)}
+                    type="button"
+                  >
+                    <span className="material-symbols-outlined">{category.icon}</span>
+                    <span>
+                      <strong>{category.label}</strong>
+                      <small>{category.caption}</small>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button
+              className="mobileMenu__cta"
+              onClick={() => handleNavigate("/request")}
+              type="button"
+            >
+              {shell.categoryCtaLabel}
             </button>
           </div>
         </div>
@@ -92,7 +171,7 @@ export function StorefrontShell({
                   : "sideRail__item"
               }
               key={category.id}
-              onClick={() => onCategorySelect(category.id)}
+              onClick={() => handleCategorySelect(category.id)}
               type="button"
             >
               <span className="material-symbols-outlined">{category.icon}</span>
@@ -106,7 +185,7 @@ export function StorefrontShell({
 
         <button
           className="sideRail__cta"
-          onClick={() => onNavigate("/request")}
+          onClick={() => handleNavigate("/request")}
           type="button"
         >
           {shell.categoryCtaLabel}

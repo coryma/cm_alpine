@@ -1,4 +1,4 @@
-import storefrontContent from "../data/storefront-content.json";
+import storefrontContent from "../data/site-content.zh-TW.json";
 import type {
   HomeResponse,
   ProductSortBy,
