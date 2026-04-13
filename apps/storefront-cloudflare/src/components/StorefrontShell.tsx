@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import type { StorefrontShellContent } from "../../shared/contracts";
 
@@ -24,6 +24,33 @@ export function StorefrontShell({
   shell
 }: StorefrontShellProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1100) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleNavigate = (href: string) => {
     setIsMobileMenuOpen(false);
@@ -53,10 +80,16 @@ export function StorefrontShell({
             </button>
 
             <div className="topBar__brand">
-              <div className="topBar__brandCopy">
-                <p className="microLabel">{shell.brandEyebrow}</p>
-                <h1>{shell.brandName}</h1>
-              </div>
+              <button
+                className="topBar__brandLink"
+                onClick={() => handleNavigate("/")}
+                type="button"
+              >
+                <div className="topBar__brandCopy">
+                  <p className="microLabel">{shell.brandEyebrow}</p>
+                  <h1>{shell.brandName}</h1>
+                </div>
+              </button>
 
               <nav className="topBar__nav">
                 {shell.navLinks.map((link) => (
@@ -107,6 +140,12 @@ export function StorefrontShell({
         </div>
 
         <div className={isMobileMenuOpen ? "mobileMenu mobileMenu_open" : "mobileMenu"}>
+          <button
+            aria-label="close navigation menu"
+            className="mobileMenu__backdrop"
+            onClick={() => setIsMobileMenuOpen(false)}
+            type="button"
+          />
           <div className="mobileMenu__panel">
             <nav className="mobileMenu__links">
               {shell.navLinks.map((link) => (

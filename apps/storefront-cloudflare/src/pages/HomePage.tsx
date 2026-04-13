@@ -8,6 +8,10 @@ interface HomePageProps {
 }
 
 export function HomePage({ home, onNavigate, page }: HomePageProps) {
+  const heroTitleClassName = containsHanCharacters(home.heroFeature.title)
+    ? "heroFeature__title heroFeature__title_cjk"
+    : "heroFeature__title";
+
   return (
     <>
       <section className="heroGrid" id="collections">
@@ -18,8 +22,8 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
             src={home.heroFeature.imageUrl}
           />
           <div className="heroFeature__overlay">
-            <span>{home.heroFeature.label}</span>
-            <h2>{home.heroFeature.title}</h2>
+            <span className="heroFeature__eyebrow">{home.heroFeature.label}</span>
+            <h2 className={heroTitleClassName}>{home.heroFeature.title}</h2>
             <p>{home.heroFeature.body}</p>
             <a
               className="heroButton"
@@ -231,4 +235,8 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
 
 function applyTemplate(template: string, values: Record<string, string | number>) {
   return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
+}
+
+function containsHanCharacters(value: string) {
+  return /[\u3400-\u9fff]/.test(value);
 }

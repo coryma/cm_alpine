@@ -61,6 +61,7 @@ img {
 }
 
 .material-symbols-outlined {
+  line-height: 1;
   font-variation-settings:
     "FILL" 0,
     "wght" 400,
@@ -118,6 +119,8 @@ img {
   width: min(1920px, calc(100% - 2rem));
   height: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .topBar__primary {
@@ -156,12 +159,25 @@ img {
   min-width: 0;
 }
 
+.topBar__brandLink {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.topBar__brandLink:hover {
+  opacity: 0.88;
+}
+
 .topBar__brand h1 {
   margin: 0.18rem 0 0;
   font-family: "Manrope", sans-serif;
   font-size: 1.65rem;
   font-weight: 800;
-  letter-spacing: -0.07em;
+  letter-spacing: 0.0em;
   color: #0f1724;
 }
 
@@ -268,21 +284,47 @@ img {
 }
 
 .mobileMenu {
-  display: none;
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.mobileMenu__backdrop {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  background: rgba(15, 23, 36, 0.14);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
 }
 
 .mobileMenu__panel {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 0.9rem;
-  width: min(100% - 1rem, 1440px);
-  margin: 0 auto 0.25rem;
-  padding: 0.25rem 0 0.75rem;
+  width: min(420px, calc(100vw - 1rem));
+  max-height: min(calc(100vh - 112px), 42rem);
+  overflow: auto;
+  margin: 0 0 0 0.5rem;
+  padding: 0.95rem;
+  border: 1px solid rgba(197, 198, 207, 0.45);
+  border-radius: 1.35rem;
+  background: rgba(248, 249, 250, 0.96);
+  box-shadow: 0 26px 64px rgba(15, 23, 36, 0.18);
 }
 
 .mobileMenu__links,
 .mobileMenu__categories {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.65rem;
 }
 
@@ -300,6 +342,7 @@ img {
   color: #0f1724;
   font-weight: 700;
   text-align: left;
+  box-shadow: 0 8px 20px rgba(15, 23, 36, 0.04);
 }
 
 .mobileMenu__section {
@@ -346,6 +389,12 @@ img {
   border-color: var(--primary);
   color: white;
   font-weight: 700;
+}
+
+.mobileMenu_open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .sideRail {
@@ -501,19 +550,27 @@ img {
   color: white;
 }
 
-.heroFeature__overlay span {
+.heroFeature__eyebrow {
   font-size: 0.82rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
-.heroFeature__overlay h2 {
+.heroFeature__title {
   max-width: 12ch;
   margin: 1rem 0;
   font-family: "Manrope", sans-serif;
   font-size: clamp(2.7rem, 4.2vw, 4.4rem);
-  line-height: 0.96;
+  line-height: 1;
   letter-spacing: -0.07em;
+  text-wrap: balance;
+}
+
+.heroFeature__title_cjk {
+  max-width: none;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
 }
 
 .heroFeature__overlay p {
@@ -679,12 +736,12 @@ img {
   background: var(--primary-fixed);
 }
 
-.shortcutItem .material-symbols-outlined {
-  font-size: 2rem;
+.shortcutItem__iconWrap .material-symbols-outlined {
+  font-size: 1.4rem;
   color: var(--primary);
 }
 
-.shortcutItem span:last-child {
+.shortcutItem > span:last-child {
   font-size: 0.76rem;
   font-weight: 700;
   color: var(--text);
@@ -1529,10 +1586,6 @@ img {
     display: inline-flex;
   }
 
-  .mobileMenu_open {
-    display: block;
-  }
-
   .heroGrid {
     grid-template-columns: 1fr;
   }
@@ -1579,6 +1632,10 @@ img {
   .topBar__brand {
     width: 100%;
     gap: 0;
+  }
+
+  .topBar__brandLink {
+    min-width: 0;
   }
 
   .topBar__brand .microLabel {
@@ -1630,11 +1687,17 @@ img {
     padding: 1rem;
   }
 
-  .heroFeature__overlay h2,
+  .heroFeature__title,
   .sectionBar__headline h2,
   .recommendedHeader h2 {
     max-width: none;
     font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .heroFeature__title_cjk {
+    line-height: 1;
+    letter-spacing: -0.03em;
+    white-space: normal;
   }
 
   .shortcutGrid,
@@ -1651,6 +1714,19 @@ img {
 
   .recommendedHeader__meta {
     align-items: flex-start;
+  }
+
+  .mobileMenu {
+    top: calc(100% + 0.4rem);
+    left: 0;
+    right: 0;
+  }
+
+  .mobileMenu__panel {
+    width: calc(100vw - 1rem);
+    max-height: min(calc(100vh - 164px), 38rem);
+    margin: 0 auto;
+    padding: 0.85rem;
   }
 
   .pageIntro__meta {

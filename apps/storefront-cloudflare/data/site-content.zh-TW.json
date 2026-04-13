@@ -13,7 +13,7 @@
       { "label": "全部商品", "href": "/products" },
       { "label": "新品推薦", "href": "/products?category=wellness" },
       { "label": "風格配件", "href": "/products?category=style" },
-      { "label": "健康測驗", "href": "/quiz" },
+      { "label": "健康顧問", "href": "/quiz" },
       { "label": "進度看板", "href": "/quiz-monitor" },
       { "label": "需求表單", "href": "/request" }
     ],
@@ -104,8 +104,8 @@
       }
     },
     "quiz": {
-      "brand": "健康好物測驗",
-      "title": "幫你找出適合你生活節奏的健康選品組合",
+      "brand": "健康好物智能推薦",
+      "title": "幫你找出適合您生活節奏的健康選品組合",
       "introStatusLabel": "5 題快速完成，直接為您量身打造",
       "questionProgressTemplate": "第 {current} / {total} 題",
       "completedLabel": "推薦完成",
@@ -121,10 +121,6 @@
         {
           "title": "依你的習慣篩選",
           "body": "根據健康目標、作息型態和使用形式，從商品清單裡找出最相關的。"
-        },
-        {
-          "title": "直接查看商品與需求表單",
-          "body": "看完推薦後可進一步瀏覽商品，或直接留下需求。"
         }
       ],
       "resultEyebrow": "你的專屬推薦結果",
@@ -138,14 +134,14 @@
       "introFooterHint": "約 1 分鐘完成，完成後直接查看推薦商品。",
       "questionFooterHint": "依照你的選擇逐步整理更適合的推薦組合。",
       "resultFooterHint": "可繼續查看商品，或直接送出需求。",
-      "startQuizLabel": "開始測驗",
+      "startQuizLabel": "開始答題",
       "previousQuestionLabel": "上一題",
       "nextQuestionLabel": "下一題",
       "viewRecommendationLabel": "查看我的推薦",
       "submitRequestLabel": "送出這組需求",
       "browseProductsLabel": "瀏覽全部商品",
       "viewMonitorLabel": "查看進度看板",
-      "restartLabel": "重新測驗",
+      "restartLabel": "重新答題",
       "loadingEyebrow": "分析中",
       "loadingTitle": "正在找出最適合你的商品組合",
       "loadingBody": "根據你的選擇幫你配對，馬上好。",
@@ -283,7 +279,7 @@
       "loadingLabel": "正在載入問卷進度...",
       "emptyLabel": "目前還沒有收到問卷進度事件。等前台使用者完成第一個步驟後，這裡就會出現對應 icon。",
       "incompleteResultLabel": "尚未完成推薦結果",
-      "backToQuizLabel": "回到測驗頁",
+      "backToQuizLabel": "回到問卷頁",
       "anonymousLabel": "匿名",
       "completedStepFallbackLabel": "已完成",
       "optionAltFallback": "問卷選擇",

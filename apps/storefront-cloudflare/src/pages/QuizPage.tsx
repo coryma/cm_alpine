@@ -85,6 +85,7 @@ export function QuizPage({ onNavigate, page }: QuizPageProps) {
 
   const currentStep = STEP_KEYS[currentStepIndex];
   const currentQuestion = isQuestionStep(currentStep) ? getQuestion(currentStep) : null;
+  const pageClassName = currentQuestion ? "quizPage quizPage_question" : "quizPage";
   const optionCards = currentQuestion
     ? currentQuestion.options.map((option) => ({
         ...option,
@@ -186,32 +187,42 @@ export function QuizPage({ onNavigate, page }: QuizPageProps) {
   }
 
   return (
-    <section className="quizPage">
+    <section className={pageClassName}>
       <div className="quizPage__panel">
         <header className="quizPage__header">
-          <div>
-            <p className="quizPage__brand">{page.brand}</p>
-            <h2>{page.title}</h2>
-            <p className="quizPage__meta">
-              {currentQuestion
-                ? applyTemplate(page.questionProgressTemplate, {
+          {currentQuestion ? (
+            <>
+              <div className="quizPage__headline">
+                <p className="quizPage__brand">{page.brand}</p>
+                <p className="quizPage__status">{currentQuestion.eyebrow}</p>
+                <h2>{currentQuestion.title}</h2>
+                <p className="quizPage__meta">{currentQuestion.subtitle}</p>
+              </div>
+
+              <div className="quizProgressWrap">
+                <p className="quizPage__progressLabel">
+                  {applyTemplate(page.questionProgressTemplate, {
                     current: currentQuestion.index,
                     total: QUIZ_STEP_COUNT
-                  })
-                : currentStep === "result"
-                  ? page.completedLabel
-                  : page.introStatusLabel}
-            </p>
-          </div>
-
-          {currentQuestion ? (
-            <div className="quizProgress" aria-hidden="true">
-              <span
-                className="quizProgress__value"
-                style={{ width: `${(currentQuestion.index / QUIZ_STEP_COUNT) * 100}%` }}
-              />
+                  })}
+                </p>
+                <div className="quizProgress" aria-hidden="true">
+                  <span
+                    className="quizProgress__value"
+                    style={{ width: `${(currentQuestion.index / QUIZ_STEP_COUNT) * 100}%` }}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            <div>
+              <p className="quizPage__brand">{page.brand}</p>
+              <h2>{page.title}</h2>
+              <p className="quizPage__meta">
+                {currentStep === "result" ? page.completedLabel : page.introStatusLabel}
+              </p>
             </div>
-          ) : null}
+          )}
         </header>
 
         <div className="quizPage__body">
@@ -240,15 +251,10 @@ export function QuizPage({ onNavigate, page }: QuizPageProps) {
 
           {currentQuestion ? (
             <section className="quizQuestion">
-              <div className="quizQuestion__copy">
-                <p className="quizQuestion__eyebrow">{currentQuestion.eyebrow}</p>
-                <h2>{currentQuestion.title}</h2>
-                <p>{currentQuestion.subtitle}</p>
-              </div>
-
               <div className="quizChoiceGrid">
                 {optionCards.map((option) => (
                   <button
+                    aria-pressed={answers[currentQuestion.key] === option.value}
                     className={option.className}
                     key={option.value}
                     onClick={() => {
@@ -261,6 +267,12 @@ export function QuizPage({ onNavigate, page }: QuizPageProps) {
                     type="button"
                   >
                     <span className="quizChoiceCard__media">
+                      {answers[currentQuestion.key] === option.value ? (
+                        <span aria-hidden="true" className="quizChoiceCard__selectedBadge">
+                          <span className="quizChoiceCard__selectedIcon">✓</span>
+                          <span className="quizChoiceCard__selectedText">已選擇</span>
+                        </span>
+                      ) : null}
                       <img alt={option.title} src={option.artwork} />
                     </span>
                     <span className="quizChoiceCard__body">

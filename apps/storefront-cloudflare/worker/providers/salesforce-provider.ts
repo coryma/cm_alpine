@@ -108,14 +108,14 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
       this.fetchCatalog({ sortBy: "featured", limitSize: 1 })
     ]);
 
-    return {
-      shell: {
-        ...baseConfig.shell,
-        brandEyebrow: readText(publicConfig.storeTagline, baseConfig.shell.brandEyebrow),
-        brandName: readText(publicConfig.storeName, baseConfig.shell.brandName),
-        searchPlaceholder: readText(
-          publicConfig.searchPlaceholder,
-          baseConfig.shell.searchPlaceholder
+      return {
+        shell: {
+          ...baseConfig.shell,
+          brandEyebrow: readText(publicConfig.storeTagline, baseConfig.shell.brandEyebrow),
+          brandName: baseConfig.shell.brandName,
+          searchPlaceholder: readText(
+            publicConfig.searchPlaceholder,
+            baseConfig.shell.searchPlaceholder
         ),
         footerLegal: readText(publicConfig.footerCopy, baseConfig.shell.footerLegal),
         sideCategories: this.mapSideCategories(catalog.categories || [])
