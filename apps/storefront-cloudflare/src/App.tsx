@@ -5,31 +5,57 @@ import type {
   StorefrontConfigResponse,
   StorefrontProduct
 } from "../shared/contracts";
-import {
-  fetchConfig,
-  fetchHome,
-  fetchProductDetail,
-  fetchProducts
-} from "./lib/api";
-import { syncAnonymousProfile } from "./lib/salesforceDataCloud";
+import { getStorefrontConfig } from "../shared/storefront";
+import { StorefrontShell } from "./components/StorefrontShell";
+import { fetchConfig, fetchHome, fetchProductDetail, fetchProducts } from "./lib/api";
+import { trackGoogleAnalyticsPageView } from "./lib/analytics";
 import {
   applyHomeHeroPersonalization,
   readHomeHeroPersonalization,
   type HomeHeroPersonalization
 } from "./lib/homePersonalization";
-import { getStorefrontConfig } from "../shared/storefront";
-import { StorefrontShell } from "./components/StorefrontShell";
+import {
+  buildCartItemFromProduct,
+  loadCart,
+  subscribeCart,
+  upsertCartItem,
+  type CartSnapshot
+} from "./lib/cartStore";
+import {
+  loadCurrentMember,
+  refreshCurrentMember,
+  subscribeMember,
+  type MemberProfile
+} from "./lib/memberStore";
+import {
+  sendProductSelectionEvent,
+  syncAnonymousProfile,
+  syncKnownMemberProfile,
+  type ProductSelectionTrackingContext
+} from "./lib/salesforceDataCloud";
+import { AccountPage } from "./pages/AccountPage";
+import { CartPage } from "./pages/CartPage";
+import { CheckoutPage } from "./pages/CheckoutPage";
 import { HomePage } from "./pages/HomePage";
+import { LoginPage } from "./pages/LoginPage";
+import { OrderCompletePage } from "./pages/OrderCompletePage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ProductsPage } from "./pages/ProductsPage";
-import { QuizPage } from "./pages/QuizPage";
 import { QuizMonitorPage } from "./pages/QuizMonitorPage";
+import { QuizPage } from "./pages/QuizPage";
+import { RegisterPage } from "./pages/RegisterPage";
 import { RequestPage } from "./pages/RequestPage";
 
 type Route =
   | { kind: "home" }
   | { kind: "products"; category: string; q: string }
   | { kind: "product"; slug: string }
+  | { kind: "cart" }
+  | { kind: "checkout" }
+  | { kind: "order-complete"; reference: string }
+  | { kind: "register"; redirectTo: string }
+  | { kind: "login"; redirectTo: string }
+  | { kind: "account" }
   | { kind: "quiz" }
   | { kind: "quiz-monitor" }
   | { kind: "request" };
@@ -59,6 +85,39 @@ function readRoute(): Route {
     };
   }
 
+  if (pathname === "/cart") {
+    return { kind: "cart" };
+  }
+
+  if (pathname === "/checkout") {
+    return { kind: "checkout" };
+  }
+
+  if (pathname === "/order-complete") {
+    return {
+      kind: "order-complete",
+      reference: searchParams.get("reference") || ""
+    };
+  }
+
+  if (pathname === "/register") {
+    return {
+      kind: "register",
+      redirectTo: searchParams.get("redirect") || ""
+    };
+  }
+
+  if (pathname === "/login") {
+    return {
+      kind: "login",
+      redirectTo: searchParams.get("redirect") || ""
+    };
+  }
+
+  if (pathname === "/account") {
+    return { kind: "account" };
+  }
+
   if (pathname === "/request") {
     return { kind: "request" };
   }
@@ -86,6 +145,8 @@ function App() {
   );
   const [productsResponse, setProductsResponse] = useState<ProductsResponse | null>(null);
   const [productDetail, setProductDetail] = useState<StorefrontProduct | null>(null);
+  const [cart, setCart] = useState<CartSnapshot>(() => loadCart());
+  const [member, setMember] = useState<MemberProfile | null>(() => loadCurrentMember());
   const [isBootstrapping, setIsBootstrapping] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -94,6 +155,9 @@ function App() {
     const nextSearch = route.kind === "products" ? route.q : "";
     setSearchInput(nextSearch);
   }, [route]);
+
+  useEffect(() => subscribeCart(setCart), []);
+  useEffect(() => subscribeMember(setMember), []);
 
   const activeCategoryId = useMemo(() => {
     if (route.kind === "products") {
@@ -111,7 +175,10 @@ function App() {
     const nextUrl = new URL(href, window.location.origin);
     const nextPath = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
 
-    if (nextPath === `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+    if (
+      nextPath ===
+      `${window.location.pathname}${window.location.search}${window.location.hash}`
+    ) {
       if (nextUrl.hash) {
         document.querySelector(nextUrl.hash)?.scrollIntoView({ behavior: "smooth" });
       }
@@ -148,6 +215,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    trackGoogleAnalyticsPageView(`${window.location.pathname}${window.location.search}`);
+  }, [route]);
+
+  useEffect(() => {
     const handleStorage = () => {
       setHeroPersonalization(readHomeHeroPersonalization());
     };
@@ -171,21 +242,27 @@ function App() {
       preferredCategory: preferredCategory === "all" ? "" : preferredCategory,
       quizBundle: heroPersonalization?.bundleName || "",
       personaHint: heroPersonalization?.heroVariantKey || ""
-    });
+    }, member);
   }, [
     heroPersonalization?.bundleName,
     heroPersonalization?.heroVariantKey,
+    member,
     productDetail?.categoryId,
     route
   ]);
 
   useEffect(() => {
+    void syncKnownMemberProfile(member);
+  }, [member]);
+
+  useEffect(() => {
     let active = true;
 
     async function bootstrapStorefront() {
-      const [configPayload, homePayload] = await Promise.all([
+      const [configPayload, homePayload, memberPayload] = await Promise.all([
         fetchConfig(),
-        fetchHome()
+        fetchHome(),
+        refreshCurrentMember().catch(() => null)
       ]);
 
       if (!active) {
@@ -195,6 +272,7 @@ function App() {
       startTransition(() => {
         setConfig(configPayload);
         setHome(homePayload);
+        setMember(memberPayload ?? null);
         setIsBootstrapping(false);
       });
     }
@@ -330,6 +408,18 @@ function App() {
     navigate(pathname);
   });
 
+  const handleAddToCart = useEffectEvent((
+    product: StorefrontProduct,
+    trackingContext: ProductSelectionTrackingContext = {}
+  ) => {
+    upsertCartItem(buildCartItemFromProduct(product));
+    void sendProductSelectionEvent(product, {
+      productAction: "add_to_cart",
+      sourcePage: `${window.location.pathname}${window.location.search}`,
+      ...trackingContext
+    });
+  });
+
   const storefrontConfig = config || DEFAULT_CONFIG;
   const resolvedHome = useMemo(
     () => (home ? applyHomeHeroPersonalization(home, heroPersonalization) : null),
@@ -339,6 +429,8 @@ function App() {
   return (
     <StorefrontShell
       activeCategoryId={activeCategoryId}
+      cartItemCount={cart.itemCount}
+      member={member}
       onCategorySelect={handleCategorySelect}
       onNavigate={navigate}
       onSearchChange={setSearchInput}
@@ -355,6 +447,8 @@ function App() {
       {!isBootstrapping && !isLoading && route.kind === "home" && resolvedHome ? (
         <HomePage
           home={resolvedHome}
+          member={member}
+          onAddToCart={handleAddToCart}
           onNavigate={navigate}
           page={storefrontConfig.pages.home}
           personalization={heroPersonalization}
@@ -364,6 +458,7 @@ function App() {
       {!isBootstrapping && !isLoading && route.kind === "products" && productsResponse ? (
         <ProductsPage
           activeCategory={route.category}
+          onAddToCart={handleAddToCart}
           onCategoryChange={handleCategorySelect}
           onNavigate={navigate}
           page={storefrontConfig.pages.products}
@@ -373,21 +468,68 @@ function App() {
 
       {!isBootstrapping && !isLoading && route.kind === "product" ? (
         <ProductDetailPage
+          onAddToCart={handleAddToCart}
           onNavigate={navigate}
           page={storefrontConfig.pages.productDetail}
           product={productDetail}
         />
       ) : null}
 
-      {!isBootstrapping && !isLoading && route.kind === "request" ? (
-        <RequestPage
+      {!isBootstrapping && !isLoading && route.kind === "cart" ? (
+        <CartPage cart={cart} onNavigate={navigate} page={storefrontConfig.pages.cart} />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "checkout" ? (
+        <CheckoutPage
+          cart={cart}
+          member={member}
           onNavigate={navigate}
-          page={storefrontConfig.pages.request}
+          page={storefrontConfig.pages.checkout}
         />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "order-complete" ? (
+        <OrderCompletePage
+          onNavigate={navigate}
+          page={storefrontConfig.pages.orderComplete}
+          reference={route.reference}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "register" ? (
+        <RegisterPage
+          currentMember={member}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.register}
+          redirectTo={route.redirectTo}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "login" ? (
+        <LoginPage
+          currentMember={member}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.login}
+          redirectTo={route.redirectTo}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "account" ? (
+        <AccountPage
+          cartItemCount={cart.itemCount}
+          member={member}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.account}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "request" ? (
+        <RequestPage onNavigate={navigate} page={storefrontConfig.pages.request} />
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "quiz" ? (
         <QuizPage
+          onAddToCart={handleAddToCart}
           onHeroPersonalizationChange={setHeroPersonalization}
           onNavigate={navigate}
           page={storefrontConfig.pages.quiz}

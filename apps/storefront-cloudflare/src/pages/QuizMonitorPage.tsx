@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { QuizMonitorPageContent, QuizSession } from "../../shared/contracts";
 import { fetchQuizSessions } from "../lib/api";
-import { getQuizIconUrl, QUIZ_STEP_COUNT } from "../lib/healthQuiz";
+import { getQuizIconUrl, QUIZ_STEP_COUNT } from "../lib/sportsPersonalityQuiz";
 import "./QuizMonitorPage.css";
 
 interface QuizMonitorPageProps {

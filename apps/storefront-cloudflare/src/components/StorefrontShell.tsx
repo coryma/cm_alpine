@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import type { StorefrontShellContent } from "../../shared/contracts";
+import type { MemberProfile } from "../lib/memberStore";
 
 interface StorefrontShellProps {
   activeCategoryId: string;
+  cartItemCount: number;
   children: ReactNode;
+  member: MemberProfile | null;
   onCategorySelect: (categoryId: string) => void;
   onNavigate: (href: string) => void;
   onSearchChange: (value: string) => void;
@@ -15,7 +18,9 @@ interface StorefrontShellProps {
 
 export function StorefrontShell({
   activeCategoryId,
+  cartItemCount,
   children,
+  member,
   onCategorySelect,
   onNavigate,
   onSearchChange,
@@ -129,10 +134,21 @@ export function StorefrontShell({
             </form>
 
             <div className="topBar__iconRow">
-              <button aria-label="cart" className="iconButton" type="button">
+              <button
+                aria-label="cart"
+                className="iconButton iconButton_withBadge"
+                onClick={() => handleNavigate("/cart")}
+                type="button"
+              >
                 <span className="material-symbols-outlined">shopping_cart</span>
+                {cartItemCount ? <span className="iconButton__badge">{cartItemCount}</span> : null}
               </button>
-              <button aria-label="profile" className="iconButton" type="button">
+              <button
+                aria-label="profile"
+                className={member ? "iconButton iconButton_active" : "iconButton"}
+                onClick={() => handleNavigate(member ? "/account" : "/login")}
+                type="button"
+              >
                 <span className="material-symbols-outlined">person</span>
               </button>
             </div>
@@ -191,6 +207,22 @@ export function StorefrontShell({
             >
               {shell.categoryCtaLabel}
             </button>
+
+            <div className="mobileMenu__account">
+              <button
+                className="detailHero__ghostButton"
+                onClick={() => handleNavigate("/cart")}
+                type="button"
+              >
+                購物車 {cartItemCount ? `(${cartItemCount})` : ""}
+              </button>
+              <button
+                onClick={() => handleNavigate(member ? "/account" : "/register")}
+                type="button"
+              >
+                {member ? "會員中心" : "建立會員"}
+              </button>
+            </div>
           </div>
         </div>
       </header>

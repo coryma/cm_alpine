@@ -31,6 +31,16 @@ npm run deploy
 
 You do not need Salesforce credentials to preview the current site. Copy `.dev.vars.example` to `.dev.vars` only when you start wiring the Worker to real backend services.
 
+Frontend analytics variable:
+
+- `VITE_GA_MEASUREMENT_ID` (optional, for GA4 page-view tracking in the SPA)
+
+Example local run with GA4 enabled:
+
+```bash
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run dev
+```
+
 Future backend variables:
 
 - `STOREFRONT_PROVIDER`

@@ -9,27 +9,90 @@
     "footerBrand": "ALPINE 健康生活館",
     "footerLegal": "© 2026 Alpine 健康生活館。保留所有權利。",
     "navLinks": [
-      { "label": "首頁", "href": "/" },
-      { "label": "全部商品", "href": "/products" },
-      { "label": "新品推薦", "href": "/products?category=wellness" },
-      { "label": "風格配件", "href": "/products?category=style" },
-      { "label": "健康顧問", "href": "/quiz" },
-      { "label": "進度看板", "href": "/quiz-monitor" },
-      { "label": "需求表單", "href": "/request" }
+      {
+        "label": "首頁",
+        "href": "/"
+      },
+      {
+        "label": "全部商品",
+        "href": "/products"
+      },
+      {
+        "label": "新品推薦",
+        "href": "/products?category=wellness"
+      },
+      {
+        "label": "風格配件",
+        "href": "/products?category=style"
+      },
+      {
+        "label": "健康顧問",
+        "href": "/quiz"
+      },
+      {
+        "label": "進度看板",
+        "href": "/quiz-monitor"
+      },
+      {
+        "label": "需求表單",
+        "href": "/request"
+      }
     ],
     "sideCategories": [
-      { "id": "all", "label": "全部分類", "caption": "所有選品", "icon": "home" },
-      { "id": "workspace", "label": "工作與桌面", "caption": "裝置與日常工具", "icon": "devices" },
-      { "id": "wellness", "label": "健康補給", "caption": "恢復與日常保養", "icon": "self_care" },
-      { "id": "style", "label": "風格配件", "caption": "造型與生活物件", "icon": "diamond" },
-      { "id": "travel", "label": "外出隨行", "caption": "輕便好攜帶", "icon": "flight_takeoff" },
-      { "id": "gourmet", "label": "風味食飲", "caption": "早餐與餐桌靈感", "icon": "restaurant" }
+      {
+        "id": "all",
+        "label": "全部分類",
+        "caption": "所有選品",
+        "icon": "home"
+      },
+      {
+        "id": "workspace",
+        "label": "工作與桌面",
+        "caption": "裝置與日常工具",
+        "icon": "devices"
+      },
+      {
+        "id": "wellness",
+        "label": "健康補給",
+        "caption": "恢復與日常保養",
+        "icon": "self_care"
+      },
+      {
+        "id": "style",
+        "label": "風格配件",
+        "caption": "造型與生活物件",
+        "icon": "diamond"
+      },
+      {
+        "id": "travel",
+        "label": "外出隨行",
+        "caption": "輕便好攜帶",
+        "icon": "flight_takeoff"
+      },
+      {
+        "id": "gourmet",
+        "label": "風味食飲",
+        "caption": "早餐與餐桌靈感",
+        "icon": "restaurant"
+      }
     ],
     "footerLinks": [
-      { "label": "隱私政策", "href": "#" },
-      { "label": "服務條款", "href": "#" },
-      { "label": "配送資訊", "href": "#" },
-      { "label": "退換說明", "href": "#" }
+      {
+        "label": "隱私政策",
+        "href": "#"
+      },
+      {
+        "label": "服務條款",
+        "href": "#"
+      },
+      {
+        "label": "配送資訊",
+        "href": "#"
+      },
+      {
+        "label": "退換說明",
+        "href": "#"
+      }
     ]
   },
   "pages": {
@@ -38,15 +101,15 @@
       "bootstrapErrorMessage": "站點內容暫時無法載入。",
       "routeErrorMessage": "頁面資料暫時無法載入。",
       "salesforceRequestSuccessMessage": "詢問已成功送出。",
-      "productDescriptionFallback": "商品短描述尚未提供。",
-      "productLongDescriptionFallback": "商品詳細介紹尚未提供。"
+      "productDescriptionFallback": "商品描述準備中。",
+      "productLongDescriptionFallback": "商品詳細介紹準備中。"
     },
     "home": {
       "heroCtaLabel": "開始選購",
       "heroQuizCtaLabel": "您的健康顧問",
-      "personalizedEyebrow": "依你的健康顧問結果",
-      "personalizedTitleTemplate": "先看這組「{bundleName}」",
-      "personalizedBodyTemplate": "這些商品會優先貼近你剛完成的問卷結果，先從最相關的幾項開始看。",
+      "personalizedEyebrow": "精選商品",
+      "personalizedTitleTemplate": "適合你的品項",
+      "personalizedBodyTemplate": "",
       "flashSaleTitle": "限時精選",
       "flashSaleMetaLabel": "本週重點",
       "flashSaleLinkLabel": "查看全部",
@@ -73,11 +136,54 @@
     },
     "productDetail": {
       "catalogLabel": "全部商品",
+      "addToCartLabel": "加入購物車",
+      "buyNowLabel": "立即結帳",
       "requestButtonLabel": "留下需求",
       "backButtonLabel": "返回商品列表",
       "notesTitle": "商品資訊",
       "notFoundEyebrow": "找不到商品",
       "notFoundTitle": "找不到這個商品。"
+    },
+    "cart": {
+      "eyebrow": "購物車",
+      "title": "確認你的選購清單",
+      "description": "調整數量、檢查小計後，再前往結帳填寫收件與配送資訊。",
+      "emptyTitle": "購物車目前沒有商品。",
+      "emptyBody": "先回到商品列表，把想買的好物加入購物車。",
+      "summaryTitle": "訂單摘要",
+      "itemCountLabel": "商品件數",
+      "subtotalLabel": "小計",
+      "checkoutLabel": "前往結帳",
+      "continueShoppingLabel": "繼續逛商品",
+      "clearCartLabel": "清空購物車"
+    },
+    "checkout": {
+      "eyebrow": "結帳",
+      "title": "填寫收件與付款資訊",
+      "description": "確認商品與數量後，填寫收件資訊即可送出訂單。",
+      "summaryTitle": "本次訂單摘要",
+      "memberPromptTitle": "還不是會員？",
+      "memberPromptBody": "先註冊會員後，下次可直接帶入常用聯絡與收件資訊。",
+      "validationMessage": "請先完成聯絡資料與配送地址。",
+      "submitErrorMessage": "目前無法建立訂單，請稍後再試。",
+      "submitIdleLabel": "送出訂單",
+      "submitBusyLabel": "建立訂單中...",
+      "backToCartLabel": "返回購物車",
+      "loginLabel": "會員登入",
+      "registerLabel": "立即註冊",
+      "saveProfileLabel": "將本次收件資訊設為會員預設資料",
+      "fieldLabels": {
+        "fullName": "下單人姓名",
+        "email": "電子郵件",
+        "phone": "聯絡電話",
+        "recipient": "收件人姓名",
+        "addressLine1": "地址",
+        "addressLine2": "樓層 / 門牌 / 補充資訊",
+        "city": "縣市",
+        "district": "區域",
+        "postalCode": "郵遞區號",
+        "note": "訂單備註"
+      }
     },
     "request": {
       "eyebrow": "需求表單",
@@ -97,59 +203,124 @@
       "submitBusyLabel": "送出中...",
       "browseProductsLabel": "瀏覽商品",
       "defaultInterest": "商品需求",
-      "mockAnonymousName": "你的",
-      "mockSuccessMessageTemplate": "已收到 {name} 的詢價需求，後續會由專人聯繫。",
+      "anonymousName": "你的",
+      "successMessageTemplate": "已收到 {name} 的需求，我們會盡快與你聯繫。",
       "fieldLabels": {
         "fullName": "姓名",
         "email": "電子郵件",
+        "phone": "聯絡電話",
         "company": "公司名稱",
         "interest": "想找的商品",
         "message": "補充說明"
       }
     },
+    "register": {
+      "eyebrow": "會員註冊",
+      "title": "建立你的 ALPINE 會員帳戶",
+      "description": "註冊後可保留常用收件資訊，並查看訂單紀錄。",
+      "validationMessage": "請完整填寫欄位，並確認兩次密碼一致。",
+      "duplicateEmailMessage": "這個電子郵件已經註冊過，請直接登入。",
+      "submitIdleLabel": "建立會員",
+      "submitBusyLabel": "建立中...",
+      "loginLabel": "前往登入",
+      "browseProductsLabel": "先逛商品",
+      "fieldLabels": {
+        "fullName": "姓名",
+        "email": "電子郵件",
+        "phone": "聯絡電話",
+        "password": "密碼",
+        "confirmPassword": "確認密碼"
+      }
+    },
+    "login": {
+      "eyebrow": "會員登入",
+      "title": "登入你的會員帳戶",
+      "description": "登入後可直接帶入常用收件資訊，並查看訂單紀錄。",
+      "validationMessage": "請輸入電子郵件與密碼。",
+      "submitIdleLabel": "登入",
+      "submitBusyLabel": "登入中...",
+      "registerLabel": "還沒有帳戶？立即註冊",
+      "browseProductsLabel": "先逛商品",
+      "fieldLabels": {
+        "email": "電子郵件",
+        "password": "密碼"
+      }
+    },
+    "account": {
+      "eyebrow": "會員中心",
+      "title": "管理你的會員與訂單資訊",
+      "description": "管理你的會員資料與訂單紀錄。",
+      "guestTitle": "你目前尚未登入會員。",
+      "guestBody": "註冊或登入後，可保留常用收件資料並查看訂單紀錄。",
+      "profileTitle": "會員資料",
+      "orderHistoryTitle": "訂單紀錄",
+      "memberSinceLabel": "加入日期",
+      "defaultAddressTitle": "預設收件資料",
+      "emptyOrdersLabel": "目前還沒有訂單紀錄。",
+      "signOutLabel": "登出",
+      "loginLabel": "會員登入",
+      "registerLabel": "建立會員",
+      "continueShoppingLabel": "繼續逛商品",
+      "checkoutLabel": "前往結帳"
+    },
+    "orderComplete": {
+      "eyebrow": "訂單完成",
+      "title": "你的訂單已建立",
+      "description": "訂單已建立，我們會盡快處理並通知你出貨進度。",
+      "summaryTitle": "訂單摘要",
+      "orderNotFoundTitle": "找不到這筆訂單。",
+      "orderNotFoundBody": "這筆訂單可能已過期，可以回到商品頁繼續選購。",
+      "browseProductsLabel": "回到商品列表",
+      "viewAccountLabel": "查看會員中心",
+      "continueShoppingLabel": "繼續選購"
+    },
     "quiz": {
-      "brand": "健康好物智能推薦",
-      "title": "幫你找出適合您生活節奏的健康選品組合",
-      "introStatusLabel": "5 題快速完成，直接為您量身打造",
+      "brand": "Alpine Nutrition 健康取向測驗",
+      "title": "你的健康取向是什麼？",
+      "introStatusLabel": "6 題快速完成，找到最適合你的補給組合",
       "questionProgressTemplate": "第 {current} / {total} 題",
-      "completedLabel": "推薦完成",
-      "introImageAlt": "健康好物推薦主視覺",
-      "introEyebrow": "個人化健康推薦",
-      "introTitle": "只需簡單的五個問題",
-      "introBody": "告訴我們你的健康目標、生活型態和偏好形式，我們從商品清單裡幫你篩出最相關的選項。",
+      "completedLabel": "測驗完成",
+      "introImageAlt": "Alpine Nutrition 健康取向測驗主視覺",
+      "introEyebrow": "Alpine Nutrition",
+      "introTitle": "找到你的運動補給組合",
+      "introBody": "回答 6 個運動生活情境題，看看你是哪種健康取向，讓我們幫你配出最適合的補給。",
       "introPoints": [
         {
-          "title": "5 題快速完成",
-          "body": "不用長時間填答，幾個步驟就能得到結果。"
+          "title": "不用先填資料",
+          "body": "直接開始作答，有興趣再領取優惠。"
         },
         {
-          "title": "依你的習慣篩選",
-          "body": "根據健康目標、作息型態和使用形式，從商品清單裡找出最相關的。"
+          "title": "依你的習慣推薦",
+          "body": "根據訓練節奏、口味偏好和使用情境配出組合。"
+        },
+        {
+          "title": "專屬優惠碼",
+          "body": "完成後可以領取你的專屬優惠。"
         }
       ],
-      "resultEyebrow": "你的專屬推薦結果",
+      "resultEyebrow": "你的健康取向",
       "insightsAriaLabel": "你的選擇摘要",
-      "recommendationSectionEyebrow": "推薦商品",
-      "recommendationSectionTitle": "為你挑選的好物",
+      "recommendationSectionEyebrow": "推薦補給商品",
+      "recommendationSectionTitle": "依你的健康取向挑出的補給",
       "viewAllProductsLabel": "查看全部商品",
       "viewProductLabel": "查看商品",
-      "emptyTitle": "目前還沒有可直接配對的商品。",
-      "emptyBody": "你可以先瀏覽全部商品，或直接把需求送到詢價表單。",
-      "introFooterHint": "約 1 分鐘完成，完成後直接查看推薦商品。",
-      "questionFooterHint": "依照你的選擇逐步整理更適合的推薦組合。",
-      "resultFooterHint": "可繼續查看商品，或直接送出需求。",
-      "startQuizLabel": "開始答題",
+      "emptyTitle": "目前還沒有可直接配對的補給商品。",
+      "emptyBody": "你可以先瀏覽全部商品，或直接領取專屬優惠。",
+      "introFooterHint": "約 1 分鐘完成，不需要先填任何個人資料。",
+      "questionFooterHint": "",
+      "resultFooterHint": "可以直接加入購物車，或領取專屬優惠碼。",
+      "startQuizLabel": "開始測驗",
       "previousQuestionLabel": "上一題",
       "nextQuestionLabel": "下一題",
-      "viewRecommendationLabel": "查看我的推薦",
-      "submitRequestLabel": "送出這組需求",
+      "viewRecommendationLabel": "查看我的健康取向",
+      "submitRequestLabel": "領取專屬優惠",
       "browseProductsLabel": "瀏覽全部商品",
       "viewMonitorLabel": "查看進度看板",
-      "restartLabel": "重新答題",
+      "restartLabel": "重新測驗",
       "loadingEyebrow": "分析中",
-      "loadingTitle": "正在找出最適合你的商品組合",
-      "loadingBody": "根據你的選擇幫你配對，馬上好。",
-      "catalogEmptyMessage": "目前尚未讀到可推薦商品，仍可先完成問答。",
+      "loadingTitle": "正在判斷你的健康取向",
+      "loadingBody": "正在根據你的回答配出最適合的組合。",
+      "catalogEmptyMessage": "商品目前正在上架中，你可以先完成問答。",
       "catalogErrorMessage": "商品資料暫時無法載入，請稍後再試。",
       "validationSelectMessage": "請先選一個選項再繼續。",
       "validationRetryMessage": "請重新選一次。",
@@ -200,12 +371,48 @@
           "title": "你現在最想先改善哪個部分？",
           "subtitle": "選你現在最有感的需求，推薦會更準確。",
           "options": [
-            { "value": "energy", "title": "白天更有精神", "note": "想讓白天更有精神和體力", "bundleWord": "活力", "summaryLead": "先把白天的精神和體力補回來" },
-            { "value": "balance", "title": "作息更規律", "note": "想讓飲食和日常習慣更規律", "bundleWord": "均衡", "summaryLead": "先把日常飲食和習慣規律起來" },
-            { "value": "recovery", "title": "運動後恢復", "note": "運動後或久坐後想好好放鬆一下", "bundleWord": "恢復", "summaryLead": "以身體放鬆和循環恢復為主" },
-            { "value": "sleep", "title": "晚上好入睡", "note": "想讓夜晚更放鬆、更好入睡", "bundleWord": "放鬆", "summaryLead": "先讓夜晚的放鬆習慣建立起來" },
-            { "value": "light", "title": "輕鬆不費力", "note": "不想太複雜，容易持續最重要", "bundleWord": "輕鬆", "summaryLead": "用低負擔的方式，一步一步建立習慣" },
-            { "value": "care", "title": "養成照顧自己的習慣", "note": "想固定花一點時間好好關心自己", "bundleWord": "保養", "summaryLead": "讓照顧自己成為每天固定的一件事" }
+            {
+              "value": "energy",
+              "title": "白天更有精神",
+              "note": "想讓白天更有精神和體力",
+              "bundleWord": "活力",
+              "summaryLead": "先把白天的精神和體力補回來"
+            },
+            {
+              "value": "balance",
+              "title": "作息更規律",
+              "note": "想讓飲食和日常習慣更規律",
+              "bundleWord": "均衡",
+              "summaryLead": "先把日常飲食和習慣規律起來"
+            },
+            {
+              "value": "recovery",
+              "title": "運動後恢復",
+              "note": "運動後或久坐後想好好放鬆一下",
+              "bundleWord": "恢復",
+              "summaryLead": "以身體放鬆和循環恢復為主"
+            },
+            {
+              "value": "sleep",
+              "title": "晚上好入睡",
+              "note": "想讓夜晚更放鬆、更好入睡",
+              "bundleWord": "放鬆",
+              "summaryLead": "先讓夜晚的放鬆習慣建立起來"
+            },
+            {
+              "value": "light",
+              "title": "輕鬆不費力",
+              "note": "不想太複雜，容易持續最重要",
+              "bundleWord": "輕鬆",
+              "summaryLead": "用低負擔的方式，一步一步建立習慣"
+            },
+            {
+              "value": "care",
+              "title": "養成照顧自己的習慣",
+              "note": "想固定花一點時間好好關心自己",
+              "bundleWord": "保養",
+              "summaryLead": "讓照顧自己成為每天固定的一件事"
+            }
           ]
         },
         {
@@ -215,12 +422,48 @@
           "title": "你的日常比較像哪一種狀態？",
           "subtitle": "同樣想顧健康，生活型態不同，適合的方式也完全不一樣。",
           "options": [
-            { "value": "office", "title": "久坐工作族", "note": "長時間盯螢幕、步調緊、容易忘記照顧自己", "bundleWord": "上班族", "summaryLead": "要能自然融入長時間的工作行程" },
-            { "value": "commute", "title": "通勤移動族", "note": "時間很零碎，外出時也要能繼續", "bundleWord": "通勤族", "summaryLead": "要夠俐落，外出也不容易中斷" },
-            { "value": "training", "title": "規律運動族", "note": "想讓訓練、休息和補充更完整", "bundleWord": "運動族", "summaryLead": "要能支撐訓練前後和恢復狀態" },
-            { "value": "lateNight", "title": "晚睡趕工型", "note": "白天忙、晚上還在趕，一直覺得很累", "bundleWord": "夜貓族", "summaryLead": "先從晚間狀態和睡前習慣下手" },
-            { "value": "home", "title": "居家生活型", "note": "喜歡在家裡慢慢建立自己的習慣", "bundleWord": "居家族", "summaryLead": "適合從居家空間和固定習慣下手" },
-            { "value": "family", "title": "家庭照顧型", "note": "不只照顧自己，也要兼顧家人的生活", "bundleWord": "家庭", "summaryLead": "要兼顧效率、實用和容易堅持" }
+            {
+              "value": "office",
+              "title": "久坐工作族",
+              "note": "長時間盯螢幕、步調緊、容易忘記照顧自己",
+              "bundleWord": "上班族",
+              "summaryLead": "要能自然融入長時間的工作行程"
+            },
+            {
+              "value": "commute",
+              "title": "通勤移動族",
+              "note": "時間很零碎，外出時也要能繼續",
+              "bundleWord": "通勤族",
+              "summaryLead": "要夠俐落，外出也不容易中斷"
+            },
+            {
+              "value": "training",
+              "title": "規律運動族",
+              "note": "想讓訓練、休息和補充更完整",
+              "bundleWord": "運動族",
+              "summaryLead": "要能支撐訓練前後和恢復狀態"
+            },
+            {
+              "value": "lateNight",
+              "title": "晚睡趕工型",
+              "note": "白天忙、晚上還在趕，一直覺得很累",
+              "bundleWord": "夜貓族",
+              "summaryLead": "先從晚間狀態和睡前習慣下手"
+            },
+            {
+              "value": "home",
+              "title": "居家生活型",
+              "note": "喜歡在家裡慢慢建立自己的習慣",
+              "bundleWord": "居家族",
+              "summaryLead": "適合從居家空間和固定習慣下手"
+            },
+            {
+              "value": "family",
+              "title": "家庭照顧型",
+              "note": "不只照顧自己，也要兼顧家人的生活",
+              "bundleWord": "家庭",
+              "summaryLead": "要兼顧效率、實用和容易堅持"
+            }
           ]
         },
         {
@@ -230,12 +473,48 @@
           "title": "你習慣用哪種方式開始？",
           "subtitle": "讓推薦更符合你的習慣，而不只是理想化的建議。",
           "options": [
-            { "value": "grabAndGo", "title": "越快開始越好", "note": "拿了就能用，不需要特別準備", "bundleWord": "即開即用", "summaryLead": "先從最容易上手的選項開始" },
-            { "value": "visibleResults", "title": "想要感受明顯一點", "note": "效果要夠明顯，才會想一直用", "bundleWord": "有感", "summaryLead": "選感受明顯的，更容易維持動力" },
-            { "value": "homeComfort", "title": "想讓家更舒適", "note": "想從家裡的環境和氛圍開始改變", "bundleWord": "居家舒適", "summaryLead": "先讓居家空間的氛圍變成你的助力" },
-            { "value": "steadyRitual", "title": "養成固定習慣", "note": "想要每天都能自然重複的安排", "bundleWord": "固定習慣", "summaryLead": "讓照顧自己變成每天的固定節奏" },
-            { "value": "lightRoutine", "title": "輕鬆不勉強", "note": "不想太複雜，能融入生活就好", "bundleWord": "輕鬆入手", "summaryLead": "保留彈性，先求做得到" },
-            { "value": "outdoorMove", "title": "出門也要繼續", "note": "外出、運動或通勤時都要方便使用", "bundleWord": "外出攜帶", "summaryLead": "以方便攜帶、不中斷為第一優先" }
+            {
+              "value": "grabAndGo",
+              "title": "越快開始越好",
+              "note": "拿了就能用，不需要特別準備",
+              "bundleWord": "即開即用",
+              "summaryLead": "先從最容易上手的選項開始"
+            },
+            {
+              "value": "visibleResults",
+              "title": "想要感受明顯一點",
+              "note": "效果要夠明顯，才會想一直用",
+              "bundleWord": "有感",
+              "summaryLead": "選感受明顯的，更容易維持動力"
+            },
+            {
+              "value": "homeComfort",
+              "title": "想讓家更舒適",
+              "note": "想從家裡的環境和氛圍開始改變",
+              "bundleWord": "居家舒適",
+              "summaryLead": "先讓居家空間的氛圍變成你的助力"
+            },
+            {
+              "value": "steadyRitual",
+              "title": "養成固定習慣",
+              "note": "想要每天都能自然重複的安排",
+              "bundleWord": "固定習慣",
+              "summaryLead": "讓照顧自己變成每天的固定節奏"
+            },
+            {
+              "value": "lightRoutine",
+              "title": "輕鬆不勉強",
+              "note": "不想太複雜，能融入生活就好",
+              "bundleWord": "輕鬆入手",
+              "summaryLead": "保留彈性，先求做得到"
+            },
+            {
+              "value": "outdoorMove",
+              "title": "出門也要繼續",
+              "note": "外出、運動或通勤時都要方便使用",
+              "bundleWord": "外出攜帶",
+              "summaryLead": "以方便攜帶、不中斷為第一優先"
+            }
           ]
         },
         {
@@ -245,12 +524,48 @@
           "title": "你比較願意從哪種形式開始？",
           "subtitle": "先從最容易上手的開始，比一次想得太完整更有用。",
           "options": [
-            { "value": "drink", "title": "飲品 / 隨手喝水", "note": "外出或工作時都能直接使用", "bundleWord": "飲品", "summaryLead": "先從最容易入口的日常補水開始" },
-            { "value": "snack", "title": "即食 / 隨手補充", "note": "拿了就吃，不需要特別備料", "bundleWord": "即食", "summaryLead": "讓補充更俐落，不容易忘記" },
-            { "value": "kitchen", "title": "搭配日常餐食", "note": "自然融入早餐或家裡的飲食習慣", "bundleWord": "餐食", "summaryLead": "從每天都會發生的飲食習慣切入" },
-            { "value": "device", "title": "居家舒緩小物", "note": "從環境和身體感受開始調整", "bundleWord": "舒緩", "summaryLead": "先從身體舒適度和居家空間下手" },
-            { "value": "tool", "title": "隨時看得到的小工具", "note": "放桌上或包包裡，自然形成提醒", "bundleWord": "小工具", "summaryLead": "讓提醒自然出現在你眼前" },
-            { "value": "gear", "title": "運動 / 恢復裝備", "note": "讓運動前後的狀態都能照顧到", "bundleWord": "裝備", "summaryLead": "用工具讓訓練和恢復更完整" }
+            {
+              "value": "drink",
+              "title": "飲品 / 隨手喝水",
+              "note": "外出或工作時都能直接使用",
+              "bundleWord": "飲品",
+              "summaryLead": "先從最容易入口的日常補水開始"
+            },
+            {
+              "value": "snack",
+              "title": "即食 / 隨手補充",
+              "note": "拿了就吃，不需要特別備料",
+              "bundleWord": "即食",
+              "summaryLead": "讓補充更俐落，不容易忘記"
+            },
+            {
+              "value": "kitchen",
+              "title": "搭配日常餐食",
+              "note": "自然融入早餐或家裡的飲食習慣",
+              "bundleWord": "餐食",
+              "summaryLead": "從每天都會發生的飲食習慣切入"
+            },
+            {
+              "value": "device",
+              "title": "居家舒緩小物",
+              "note": "從環境和身體感受開始調整",
+              "bundleWord": "舒緩",
+              "summaryLead": "先從身體舒適度和居家空間下手"
+            },
+            {
+              "value": "tool",
+              "title": "隨時看得到的小工具",
+              "note": "放桌上或包包裡，自然形成提醒",
+              "bundleWord": "小工具",
+              "summaryLead": "讓提醒自然出現在你眼前"
+            },
+            {
+              "value": "gear",
+              "title": "運動 / 恢復裝備",
+              "note": "讓運動前後的狀態都能照顧到",
+              "bundleWord": "裝備",
+              "summaryLead": "用工具讓訓練和恢復更完整"
+            }
           ]
         },
         {
@@ -260,12 +575,48 @@
           "title": "你最希望它帶來什麼感受？",
           "subtitle": "最後一題，決定這套推薦偏向提振、穩定還是放鬆。",
           "options": [
-            { "value": "clear", "title": "清爽一點", "note": "希望整體感覺更清新、不那麼沉重", "bundleWord": "清爽", "summaryLead": "偏向輕盈清爽的日常感" },
-            { "value": "steady", "title": "穩定一點", "note": "重點是規律、能長期堅持", "bundleWord": "穩定", "summaryLead": "先把節奏穩下來，再慢慢進步" },
-            { "value": "comfort", "title": "舒服一點", "note": "想讓身體和生活空間都更舒適", "bundleWord": "舒適", "summaryLead": "先把壓力降下來，整體更舒服" },
-            { "value": "motivate", "title": "有動力一點", "note": "想要感受夠明顯，更能激勵自己繼續", "bundleWord": "有活力", "summaryLead": "用感受明顯的方式把動力帶起來" },
-            { "value": "simple", "title": "簡單一點", "note": "步驟越少越好，做得到最重要", "bundleWord": "簡單", "summaryLead": "幾乎不增加額外的負擔" },
-            { "value": "restore", "title": "修復一點", "note": "比較需要放鬆、恢復和重新調整", "bundleWord": "修復", "summaryLead": "先把身體和狀態好好修整回來" }
+            {
+              "value": "clear",
+              "title": "清爽一點",
+              "note": "希望整體感覺更清新、不那麼沉重",
+              "bundleWord": "清爽",
+              "summaryLead": "偏向輕盈清爽的日常感"
+            },
+            {
+              "value": "steady",
+              "title": "穩定一點",
+              "note": "重點是規律、能長期堅持",
+              "bundleWord": "穩定",
+              "summaryLead": "先把節奏穩下來，再慢慢進步"
+            },
+            {
+              "value": "comfort",
+              "title": "舒服一點",
+              "note": "想讓身體和生活空間都更舒適",
+              "bundleWord": "舒適",
+              "summaryLead": "先把壓力降下來，整體更舒服"
+            },
+            {
+              "value": "motivate",
+              "title": "有動力一點",
+              "note": "想要感受夠明顯，更能激勵自己繼續",
+              "bundleWord": "有活力",
+              "summaryLead": "用感受明顯的方式把動力帶起來"
+            },
+            {
+              "value": "simple",
+              "title": "簡單一點",
+              "note": "步驟越少越好，做得到最重要",
+              "bundleWord": "簡單",
+              "summaryLead": "幾乎不增加額外的負擔"
+            },
+            {
+              "value": "restore",
+              "title": "修復一點",
+              "note": "比較需要放鬆、恢復和重新調整",
+              "bundleWord": "修復",
+              "summaryLead": "先把身體和狀態好好修整回來"
+            }
           ]
         }
       ]
@@ -273,38 +624,68 @@
     "quizMonitor": {
       "eyebrow": "進度看板",
       "title": "即時問卷進度",
-      "description": "這裡會持續整理最近的作答 session 與已完成步驟，方便查看目前的填答狀況。",
+      "description": "即時顯示所有填答進度和已完成的步驟。",
       "refreshIdleLabel": "重新整理",
       "refreshBusyLabel": "同步中...",
-      "totalIconsLabel": "已累積 icon",
-      "totalSessionsLabel": "目前 session",
+      "totalIconsLabel": "已完成步驟",
+      "totalSessionsLabel": "填答人次",
       "autoRefreshValue": "每 4 秒",
       "autoRefreshLabel": "自動更新",
       "loadingLabel": "正在載入問卷進度...",
-      "emptyLabel": "目前還沒有收到問卷進度事件。等前台使用者完成第一個步驟後，這裡就會出現對應 icon。",
+      "emptyLabel": "目前還沒有填答紀錄。",
       "incompleteResultLabel": "尚未完成推薦結果",
-      "backToQuizLabel": "回到問卷頁",
+      "backToQuizLabel": "回到測驗",
       "anonymousLabel": "匿名",
       "completedStepFallbackLabel": "已完成",
-      "optionAltFallback": "問卷選擇",
-      "completedSessionLabel": "已完成完整問卷",
-      "sessionProgressTemplate": "目前完成 {count} 個步驟",
+      "optionAltFallback": "選擇項目",
+      "completedSessionLabel": "已完成",
+      "sessionProgressTemplate": "已完成 {count} 個步驟",
       "stepTitleTemplate": "第 {stepNumber} 步 · {label}",
-      "loadErrorMessage": "問卷進度暫時無法載入。"
+      "loadErrorMessage": "進度資料暫時無法載入，請稍後再試。"
     }
   },
   "homeSections": {
     "quickLinks": [
-      { "label": "今日優惠", "icon": "local_fire_department" },
-      { "label": "優惠券", "icon": "confirmation_number" },
-      { "label": "會員禮遇", "icon": "loyalty" },
-      { "label": "人氣品牌", "icon": "electric_bolt" },
-      { "label": "最新上架", "icon": "package_2" },
-      { "label": "風格實驗室", "icon": "diamond" },
-      { "label": "永續選物", "icon": "eco" },
-      { "label": "海外配送", "icon": "flight_takeoff" },
-      { "label": "智慧推薦", "icon": "auto_awesome" },
-      { "label": "更多分類", "icon": "more_horiz" }
+      {
+        "label": "今日優惠",
+        "icon": "local_fire_department"
+      },
+      {
+        "label": "優惠券",
+        "icon": "confirmation_number"
+      },
+      {
+        "label": "會員禮遇",
+        "icon": "loyalty"
+      },
+      {
+        "label": "人氣品牌",
+        "icon": "electric_bolt"
+      },
+      {
+        "label": "最新上架",
+        "icon": "package_2"
+      },
+      {
+        "label": "風格實驗室",
+        "icon": "diamond"
+      },
+      {
+        "label": "永續選物",
+        "icon": "eco"
+      },
+      {
+        "label": "海外配送",
+        "icon": "flight_takeoff"
+      },
+      {
+        "label": "智慧推薦",
+        "icon": "auto_awesome"
+      },
+      {
+        "label": "更多分類",
+        "icon": "more_horiz"
+      }
     ],
     "heroFeature": {
       "label": "本週主題",
@@ -314,54 +695,109 @@
       "alt": "以穀物、柑橘與機能飲為主題的健康生活主視覺"
     },
     "quizHeroVariants": {
-      "energy": {
-        "label": "您的健康顧問推薦結果",
-        "title": "讓您白天精神補滿",
-        "body": "你剛完成的問卷比較偏向白天提振與清爽補給，首頁先替你聚焦「{bundleName}」。",
+      "discipline": {
+        "label": "精選系列",
+        "title": "高強度訓練補給組",
+        "body": "蛋白棒、能量飲、恢復配方，一次備齊。",
         "imageUrl": "/images/home-hero-energy.svg",
-        "alt": "以日常提振與清爽補給為主題的個人化首頁主視覺"
+        "alt": "高強度訓練補給組主視覺"
+      },
+      "mindful": {
+        "label": "精選系列",
+        "title": "風味精選系列",
+        "body": "蛋白咖啡、抹茶、莓果，每天都值得期待。",
+        "imageUrl": "/images/home-hero-care.svg",
+        "alt": "風味精選系列主視覺"
+      },
+      "social": {
+        "label": "精選系列",
+        "title": "嘗鮮分享組合",
+        "body": "多口味、好拆分，自己喝或揪團都剛好。",
+        "imageUrl": "/images/home-hero-light.svg",
+        "alt": "嘗鮮分享組合主視覺"
+      },
+      "efficiency": {
+        "label": "精選系列",
+        "title": "高效補給精選",
+        "body": "成分透明、規格清楚，快速挑完不猶豫。",
+        "imageUrl": "/images/home-hero-balance.svg",
+        "alt": "高效補給精選主視覺"
+      },
+      "conscious": {
+        "label": "精選系列",
+        "title": "植物系純淨補給",
+        "body": "植物性配方、永續包裝，乾淨補給新選擇。",
+        "imageUrl": "/images/home-hero-wellness.svg",
+        "alt": "植物系純淨補給主視覺"
+      },
+      "energy": {
+        "label": "精選系列",
+        "title": "日間提振系列",
+        "body": "清爽好入口，白天隨時補一杯。",
+        "imageUrl": "/images/home-hero-energy.svg",
+        "alt": "日間提振系列主視覺"
       },
       "balance": {
-        "label": "您的健康顧問推薦結果",
-        "title": "生活規律養成規律好習慣",
-        "body": "你目前更適合從均衡、規律、好持續的選擇開始，首頁先替你聚焦「{bundleName}」。",
+        "label": "精選系列",
+        "title": "日常基礎補給",
+        "body": "一包一杯，輕鬆養成每天的習慣。",
         "imageUrl": "/images/home-hero-balance.svg",
-        "alt": "以均衡日常與穩定節奏為主題的個人化首頁主視覺"
+        "alt": "日常基礎補給主視覺"
       },
       "recovery": {
-        "label": "您的健康顧問推薦結果",
-        "title": "從勞累中恢復元氣",
-        "body": "你剛完成的問卷明顯偏向恢復與身體整理，首頁先替你聚焦「{bundleName}」。",
+        "label": "精選系列",
+        "title": "運動修復補給",
+        "body": "練後恢復、肌肉修復，該補的都在這。",
         "imageUrl": "/images/home-hero-recovery.svg",
-        "alt": "以恢復節奏與放鬆補給為主題的個人化首頁主視覺"
+        "alt": "運動修復補給主視覺"
       },
       "sleep": {
-        "label": "您的健康顧問推薦結果",
-        "title": "夜晚一夜好眠",
-        "body": "你現在更需要把夜晚節奏慢下來，首頁先替你聚焦「{bundleName}」。",
+        "label": "精選系列",
+        "title": "夜間舒緩系列",
+        "body": "助眠配方、放鬆成分，睡前來一杯。",
         "imageUrl": "/images/home-hero-sleep.svg",
-        "alt": "以夜晚放鬆與舒緩節奏為主題的個人化首頁主視覺"
+        "alt": "夜間舒緩系列主視覺"
       },
       "light": {
-        "label": "您的健康顧問推薦結果",
-        "title": "簡單生活輕鬆開始",
-        "body": "你比較適合先從低負擔、容易開始的方式切入，首頁先替你聚焦「{bundleName}」。",
+        "label": "精選系列",
+        "title": "入門輕量組合",
+        "body": "份量剛好、價格好入手，第一次也不怕踩雷。",
         "imageUrl": "/images/home-hero-light.svg",
-        "alt": "以輕鬆好執行的健康節奏為主題的個人化首頁主視覺"
+        "alt": "入門輕量組合主視覺"
       },
       "care": {
-        "label": "您的健康顧問推薦結果",
-        "title": "把自己照顧好很重要",
-        "body": "你這次的選擇更偏向溫和照顧與日常陪伴，首頁先替你聚焦「{bundleName}」。",
+        "label": "精選系列",
+        "title": "溫和日常補給",
+        "body": "低負擔配方，適合每天持續補充。",
         "imageUrl": "/images/home-hero-care.svg",
-        "alt": "以日常照顧與溫和陪伴為主題的個人化首頁主視覺"
+        "alt": "溫和日常補給主視覺"
       }
     },
     "heroSecondary": {
       "title": "晨光補給",
-      "caption": "清爽、明亮、適合健康生活的日常角落",
+      "caption": "清爽明亮，用一杯開始今天",
       "imageUrl": "/images/home-secondary-pantry.svg",
       "alt": "帶有陽光、穀物罐與柑橘的明亮健康角落"
+    },
+    "heroSecondaryByTime": {
+      "morning": {
+        "title": "晨光補給",
+        "caption": "清爽明亮，用一杯開始今天",
+        "imageUrl": "/images/home-secondary-pantry.svg",
+        "alt": "帶有陽光、穀物罐與柑橘的明亮健康角落"
+      },
+      "afternoon": {
+        "title": "午後充電",
+        "caption": "下午撐不住的時候，補一下",
+        "imageUrl": "/images/home-secondary-afternoon.svg",
+        "alt": "帶有咖啡、能量補給與暖色調的午後充電角落"
+      },
+      "evening": {
+        "title": "夜間放鬆",
+        "caption": "忙完了，讓身體慢下來",
+        "imageUrl": "/images/home-secondary-evening.svg",
+        "alt": "帶有月光、茶杯與舒緩植物的夜間放鬆角落"
+      }
     },
     "heroMembership": {
       "title": "會員精選",
@@ -415,13 +851,26 @@
       "priceLabel": "NT$420",
       "description": "低糖燕麥穀物搭配果乾與堅果，是每天早晨最穩定的補給選擇。",
       "longDescription": "使用全穀燕麥與天然果乾烘焙，不添加人工色素，適合搭配優格或牛奶，是忙碌早晨也能輕鬆補充的健康選項。每袋足夠沖泡約 10 份，方便補貨囤放。",
-      "highlights": ["無人工色素", "高纖低糖配方", "適合搭配優格或牛奶"],
-      "specs": [
-        { "label": "份量", "value": "400g / 袋" },
-        { "label": "保存期限", "value": "12 個月" },
-        { "label": "適合", "value": "早餐 / 下午點心" }
+      "highlights": [
+        "無人工色素",
+        "高纖低糖配方",
+        "適合搭配優格或牛奶"
       ],
-      "imageUrl": "/images/product-granola-sunrise.jpg",
+      "specs": [
+        {
+          "label": "份量",
+          "value": "400g / 袋"
+        },
+        {
+          "label": "保存期限",
+          "value": "12 個月"
+        },
+        {
+          "label": "適合",
+          "value": "早餐 / 下午點心"
+        }
+      ],
+      "imageUrl": "/images/product-granola-sunrise.svg",
       "imageAlt": "a bag of oat granola with dried fruits and nuts"
     },
     {
@@ -435,13 +884,26 @@
       "priceLabel": "NT$680",
       "description": "日本宇治抹茶與 L-茶胺酸配方，幫助在清醒與平靜之間找到平衡。",
       "longDescription": "每份含有天然咖啡因與 L-茶胺酸，帶來不焦慮的專注感，適合早晨或工作前飲用。可直接熱泡、冷泡或加入燕麥奶調製成抹茶拿鐵，日常使用彈性高。",
-      "highlights": ["宇治抹茶原料", "含 L-茶胺酸", "可熱泡或冷泡"],
-      "specs": [
-        { "label": "規格", "value": "30 包 / 盒" },
-        { "label": "產地", "value": "日本宇治" },
-        { "label": "適合", "value": "早晨 / 工作前" }
+      "highlights": [
+        "宇治抹茶原料",
+        "含 L-茶胺酸",
+        "可熱泡或冷泡"
       ],
-      "imageUrl": "/images/product-matcha-elixir.jpg",
+      "specs": [
+        {
+          "label": "規格",
+          "value": "30 包 / 盒"
+        },
+        {
+          "label": "產地",
+          "value": "日本宇治"
+        },
+        {
+          "label": "適合",
+          "value": "早晨 / 工作前"
+        }
+      ],
+      "imageUrl": "/images/product-matcha-elixir.svg",
       "imageAlt": "a box of matcha powder sachets with a ceramic cup"
     },
     {
@@ -458,13 +920,26 @@
       "claimedPercent": 74,
       "description": "來自深海魚類的水解膠原蛋白，易溶於水，每日一包持續補充。",
       "longDescription": "低分子水解膠原蛋白粉，無腥味、易溶，適合加入早晨飲品或常溫水飲用。每包含 5,000mg 膠原蛋白，連續使用四週即可感受皮膚彈性與關節活動度的改善。",
-      "highlights": ["深海魚膠原蛋白", "低分子易吸收", "無腥味配方"],
-      "specs": [
-        { "label": "規格", "value": "30 包 / 盒" },
-        { "label": "每份含量", "value": "5,000mg 膠原蛋白" },
-        { "label": "適合", "value": "日常保養 / 晨間補充" }
+      "highlights": [
+        "深海魚膠原蛋白",
+        "低分子易吸收",
+        "無腥味配方"
       ],
-      "imageUrl": "/images/product-collagen-boost.jpg",
+      "specs": [
+        {
+          "label": "規格",
+          "value": "30 包 / 盒"
+        },
+        {
+          "label": "每份含量",
+          "value": "5,000mg 膠原蛋白"
+        },
+        {
+          "label": "適合",
+          "value": "日常保養 / 晨間補充"
+        }
+      ],
+      "imageUrl": "/images/product-collagen-boost.svg",
       "imageAlt": "a box of marine collagen powder sachets"
     },
     {
@@ -478,13 +953,26 @@
       "priceLabel": "NT$450",
       "description": "涵蓋十二種日常所需維生素與礦物質，一顆滿足基礎需求。",
       "longDescription": "含維生素 C、D3、B 群、鎂與鋅，針對現代人飲食容易缺乏的營養素進行補充。植物膠囊、無人工染色，適合長期每日服用，也適合體質較敏感的族群。",
-      "highlights": ["12 種維生素與礦物質", "植物膠囊無染色", "適合長期每日補充"],
-      "specs": [
-        { "label": "規格", "value": "60 顆 / 瓶" },
-        { "label": "建議用量", "value": "每日 1 顆，隨餐服用" },
-        { "label": "適合", "value": "日常補充 / 體質調養" }
+      "highlights": [
+        "12 種維生素與礦物質",
+        "植物膠囊無染色",
+        "適合長期每日補充"
       ],
-      "imageUrl": "/images/product-vitamin-restore.jpg",
+      "specs": [
+        {
+          "label": "規格",
+          "value": "60 顆 / 瓶"
+        },
+        {
+          "label": "建議用量",
+          "value": "每日 1 顆，隨餐服用"
+        },
+        {
+          "label": "適合",
+          "value": "日常補充 / 體質調養"
+        }
+      ],
+      "imageUrl": "/images/product-vitamin-restore.svg",
       "imageAlt": "a bottle of daily vitamin complex capsules"
     },
     {
@@ -501,13 +989,26 @@
       "claimedPercent": 89,
       "description": "混合式主動降噪搭配 36 小時續航，專為長時間工作與專注環境設計的頭戴式耳機。",
       "longDescription": "採用混合式 ANC 技術，有效隔絕辦公室雜音與環境聲，讓你在任何場合都能保持專注。霧黑啞光機身輕盈耐用，折疊設計方便攜帶，從桌面到通勤都是理想選擇。",
-      "highlights": ["混合式主動降噪", "36 小時電池續航", "可折疊攜帶設計"],
-      "specs": [
-        { "label": "電池", "value": "36 小時" },
-        { "label": "使用情境", "value": "桌面 / 通勤 / 專注" },
-        { "label": "材質", "value": "霧黑石墨" }
+      "highlights": [
+        "混合式主動降噪",
+        "36 小時電池續航",
+        "可折疊攜帶設計"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBYZPqEdn0Vzl-_BdmQ9Q7ojDYwHOn_aLgIQgRbX1xX24wLGBRcb6BCwtS_NBi8PiG8iWlYrXjffYqMQww1XnrN_NoPfZFwihHJe09CxDGqaxH4WU7DYBLu1hlgK7Zb7SBh5QQvAnnW1lknK2Yw_Za2r5W8MA4hDMunYR_3XKOep4uoIgZhkdCSa7DsbHWr8SUOn4phrTn6RQwjS5yQFI4-61RdrT-bt5Aq4fVlA-coZixwHfSF_OTN6psbSV6MxwNYRaA6PeG-hAc",
+      "specs": [
+        {
+          "label": "電池",
+          "value": "36 小時"
+        },
+        {
+          "label": "使用情境",
+          "value": "桌面 / 通勤 / 專注"
+        },
+        {
+          "label": "材質",
+          "value": "霧黑石墨"
+        }
+      ],
+      "imageUrl": "/images/product-audio-anc.svg",
       "imageAlt": "black over ear headphones"
     },
     {
@@ -524,13 +1025,26 @@
       "claimedPercent": 22,
       "description": "淡木色紋理錶面搭配義大利小牛皮錶帶，低調精緻的日常腕錶。",
       "longDescription": "以簡潔建築感排版為設計核心，淡木色紋理錶面搭配細緻義大利小牛皮錶帶，適合日常穿搭與正式場合。防水 5 ATM，是送禮或自用都合適的精選配件。",
-      "highlights": ["淡木色紋理錶面", "義大利小牛皮錶帶", "防水 5 ATM"],
-      "specs": [
-        { "label": "錶面", "value": "淡木色紋理" },
-        { "label": "錶帶", "value": "義大利小牛皮" },
-        { "label": "防水", "value": "5 ATM" }
+      "highlights": [
+        "淡木色紋理錶面",
+        "義大利小牛皮錶帶",
+        "防水 5 ATM"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuByG7RcDUTqePcA3YcbKLrwHaFkEaeOLF0Q9Q386Rx13ze1ls6zN3kLU0JwhsQPNQrmvnzsfT1XTw3RJxuOXyDX0EG_HaycHlSKjSJJB6-ZOeGH7W3Wdb3zpaLQxzZtNt3zV3DPZx3e-HNIJ-0GBKXJSJN2kd8Y7PxZPJG8LM0g5zQ2URJLoZs8kCFKgqOydtrV11R1dGnhasy4_AC1j00sYm4FPpsWqDlKJVHBONG5EZYkYxj3DebT2bJanainzJhBDkOyVxy8-w0",
+      "specs": [
+        {
+          "label": "錶面",
+          "value": "淡木色紋理"
+        },
+        {
+          "label": "錶帶",
+          "value": "義大利小牛皮"
+        },
+        {
+          "label": "防水",
+          "value": "5 ATM"
+        }
+      ],
+      "imageUrl": "/images/product-watch-minimal.svg",
       "imageAlt": "white minimalist wristwatch"
     },
     {
@@ -547,13 +1061,26 @@
       "claimedPercent": 45,
       "description": "復古外型的輕便數位相機，隨時記錄旅途與日常的每個瞬間。",
       "longDescription": "石墨合金機身輕巧好握，35mm 膠捲感畫面風格讓每張照片都帶有溫度。隨附背帶方便隨身攜帶，無論城市散步或週末旅行都能輕鬆上手。",
-      "highlights": ["復古 35mm 數位畫風", "石墨合金輕量機身", "隨附隨行背帶"],
-      "specs": [
-        { "label": "感光元件", "value": "35mm 數位感光" },
-        { "label": "機身", "value": "石墨合金" },
-        { "label": "隨附配件", "value": "隨行背帶" }
+      "highlights": [
+        "復古 35mm 數位畫風",
+        "石墨合金輕量機身",
+        "隨附隨行背帶"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDIGPxswSQDggsvlqotHz4Y4ZgifILyFsSGHKoKMUbpcmZG6PoU-6qPDJ9g5BwC6V-Owcn5t5ZK3YB7N1tSopxRkl-Hunm3-dcZxy3zWn3vxjQQzj1kCEUq7GpbM63S3UzPduF53wjUDymzkHaUxSPK8cBH7j4Njj68RXwX1OQd6FREEPjmCXz0l6ALEmdFJ3Hqi0C2WzdXnnEKbw87NcRO-Jc6X2C7HT3e_Nj8sfxqEM7lROBENqGNhMsraIO-_JWgT96sSxuPe50",
+      "specs": [
+        {
+          "label": "感光元件",
+          "value": "35mm 數位感光"
+        },
+        {
+          "label": "機身",
+          "value": "石墨合金"
+        },
+        {
+          "label": "隨附配件",
+          "value": "隨行背帶"
+        }
+      ],
+      "imageUrl": "/images/product-camera-retro.svg",
       "imageAlt": "retro digital camera"
     },
     {
@@ -567,13 +1094,26 @@
       "priceLabel": "NT$28,900",
       "description": "11 吋霧面螢幕搭配觸控筆支援，適合手寫記錄、媒體瀏覽與行動辦公。",
       "longDescription": "抗反光霧面面板讓戶外使用更清晰，支援觸控筆手寫輸入，是學習、整理筆記與輕度創作的理想選擇。輕薄機身搭配多工切換，隨時從桌面延伸到移動辦公。",
-      "highlights": ["11 吋抗反光霧面螢幕", "支援觸控筆手寫", "適合行動辦公與學習"],
-      "specs": [
-        { "label": "螢幕", "value": "11 吋霧面抗反光" },
-        { "label": "晶片", "value": "高效行動晶片" },
-        { "label": "適用場景", "value": "筆記 / 媒體 / 行動辦公" }
+      "highlights": [
+        "11 吋抗反光霧面螢幕",
+        "支援觸控筆手寫",
+        "適合行動辦公與學習"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSZtMyN6M2Gr_Ub81oWubS5DRxrToVlKTvsI_CVH-YiRDvMQtwRTQhghLZDoqqxjip569u63b3EQVJjRqY_3VZ6wdtQASVTHNmSH06WCLU4e3KMepfaj1wCktDJKcvxRmaR1FdhHc71Kktr75v3Hnej1wid2iTJmFda5f8WDHA7pnX73o1SkljhbPLojPUhZzJpEATO-2QaloPUQGTTlQiLJa8xz3rtvrV4EUGE2EzyaUAZeGU9ZZMdaXNJggKPksds4hsfNrTcNw",
+      "specs": [
+        {
+          "label": "螢幕",
+          "value": "11 吋霧面抗反光"
+        },
+        {
+          "label": "晶片",
+          "value": "高效行動晶片"
+        },
+        {
+          "label": "適用場景",
+          "value": "筆記 / 媒體 / 行動辦公"
+        }
+      ],
+      "imageUrl": "/images/product-tablet-slate.svg",
       "imageAlt": "tablet with stylus"
     },
     {
@@ -587,13 +1127,26 @@
       "priceLabel": "NT$36,900",
       "description": "珍珠金屬機身搭配邊光 OLED 螢幕，旗艦級手感與顯示表現。",
       "longDescription": "以珍珠色澤鋁合金打造機身，手持質感細膩。邊光 OLED 螢幕色彩飽和、層次鮮明，適合內容創作、日常拍攝與多工使用，從辦公到外出維持流暢體驗。",
-      "highlights": ["珍珠色澤鋁合金機身", "邊光 OLED 螢幕", "旗艦級拍攝與多工"],
-      "specs": [
-        { "label": "機身", "value": "珍珠色澤鋁合金" },
-        { "label": "螢幕", "value": "邊光 OLED" },
-        { "label": "適用場景", "value": "工作 / 外出 / 日常拍攝" }
+      "highlights": [
+        "珍珠色澤鋁合金機身",
+        "邊光 OLED 螢幕",
+        "旗艦級拍攝與多工"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuC0kZf-tcag5s5pUlMdNygUWfedW5K6m8q__wAsd5D-6tQ03R50G1SouvJTse8k6T4fN1SEnOsBsBYEObrHnLWhIT7Igo-cOGRFHaBvqm8ASBUgUAsmaKkg8QXErfiVqr0-v_9eRFWS5x5heHe7lOIVWdDPFTX74vktz1ZNKWhV81Kiyby-7uRYgCL8PMv0Q_FjHc2M5C1ac_kvb_8Gk-SN6ua87_vIbj0V84lQOxN6WRpy_-3sxd1S5SFTXNbvg-so6K4FJqsLysmA",
+      "specs": [
+        {
+          "label": "機身",
+          "value": "珍珠色澤鋁合金"
+        },
+        {
+          "label": "螢幕",
+          "value": "邊光 OLED"
+        },
+        {
+          "label": "適用場景",
+          "value": "工作 / 外出 / 日常拍攝"
+        }
+      ],
+      "imageUrl": "/images/product-phone-nebula.svg",
       "imageAlt": "premium smartphone on pedestal"
     },
     {
@@ -607,13 +1160,26 @@
       "priceLabel": "NT$46,500",
       "description": "1.18 公斤輕薄機身搭配 14 吋抗反光螢幕，移動辦公的首選。",
       "longDescription": "霧面防眩光螢幕減少長時間使用的眼睛疲勞，輕量機身讓通勤與移動辦公更輕鬆。適合需要整合工作、內容整理與創作的使用者，兼顧便攜性與穩定效能。",
-      "highlights": ["14 吋抗反光霧面螢幕", "僅重 1.18 公斤", "適合移動辦公與創作"],
-      "specs": [
-        { "label": "螢幕", "value": "14 吋抗反光霧面" },
-        { "label": "重量", "value": "1.18 kg" },
-        { "label": "適合", "value": "移動辦公 / 內容創作" }
+      "highlights": [
+        "14 吋抗反光霧面螢幕",
+        "僅重 1.18 公斤",
+        "適合移動辦公與創作"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAiJz6ijXqNTKDo1hjk2LoKKF4pv0oTJmlJbfvsHsC223HF60ZQ45zw9pb8FWrfbQI2PYDhH0F_4H89zwvTfStdCeXaBrmI8qh2whlFa0uEGSCWRljK9FmRtGpIU8sTVJmmQGVBt0EfLSxh_62pclYBQg6TMJPN4gZaCOSe38L7Ymck-bYPkhyvQn2_9KT9fxHPMZgWZLggIkNf_GMnbCtwM0aS2Kb5klDRbb9n52EXjBxC0k3Y8QKAztMdsyErD82XhjkyuKJcajM",
+      "specs": [
+        {
+          "label": "螢幕",
+          "value": "14 吋抗反光霧面"
+        },
+        {
+          "label": "重量",
+          "value": "1.18 kg"
+        },
+        {
+          "label": "適合",
+          "value": "移動辦公 / 內容創作"
+        }
+      ],
+      "imageUrl": "/images/product-ultrabook-zenith.svg",
       "imageAlt": "silver ultrabook laptop"
     },
     {
@@ -627,13 +1193,26 @@
       "priceLabel": "NT$2,480",
       "description": "三段燈光模式可調，適合桌面工作、閱讀與空間氛圍佈置。",
       "longDescription": "暖光、專注光與環境光三種模式切換，配合不同時段與工作狀態使用。烤漆鋼材底座穩固耐用，俐落造型適合桌面、床頭或工作室角落，是提升空間質感的實用配件。",
-      "highlights": ["三段燈光模式可調", "烤漆鋼材底座", "適合桌面 / 床頭 / 工作室"],
-      "specs": [
-        { "label": "燈光模式", "value": "暖光 / 專注光 / 環境光" },
-        { "label": "底座", "value": "烤漆鋼材" },
-        { "label": "適用位置", "value": "桌面 / 床頭 / 工作室" }
+      "highlights": [
+        "三段燈光模式可調",
+        "烤漆鋼材底座",
+        "適合桌面 / 床頭 / 工作室"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBYdLnne67C5-Rq2m0w8QfNEvrGLw5cOknH3rhRmk23FBJN5o34lbbKidpRgMttAF0hnuaH3YuGnz9pcbj5kAFAOCrMfGtS1iLw2nvN4HQIrzmmaF5wW4krqJtQxxO2-WurqzdmfmhN-8KdOIi-kbUUzuTqq-OQQ-RUiB5ltAFtFOnv59PKsVIkpZewFszHTk6JfXi0s8rT0dSN6Z7twBGZp02mdChx8EO82DAyNNLxbjqQv8HF5jdiMFSdXUDZTbJOOt0LGLAqqIw",
+      "specs": [
+        {
+          "label": "燈光模式",
+          "value": "暖光 / 專注光 / 環境光"
+        },
+        {
+          "label": "底座",
+          "value": "烤漆鋼材"
+        },
+        {
+          "label": "適用位置",
+          "value": "桌面 / 床頭 / 工作室"
+        }
+      ],
+      "imageUrl": "/images/product-lamp-lume.svg",
       "imageAlt": "minimalist white desk lamp"
     },
     {
@@ -647,13 +1226,26 @@
       "priceLabel": "NT$9,400",
       "description": "科涅克棕真皮搭配歐式窄楦，靜謐奢華感的日常皮鞋。",
       "longDescription": "選用科涅克棕小牛皮，手工縫製細節與歐式窄楦設計帶來優雅貼腳的穿著體驗。無論商務場合或日常穿搭，都能呈現低調而有質感的風格，也是送禮的精選選項。",
-      "highlights": ["科涅克棕真皮材質", "歐式窄楦設計", "商務與日常皆適用"],
-      "specs": [
-        { "label": "材質", "value": "科涅克棕小牛皮" },
-        { "label": "鞋楦", "value": "歐式窄楦" },
-        { "label": "風格", "value": "低調奢華" }
+      "highlights": [
+        "科涅克棕真皮材質",
+        "歐式窄楦設計",
+        "商務與日常皆適用"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBhufS_48nNpSbIjQVzoZjG-B1UDWY2cZCuUjdG3vZQH11mHsVq538r6v9eTqTI9sYjg54T86jbto9qflEzeleAgVvsW-syzFynINPXwUiOgvOQahj70A-rxYr-yQMh7skpiFR-KCIs7F50ppewFiIeEQxVl5ET6cdRKYHOOc8tMGJMsj0ff1s1Shgu27u9qub8oPwy-ya6WXSVxSiZLII5MT8M66M10FfTjH0OgpD3mItKeiS3BToNFQ_cgEs5T52DHRe2bXZH4jY",
+      "specs": [
+        {
+          "label": "材質",
+          "value": "科涅克棕小牛皮"
+        },
+        {
+          "label": "鞋楦",
+          "value": "歐式窄楦"
+        },
+        {
+          "label": "風格",
+          "value": "低調奢華"
+        }
+      ],
+      "imageUrl": "/images/product-loafers-oxford.svg",
       "imageAlt": "premium leather loafers"
     },
     {
@@ -667,13 +1259,26 @@
       "priceLabel": "NT$13,800",
       "description": "暖色工作室調音搭配鍍金插頭，為桌面聆聽帶來收藏級音質。",
       "longDescription": "以暖色工作室調音曲線調校，中頻飽滿、細節豐富，適合長時間桌面聆聽與旅行隨身攜帶。編織線材耐用抗纏繞，鍍金插頭確保穩定訊號傳輸，是音樂愛好者的精選配件。",
-      "highlights": ["暖色工作室調音", "鍍金插頭穩定傳輸", "編織線材耐用設計"],
-      "specs": [
-        { "label": "調音特性", "value": "暖色工作室調音" },
-        { "label": "線材", "value": "編織高級線材" },
-        { "label": "適用場景", "value": "桌面聆聽 / 旅行隨身" }
+      "highlights": [
+        "暖色工作室調音",
+        "鍍金插頭穩定傳輸",
+        "編織線材耐用設計"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDDpRf7soXzRM-LUNoDorLr92q-1hJQ6ApXcDnu_ARL-7TmCfaT1M6UVAIx-84noXBiAr1EipOsvv_zcZEkUPwtRm9GUGpaOJNAXJLXNCjSYXaNoY0JpJ1EY1WVMY986iaok-DyntTvLKaviYdwh7e22h3HeQRak7x0DKdAgxzolWS7Qqt33U0r18cJsbjj_JIc6BPo2IibevhTyAja65pByAYESyYzhcFFq8rSCNaLehHKEKvIKiTGMv3I8zqzM_kyPL35jV63p0",
+      "specs": [
+        {
+          "label": "調音特性",
+          "value": "暖色工作室調音"
+        },
+        {
+          "label": "線材",
+          "value": "編織高級線材"
+        },
+        {
+          "label": "適用場景",
+          "value": "桌面聆聽 / 旅行隨身"
+        }
+      ],
+      "imageUrl": "/images/product-hifi-monitors.svg",
       "imageAlt": "premium wired earphones"
     },
     {
@@ -687,13 +1292,26 @@
       "priceLabel": "NT$5,600",
       "description": "金色飛行員鏡框搭配漸層煙灰鏡片，夏日必備的經典太陽眼鏡。",
       "longDescription": "以經典飛行員輪廓為基礎，金色細邊鏡框搭配漸層煙灰鏡片，提供遮光保護的同時維持清晰視野。輕量鏡架佩戴舒適，適合戶外活動、旅行或日常外出。",
-      "highlights": ["金色飛行員鏡框", "漸層煙灰抗 UV 鏡片", "輕量舒適鏡架"],
-      "specs": [
-        { "label": "鏡框", "value": "金色飛行員款" },
-        { "label": "鏡片", "value": "漸層煙灰" },
-        { "label": "適合場合", "value": "戶外 / 旅行 / 日常外出" }
+      "highlights": [
+        "金色飛行員鏡框",
+        "漸層煙灰抗 UV 鏡片",
+        "輕量舒適鏡架"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBZ9-XxcXtBJIqQw6gjjLWtUZNjtmwK_GO6AM-v8NiOe2ojVpaR0IXjjAjS_48eapV5O46nt2ceSbyBda6FlajDWFizz-ZuaK2iCUC8G14W1cl4W09JhYYGA_RMYflRVh8_Vu5kX6ozKqc7clDPrEgL_7LDeOjyTPc5cqOjW57-GYahGkDXxvCHjY5aRbrkp0rbbk3zpi9R1M1V7QvPKE2R60is-u38duEUTMpNyn9KSmhBImiKxMC5rYJl_zG5dGdHaGDsnLgw",
+      "specs": [
+        {
+          "label": "鏡框",
+          "value": "金色飛行員款"
+        },
+        {
+          "label": "鏡片",
+          "value": "漸層煙灰"
+        },
+        {
+          "label": "適合場合",
+          "value": "戶外 / 旅行 / 日常外出"
+        }
+      ],
+      "imageUrl": "/images/product-aviators-navigator.svg",
       "imageAlt": "aviator sunglasses"
     },
     {
@@ -707,13 +1325,26 @@
       "priceLabel": "NT$39,800",
       "description": "18K 金材質搭配細鍊輪廓，細膩的金屬光澤適合日常與正式場合。",
       "longDescription": "以 18K 黃金打造，俐落的幾何輪廓讓項鍊成為穿搭的視覺焦點。細鍊設計貼近頸部線條，不論單獨佩戴或疊戴都自然協調，是具有長期保值性的精緻飾品。",
-      "highlights": ["18K 黃金材質", "俐落幾何輪廓", "單戴或疊戴皆宜"],
-      "specs": [
-        { "label": "金屬成色", "value": "18K 黃金" },
-        { "label": "鍊條", "value": "細鍊設計" },
-        { "label": "佩戴場合", "value": "正式 / 日常皆宜" }
+      "highlights": [
+        "18K 黃金材質",
+        "俐落幾何輪廓",
+        "單戴或疊戴皆宜"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuDImGUmRA9bJO4Vb5A8iKXd-eDaqAo-68KXmdyZevnOJAjwXTKBBAi11deSx3U2Rjpr8FAQHez_YfDryHLmKVcNH7bDr5W4xwAP8-NGv-jM83OhDeYP1ylKcrr0qrG-dx5DGUqZ1UcokeITm4g-uI7FajG9rvZQn7Njk1m24KZMrxl26xWm7CUv8IYTnM4G2O33dLncDm0CaBGJTe--WlTxs56jkqX0YUN5Tn2XyczWEDIMWRW9ikMqdT3mD3WFKEMW5PQbMHWfMo8",
+      "specs": [
+        {
+          "label": "金屬成色",
+          "value": "18K 黃金"
+        },
+        {
+          "label": "鍊條",
+          "value": "細鍊設計"
+        },
+        {
+          "label": "佩戴場合",
+          "value": "正式 / 日常皆宜"
+        }
+      ],
+      "imageUrl": "/images/product-pendant-ethereal.svg",
       "imageAlt": "gold pendant jewelry"
     },
     {
@@ -727,13 +1358,26 @@
       "priceLabel": "NT$66,900",
       "description": "專為長時間工作設計的桌上型工作站，兼顧高效能輸出與桌面美學。",
       "longDescription": "採用低噪散熱設計，長時間運作保持安靜穩定，適合需要持續高效能輸出的工作情境。精簡俐落的外型融入桌面環境，不佔視覺空間，是注重工作氛圍使用者的理想選擇。",
-      "highlights": ["低噪高效能工作站", "長時間穩定運作", "融入桌面的精簡外型"],
-      "specs": [
-        { "label": "適用場景", "value": "主力桌面辦公" },
-        { "label": "散熱設計", "value": "低噪靜音散熱" },
-        { "label": "機型", "value": "高階桌上型工作站" }
+      "highlights": [
+        "低噪高效能工作站",
+        "長時間穩定運作",
+        "融入桌面的精簡外型"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCp-NT4zbGpER1kVtzpy_KF3ei40qIyXf-mZ07HRT3Kp29DOik5fmiTqodbczXodYmo35POHyACi1Pb0alA8-Vegf5C7UUpRxPBeyh0yy8IP7GZ3TJ8hrNZNxQbzyc3y20qvraQ9IWAaXHWRS5_vbKlWi5ZKVWW2bhUZL1ALs9XmcUd6rUn88oH4EUFQSjU6Agm6tryOnrOEGRvl34Jlm5auNy6EfDfT69zxTuUCcCyjrhrXm3ANIJxCwo-VFsEYWByyU6x5Al32Dw",
+      "specs": [
+        {
+          "label": "適用場景",
+          "value": "主力桌面辦公"
+        },
+        {
+          "label": "散熱設計",
+          "value": "低噪靜音散熱"
+        },
+        {
+          "label": "機型",
+          "value": "高階桌上型工作站"
+        }
+      ],
+      "imageUrl": "/images/product-workstation-flux.svg",
       "imageAlt": "modern laptop on clean desk"
     },
     {
@@ -750,13 +1394,26 @@
       "claimedPercent": 67,
       "description": "透氣網面鞋身搭配輕彈中底，城市移動與日常運動的首選跑鞋。",
       "longDescription": "採用透氣網布鞋面，有效散熱降低長時間穿著的悶熱感。輕量回彈中底在每一步提供自然推進感，適合晨跑、通勤步行與健身房訓練，是日常運動的可靠夥伴。",
-      "highlights": ["透氣網面鞋身設計", "輕量回彈中底", "適合晨跑與城市通勤"],
-      "specs": [
-        { "label": "鞋面", "value": "透氣網布編織" },
-        { "label": "適用場景", "value": "日常城市移動" },
-        { "label": "中底", "value": "輕量回彈" }
+      "highlights": [
+        "透氣網面鞋身設計",
+        "輕量回彈中底",
+        "適合晨跑與城市通勤"
       ],
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuClcPrR_lz-7qZv8SmXDunUbc30ahi3331jjmrsa9ZRPb16_jgggvgLCP-yrvWvpbjqHkVOiTECu9_WiUzGngMuQHYHH9SaR2Wq4WqOaQyHA2ZB5ETPvzWJ0EmtO0hFe45SIEXLGK8VdOUt9JVJkPJTc35NX5W7bYC2sR4WmC1zillLCb4dt35Zbi0AHTiLh3NXpL1OmHQb-EGW4jJfukmBPEFsLTeWZrC8w",
+      "specs": [
+        {
+          "label": "鞋面",
+          "value": "透氣網布編織"
+        },
+        {
+          "label": "適用場景",
+          "value": "日常城市移動"
+        },
+        {
+          "label": "中底",
+          "value": "輕量回彈"
+        }
+      ],
+      "imageUrl": "/images/product-sneaker-kinetic.svg",
       "imageAlt": "red performance sneaker"
     }
   ]

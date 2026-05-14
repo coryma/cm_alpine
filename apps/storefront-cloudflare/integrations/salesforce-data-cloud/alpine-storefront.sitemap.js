@@ -5,7 +5,8 @@
     return;
   }
 
-  const EVENT_NAME = "alpineStorefrontAction";
+  const EVENT_NAME =
+    window.ALPINE_STOREFRONT_CONFIG?.dataCloud?.eventName || "alpineStorefrontAction";
   const INIT_FLAG = "__alpineStorefrontDataCloudSitemapInstalled__";
 
   if (window[INIT_FLAG]) {
@@ -97,6 +98,7 @@
           productSlug: getProductSlug()
         })
       ),
+      buildPageViewConfig("cart", "cart", () => getPathname() === "/cart"),
       buildPageViewConfig("request", "request", () => getPathname() === "/request"),
       buildPageViewConfig("quiz", "quiz", () => getPathname() === "/quiz"),
       buildPageViewConfig(
@@ -146,6 +148,29 @@
     window.addEventListener("popstate", reinitIfUrlChanged);
   }
 
+  function installCustomActionListener() {
+    if (window.__alpineStorefrontDataCloudActionHookInstalled__) {
+      return;
+    }
+
+    window.__alpineStorefrontDataCloudActionHookInstalled__ = true;
+
+    window.addEventListener("alpine-storefront:data-cloud-action", function (event) {
+      const detail = event.detail || {};
+
+      SDK.sendEvent({
+        interaction: {
+          name: EVENT_NAME,
+          category: "Engagement",
+          pagePath: getPathname(),
+          sourcePage: getPathname(),
+          ...detail
+        }
+      });
+    });
+  }
+
   installSpaReinit();
+  installCustomActionListener();
   SDK.initSitemap(sitemapConfig);
 })();

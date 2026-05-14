@@ -24,7 +24,22 @@
       "head_sampling_rate": 1
     }
   },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "ACCOUNT_STORE",
+        "class_name": "StorefrontAccountStore"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["StorefrontAccountStore"]
+    }
+  ],
   "vars": {
+    "ADMIN_MEMBER_EMAILS": "coryma@gmail.com",
     "STOREFRONT_PROVIDER": "salesforce",
     "EDGE_CACHE_TTL_SECONDS": "300",
     "SALESFORCE_API_VERSION": "v66.0",

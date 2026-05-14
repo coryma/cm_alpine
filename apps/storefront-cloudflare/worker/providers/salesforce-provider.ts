@@ -1,9 +1,17 @@
 import type {
+  CheckoutPayload,
+  CheckoutResponse,
   HomeResponse,
   ProductSortBy,
   ProductsResponse,
+  QuizIdentityBridgeMonitorPayload,
+  QuizIdentityBridgeMonitorResponse,
+  QuizRecommendationCodeClickPayload,
+  QuizRecommendationCodeClickResponse,
   QuizProgressPayload,
   QuizProgressResponse,
+  QuizSharePayload,
+  QuizShareResponse,
   QuizSession,
   RequestPayload,
   RequestResponse,
@@ -12,11 +20,16 @@ import type {
   StorefrontProduct
 } from "../../shared/contracts";
 import {
+  createMockCheckoutResponse,
   getStorefrontConfig,
   getStorefrontContentDocument
 } from "../../shared/storefront";
 import type { Env } from "../env";
 import type { ProductListQuery, StorefrontProvider } from "./contracts";
+import {
+  resetSalesforceTokenCache,
+  resolveSalesforceAccessToken
+} from "./salesforce-auth";
 
 const STOREFRONT_API_PREFIX = "/services/apexrest/alpine-storefront/v1";
 
@@ -241,6 +254,10 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     return this.mapProduct(payload);
   }
 
+  async submitCheckout(payload: CheckoutPayload): Promise<CheckoutResponse> {
+    return createMockCheckoutResponse(payload);
+  }
+
   async submitRequest(payload: RequestPayload): Promise<RequestResponse> {
     const response = await this.fetchSalesforce(`${STOREFRONT_API_PREFIX}/request`, {
       method: "POST",
@@ -285,6 +302,46 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     }
 
     return (await response.json()) as QuizProgressResponse;
+  }
+
+  async sendQuizShare(payload: QuizSharePayload): Promise<QuizShareResponse> {
+    return this.fetchSalesforceJson<QuizShareResponse>("/quiz/share", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  }
+
+  async recordIdentityBridgeMonitor(
+    payload: QuizIdentityBridgeMonitorPayload
+  ): Promise<QuizIdentityBridgeMonitorResponse> {
+    return this.fetchSalesforceJson<QuizIdentityBridgeMonitorResponse>(
+      "/quiz/identity-bridge-monitor",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+  }
+
+  async markRecommendationCodeClick(
+    payload: QuizRecommendationCodeClickPayload
+  ): Promise<QuizRecommendationCodeClickResponse> {
+    return this.fetchSalesforceJson<QuizRecommendationCodeClickResponse>(
+      "/quiz/recommendation-code-click",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
   }
 
   async getQuizSessions(limitSize = 50): Promise<QuizSession[]> {
@@ -349,14 +406,27 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     init: RequestInit = {}
   ): Promise<Response> {
     const baseUrl = this.env.SALESFORCE_API_BASE_URL?.trim();
-    const token = this.env.SALESFORCE_API_TOKEN?.trim();
 
-    if (!baseUrl || !token) {
-      throw new Error(
-        "Salesforce provider requires SALESFORCE_API_BASE_URL and SALESFORCE_API_TOKEN."
-      );
+    if (!baseUrl) {
+      throw new Error("Salesforce provider requires SALESFORCE_API_BASE_URL.");
     }
 
+    const response = await this.executeSalesforceRequest(path, init, baseUrl);
+
+    if (response.status === 401 && this.hasOAuthCredentials()) {
+      resetSalesforceTokenCache();
+      return this.executeSalesforceRequest(path, init, baseUrl);
+    }
+
+    return response;
+  }
+
+  private async executeSalesforceRequest(
+    path: string,
+    init: RequestInit,
+    baseUrl: string
+  ): Promise<Response> {
+    const token = await resolveSalesforceAccessToken(this.env);
     const headers = new Headers(init.headers);
     headers.set("Accept", "application/json");
     headers.set("Authorization", `Bearer ${token}`);
@@ -365,6 +435,13 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
       ...init,
       headers
     });
+  }
+
+  private hasOAuthCredentials(): boolean {
+    return Boolean(
+      this.env.SALESFORCE_CLIENT_ID?.trim() &&
+        this.env.SALESFORCE_CLIENT_SECRET?.trim()
+    );
   }
 
   private async readErrorMessage(response: Response): Promise<string> {

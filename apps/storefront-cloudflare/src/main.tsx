@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import { initGoogleAnalytics } from "./lib/analytics";
 import { initSalesforceDataCloud } from "./lib/salesforceDataCloud";
 import "./styles.css";
 
@@ -11,6 +12,7 @@ if (!rootElement) {
 }
 
 void initSalesforceDataCloud();
+initGoogleAnalytics();
 
 createRoot(rootElement).render(
   <StrictMode>

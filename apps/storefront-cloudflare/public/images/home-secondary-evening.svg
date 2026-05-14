@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" role="img" aria-labelledby="title desc">
+  <title id="title">夜間放鬆角落</title>
+  <desc id="desc">帶有月光、茶杯與舒緩植物的夜間放鬆角落插圖。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2a3a50"/>
+      <stop offset="100%" stop-color="#1e2d40"/>
+    </linearGradient>
+    <linearGradient id="moonGlow" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e8e0d0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#e8e0d0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="shelf" x1="0" x2="1">
+      <stop offset="0%" stop-color="#5a4a3a"/>
+      <stop offset="100%" stop-color="#4a3a2c"/>
+    </linearGradient>
+    <linearGradient id="cup" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e8e0d6" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#d0c4b4" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7e9ab8"/>
+      <stop offset="100%" stop-color="#5c7e9a"/>
+    </linearGradient>
+    <linearGradient id="plant" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#4a7060"/>
+      <stop offset="100%" stop-color="#365848"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0a1420" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="800" fill="url(#bg)"/>
+  <rect width="1000" height="800" fill="url(#moonGlow)"/>
+
+  <!-- Moon -->
+  <circle cx="760" cy="140" r="90" fill="#f0e8d4" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="790" cy="120" r="70" fill="url(#bg)"/>
+
+  <!-- Stars -->
+  <circle cx="200" cy="100" r="3" fill="#e8e0d0" opacity="0.7"/>
+  <circle cx="400" cy="60" r="2" fill="#e8e0d0" opacity="0.5"/>
+  <circle cx="560" cy="120" r="2.5" fill="#e8e0d0" opacity="0.6"/>
+  <circle cx="300" cy="180" r="2" fill="#e8e0d0" opacity="0.4"/>
+  <circle cx="650" cy="80" r="2" fill="#e8e0d0" opacity="0.5"/>
+  <circle cx="880" cy="240" r="2.5" fill="#e8e0d0" opacity="0.4"/>
+  <circle cx="120" cy="220" r="1.5" fill="#e8e0d0" opacity="0.3"/>
+
+  <!-- Shelves -->
+  <rect x="112" y="448" width="776" height="22" rx="11" fill="url(#shelf)"/>
+  <rect x="156" y="610" width="698" height="24" rx="12" fill="#3e3028"/>
+
+  <!-- Tea cup -->
+  <g filter="url(#shadow)">
+    <ellipse cx="380" cy="430" rx="90" ry="20" fill="#1a2030" opacity="0.3"/>
+    <rect x="300" y="300" width="160" height="148" rx="30" fill="url(#cup)"/>
+    <ellipse cx="380" cy="300" rx="80" ry="20" fill="#ddd4c8"/>
+    <ellipse cx="380" cy="300" rx="64" ry="14" fill="#8aaa7a"/>
+    <ellipse cx="380" cy="296" rx="52" ry="10" fill="#9aba8a"/>
+    <path d="M460 336c36 4 52 24 48 56-4 30-26 46-50 42" fill="none" stroke="#a09484" stroke-width="10" stroke-linecap="round"/>
+    <!-- Steam -->
+    <path d="M354 278c-2-24 10-42 6-60" fill="none" stroke="#8aa0b8" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+    <path d="M380 274c0-22 10-40 4-62" fill="none" stroke="#8aa0b8" stroke-width="5" stroke-linecap="round" opacity="0.25"/>
+    <path d="M406 278c2-26-8-44-2-58" fill="none" stroke="#8aa0b8" stroke-width="5" stroke-linecap="round" opacity="0.2"/>
+  </g>
+
+  <!-- Sleep supplement bottle -->
+  <g filter="url(#shadow)">
+    <rect x="600" y="290" width="110" height="158" rx="24" fill="url(#accent)"/>
+    <rect x="620" y="260" width="70" height="38" rx="14" fill="#4a6a84"/>
+    <rect x="618" y="360" width="74" height="56" rx="12" fill="#e8e0d4" opacity="0.85"/>
+    <circle cx="655" cy="388" r="16" fill="#f0e8d4" opacity="0.7"/>
+  </g>
+
+  <!-- Candle -->
+  <g filter="url(#shadow)">
+    <rect x="180" y="360" width="70" height="88" rx="14" fill="#e8dcd0"/>
+    <rect x="188" y="368" width="54" height="72" rx="10" fill="#f0e8dc"/>
+    <rect x="210" y="340" width="10" height="24" rx="3" fill="#c0b4a4"/>
+    <ellipse cx="215" cy="336" rx="8" ry="12" fill="#f0c860" opacity="0.9" filter="url(#glow)"/>
+    <ellipse cx="215" cy="340" rx="4" ry="6" fill="#fff4d0"/>
+  </g>
+
+  <!-- Plant pot -->
+  <g filter="url(#shadow)">
+    <rect x="730" y="500" width="120" height="110" rx="20" fill="#5a4a3a"/>
+    <rect x="738" y="492" width="104" height="20" rx="8" fill="#6a5a48"/>
+    <g fill="url(#plant)">
+      <path d="M790 492c-10-50-40-80-80-94 10 48 36 82 72 98 6 2 10-1 8-4z"/>
+      <path d="M790 492c10-46 44-74 86-82-6 46-34 78-78 88-6 2-10-2-8-6z"/>
+      <path d="M790 492c-30-38-68-54-110-48 24 38 60 56 104 54 6 0 8-4 6-6z"/>
+    </g>
+  </g>
+
+  <!-- Warm blanket/cloth element -->
+  <g filter="url(#shadow)">
+    <ellipse cx="480" cy="590" rx="130" ry="40" fill="#1a2030" opacity="0.2"/>
+    <path d="M370 610c0-40 20-80 60-90 30-8 60 4 80 0 30-6 50-20 80-10 40 14 50 60 40 100-60 4-140 4-220 0-20-2-40 0-40 0z" fill="#6e5a48" opacity="0.7"/>
+    <path d="M380 608c10-30 26-60 56-68 24-6 48 4 68 0 26-6 42-16 68-8 34 12 42 50 34 84-50 2-120 2-190 0-16-2-36 0-36-8z" fill="#8a7260"/>
+  </g>
+</svg>

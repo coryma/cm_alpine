@@ -36,6 +36,222 @@
           "isDataRequired": false
         },
         {
+          "masterLabel": "sourcePage",
+          "developerName": "sourcePage",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "startedAt",
+          "developerName": "startedAt",
+          "dataType": "DateTime",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "interest",
+          "developerName": "interest",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "sessionKey",
+          "developerName": "sessionKey",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "displayLabel",
+          "developerName": "displayLabel",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "quizVersion",
+          "developerName": "quizVersion",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "stepNumber",
+          "developerName": "stepNumber",
+          "dataType": "Number",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "completedSteps",
+          "developerName": "completedSteps",
+          "dataType": "Number",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "questionKey",
+          "developerName": "questionKey",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "questionLabel",
+          "developerName": "questionLabel",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "optionKey",
+          "developerName": "optionKey",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "optionLabel",
+          "developerName": "optionLabel",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "answerHistoryJson",
+          "developerName": "answerHistoryJson",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "weightJson",
+          "developerName": "weightJson",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "resultTypeKey",
+          "developerName": "resultTypeKey",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "resultTypeLabel",
+          "developerName": "resultTypeLabel",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "bundleName",
+          "developerName": "bundleName",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "scoreJson",
+          "developerName": "scoreJson",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "completionMs",
+          "developerName": "completionMs",
+          "dataType": "Number",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "selectedProductId",
+          "developerName": "selectedProductId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "selectedProductName",
+          "developerName": "selectedProductName",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "productId",
+          "developerName": "productId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "productName",
+          "developerName": "productName",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "productAction",
+          "developerName": "productAction",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "answerSource",
+          "developerName": "answerSource",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "categoryLabel",
+          "developerName": "categoryLabel",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "priceLabel",
+          "developerName": "priceLabel",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "emailAddress",
+          "developerName": "emailAddress",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "emailDomain",
+          "developerName": "emailDomain",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "firstName",
+          "developerName": "firstName",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "lastName",
+          "developerName": "lastName",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "phoneNumber",
+          "developerName": "phoneNumber",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "messagePresent",
+          "developerName": "messagePresent",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "gaClientId",
+          "developerName": "gaClientId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "gaClientIdSource",
+          "developerName": "gaClientIdSource",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
+          "masterLabel": "gaMeasurementId",
+          "developerName": "gaMeasurementId",
+          "dataType": "Text",
+          "isDataRequired": false
+        },
+        {
           "masterLabel": "eventId",
           "developerName": "eventId",
           "dataType": "Text",
@@ -109,6 +325,12 @@
           "developerName": "eventType",
           "dataType": "Text",
           "isDataRequired": true
+        },
+        {
+          "masterLabel": "email",
+          "developerName": "email",
+          "dataType": "Text",
+          "isDataRequired": false
         },
         {
           "masterLabel": "firstName",
@@ -187,6 +409,118 @@
           "developerName": "customField3",
           "dataType": "Text",
           "isDataRequired": false
+        }
+      ]
+    },
+    {
+      "developerName": "contactPointEmail",
+      "masterLabel": "Contact Point Email",
+      "category": "Profile",
+      "externalDataTranFields": [
+        {
+          "masterLabel": "category",
+          "developerName": "category",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "dateTime",
+          "developerName": "dateTime",
+          "dataType": "DateTime",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "deviceId",
+          "developerName": "deviceId",
+          "dataType": "Text",
+          "isDataRequired": true,
+          "primaryIndexOrder": 1
+        },
+        {
+          "masterLabel": "eventId",
+          "developerName": "eventId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "eventType",
+          "developerName": "eventType",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "sessionId",
+          "developerName": "sessionId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "email",
+          "developerName": "email",
+          "dataType": "Text",
+          "isDataRequired": true
+        }
+      ]
+    },
+    {
+      "developerName": "partyIdentification",
+      "masterLabel": "Party Identification",
+      "category": "Profile",
+      "externalDataTranFields": [
+        {
+          "masterLabel": "category",
+          "developerName": "category",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "dateTime",
+          "developerName": "dateTime",
+          "dataType": "DateTime",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "deviceId",
+          "developerName": "deviceId",
+          "dataType": "Text",
+          "isDataRequired": true,
+          "primaryIndexOrder": 1
+        },
+        {
+          "masterLabel": "eventId",
+          "developerName": "eventId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "eventType",
+          "developerName": "eventType",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "sessionId",
+          "developerName": "sessionId",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "IDNameWeb",
+          "developerName": "IDNameWeb",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "IDType",
+          "developerName": "IDType",
+          "dataType": "Text",
+          "isDataRequired": true
+        },
+        {
+          "masterLabel": "userId",
+          "developerName": "userId",
+          "dataType": "Text",
+          "isDataRequired": true
         }
       ]
     }

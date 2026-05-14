@@ -1,9 +1,17 @@
 import type {
+  CheckoutPayload,
+  CheckoutResponse,
   HomeResponse,
   ProductSortBy,
   ProductsResponse,
+  QuizIdentityBridgeMonitorPayload,
+  QuizIdentityBridgeMonitorResponse,
+  QuizRecommendationCodeClickPayload,
+  QuizRecommendationCodeClickResponse,
   QuizProgressPayload,
   QuizProgressResponse,
+  QuizSharePayload,
+  QuizShareResponse,
   QuizSession,
   RequestPayload,
   RequestResponse,
@@ -11,6 +19,7 @@ import type {
   StorefrontProduct
 } from "../../shared/contracts";
 import {
+  createMockCheckoutResponse,
   createMockRequestResponse,
   getStorefrontConfig,
   getHomeResponse,
@@ -104,6 +113,29 @@ export async function submitRequest(
   }
 }
 
+export async function submitCheckout(
+  payload: CheckoutPayload
+): Promise<CheckoutResponse> {
+  try {
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
+    }
+
+    return (await response.json()) as CheckoutResponse;
+  } catch {
+    return createMockCheckoutResponse(payload);
+  }
+}
+
 export async function submitQuizProgress(
   payload: QuizProgressPayload
 ): Promise<QuizProgressResponse> {
@@ -127,6 +159,90 @@ export async function submitQuizProgress(
       sessionId: payload.sessionKey,
       completedSteps: payload.completedSteps || payload.stepNumber,
       success: true
+    };
+  }
+}
+
+export async function submitQuizShare(
+  payload: QuizSharePayload
+): Promise<QuizShareResponse> {
+  try {
+    const response = await fetch("/api/quiz/share", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
+    }
+
+    return (await response.json()) as QuizShareResponse;
+  } catch {
+    return {
+      success: true,
+      emailAddress: payload.emailAddress,
+      accountId: null,
+      contactId: null,
+      accountCreated: false,
+      sessionId: payload.sessionKey
+    };
+  }
+}
+
+export async function submitQuizIdentityBridgeMonitor(
+  payload: QuizIdentityBridgeMonitorPayload
+): Promise<QuizIdentityBridgeMonitorResponse> {
+  try {
+    const response = await fetch("/api/quiz/identity-bridge-monitor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload),
+      keepalive: true
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
+    }
+
+    return (await response.json()) as QuizIdentityBridgeMonitorResponse;
+  } catch {
+    return {
+      success: true,
+      sessionKey: payload.sessionKey
+    };
+  }
+}
+
+export async function submitQuizRecommendationCodeClick(
+  payload: QuizRecommendationCodeClickPayload
+): Promise<QuizRecommendationCodeClickResponse> {
+  try {
+    const response = await fetch("/api/quiz/recommendation-code-click", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload),
+      keepalive: true
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`);
+    }
+
+    return (await response.json()) as QuizRecommendationCodeClickResponse;
+  } catch {
+    return {
+      success: true,
+      sessionId: payload.sessionKey
     };
   }
 }

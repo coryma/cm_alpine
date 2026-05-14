@@ -1,8 +1,13 @@
 import type {
+  CheckoutPayload,
+  QuizIdentityBridgeMonitorPayload,
+  QuizRecommendationCodeClickPayload,
   QuizProgressPayload,
+  QuizSharePayload,
   RequestPayload
 } from "../../shared/contracts";
 import {
+  createMockCheckoutResponse,
   createMockRequestResponse,
   getHomeResponse,
   getProductDetail,
@@ -33,6 +38,10 @@ export class StaticJsonStorefrontProvider implements StorefrontProvider {
     return getProductDetail(slug);
   }
 
+  async submitCheckout(payload: CheckoutPayload) {
+    return createMockCheckoutResponse(payload);
+  }
+
   async submitRequest(payload: RequestPayload) {
     return createMockRequestResponse(payload);
   }
@@ -42,6 +51,31 @@ export class StaticJsonStorefrontProvider implements StorefrontProvider {
       sessionId: payload.sessionKey,
       completedSteps: payload.completedSteps || payload.stepNumber || 0,
       success: true
+    };
+  }
+
+  async sendQuizShare(payload: QuizSharePayload) {
+    return {
+      success: true,
+      emailAddress: payload.emailAddress.trim(),
+      accountId: "001000000000000AAA",
+      contactId: "003000000000000AAA",
+      accountCreated: false,
+      sessionId: payload.sessionKey
+    };
+  }
+
+  async recordIdentityBridgeMonitor(payload: QuizIdentityBridgeMonitorPayload) {
+    return {
+      success: true,
+      sessionKey: payload.sessionKey
+    };
+  }
+
+  async markRecommendationCodeClick(payload: QuizRecommendationCodeClickPayload) {
+    return {
+      success: true,
+      sessionId: payload.sessionKey
     };
   }
 
