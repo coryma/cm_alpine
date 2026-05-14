@@ -1,17 +1,34 @@
 import { ROADMAP_RESPONSE } from "../shared/roadmap";
 import type {
+  CheckoutPayload,
   HealthResponse,
   ProductSortBy,
+  QuizIdentityBridgeMonitorPayload,
+  QuizRecommendationCodeClickPayload,
   QuizProgressPayload,
+  QuizSharePayload,
   RequestPayload
 } from "../shared/contracts";
 import type { Env } from "./env";
-import { createStorefrontProvider, readProviderName } from "./providers";
+import { StorefrontAccountStore } from "./durable/storefrontAccountStore";
+import { createStorefrontProvider, readEffectiveProviderName } from "./providers";
+
+export { StorefrontAccountStore };
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const provider = createStorefrontProvider(env);
+
+    if (
+      url.pathname === "/api/auth/register" ||
+      url.pathname === "/api/auth/login" ||
+      url.pathname === "/api/auth/logout" ||
+      url.pathname === "/api/me" ||
+      url.pathname === "/api/admin/members"
+    ) {
+      return forwardAccountRequest(request, env, url);
+    }
 
     if (url.pathname === "/api/health") {
       if (request.method !== "GET") {
@@ -22,10 +39,13 @@ export default {
         ok: true,
         runtime: "cloudflare-workers",
         generatedAt: new Date().toISOString(),
-        provider: readProviderName(env.STOREFRONT_PROVIDER),
+        provider: readEffectiveProviderName(env),
         salesforce: {
           baseUrlConfigured: Boolean(env.SALESFORCE_API_BASE_URL),
           tokenConfigured: Boolean(env.SALESFORCE_API_TOKEN),
+          clientCredentialsConfigured: Boolean(
+            env.SALESFORCE_CLIENT_ID && env.SALESFORCE_CLIENT_SECRET
+          ),
           apiVersion: env.SALESFORCE_API_VERSION || "v66.0"
         }
       };
@@ -171,6 +191,52 @@ export default {
       }
     }
 
+    if (url.pathname === "/api/checkout") {
+      if (request.method !== "POST") {
+        return methodNotAllowed("POST");
+      }
+
+      let payload: CheckoutPayload;
+
+      try {
+        payload = (await request.json()) as CheckoutPayload;
+      } catch {
+        return json(
+          {
+            error: "Bad Request",
+            message: "Checkout payload must be valid JSON."
+          },
+          400
+        );
+      }
+
+      if (
+        !payload.fullName?.trim() ||
+        !payload.email?.trim() ||
+        !payload.phone?.trim() ||
+        !payload.addressLine1?.trim() ||
+        !payload.city?.trim() ||
+        !payload.district?.trim() ||
+        !payload.items?.length
+      ) {
+        return json(
+          {
+            error: "Bad Request",
+            message: "Checkout payload is incomplete."
+          },
+          400
+        );
+      }
+
+      try {
+        return json(await provider.submitCheckout(payload), 200, {
+          "Cache-Control": "no-store"
+        });
+      } catch (error) {
+        return handleProviderError(error);
+      }
+    }
+
     if (url.pathname === "/api/quiz/progress") {
       if (request.method !== "POST") {
         return methodNotAllowed("POST");
@@ -190,11 +256,12 @@ export default {
         );
       }
 
-      if (!payload.sessionKey?.trim() || !payload.stepKey?.trim() || !payload.optionKey?.trim()) {
+      const questionKey = payload.questionKey?.trim() || payload.stepKey?.trim();
+      if (!payload.sessionKey?.trim() || !questionKey || !payload.optionKey?.trim()) {
         return json(
           {
             error: "Bad Request",
-            message: "sessionKey, stepKey, and optionKey are required."
+            message: "sessionKey, questionKey/stepKey, and optionKey are required."
           },
           400
         );
@@ -202,6 +269,120 @@ export default {
 
       try {
         return json(await provider.recordQuizProgress(payload), 200, {
+          "Cache-Control": "no-store"
+        });
+      } catch (error) {
+        return handleProviderError(error);
+      }
+    }
+
+    if (url.pathname === "/api/quiz/share") {
+      if (request.method !== "POST") {
+        return methodNotAllowed("POST");
+      }
+
+      let payload: Partial<QuizSharePayload> | null;
+
+      try {
+        payload = (await request.json()) as Partial<QuizSharePayload> | null;
+      } catch {
+        return json(
+          {
+            error: "Bad Request",
+            message: "Quiz share payload must be valid JSON."
+          },
+          400
+        );
+      }
+
+      if (!isValidQuizSharePayload(payload)) {
+        return json(
+          {
+            error: "Bad Request",
+            message: "emailAddress and sessionKey are required."
+          },
+          400
+        );
+      }
+
+      try {
+        return json(await provider.sendQuizShare(payload), 200, {
+          "Cache-Control": "no-store"
+        });
+      } catch (error) {
+        return handleProviderError(error);
+      }
+    }
+
+    if (url.pathname === "/api/quiz/recommendation-code-click") {
+      if (request.method !== "POST") {
+        return methodNotAllowed("POST");
+      }
+
+      let payload: Partial<QuizRecommendationCodeClickPayload> | null;
+
+      try {
+        payload = (await request.json()) as Partial<QuizRecommendationCodeClickPayload> | null;
+      } catch {
+        return json(
+          {
+            error: "Bad Request",
+            message: "Recommendation code click payload must be valid JSON."
+          },
+          400
+        );
+      }
+
+      if (!isValidRecommendationCodeClickPayload(payload)) {
+        return json(
+          {
+            error: "Bad Request",
+            message: "sessionKey is required."
+          },
+          400
+        );
+      }
+
+      try {
+        return json(await provider.markRecommendationCodeClick(payload), 200, {
+          "Cache-Control": "no-store"
+        });
+      } catch (error) {
+        return handleProviderError(error);
+      }
+    }
+
+    if (url.pathname === "/api/quiz/identity-bridge-monitor") {
+      if (request.method !== "POST") {
+        return methodNotAllowed("POST");
+      }
+
+      let payload: Partial<QuizIdentityBridgeMonitorPayload> | null;
+
+      try {
+        payload = (await request.json()) as Partial<QuizIdentityBridgeMonitorPayload> | null;
+      } catch {
+        return json(
+          {
+            error: "Bad Request",
+            message: "Identity bridge monitor payload must be valid JSON."
+          },
+          400
+        );
+      }
+
+      if (!isValidIdentityBridgeMonitorPayload(payload)) {
+        return json(
+          {
+            error: "Bad Request",
+            message: "sessionKey is required."
+          },
+          400
+        );
+      }
+
+      try {
+        return json(await provider.recordIdentityBridgeMonitor(payload), 200, {
           "Cache-Control": "no-store"
         });
       } catch (error) {
@@ -227,6 +408,11 @@ export default {
       }
     }
 
+    if (isSpaRouteRequest(request, url)) {
+      const indexUrl = new URL("/index.html", url);
+      return env.ASSETS.fetch(new Request(indexUrl.toString(), request));
+    }
+
     return env.ASSETS.fetch(request);
   }
 };
@@ -241,6 +427,42 @@ function methodNotAllowed(allow: string): Response {
       Allow: allow
     }
   );
+}
+
+async function forwardAccountRequest(
+  request: Request,
+  env: Env,
+  url: URL
+): Promise<Response> {
+  const stub = env.ACCOUNT_STORE.get(env.ACCOUNT_STORE.idFromName("primary"));
+  let targetPath = "";
+
+  if (url.pathname === "/api/auth/register") {
+    targetPath = "/auth/register";
+  } else if (url.pathname === "/api/auth/login") {
+    targetPath = "/auth/login";
+  } else if (url.pathname === "/api/auth/logout") {
+    targetPath = "/auth/logout";
+  } else if (url.pathname === "/api/me") {
+    targetPath = "/members/me";
+  } else if (url.pathname === "/api/admin/members") {
+    targetPath = "/members";
+  } else {
+    return json(
+      {
+        error: "Not Found",
+        message: "Unknown account endpoint."
+      },
+      404,
+      {
+        "Cache-Control": "no-store"
+      }
+    );
+  }
+
+  const targetUrl = new URL(`https://account-store${targetPath}`);
+  targetUrl.search = url.search;
+  return stub.fetch(new Request(targetUrl.toString(), request));
 }
 
 function readTtl(value?: string): number {
@@ -264,6 +486,54 @@ function readSortBy(value: string | null): ProductSortBy | undefined {
     default:
       return undefined;
   }
+}
+
+function isValidQuizSharePayload(
+  payload: Partial<QuizSharePayload> | null | undefined
+): payload is QuizSharePayload {
+  return Boolean(
+    payload &&
+      typeof payload === "object" &&
+      payload.emailAddress?.trim() &&
+      payload.sessionKey?.trim() &&
+      isLikelyEmail(payload.emailAddress)
+  );
+}
+
+function isValidRecommendationCodeClickPayload(
+  payload: Partial<QuizRecommendationCodeClickPayload> | null | undefined
+): payload is QuizRecommendationCodeClickPayload {
+  return Boolean(
+    payload &&
+      typeof payload === "object" &&
+      payload.sessionKey?.trim()
+  );
+}
+
+function isValidIdentityBridgeMonitorPayload(
+  payload: Partial<QuizIdentityBridgeMonitorPayload> | null | undefined
+): payload is QuizIdentityBridgeMonitorPayload {
+  return Boolean(
+    payload &&
+      typeof payload === "object" &&
+      payload.sessionKey?.trim()
+  );
+}
+
+function isLikelyEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function isSpaRouteRequest(request: Request, url: URL): boolean {
+  if (request.method !== "GET" && request.method !== "HEAD") {
+    return false;
+  }
+
+  if (url.pathname.startsWith("/api/")) {
+    return false;
+  }
+
+  return !url.pathname.includes(".");
 }
 
 function handleProviderError(error: unknown): Response {
@@ -339,10 +609,17 @@ async function proxyRemoteImage(url: URL, env: Env): Promise<Response> {
     );
   }
 
+  const headers = new Headers({
+    Accept: "image/*"
+  });
+  const salesforceToken = readSalesforceMediaToken(remoteUrl, env);
+
+  if (salesforceToken) {
+    headers.set("Authorization", `Bearer ${salesforceToken}`);
+  }
+
   const upstream = await fetch(remoteUrl.toString(), {
-    headers: {
-      Accept: "image/*"
-    }
+    headers
   });
 
   if (!upstream.ok) {
@@ -365,18 +642,18 @@ async function proxyRemoteImage(url: URL, env: Env): Promise<Response> {
     });
   }
 
-  const headers = new Headers();
-  headers.set("Content-Type", contentType);
-  headers.set("Cache-Control", `public, max-age=${readTtl(env.EDGE_CACHE_TTL_SECONDS)}`);
+  const responseHeaders = new Headers();
+  responseHeaders.set("Content-Type", contentType);
+  responseHeaders.set("Cache-Control", `public, max-age=${readTtl(env.EDGE_CACHE_TTL_SECONDS)}`);
 
   const etag = upstream.headers.get("ETag");
   if (etag) {
-    headers.set("ETag", etag);
+    responseHeaders.set("ETag", etag);
   }
 
   return new Response(upstream.body, {
     status: 200,
-    headers
+    headers: responseHeaders
   });
 }
 
@@ -392,10 +669,27 @@ function isAllowedRemoteImageUrl(url: URL): boolean {
     return true;
   }
 
+  return hostname.endsWith(".amazonaws.com") || isSalesforceHostname(hostname);
+}
+
+function readSalesforceMediaToken(url: URL, env: Env): string | null {
+  const token = env.SALESFORCE_API_TOKEN?.trim();
+
+  if (!token || !isSalesforceHostname(url.hostname)) {
+    return null;
+  }
+
+  return token;
+}
+
+function isSalesforceHostname(hostname: string): boolean {
+  const normalized = hostname.toLowerCase();
+
   return [
-    ".amazonaws.com",
     ".salesforce.com",
     ".force.com",
-    ".site.com"
-  ].some((suffix) => hostname.endsWith(suffix));
+    ".site.com",
+    ".documentforce.com",
+    ".salesforce-sites.com"
+  ].some((suffix) => normalized.endsWith(suffix));
 }

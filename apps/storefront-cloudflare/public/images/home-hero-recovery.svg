@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Recovery hero background">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#31125c"/>
+      <stop offset="55%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#f9a8d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1360" cy="176" r="160" fill="#fbcfe8" opacity="0.28"/>
+  <circle cx="180" cy="720" r="230" fill="#c4b5fd" opacity="0.16"/>
+  <path d="M0 714C150 660 266 646 402 668C546 692 662 754 824 746C986 738 1138 648 1288 622C1402 602 1496 610 1600 650V900H0Z" fill="#ffffff" opacity="0.12"/>
+  <path d="M250 574H466L544 430L624 664L714 520H1020L1126 414L1244 590H1422" fill="none" stroke="#f8fafc" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+  <circle cx="1218" cy="322" r="62" fill="#fb7185" opacity="0.76"/>
+  <rect x="1160" y="602" width="148" height="52" rx="26" fill="#fdf2f8" opacity="0.18"/>
+  <text x="206" y="214" fill="#f5f3ff" font-size="52" font-family="Manrope, sans-serif" letter-spacing="10">RECOVERY</text>
+</svg>

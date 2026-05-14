@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Sleep hero background">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#7c9bd1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1220" cy="180" r="132" fill="#e2e8f0" opacity="0.24"/>
+  <circle cx="1186" cy="194" r="110" fill="#0f172a" opacity="0.92"/>
+  <circle cx="1318" cy="120" r="10" fill="#ffffff" opacity="0.82"/>
+  <circle cx="1386" cy="178" r="8" fill="#ffffff" opacity="0.72"/>
+  <circle cx="1276" cy="250" r="8" fill="#ffffff" opacity="0.64"/>
+  <path d="M0 690C158 640 294 630 446 652C574 670 686 724 838 722C990 720 1106 656 1264 642C1380 632 1480 640 1600 686V900H0Z" fill="#dbeafe" opacity="0.15"/>
+  <path d="M244 594C346 548 452 532 566 546C666 560 752 614 844 616C956 618 1036 560 1144 550" fill="none" stroke="#e2e8f0" stroke-width="18" stroke-linecap="round" opacity="0.28"/>
+  <path d="M236 642C352 588 456 568 580 580C708 594 786 660 902 658C1012 656 1098 604 1226 596" fill="none" stroke="#bfdbfe" stroke-width="12" stroke-linecap="round" opacity="0.34"/>
+  <text x="210" y="214" fill="#e2e8f0" font-size="52" font-family="Manrope, sans-serif" letter-spacing="10">SLEEP</text>
+</svg>

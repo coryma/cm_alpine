@@ -10,9 +10,36 @@
     "run_worker_first": ["/api/*"]
   },
   "observability": {
-    "enabled": true
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
   },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "ACCOUNT_STORE",
+        "class_name": "StorefrontAccountStore"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["StorefrontAccountStore"]
+    }
+  ],
   "vars": {
+    "ADMIN_MEMBER_EMAILS": "coryma@gmail.com",
     "STOREFRONT_PROVIDER": "salesforce",
     "EDGE_CACHE_TTL_SECONDS": "300",
     "SALESFORCE_API_VERSION": "v66.0",

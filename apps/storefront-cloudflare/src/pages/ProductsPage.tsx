@@ -1,8 +1,10 @@
 import type { ProductsPageContent, ProductsResponse } from "../../shared/contracts";
 import { StorefrontImage } from "../components/StorefrontImage";
+import type { StorefrontProduct } from "../../shared/contracts";
 
 interface ProductsPageProps {
   activeCategory: string;
+  onAddToCart: (product: StorefrontProduct) => void;
   onCategoryChange: (categoryId: string) => void;
   onNavigate: (href: string) => void;
   page: ProductsPageContent;
@@ -11,6 +13,7 @@ interface ProductsPageProps {
 
 export function ProductsPage({
   activeCategory,
+  onAddToCart,
   onCategoryChange,
   onNavigate,
   page,
@@ -61,12 +64,21 @@ export function ProductsPage({
                 <span>{product.description}</span>
                 <div className="listingCard__footer">
                   <strong>{product.priceLabel}</strong>
-                  <button
-                    onClick={() => onNavigate(`/products/${product.slug}`)}
-                    type="button"
-                  >
-                    {page.viewProductLabel}
-                  </button>
+                  <div className="listingCard__actions">
+                    <button
+                      className="detailHero__ghostButton"
+                      onClick={() => onAddToCart(product)}
+                      type="button"
+                    >
+                      加入購物車
+                    </button>
+                    <button
+                      onClick={() => onNavigate(`/products/${product.slug}`)}
+                      type="button"
+                    >
+                      {page.viewProductLabel}
+                    </button>
+                  </div>
                 </div>
               </div>
             </article>

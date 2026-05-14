@@ -5,98 +5,62 @@ import type {
   StorefrontConfigResponse,
   StorefrontProduct
 } from "../shared/contracts";
-import {
-  fetchConfig,
-  fetchHome,
-  fetchProductDetail,
-  fetchProducts
-} from "./lib/api";
+import { getStorefrontConfig } from "../shared/storefront";
 import { StorefrontShell } from "./components/StorefrontShell";
+import { fetchConfig, fetchHome, fetchProductDetail, fetchProducts } from "./lib/api";
+import { trackGoogleAnalyticsPageView } from "./lib/analytics";
+import {
+  applyHomeHeroPersonalization,
+  readHomeHeroPersonalization,
+  type HomeHeroPersonalization
+} from "./lib/homePersonalization";
+import {
+  buildCartItemFromProduct,
+  loadCart,
+  subscribeCart,
+  upsertCartItem,
+  type CartSnapshot
+} from "./lib/cartStore";
+import {
+  loadCurrentMember,
+  refreshCurrentMember,
+  subscribeMember,
+  type MemberProfile
+} from "./lib/memberStore";
+import {
+  sendProductSelectionEvent,
+  syncAnonymousProfile,
+  syncKnownMemberProfile,
+  type ProductSelectionTrackingContext
+} from "./lib/salesforceDataCloud";
+import { AccountPage } from "./pages/AccountPage";
+import { CartPage } from "./pages/CartPage";
+import { CheckoutPage } from "./pages/CheckoutPage";
 import { HomePage } from "./pages/HomePage";
+import { LoginPage } from "./pages/LoginPage";
+import { OrderCompletePage } from "./pages/OrderCompletePage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ProductsPage } from "./pages/ProductsPage";
-import { QuizPage } from "./pages/QuizPage";
 import { QuizMonitorPage } from "./pages/QuizMonitorPage";
+import { QuizPage } from "./pages/QuizPage";
+import { RegisterPage } from "./pages/RegisterPage";
 import { RequestPage } from "./pages/RequestPage";
 
 type Route =
   | { kind: "home" }
   | { kind: "products"; category: string; q: string }
   | { kind: "product"; slug: string }
+  | { kind: "cart" }
+  | { kind: "checkout" }
+  | { kind: "order-complete"; reference: string }
+  | { kind: "register"; redirectTo: string }
+  | { kind: "login"; redirectTo: string }
+  | { kind: "account" }
   | { kind: "quiz" }
   | { kind: "quiz-monitor" }
   | { kind: "request" };
 
-const EMPTY_CONFIG: StorefrontConfigResponse = {
-  shell: {
-    brandEyebrow: "",
-    brandName: "",
-    searchPlaceholder: "",
-    categoryEyebrow: "",
-    categoryTitle: "",
-    categoryCtaLabel: "",
-    footerBrand: "",
-    footerLegal: "",
-    navLinks: [],
-    sideCategories: [],
-    footerLinks: []
-  },
-  pages: {
-    home: {
-      heroCtaLabel: "",
-      flashSaleTitle: "",
-      flashSaleMetaLabel: "",
-      flashSaleLinkLabel: "",
-      premiumTechnologyTitle: "",
-      recommendedEyebrow: "",
-      recommendedTitle: "",
-      browseCatalogLabel: "",
-      promoCard: {
-        title: "",
-        body: "",
-        ctaLabel: ""
-      }
-    },
-    products: {
-      eyebrow: "",
-      title: "",
-      description: "",
-      matchingLabel: "",
-      emptyEyebrow: "",
-      emptyTitle: "",
-      emptyBody: "",
-      viewProductLabel: ""
-    },
-    productDetail: {
-      catalogLabel: "",
-      requestButtonLabel: "",
-      backButtonLabel: "",
-      notesTitle: "",
-      notFoundEyebrow: "",
-      notFoundTitle: ""
-    },
-    request: {
-      eyebrow: "",
-      title: "",
-      description: "",
-      panelEyebrow: "",
-      panelTitle: "",
-      panelBody: "",
-      checklist: [],
-      validationMessage: "",
-      submitIdleLabel: "",
-      submitBusyLabel: "",
-      browseProductsLabel: "",
-      fieldLabels: {
-        fullName: "",
-        email: "",
-        company: "",
-        interest: "",
-        message: ""
-      }
-    }
-  }
-};
+const DEFAULT_CONFIG: StorefrontConfigResponse = getStorefrontConfig();
 
 function readRoute(): Route {
   if (typeof window === "undefined") {
@@ -121,6 +85,39 @@ function readRoute(): Route {
     };
   }
 
+  if (pathname === "/cart") {
+    return { kind: "cart" };
+  }
+
+  if (pathname === "/checkout") {
+    return { kind: "checkout" };
+  }
+
+  if (pathname === "/order-complete") {
+    return {
+      kind: "order-complete",
+      reference: searchParams.get("reference") || ""
+    };
+  }
+
+  if (pathname === "/register") {
+    return {
+      kind: "register",
+      redirectTo: searchParams.get("redirect") || ""
+    };
+  }
+
+  if (pathname === "/login") {
+    return {
+      kind: "login",
+      redirectTo: searchParams.get("redirect") || ""
+    };
+  }
+
+  if (pathname === "/account") {
+    return { kind: "account" };
+  }
+
   if (pathname === "/request") {
     return { kind: "request" };
   }
@@ -143,8 +140,13 @@ function App() {
   );
   const [config, setConfig] = useState<StorefrontConfigResponse | null>(null);
   const [home, setHome] = useState<HomeResponse | null>(null);
+  const [heroPersonalization, setHeroPersonalization] = useState<HomeHeroPersonalization | null>(
+    () => readHomeHeroPersonalization()
+  );
   const [productsResponse, setProductsResponse] = useState<ProductsResponse | null>(null);
   const [productDetail, setProductDetail] = useState<StorefrontProduct | null>(null);
+  const [cart, setCart] = useState<CartSnapshot>(() => loadCart());
+  const [member, setMember] = useState<MemberProfile | null>(() => loadCurrentMember());
   const [isBootstrapping, setIsBootstrapping] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -153,6 +155,9 @@ function App() {
     const nextSearch = route.kind === "products" ? route.q : "";
     setSearchInput(nextSearch);
   }, [route]);
+
+  useEffect(() => subscribeCart(setCart), []);
+  useEffect(() => subscribeMember(setMember), []);
 
   const activeCategoryId = useMemo(() => {
     if (route.kind === "products") {
@@ -170,7 +175,10 @@ function App() {
     const nextUrl = new URL(href, window.location.origin);
     const nextPath = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
 
-    if (nextPath === `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+    if (
+      nextPath ===
+      `${window.location.pathname}${window.location.search}${window.location.hash}`
+    ) {
       if (nextUrl.hash) {
         document.querySelector(nextUrl.hash)?.scrollIntoView({ behavior: "smooth" });
       }
@@ -207,12 +215,54 @@ function App() {
   }, []);
 
   useEffect(() => {
+    trackGoogleAnalyticsPageView(`${window.location.pathname}${window.location.search}`);
+  }, [route]);
+
+  useEffect(() => {
+    const handleStorage = () => {
+      setHeroPersonalization(readHomeHeroPersonalization());
+    };
+
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
+
+  useEffect(() => {
+    const preferredCategory =
+      route.kind === "products"
+        ? route.category
+        : route.kind === "product"
+          ? productDetail?.categoryId || ""
+          : "";
+
+    void syncAnonymousProfile({
+      preferredCategory: preferredCategory === "all" ? "" : preferredCategory,
+      quizBundle: heroPersonalization?.bundleName || "",
+      personaHint: heroPersonalization?.heroVariantKey || ""
+    }, member);
+  }, [
+    heroPersonalization?.bundleName,
+    heroPersonalization?.heroVariantKey,
+    member,
+    productDetail?.categoryId,
+    route
+  ]);
+
+  useEffect(() => {
+    void syncKnownMemberProfile(member);
+  }, [member]);
+
+  useEffect(() => {
     let active = true;
 
     async function bootstrapStorefront() {
-      const [configPayload, homePayload] = await Promise.all([
+      const [configPayload, homePayload, memberPayload] = await Promise.all([
         fetchConfig(),
-        fetchHome()
+        fetchHome(),
+        refreshCurrentMember().catch(() => null)
       ]);
 
       if (!active) {
@@ -222,6 +272,7 @@ function App() {
       startTransition(() => {
         setConfig(configPayload);
         setHome(homePayload);
+        setMember(memberPayload ?? null);
         setIsBootstrapping(false);
       });
     }
@@ -233,7 +284,9 @@ function App() {
 
       startTransition(() => {
         setErrorMessage(
-          error instanceof Error ? error.message : "站點內容暫時無法載入。"
+          error instanceof Error
+            ? error.message
+            : DEFAULT_CONFIG.pages.common.bootstrapErrorMessage
         );
         setIsBootstrapping(false);
       });
@@ -280,7 +333,9 @@ function App() {
           startTransition(() => {
             setProductDetail(payload);
             setProductsResponse(null);
-            setErrorMessage(payload ? "" : "找不到這個商品。");
+            setErrorMessage(
+              payload ? "" : (config || DEFAULT_CONFIG).pages.productDetail.notFoundTitle
+            );
             setIsLoading(false);
           });
           return;
@@ -299,7 +354,9 @@ function App() {
 
         startTransition(() => {
           setErrorMessage(
-            error instanceof Error ? error.message : "頁面資料暫時無法載入。"
+            error instanceof Error
+              ? error.message
+              : (config || DEFAULT_CONFIG).pages.common.routeErrorMessage
           );
           setIsLoading(false);
         });
@@ -311,7 +368,7 @@ function App() {
     return () => {
       active = false;
     };
-  }, [route]);
+  }, [config, route]);
 
   const handleSearchSubmit = useEffectEvent(() => {
     const searchParams = new URLSearchParams();
@@ -351,11 +408,29 @@ function App() {
     navigate(pathname);
   });
 
-  const storefrontConfig = config || EMPTY_CONFIG;
+  const handleAddToCart = useEffectEvent((
+    product: StorefrontProduct,
+    trackingContext: ProductSelectionTrackingContext = {}
+  ) => {
+    upsertCartItem(buildCartItemFromProduct(product));
+    void sendProductSelectionEvent(product, {
+      productAction: "add_to_cart",
+      sourcePage: `${window.location.pathname}${window.location.search}`,
+      ...trackingContext
+    });
+  });
+
+  const storefrontConfig = config || DEFAULT_CONFIG;
+  const resolvedHome = useMemo(
+    () => (home ? applyHomeHeroPersonalization(home, heroPersonalization) : null),
+    [heroPersonalization, home]
+  );
 
   return (
     <StorefrontShell
       activeCategoryId={activeCategoryId}
+      cartItemCount={cart.itemCount}
+      member={member}
       onCategorySelect={handleCategorySelect}
       onNavigate={navigate}
       onSearchChange={setSearchInput}
@@ -366,20 +441,24 @@ function App() {
       {errorMessage ? <div className="errorBanner">{errorMessage}</div> : null}
 
       {isBootstrapping || isLoading ? (
-        <div className="loadingPanel">載入頁面中...</div>
+        <div className="loadingPanel">{storefrontConfig.pages.common.loadingLabel}</div>
       ) : null}
 
-      {!isBootstrapping && !isLoading && route.kind === "home" && home ? (
+      {!isBootstrapping && !isLoading && route.kind === "home" && resolvedHome ? (
         <HomePage
-          home={home}
+          home={resolvedHome}
+          member={member}
+          onAddToCart={handleAddToCart}
           onNavigate={navigate}
           page={storefrontConfig.pages.home}
+          personalization={heroPersonalization}
         />
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "products" && productsResponse ? (
         <ProductsPage
           activeCategory={route.category}
+          onAddToCart={handleAddToCart}
           onCategoryChange={handleCategorySelect}
           onNavigate={navigate}
           page={storefrontConfig.pages.products}
@@ -389,25 +468,76 @@ function App() {
 
       {!isBootstrapping && !isLoading && route.kind === "product" ? (
         <ProductDetailPage
+          onAddToCart={handleAddToCart}
           onNavigate={navigate}
           page={storefrontConfig.pages.productDetail}
           product={productDetail}
         />
       ) : null}
 
-      {!isBootstrapping && !isLoading && route.kind === "request" ? (
-        <RequestPage
+      {!isBootstrapping && !isLoading && route.kind === "cart" ? (
+        <CartPage cart={cart} onNavigate={navigate} page={storefrontConfig.pages.cart} />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "checkout" ? (
+        <CheckoutPage
+          cart={cart}
+          member={member}
           onNavigate={navigate}
-          page={storefrontConfig.pages.request}
+          page={storefrontConfig.pages.checkout}
         />
       ) : null}
 
+      {!isBootstrapping && !isLoading && route.kind === "order-complete" ? (
+        <OrderCompletePage
+          onNavigate={navigate}
+          page={storefrontConfig.pages.orderComplete}
+          reference={route.reference}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "register" ? (
+        <RegisterPage
+          currentMember={member}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.register}
+          redirectTo={route.redirectTo}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "login" ? (
+        <LoginPage
+          currentMember={member}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.login}
+          redirectTo={route.redirectTo}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "account" ? (
+        <AccountPage
+          cartItemCount={cart.itemCount}
+          member={member}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.account}
+        />
+      ) : null}
+
+      {!isBootstrapping && !isLoading && route.kind === "request" ? (
+        <RequestPage onNavigate={navigate} page={storefrontConfig.pages.request} />
+      ) : null}
+
       {!isBootstrapping && !isLoading && route.kind === "quiz" ? (
-        <QuizPage onNavigate={navigate} />
+        <QuizPage
+          onAddToCart={handleAddToCart}
+          onHeroPersonalizationChange={setHeroPersonalization}
+          onNavigate={navigate}
+          page={storefrontConfig.pages.quiz}
+        />
       ) : null}
 
       {!isBootstrapping && !isLoading && route.kind === "quiz-monitor" ? (
-        <QuizMonitorPage onNavigate={navigate} />
+        <QuizMonitorPage onNavigate={navigate} page={storefrontConfig.pages.quizMonitor} />
       ) : null}
     </StorefrontShell>
   );

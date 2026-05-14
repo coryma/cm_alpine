@@ -3,14 +3,20 @@ import type {
   StorefrontProduct
 } from "../../shared/contracts";
 import { StorefrontImage } from "../components/StorefrontImage";
+import type { ProductSelectionTrackingContext } from "../lib/salesforceDataCloud";
 
 interface ProductDetailPageProps {
+  onAddToCart: (
+    product: StorefrontProduct,
+    trackingContext?: ProductSelectionTrackingContext
+  ) => void;
   onNavigate: (href: string) => void;
   page: ProductDetailPageContent;
   product: StorefrontProduct | null;
 }
 
 export function ProductDetailPage({
+  onAddToCart,
   onNavigate,
   page,
   product
@@ -60,15 +66,35 @@ export function ProductDetailPage({
           </ul>
 
           <div className="detailHero__actions">
-            <button onClick={() => onNavigate("/request")} type="button">
-              {page.requestButtonLabel}
+            <button
+              onClick={() =>
+                onAddToCart(product, {
+                  productAction: "add_to_cart",
+                  routeKind: "product"
+                })
+              }
+              type="button"
+            >
+              {page.addToCartLabel}
+            </button>
+            <button
+              onClick={() => {
+                onAddToCart(product, {
+                  productAction: "buy_now",
+                  routeKind: "product"
+                });
+                onNavigate("/checkout");
+              }}
+              type="button"
+            >
+              {page.buyNowLabel}
             </button>
             <button
               className="detailHero__ghostButton"
-              onClick={() => onNavigate("/products")}
+              onClick={() => onNavigate("/request")}
               type="button"
             >
-              {page.backButtonLabel}
+              {page.requestButtonLabel}
             </button>
           </div>
         </article>

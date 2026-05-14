@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Self care hero background">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8a1d4d"/>
+      <stop offset="55%" stop-color="#e879b9"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1360" cy="178" r="166" fill="#fde68a" opacity="0.26"/>
+  <circle cx="170" cy="720" r="214" fill="#fbcfe8" opacity="0.18"/>
+  <path d="M0 706C154 648 286 636 430 658C582 682 690 742 844 742C990 742 1124 666 1280 638C1410 614 1512 622 1600 664V900H0Z" fill="#ffffff" opacity="0.16"/>
+  <circle cx="852" cy="474" r="108" fill="#fff7ed" opacity="0.92"/>
+  <circle cx="852" cy="474" r="48" fill="#f59e0b" opacity="0.88"/>
+  <g stroke="#fff7ed" stroke-width="16" stroke-linecap="round" opacity="0.9">
+    <path d="M852 304V364"/>
+    <path d="M852 584V644"/>
+    <path d="M682 474H742"/>
+    <path d="M962 474H1022"/>
+    <path d="M728 350L770 392"/>
+    <path d="M934 556L976 598"/>
+    <path d="M728 598L770 556"/>
+    <path d="M934 392L976 350"/>
+  </g>
+  <text x="210" y="214" fill="#fff7ed" font-size="52" font-family="Manrope, sans-serif" letter-spacing="10">CARE</text>
+</svg>

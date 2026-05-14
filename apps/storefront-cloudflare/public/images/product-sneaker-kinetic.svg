@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Kinetic Performance Runners</title>
+  <desc id="desc">red performance sneaker</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f4efe3"/>
+      <stop offset="100%" stop-color="#dce9d0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="20%" r="62%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="72" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="72" fill="url(#glow)"/>
+  <circle cx="178" cy="170" r="132" fill="#ffffff" opacity="0.32"/>
+  <circle cx="852" cy="804" r="190" fill="#ffffff" opacity="0.26"/>
+  <ellipse cx="512" cy="704" rx="272" ry="50" fill="#000" opacity="0.10"/><path d="M224 572c112 2 164-62 220-146 58 64 112 98 196 112 70 12 122 36 152 76 18 24 12 58-22 58H252c-42 0-66-46-28-100z" fill="#f59e0b"/><path d="M306 628h432" stroke="#f8fafc" stroke-width="20" stroke-linecap="round"/><path d="M444 492h130" stroke="#111827" stroke-width="16" stroke-linecap="round"/><path d="M420 534h170" stroke="#111827" stroke-width="16" stroke-linecap="round"/>
+  <rect x="92" y="82" width="268" height="58" rx="29" fill="#ffffff" opacity="0.72"/>
+  <text x="122" y="119" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="2">運動健身</text>
+</svg>

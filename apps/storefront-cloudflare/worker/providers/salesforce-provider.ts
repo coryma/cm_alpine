@@ -1,9 +1,17 @@
 import type {
+  CheckoutPayload,
+  CheckoutResponse,
   HomeResponse,
   ProductSortBy,
   ProductsResponse,
+  QuizIdentityBridgeMonitorPayload,
+  QuizIdentityBridgeMonitorResponse,
+  QuizRecommendationCodeClickPayload,
+  QuizRecommendationCodeClickResponse,
   QuizProgressPayload,
   QuizProgressResponse,
+  QuizSharePayload,
+  QuizShareResponse,
   QuizSession,
   RequestPayload,
   RequestResponse,
@@ -12,11 +20,16 @@ import type {
   StorefrontProduct
 } from "../../shared/contracts";
 import {
+  createMockCheckoutResponse,
   getStorefrontConfig,
   getStorefrontContentDocument
 } from "../../shared/storefront";
 import type { Env } from "../env";
 import type { ProductListQuery, StorefrontProvider } from "./contracts";
+import {
+  resetSalesforceTokenCache,
+  resolveSalesforceAccessToken
+} from "./salesforce-auth";
 
 const STOREFRONT_API_PREFIX = "/services/apexrest/alpine-storefront/v1";
 
@@ -50,6 +63,8 @@ interface SalesforceCategoryOption {
 interface SalesforceImageRecord {
   url?: string;
   alt?: string;
+  cmsContentId?: string;
+  cmsDeliveryPath?: string;
 }
 
 interface SalesforceSpecRecord {
@@ -106,14 +121,14 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
       this.fetchCatalog({ sortBy: "featured", limitSize: 1 })
     ]);
 
-    return {
-      shell: {
-        ...baseConfig.shell,
-        brandEyebrow: readText(publicConfig.storeTagline, baseConfig.shell.brandEyebrow),
-        brandName: readText(publicConfig.storeName, baseConfig.shell.brandName),
-        searchPlaceholder: readText(
-          publicConfig.searchPlaceholder,
-          baseConfig.shell.searchPlaceholder
+      return {
+        shell: {
+          ...baseConfig.shell,
+          brandEyebrow: readText(publicConfig.storeTagline, baseConfig.shell.brandEyebrow),
+          brandName: baseConfig.shell.brandName,
+          searchPlaceholder: readText(
+            publicConfig.searchPlaceholder,
+            baseConfig.shell.searchPlaceholder
         ),
         footerLegal: readText(publicConfig.footerCopy, baseConfig.shell.footerLegal),
         sideCategories: this.mapSideCategories(catalog.categories || [])
@@ -239,6 +254,10 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     return this.mapProduct(payload);
   }
 
+  async submitCheckout(payload: CheckoutPayload): Promise<CheckoutResponse> {
+    return createMockCheckoutResponse(payload);
+  }
+
   async submitRequest(payload: RequestPayload): Promise<RequestResponse> {
     const response = await this.fetchSalesforce(`${STOREFRONT_API_PREFIX}/request`, {
       method: "POST",
@@ -255,10 +274,11 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     }
 
     const result = (await response.json()) as SalesforceRequestResponse;
+    const commonPage = getStorefrontContentDocument().pages.common;
 
     return {
       ok: true,
-      message: result.message || "詢問已成功送出。",
+      message: result.message || commonPage.salesforceRequestSuccessMessage,
       reference: result.reference || result.leadId || "SALESFORCE-UNKNOWN",
       mockMode: false
     };
@@ -282,6 +302,46 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     }
 
     return (await response.json()) as QuizProgressResponse;
+  }
+
+  async sendQuizShare(payload: QuizSharePayload): Promise<QuizShareResponse> {
+    return this.fetchSalesforceJson<QuizShareResponse>("/quiz/share", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  }
+
+  async recordIdentityBridgeMonitor(
+    payload: QuizIdentityBridgeMonitorPayload
+  ): Promise<QuizIdentityBridgeMonitorResponse> {
+    return this.fetchSalesforceJson<QuizIdentityBridgeMonitorResponse>(
+      "/quiz/identity-bridge-monitor",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+  }
+
+  async markRecommendationCodeClick(
+    payload: QuizRecommendationCodeClickPayload
+  ): Promise<QuizRecommendationCodeClickResponse> {
+    return this.fetchSalesforceJson<QuizRecommendationCodeClickResponse>(
+      "/quiz/recommendation-code-click",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
   }
 
   async getQuizSessions(limitSize = 50): Promise<QuizSession[]> {
@@ -346,14 +406,27 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
     init: RequestInit = {}
   ): Promise<Response> {
     const baseUrl = this.env.SALESFORCE_API_BASE_URL?.trim();
-    const token = this.env.SALESFORCE_API_TOKEN?.trim();
 
-    if (!baseUrl || !token) {
-      throw new Error(
-        "Salesforce provider requires SALESFORCE_API_BASE_URL and SALESFORCE_API_TOKEN."
-      );
+    if (!baseUrl) {
+      throw new Error("Salesforce provider requires SALESFORCE_API_BASE_URL.");
     }
 
+    const response = await this.executeSalesforceRequest(path, init, baseUrl);
+
+    if (response.status === 401 && this.hasOAuthCredentials()) {
+      resetSalesforceTokenCache();
+      return this.executeSalesforceRequest(path, init, baseUrl);
+    }
+
+    return response;
+  }
+
+  private async executeSalesforceRequest(
+    path: string,
+    init: RequestInit,
+    baseUrl: string
+  ): Promise<Response> {
+    const token = await resolveSalesforceAccessToken(this.env);
     const headers = new Headers(init.headers);
     headers.set("Accept", "application/json");
     headers.set("Authorization", `Bearer ${token}`);
@@ -362,6 +435,13 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
       ...init,
       headers
     });
+  }
+
+  private hasOAuthCredentials(): boolean {
+    return Boolean(
+      this.env.SALESFORCE_CLIENT_ID?.trim() &&
+        this.env.SALESFORCE_CLIENT_SECRET?.trim()
+    );
   }
 
   private async readErrorMessage(response: Response): Promise<string> {
@@ -407,6 +487,7 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
 
   private mapProduct(record: SalesforceProductRecord): StorefrontProduct {
     const baseDocument = getStorefrontContentDocument();
+    const commonPage = baseDocument.pages.common;
     const matchedBaseProduct = baseDocument.products.find(
       (product) =>
         product.slug === record.slug ||
@@ -454,12 +535,12 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
       description:
         readText(
           record.shortDescription,
-          matchedBaseProduct?.description || "商品短描述尚未提供。"
+          matchedBaseProduct?.description || commonPage.productDescriptionFallback
         ),
       longDescription:
         readText(
           stripHtml(record.longDescription),
-          matchedBaseProduct?.longDescription || "商品詳細介紹尚未提供。"
+          matchedBaseProduct?.longDescription || commonPage.productLongDescriptionFallback
         ),
       highlights: highlights.length
         ? highlights
@@ -473,7 +554,7 @@ export class SalesforceStorefrontProvider implements StorefrontProvider {
             value: spec.value || "-"
           }))
           .filter((spec) => spec.label && spec.value) || matchedBaseProduct?.specs || [],
-      imageUrl: toMediaUrl(image?.url || matchedBaseProduct?.imageUrl || ""),
+      imageUrl: resolveSalesforceImageUrl(image, matchedBaseProduct?.imageUrl, this.env),
       imageAlt:
         image?.alt || matchedBaseProduct?.imageAlt || record.name || "storefront product image"
     };
@@ -560,6 +641,24 @@ function hasCurrencyMarker(value: string): boolean {
   return /(?:NT\$|[$¥€£]|USD|TWD|JPY|CNY|RMB|EUR|GBP)/i.test(value);
 }
 
+function resolveSalesforceImageUrl(
+  image: SalesforceImageRecord | undefined,
+  fallbackUrl: string | undefined,
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string {
+  const directUrl = image?.url?.trim();
+  if (directUrl) {
+    return toSalesforceMediaUrl(directUrl, env);
+  }
+
+  const cmsDeliveryPath = image?.cmsDeliveryPath?.trim();
+  if (cmsDeliveryPath) {
+    return toSalesforceMediaUrl(cmsDeliveryPath, env);
+  }
+
+  return fallbackUrl || "";
+}
+
 function toMediaUrl(imageUrl: string): string {
   const normalized = imageUrl.trim();
 
@@ -572,6 +671,71 @@ function toMediaUrl(imageUrl: string): string {
   }
 
   return `/api/media?src=${encodeURIComponent(normalized)}`;
+}
+
+function toSalesforceMediaUrl(
+  imageUrl: string,
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string {
+  const normalized = imageUrl.trim();
+
+  if (!normalized) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(normalized)) {
+    return buildMediaProxyUrl(normalized);
+  }
+
+  if (!normalized.startsWith("/")) {
+    return normalized;
+  }
+
+  const absoluteUrl = toAbsoluteSalesforceUrl(normalized, env);
+  return absoluteUrl ? buildMediaProxyUrl(absoluteUrl) : normalized;
+}
+
+function toAbsoluteSalesforceUrl(
+  path: string,
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string | null {
+  const origin = readSalesforceMediaOrigin(env);
+
+  if (!origin) {
+    return null;
+  }
+
+  try {
+    return new URL(path, origin).toString();
+  } catch {
+    return null;
+  }
+}
+
+function readSalesforceMediaOrigin(
+  env: Pick<Env, "SALESFORCE_API_BASE_URL" | "SALESFORCE_MEDIA_BASE_URL">
+): string | null {
+  const candidates = [env.SALESFORCE_MEDIA_BASE_URL, env.SALESFORCE_API_BASE_URL];
+
+  for (const candidate of candidates) {
+    const normalized = candidate?.trim();
+
+    if (!normalized) {
+      continue;
+    }
+
+    try {
+      return new URL(normalized).origin;
+    } catch {
+      continue;
+    }
+  }
+
+  return null;
+}
+
+function buildMediaProxyUrl(imageUrl: string): string {
+  return `/api/media?src=${encodeURIComponent(imageUrl)}`;
 }
 
 function inferCategoryIcon(label: string): string {

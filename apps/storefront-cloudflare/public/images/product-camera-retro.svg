@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Retro Frame 35mm Digital</title>
+  <desc id="desc">retro digital camera</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f2f4f7"/>
+      <stop offset="100%" stop-color="#d5dce7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="20%" r="62%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="72" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="72" fill="url(#glow)"/>
+  <circle cx="178" cy="170" r="132" fill="#ffffff" opacity="0.32"/>
+  <circle cx="852" cy="804" r="190" fill="#ffffff" opacity="0.26"/>
+  <ellipse cx="512" cy="692" rx="250" ry="44" fill="#000" opacity="0.10"/><rect x="258" y="342" width="508" height="292" rx="54" fill="#2f3542"/><rect x="322" y="292" width="154" height="70" rx="24" fill="#374151"/><circle cx="528" cy="488" r="112" fill="#111827" stroke="#f8fafc" stroke-width="26"/><circle cx="528" cy="488" r="58" fill="#be123c"/><circle cx="690" cy="402" r="30" fill="#f8fafc"/>
+  <rect x="92" y="82" width="268" height="58" rx="29" fill="#ffffff" opacity="0.72"/>
+  <text x="122" y="119" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="2">外出隨行</text>
+</svg>

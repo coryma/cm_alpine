@@ -1,4 +1,5 @@
 STOREFRONT_PROVIDER=static-json
 SALESFORCE_API_BASE_URL=https://your-instance.my.salesforce.com
+SALESFORCE_MEDIA_BASE_URL=https://your-experience-site.my.site.com
 SALESFORCE_API_TOKEN=replace-with-worker-side-secret
 EDGE_CACHE_TTL_SECONDS=300

@@ -1,5 +1,15 @@
-import storefrontContent from "../data/storefront-content.json";
+import storefrontContent from "../data/site-content.zh-TW.json";
+import {
+  REAL_HOME_FLASH_PRODUCT_IDS,
+  REAL_HOME_RAIL_PRODUCT_IDS,
+  REAL_HOME_RECOMMENDED_PRODUCT_IDS,
+  REAL_STOREFRONT_PRODUCTS,
+  getRealProductsByIds
+} from "./realProductCatalog";
 import type {
+  CheckoutPayload,
+  CheckoutResponse,
+  HeroSecondary,
   HomeResponse,
   ProductSortBy,
   ProductsResponse,
@@ -25,7 +35,7 @@ export function getStorefrontConfig(): StorefrontConfigResponse {
 }
 
 function productMap() {
-  return new Map(content.products.map((product) => [product.id, product]));
+  return new Map(getAllProducts().map((product) => [product.id, product]));
 }
 
 function resolveIds(ids: string[]) {
@@ -36,18 +46,31 @@ function resolveIds(ids: string[]) {
 }
 
 export function getHomeResponse(): HomeResponse {
+  const flashSale = mergeHomeProducts(
+    getRealProductsByIds(REAL_HOME_FLASH_PRODUCT_IDS),
+    resolveIds(content.homeSections.flashSaleIds)
+  ).slice(0, 5);
+  const premiumTechnology = mergeHomeProducts(
+    getRealProductsByIds(REAL_HOME_RAIL_PRODUCT_IDS),
+    resolveIds(content.homeSections.premiumTechnologyIds)
+  ).slice(0, 7);
+  const recommended = mergeHomeProducts(
+    getRealProductsByIds(REAL_HOME_RECOMMENDED_PRODUCT_IDS),
+    resolveIds(content.homeSections.recommendedIds)
+  );
+
   return {
     navLinks: content.shell.navLinks,
     sideCategories: content.shell.sideCategories,
     quickLinks: content.homeSections.quickLinks,
     footerLinks: content.shell.footerLinks,
     heroFeature: content.homeSections.heroFeature,
-    heroSecondary: content.homeSections.heroSecondary,
+    heroSecondary: resolveHeroSecondaryByTime(content.homeSections),
     heroMembership: content.homeSections.heroMembership,
     editorialBanner: content.homeSections.editorialBanner,
-    flashSale: resolveIds(content.homeSections.flashSaleIds),
-    premiumTechnology: resolveIds(content.homeSections.premiumTechnologyIds),
-    recommended: resolveIds(content.homeSections.recommendedIds)
+    flashSale,
+    premiumTechnology,
+    recommended
   };
 }
 
@@ -67,7 +90,7 @@ export function listProducts({
   const normalizedSort = normalizeSort(sortBy);
   const safeLimit = normalizeLimit(limitSize);
 
-  const filteredItems = content.products.filter((product) => {
+  const filteredItems = getAllProducts().filter((product) => {
     const matchCategory =
       normalizedCategory === "all" ? true : product.categoryId === normalizedCategory;
     const matchQuery = normalizedQuery
@@ -104,7 +127,7 @@ export function listProducts({
 
 export function getProductDetail(slug: string): StorefrontProduct | null {
   const normalizedSlug = slug.trim().toLowerCase();
-  return content.products.find((product) => product.slug === normalizedSlug) || null;
+  return getAllProducts().find((product) => product.slug === normalizedSlug) || null;
 }
 
 export function createMockRequestResponse(payload: RequestPayload): RequestResponse {
@@ -117,13 +140,82 @@ export function createMockRequestResponse(payload: RequestPayload): RequestRespo
     .toString()
     .padStart(6, "0")
     .slice(0, 6);
+  const requestPage = content.pages.request;
+  const contactName = payload.fullName?.trim() || requestPage.anonymousName;
 
   return {
     ok: true,
-    message: `已收到 ${payload.fullName || "你的"} 的詢價需求，後續會由專人聯繫。`,
-    reference: `ALPINE-MOCK-${hash}`,
+    message: applyTemplate(requestPage.successMessageTemplate, {
+      name: contactName
+    }),
+    reference: `ALPINE-${hash}`,
     mockMode: true
   };
+}
+
+export function createMockCheckoutResponse(
+  payload: CheckoutPayload
+): CheckoutResponse {
+  const signature = [
+    payload.fullName,
+    payload.email,
+    payload.phone,
+    payload.items.map((item) => `${item.productId}:${item.quantity}`).join("|")
+  ].join(":");
+  const hash = Math.abs(
+    Array.from(signature).reduce(
+      (accumulator, character) => accumulator + character.charCodeAt(0),
+      0
+    )
+  )
+    .toString()
+    .padStart(8, "0")
+    .slice(0, 8);
+  const totalAmount = payload.items.reduce(
+    (sum, item) => sum + item.unitPrice * item.quantity,
+    0
+  );
+
+  return {
+    ok: true,
+    message: "訂單已建立，付款與出貨將由後續流程確認。",
+    reference: `ALPINE-ORDER-${hash}`,
+    createdAt: new Date().toISOString(),
+    totalAmount: Math.round(totalAmount),
+    currencyCode: "TWD",
+    mockMode: true
+  };
+}
+
+function applyTemplate(template: string, values: Record<string, string | number>) {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
+}
+
+function getAllProducts(): StorefrontProduct[] {
+  const productMapById = new Map<string, StorefrontProduct>();
+
+  [...content.products, ...REAL_STOREFRONT_PRODUCTS].forEach((product) => {
+    if (!productMapById.has(product.id)) {
+      productMapById.set(product.id, product);
+    }
+  });
+
+  return Array.from(productMapById.values());
+}
+
+function mergeHomeProducts(
+  primaryProducts: readonly StorefrontProduct[],
+  secondaryProducts: readonly StorefrontProduct[]
+): StorefrontProduct[] {
+  const productMapById = new Map<string, StorefrontProduct>();
+
+  [...primaryProducts, ...secondaryProducts].forEach((product) => {
+    if (!productMapById.has(product.id)) {
+      productMapById.set(product.id, product);
+    }
+  });
+
+  return Array.from(productMapById.values());
 }
 
 function normalizeSort(value?: ProductSortBy): ProductSortBy {
@@ -175,4 +267,25 @@ function readNumericPrice(product: StorefrontProduct): number {
   const digits = product.priceLabel.replace(/[^0-9.]/g, "");
   const parsed = Number.parseFloat(digits);
   return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function resolveHeroSecondaryByTime(
+  sections: StorefrontContentDocument["homeSections"]
+): HeroSecondary {
+  const variants = sections.heroSecondaryByTime;
+  if (!variants) {
+    return sections.heroSecondary;
+  }
+
+  const hour = new Date().getHours();
+  let key: string;
+  if (hour >= 6 && hour < 12) {
+    key = "morning";
+  } else if (hour >= 12 && hour < 18) {
+    key = "afternoon";
+  } else {
+    key = "evening";
+  }
+
+  return variants[key] || sections.heroSecondary;
 }

@@ -14,7 +14,7 @@ This app is a Cloudflare storefront migration workspace for the Alpine demo proj
   - `POST /api/request`
   - `GET /api/health`
   - `GET /api/roadmap`
-- A content-driven catalog preview backed by `data/storefront-content.json`
+- A content-driven catalog preview backed by `data/site-content.zh-TW.json`
 - A provider boundary under `worker/providers/` so the current static JSON source can later be swapped for Salesforce without changing the public routes
 - Wrangler + Vite wiring for local development and deploy
 
@@ -31,10 +31,21 @@ npm run deploy
 
 You do not need Salesforce credentials to preview the current site. Copy `.dev.vars.example` to `.dev.vars` only when you start wiring the Worker to real backend services.
 
+Frontend analytics variable:
+
+- `VITE_GA_MEASUREMENT_ID` (optional, for GA4 page-view tracking in the SPA)
+
+Example local run with GA4 enabled:
+
+```bash
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run dev
+```
+
 Future backend variables:
 
 - `STOREFRONT_PROVIDER`
 - `SALESFORCE_API_BASE_URL`
+- `SALESFORCE_MEDIA_BASE_URL` (optional, for ProductMedia / CMS images on an Experience domain)
 - `SALESFORCE_API_TOKEN`
 - `SALESFORCE_API_VERSION`
 - `EDGE_CACHE_TTL_SECONDS`
@@ -64,7 +75,7 @@ These are the main Salesforce sources that need public API equivalents:
 
 - `wrangler.jsonc` points `main` to `worker/index.ts`.
 - `assets.not_found_handling` is set to `single-page-application` so storefront routes stay in the SPA while `/api/*` remains in the Worker.
-- `data/storefront-content.json` is the current editable source for shell copy, page copy, category definitions, and product content.
+- `data/site-content.zh-TW.json` is the current editable source for shell copy, page copy, category definitions, and product content.
 - `shared/storefront.ts` is now only a data access layer that derives API responses from the JSON document.
 - `worker/providers/static-json-provider.ts` is the active provider.
 - `worker/providers/salesforce-provider.ts` now calls the Salesforce Apex REST facade while preserving the existing Cloudflare route contracts.
@@ -85,5 +96,6 @@ These are the main Salesforce sources that need public API equivalents:
 3. Set:
    - `STOREFRONT_PROVIDER=salesforce`
    - `SALESFORCE_API_BASE_URL=https://<your-instance>.my.salesforce.com`
+   - `SALESFORCE_MEDIA_BASE_URL=https://<your-experience-site>.my.site.com` when ProductMedia / CMS delivery uses a site host instead of the API host
    - `SALESFORCE_API_TOKEN=<worker-side bearer token>`
 4. Re-deploy the Cloudflare Worker after the env change.

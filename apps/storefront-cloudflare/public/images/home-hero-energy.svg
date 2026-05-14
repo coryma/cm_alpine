@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Energy hero background">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b3b2e"/>
+      <stop offset="45%" stop-color="#1f8f63"/>
+      <stop offset="100%" stop-color="#f4d35e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1240" cy="170" r="220" fill="#fff3b0" opacity="0.45"/>
+  <circle cx="180" cy="720" r="260" fill="#164e3b" opacity="0.55"/>
+  <path d="M0 720C150 640 280 630 420 660C540 686 660 752 820 744C980 736 1110 642 1280 596C1400 564 1490 570 1600 608V900H0Z" fill="#d9f99d" opacity="0.22"/>
+  <rect x="1040" y="190" width="170" height="430" rx="70" fill="#2f855a"/>
+  <rect x="1086" y="258" width="78" height="172" rx="24" fill="#f0fdf4" opacity="0.8"/>
+  <path d="M1110 296L1182 330L1136 414L1104 362Z" fill="#f6ad55"/>
+  <circle cx="1134" cy="348" r="16" fill="#fef08a"/>
+  <path d="M342 624C396 548 502 506 624 510C740 514 834 564 898 658" fill="none" stroke="#f8fafc" stroke-width="22" stroke-linecap="round" opacity="0.82"/>
+  <circle cx="532" cy="596" r="66" fill="#facc15" opacity="0.62"/>
+  <circle cx="656" cy="580" r="54" fill="#fde68a" opacity="0.64"/>
+  <circle cx="744" cy="616" r="72" fill="#fbbf24" opacity="0.58"/>
+  <path d="M1220 606C1290 540 1410 526 1510 566C1452 650 1356 692 1240 676Z" fill="#4ade80" opacity="0.72"/>
+  <text x="200" y="214" fill="#143d2f" font-size="54" font-family="Manrope, sans-serif" letter-spacing="12">ENERGY</text>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Balance hero background">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f4f3a"/>
+      <stop offset="50%" stop-color="#7cc98a"/>
+      <stop offset="100%" stop-color="#f6e58d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1380" cy="170" r="170" fill="#fff7cc" opacity="0.38"/>
+  <circle cx="190" cy="734" r="220" fill="#d9f99d" opacity="0.22"/>
+  <path d="M0 714C136 642 270 626 404 648C548 672 658 734 820 732C1020 728 1174 616 1340 594C1446 580 1526 588 1600 620V900H0Z" fill="#ffffff" opacity="0.2"/>
+  <path d="M520 590C618 492 746 450 880 476C1016 504 1124 580 1218 706" fill="none" stroke="#f8fafc" stroke-width="18" stroke-linecap="round" opacity="0.82"/>
+  <circle cx="704" cy="548" r="58" fill="#ecfccb" opacity="0.88"/>
+  <path d="M882 646C882 546 942 480 1056 460C1046 584 980 646 882 646Z" fill="#f8fafc" opacity="0.84"/>
+  <path d="M786 622C786 534 742 484 644 458C654 570 706 622 786 622Z" fill="#facc15" opacity="0.72"/>
+  <path d="M894 660C892 604 916 548 964 498" stroke="#1f4f3a" stroke-width="12" stroke-linecap="round" opacity="0.32"/>
+  <text x="210" y="214" fill="#204431" font-size="52" font-family="Manrope, sans-serif" letter-spacing="10">BALANCE</text>
+</svg>

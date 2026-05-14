@@ -1,13 +1,36 @@
 import type { HomePageContent, HomeResponse } from "../../shared/contracts";
+import type { HomeHeroPersonalization } from "../lib/homePersonalization";
+import type { MemberProfile } from "../lib/memberStore";
 import { StorefrontImage } from "../components/StorefrontImage";
 
 interface HomePageProps {
   home: HomeResponse;
+  member: MemberProfile | null;
+  onAddToCart: (product: HomeResponse["recommended"][number]) => void;
   onNavigate: (href: string) => void;
   page: HomePageContent;
+  personalization: HomeHeroPersonalization | null;
 }
 
-export function HomePage({ home, onNavigate, page }: HomePageProps) {
+export function HomePage({
+  home,
+  member,
+  onAddToCart,
+  onNavigate,
+  page,
+  personalization
+}: HomePageProps) {
+  const heroTitleClassName = containsHanCharacters(home.heroFeature.title)
+    ? "heroFeature__title heroFeature__title_cjk"
+    : "heroFeature__title";
+  const personalizedProducts = personalization?.products || [];
+  const personalizedTitle = applyTemplate(page.personalizedTitleTemplate, {
+    bundleName: personalization?.bundleName || ""
+  });
+  const personalizedBody = applyTemplate(page.personalizedBodyTemplate, {
+    bundleName: personalization?.bundleName || ""
+  });
+
   return (
     <>
       <section className="heroGrid" id="collections">
@@ -18,19 +41,31 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
             src={home.heroFeature.imageUrl}
           />
           <div className="heroFeature__overlay">
-            <span>{home.heroFeature.label}</span>
-            <h2>{home.heroFeature.title}</h2>
+            <span className="heroFeature__eyebrow">{home.heroFeature.label}</span>
+            <h2 className={heroTitleClassName}>{home.heroFeature.title}</h2>
             <p>{home.heroFeature.body}</p>
-            <a
-              className="heroButton"
-              href="/products"
-              onClick={(event) => {
-                event.preventDefault();
-                onNavigate("/products");
-              }}
-            >
-              {page.heroCtaLabel}
-            </a>
+            <div className="heroActionRow">
+              <a
+                className="heroButton"
+                href="/products"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate("/products");
+                }}
+              >
+                {page.heroCtaLabel}
+              </a>
+              <a
+                className="heroButton heroButton_secondary"
+                href="/quiz"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate("/quiz");
+                }}
+              >
+                {page.heroQuizCtaLabel}
+              </a>
+            </div>
           </div>
         </article>
 
@@ -51,11 +86,60 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
             <div>
               <h3>{home.heroMembership.title}</h3>
               <p>{home.heroMembership.caption}</p>
+              <button
+                className="heroMembershipCard__button"
+                onClick={() => onNavigate(member ? "/account" : "/register")}
+                type="button"
+              >
+                {member ? "前往會員中心" : "建立會員帳戶"}
+              </button>
             </div>
             <span className="material-symbols-outlined">stars</span>
           </article>
         </div>
       </section>
+
+      {personalizedProducts.length ? (
+        <section className="personalizedSpotlight" id="personalized-spotlight">
+          <div className="personalizedSpotlight__header">
+            <div>
+              <p className="microLabel">{page.personalizedEyebrow}</p>
+              <h2>{personalizedTitle}</h2>
+              {personalizedBody ? (
+                <p className="personalizedSpotlight__intro">{personalizedBody}</p>
+              ) : null}
+            </div>
+            <a
+              className="discoverButton personalizedSpotlight__cta"
+              href="/quiz"
+              onClick={(event) => {
+                event.preventDefault();
+                onNavigate("/quiz");
+              }}
+            >
+              {page.heroQuizCtaLabel}
+            </a>
+          </div>
+
+          <div className="personalizedSpotlight__grid">
+            {personalizedProducts.map((product) => (
+              <article
+                className="recommendCard personalizedSpotlight__card"
+                key={product.id}
+                onClick={() => onNavigate(`/products/${product.slug}`)}
+              >
+                <div className="recommendCard__imageWrap">
+                  <StorefrontImage alt={product.imageAlt} src={product.imageUrl} />
+                </div>
+                <p>{product.roleLabel}</p>
+                <h3>{product.name}</h3>
+                <span className="personalizedSpotlight__reason">{product.reason}</span>
+                <strong>{product.priceLabel}</strong>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="shortcutGrid">
         {home.quickLinks.map((item) => (
@@ -123,7 +207,9 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
                 />
               </div>
               <p className="saleCard__claimText">
-                {(product.claimedPercent || 40).toString()}% 已搶購
+                {applyTemplate(page.flashSaleClaimTextTemplate, {
+                  percent: (product.claimedPercent || 40).toString()
+                })}
               </p>
             </article>
           ))}
@@ -188,9 +274,16 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
             >
               <div className="recommendCard__imageWrap">
                 <StorefrontImage alt={product.imageAlt} src={product.imageUrl} />
-                <button className="recommendCard__cart" type="button">
+                  <button
+                    className="recommendCard__cart"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onAddToCart(product);
+                    }}
+                    type="button"
+                  >
                   <span className="material-symbols-outlined">add_shopping_cart</span>
-                </button>
+                  </button>
               </div>
               <p>{product.label}</p>
               <h3>{product.name}</h3>
@@ -225,4 +318,12 @@ export function HomePage({ home, onNavigate, page }: HomePageProps) {
       </section>
     </>
   );
+}
+
+function applyTemplate(template: string, values: Record<string, string | number>) {
+  return template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
+}
+
+function containsHanCharacters(value: string) {
+  return /[\u3400-\u9fff]/.test(value);
 }

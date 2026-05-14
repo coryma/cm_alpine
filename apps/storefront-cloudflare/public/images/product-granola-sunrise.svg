@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Sunrise Morning Granola</title>
+  <desc id="desc">a bag of oat granola with dried fruits and nuts</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f4efe3"/>
+      <stop offset="100%" stop-color="#dce9d0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="20%" r="62%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="72" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="72" fill="url(#glow)"/>
+  <circle cx="178" cy="170" r="132" fill="#ffffff" opacity="0.32"/>
+  <circle cx="852" cy="804" r="190" fill="#ffffff" opacity="0.26"/>
+  <ellipse cx="512" cy="610" rx="250" ry="56" fill="#000" opacity="0.10"/><path d="M282 504h460c-18 148-112 232-230 232s-212-84-230-232z" fill="#f8fafc"/><path d="M316 534h392c-29 96-101 150-196 150s-167-54-196-150z" fill="#0f766e" opacity="0.88"/><circle cx="390" cy="456" r="46" fill="#f59e0b"/><circle cx="488" cy="430" r="42" fill="#facc15"/><circle cx="594" cy="456" r="48" fill="#f7c873"/><circle cx="646" cy="520" r="38" fill="#ef8f54"/><circle cx="450" cy="526" r="34" fill="#b87949"/>
+  <rect x="92" y="82" width="268" height="58" rx="29" fill="#ffffff" opacity="0.72"/>
+  <text x="122" y="119" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="2">風味食飲</text>
+</svg>
