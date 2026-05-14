@@ -41,6 +41,7 @@ struct HomeScreen: View {
     let api: StorefrontAPI
 
     @EnvironmentObject private var cart: CartStore
+    @EnvironmentObject private var notificationManager: NotificationManager
     @State private var home: HomeResponse?
     @State private var products = [StorefrontProduct]()
     @State private var isLoading = true
@@ -140,7 +141,7 @@ struct HomeScreen: View {
                         ProductDetailScreen(api: api, product: product)
                     } label: {
                         ProductRailCard(api: api, product: product) {
-                            cart.add(product)
+                            addToCart(product)
                         }
                     }
                     .buttonStyle(.plain)
@@ -155,7 +156,20 @@ struct HomeScreen: View {
         VStack(spacing: 12) {
             DemoHighlightRow(icon: "iphone", title: "原生 App Target", detail: "可以在 iOS Simulator 從 app icon 開啟。")
             DemoHighlightRow(icon: "cloud", title: "Live Storefront API", detail: "商品與推薦內容直接來自 store.coryma.me。")
-            DemoHighlightRow(icon: "bag.badge.plus", title: "Demo Cart", detail: "可加入購物車並展示結帳完成流程。")
+            DemoHighlightRow(icon: "bell.badge.fill", title: "模擬 App Push", detail: "購物車跨過 NT$3,000 後推送商品圖與折扣碼。")
+        }
+    }
+
+    private func addToCart(_ product: StorefrontProduct) {
+        guard cart.add(product) else {
+            return
+        }
+
+        Task {
+            await notificationManager.sendCartThresholdPush(
+                for: product,
+                imageURL: api.imageURL(for: product)
+            )
         }
     }
 
@@ -283,6 +297,7 @@ struct ProductDetailScreen: View {
     let product: StorefrontProduct
 
     @EnvironmentObject private var cart: CartStore
+    @EnvironmentObject private var notificationManager: NotificationManager
 
     var body: some View {
         ScrollView {
@@ -338,7 +353,7 @@ struct ProductDetailScreen: View {
                 Spacer()
 
                 Button {
-                    cart.add(product)
+                    addToCart()
                 } label: {
                     Label("加入購物車", systemImage: "bag.badge.plus")
                 }
@@ -351,12 +366,26 @@ struct ProductDetailScreen: View {
             .background(.ultraThinMaterial)
         }
     }
+
+    private func addToCart() {
+        guard cart.add(product) else {
+            return
+        }
+
+        Task {
+            await notificationManager.sendCartThresholdPush(
+                for: product,
+                imageURL: api.imageURL(for: product)
+            )
+        }
+    }
 }
 
 struct CartScreen: View {
     let api: StorefrontAPI
 
     @EnvironmentObject private var cart: CartStore
+    @EnvironmentObject private var notificationManager: NotificationManager
     @State private var showConfirmation = false
 
     var body: some View {
@@ -382,7 +411,7 @@ struct CartScreen: View {
                                     .font(.subheadline.weight(.semibold))
                                     .foregroundStyle(Color.alpineNavy)
                                 Stepper("數量 \(item.quantity)") {
-                                    cart.add(item.product)
+                                    addToCart(item.product)
                                 } onDecrement: {
                                     cart.decrement(item)
                                 }
@@ -430,6 +459,19 @@ struct CartScreen: View {
                 showConfirmation = false
             }
             .presentationDetents([.medium])
+        }
+    }
+
+    private func addToCart(_ product: StorefrontProduct) {
+        guard cart.add(product) else {
+            return
+        }
+
+        Task {
+            await notificationManager.sendCartThresholdPush(
+                for: product,
+                imageURL: api.imageURL(for: product)
+            )
         }
     }
 }

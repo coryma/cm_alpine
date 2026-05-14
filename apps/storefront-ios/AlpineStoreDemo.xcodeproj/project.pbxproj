@@ -12,6 +12,7 @@
 		91D3F6812C3A4B1200010001 /* StorefrontAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D3F6802C3A4B1200010001 /* StorefrontAPI.swift */; };
 		91D3F6832C3A4B1200010001 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D3F6822C3A4B1200010001 /* CartStore.swift */; };
 		91D3F6852C3A4B1200010001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D3F6842C3A4B1200010001 /* ContentView.swift */; };
+		91D3F68D2C3A4B1200010001 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D3F68C2C3A4B1200010001 /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		91D3F6802C3A4B1200010001 /* StorefrontAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontAPI.swift; sourceTree = "<group>"; };
 		91D3F6822C3A4B1200010001 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 		91D3F6842C3A4B1200010001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		91D3F68C2C3A4B1200010001 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				91D3F67E2C3A4B1200010001 /* Models.swift */,
 				91D3F6802C3A4B1200010001 /* StorefrontAPI.swift */,
 				91D3F6822C3A4B1200010001 /* CartStore.swift */,
+				91D3F68C2C3A4B1200010001 /* NotificationManager.swift */,
 				91D3F6842C3A4B1200010001 /* ContentView.swift */,
 			);
 			path = AlpineStoreDemo;
@@ -140,6 +143,7 @@
 				91D3F67F2C3A4B1200010001 /* Models.swift in Sources */,
 				91D3F6812C3A4B1200010001 /* StorefrontAPI.swift in Sources */,
 				91D3F6832C3A4B1200010001 /* CartStore.swift in Sources */,
+				91D3F68D2C3A4B1200010001 /* NotificationManager.swift in Sources */,
 				91D3F6852C3A4B1200010001 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

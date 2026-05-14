@@ -52,6 +52,11 @@ struct StorefrontProduct: Decodable, Identifiable, Hashable {
     var displayDescription: String {
         longDescription ?? description ?? "精選商品，適合 iOS demo 流程展示。"
     }
+
+    var priceAmount: Int {
+        let digits = priceLabel.filter(\.isNumber)
+        return Int(digits) ?? 0
+    }
 }
 
 struct ProductSpec: Decodable, Hashable {
